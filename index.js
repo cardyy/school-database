@@ -39,7 +39,7 @@ app.listen(3000);
 
 
 const mongoose = require('mongoose');
-mongoose.connect('mongodb+srv://cardyy:spoon1989@cluster0-mxvqy.mongodb.net/test?retryWrites=true&w=majority', {useNewUrlParser: true});
+mongoose.connect('mongodb+srv://cardyy:spoon1989@schools-snqvi.mongodb.net/test?retryWrites=true&w=majority', {useNewUrlParser: true});
 mongoose.connection.once('open', function(){
     console.log('connection made');
 
