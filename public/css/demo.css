@@ -15,11 +15,6 @@
 
 
 
-a {
-	outline: none;
-	color: #63f8d3;
-	text-decoration: none;
-}
 
 a:hover, a:focus {
 	color: #57d8b8;

@@ -34,12 +34,12 @@ var Script = function() {
   $(function() {
     function responsiveView() {
       var wSize = $(window).width();
-      if (wSize <= 768) {
+      if (wSize <= 480) {
         $('#container').addClass('sidebar-close');
         $('#sidebar > ul').hide();
       }
 
-      if (wSize > 768) {
+      if (wSize > 480) {
         $('#container').removeClass('sidebar-close');
         $('#sidebar > ul').show();
       }

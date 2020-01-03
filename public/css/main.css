@@ -210,3 +210,44 @@ overflow: auto;
 .timetableStyle td:nth-child(4),
 .timetableStyle th:nth-child(4) { display: none; }
 }
+
+@media screen and  (max-width: 976px) {
+.prouserpic1{
+	float: left;
+    margin-top:20px;
+    margin-left:50px;
+	width: 450px;
+	height:507px;
+    text-align: center;
+	background-color:rgba(6, 6, 33, 0.7);
+	border-radius:5px;
+	transition: transform  3s ;
+	transition-timing-function: ease-out;
+}
+.tabcontent {
+position: absolute;
+    left: 0px;
+    top: 100px;
+    background-color: white;
+    padding: 6px 12px;
+    overflow: auto;
+    border-top: none;
+    width: 590%;
+    height: 460px;
+    box-shadow: 1px 1px 1px 1px #333;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+.tab {
+    width: 590%;
+    font-family: poppins;
+    font-size: 12px;
+    overflow: hidden;
+    box-shadow: 1px 1px 1px 1px #333;
+    background-color: rgba(6, 6, 33, 0.7);
+    color: #c7c7c7;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+}

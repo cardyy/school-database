@@ -16,10 +16,10 @@
   <!-- Bootstrap core CSS -->
   <link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!--external css-->
-  <link href="/lib/font-awesome/css/font-awesome.css" rel="stylesheet" />
+  
   <!-- Custom styles for this template -->
 
-  <link href="/css/style.css" rel="stylesheet">
+  <link href="/css/profile.css" rel="stylesheet">
   <link href="/css/style-responsive.css" rel="stylesheet">
   
 		
@@ -52,187 +52,74 @@
         
       </div>
       <!--logo start-->
-      <a href="index" class="logo"><img src="/img/sahara logo 1 .png"  style="position:fixed;width:100px;  height:auto; margin:-10px;margin-left:-29px" /></a>
+      <a href="index" class="logo"><img src="/img/sahara logo 1 .png" alt=""   class= "topLogo2" /></a>
       <!--logo end-->
       <div class="nav notify-row" id="top_menu">
         <!--  notification start -->
         <ul class="nav top-menu">
           <!-- settings start -->
-          <li class="dropdown">
-            <a data-toggle="dropdown" class="dropdown-toggle" href="index#">
-              <i class="fa fa-tasks"></i>
-              <span class="badge bg-theme">4</span>
-              </a>
-            <ul class="dropdown-menu extended tasks-bar">
-              <div class="notify-arrow notify-arrow-green"></div>
-              <li>
-                <p class="green">You have 4 pending tasks</p>
-              </li>
-              <li>
-                <a href="index#">
-                  <div class="task-info">
-                    <div class="desc">Nebular Admin Panel</div>
-                    <div class="percent">40%</div>
-                  </div>
-                  <div class="progress progress-striped">
-                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
-                      <span class="sr-only">40% Complete (success)</span>
-                    </div>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a href="index#">
-                  <div class="task-info">
-                    <div class="desc">Database Update</div>
-                    <div class="percent">60%</div>
-                  </div>
-                  <div class="progress progress-striped">
-                    <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
-                      <span class="sr-only">60% Complete (warning)</span>
-                    </div>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a href="index#">
-                  <div class="task-info">
-                    <div class="desc">Product Development</div>
-                    <div class="percent">80%</div>
-                  </div>
-                  <div class="progress progress-striped">
-                    <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
-                      <span class="sr-only">80% Complete</span>
-                    </div>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a href="index#">
-                  <div class="task-info">
-                    <div class="desc">Payments Sent</div>
-                    <div class="percent">70%</div>
-                  </div>
-                  <div class="progress progress-striped">
-                    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 70%">
-                      <span class="sr-only">70% Complete (Important)</span>
-                    </div>
-                  </div>
-                </a>
-              </li>
-              <li class="external">
-                <a href="#">See All Tasks</a>
-              </li>
-            </ul>
-          </li>
+          
+           
           <!-- settings end -->
           <!-- inbox dropdown start-->
           <li id="header_inbox_bar" class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="index#">
-              <i class="fa fa-envelope-o"></i>
-              <span class="badge bg-theme">5</span>
+              <i class="fa fa-clipboard"></i>
+             
               </a>
             <ul class="dropdown-menu extended inbox">
               <div class="notify-arrow notify-arrow-green"></div>
               <li>
-                <p class="green">You have 5 new messages</p>
+                <p class="green">Today's Duty Roaster</p>
               </li>
-              <li>
-                <a href="index#">
-                  <span class="photo"><img alt="avatar" src="img/ui-zac.jpg"></span>
-                  <span class="subject">
-                  <span class="from">Zac Snider</span>
-                  <span class="time">Just now</span>
-                  </span>
-                  <span class="message">
-                  Hi mate, how is everything?
-                  </span>
-                  </a>
-              </li>
-              <li>
-                <a href="index#">
-                  <span class="photo"><img alt="avatar" src="img/ui-divya.jpg"></span>
-                  <span class="subject">
-                  <span class="from">Divya Manian</span>
-                  <span class="time">40 mins.</span>
-                  </span>
-                  <span class="message">
-                  Hi, I need your help with this.
-                  </span>
-                  </a>
-              </li>
-              <li>
-                <a href="index#">
-                  <span class="photo"><img alt="avatar" src="img/ui-danro.jpg"></span>
-                  <span class="subject">
-                  <span class="from">Dan Rogers</span>
-                  <span class="time">2 hrs.</span>
-                  </span>
-                  <span class="message">
-                  Love your new Dashboard.
-                  </span>
-                  </a>
-              </li>
-              <li>
-                <a href="index#">
-                  <span class="photo"><img alt="avatar" src="img/ui-sherman.jpg"></span>
-                  <span class="subject">
-                  <span class="from">Dj Sherman</span>
-                  <span class="time">4 hrs.</span>
-                  </span>
-                  <span class="message">
-                  Please, answer asap.
-                  </span>
-                  </a>
-              </li>
-              <li>
-                <a href="index#">See all messages</a>
-              </li>
-            </ul>
+              <% var currentDateRoaster =  new Date().toLocaleDateString() %>
+              
+              <% var outp = '' %>
+              <% for (let i = 0; i < data[0].teachers.length ; i++ ) { %>
+               <% var object = data[0].teachers[i].duties  %>
+                <% var todayssObject = object.filter((item)=>{return item.date === currentDateRoaster}) %>
+                
+                <% outp += todayssObject + ',' } %>
+               
+               
+              
+              <div id = "daRoaster"> </div>
+           <script>
+           var wat = ''
+            var outp = [<%- outp %>]
+             outp.forEach((item)=>{wat+=  `<li><a href="index#"><span class="photo"><img src="/img/bin/config.js/system/tc/${item.image}.jpg" alt="" /></span><span class="subject"><span class="from">${item.name}</span>
+             <span class="time">${item.time}</span></span><span class="message" id="droaster">${item.duty}</span> </a></li> `	})
+               	document.getElementById('daRoaster').innerHTML = wat
+                </script>
+                 </ul>
           </li>
           <!-- inbox dropdown end -->
           <!-- notification dropdown start-->
           <li id="header_notification_bar" class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="index#">
-              <i class="fa fa-bell-o"></i>
-              <span class="badge bg-warning">7</span>
+              <i class="fa fa-calendar"></i>
+             
               </a>
             <ul class="dropdown-menu extended notification">
               <div class="notify-arrow notify-arrow-yellow"></div>
               <li>
-                <p class="yellow">You have 7 new notifications</p>
+                <p class="yellow">Upcoming School Events</p>
               </li>
+              <% var upcoming = data[0].upcomingSchoolEvents %>
+         <% var filerdEvents = upcoming.filter((ilem) => { return ilem.date >= currentDateRoaster  }) %>
+       
+              <% for(var z in filerdEvents){ %> 
               <li>
                 <a href="index#">
-                  <span class="label label-danger"><i class="fa fa-bolt"></i></span>
-                  Server Overloaded.
-                  <span class="small italic">4 mins.</span>
+                  <span class="label label-success"><i class="fa fa-bolt"></i></span>
+                  
+                 <%- filerdEvents[z].name %>: 
+                  <span class="small italic">&nbsp;<%- filerdEvents[z].date%> </span>
                   </a>
               </li>
-              <li>
-                <a href="index#">
-                  <span class="label label-warning"><i class="fa fa-bell"></i></span>
-                  Memory #2 Not Responding.
-                  <span class="small italic">30 mins.</span>
-                  </a>
-              </li>
-              <li>
-                <a href="index#">
-                  <span class="label label-danger"><i class="fa fa-bolt"></i></span>
-                  Disk Space Reached 85%.
-                  <span class="small italic">2 hrs.</span>
-                  </a>
-              </li>
-              <li>
-                <a href="index#">
-                  <span class="label label-success"><i class="fa fa-plus"></i></span>
-                  New User Registered.
-                  <span class="small italic">3 hrs.</span>
-                  </a>
-              </li>
-              <li>
-                <a href="index#">See all notifications</a>
-              </li>
+             
+              <%}%>
+             
             </ul>
           </li>
           <!-- notification dropdown end -->
@@ -254,7 +141,7 @@
       <div id="sidebar" class="nav-collapse ">
         <!-- sidebar menu start-->
         <ul class="sidebar-menu" id="nav-accordion">
-          <p class="centered"><a href="profile"><img src="/img/ui-sam.jpg" class="img-circle" width="80"></a></p>
+          <p class="centered"><a href="profile"><img src="<%= data[0].imagePath %>" class="img-circle" width="80"></a></p>
           <h5 class="centered"> <%=data[0].name%></h5>
           <li class="mt">
             <a href="/home">
@@ -269,7 +156,7 @@
               </a>
             <ul class="sub">
               <li><a href="/allStudents/<%=school%>">All Students</a></li>
-              <li><a href="addStudent">Add Student</a></li>
+              <li><a href="/addStudent/<%=school%>">Add Student</a></li>
 			 
               </ul>
           </li>
@@ -280,7 +167,7 @@
               </a>
             <ul class="sub">
               <li><a href="/allTeachers/<%=school%>">All Teachers</a></li>
-              <li><a href="addTeachers">Add Teachers</a></li>
+              <li><a href="/addTeachers/<%=school%>">Add Teachers</a></li>
              
               
             
@@ -300,30 +187,19 @@
               <span>Fees</span>
               </a>
             <ul class="sub">
-              <li><a href="feesCollection">Fees Collection</a></li>
-              <li><a href="addFees">Add Fess</a></li>
+              <li><a href="/feesCollection/<%=school%>">Fees Collection</a></li>
+              <li><a href="/addFees/<%=school%>">Add Fess</a></li>
               
             </ul>
           </li>
           <li>
-            <a href="smsGateway">
+           <a href="/textSmS/<%=school%>">
               <i class="fa fa-envelope"></i>
               <span>SMS Gateway </span>
         
               </a>
           </li>
-          <li class="sub-menu">
-            <a href="javascript:;">
-              <i class=" fa fa-database"></i>
-              <span>Insights</span>
-			   </a>
-              <ul class="sub">
-              <li><a href="examResults">Academics</a></li>
-              <li><a href="sports">Extra Curricular</a></li>
-              
-
-            </ul>
-          </li>
+          
           
           <div id="daYear"><p></p></div>
         </ul>
@@ -441,81 +317,85 @@
   
     <th align="center">
 
-     <% var object =d2.timeTable.Monday %>
-   <% for (var i in object
- ) {%>
-           
- %>
-               <%  if (object.hasOwnProperty(i)) { %>
-   <th><%- object[i][0]  %></th>
-   <%}%>
-    <%}%>
-    
-    </th>
+     <% var object = data[0].timeShedule %>
+      <% for (var i in object) {%>
+       <th><%- object[i]  %></th>
+        <%}%>
+       </th>
     
   </tr>
   <tr>
     <td  ><b><i>Monday</i></b></td>
     
-    <% var object =d2.timeTable.Monday %>
-   <% for (var i in object
- ) {%>
-           
- %>
-               <%  if (object.hasOwnProperty(i)) { %>
-    <td><%- object[i][1]  %></td>
+    <% var object2 = data[0].classes.Monday %>
+   <% for (var i in object ) {%>
+   <% var name = d2.className%>
+   <% var name2 = name.split(',') %>
+ <% var checker = value => name2.some(element => value.includes(element)) %>
+                       <% var thearray = object2.filter(checker) %>
+               <%  if (thearray.hasOwnProperty(i)) { %>
+             
+    <td><%- thearray[i][1]  %></td>
     <%}%>
     <%}%>
     
   </tr>
  <tr>
     <td><b><i>Tuesday</i</b></td>
-    <% var object =d2.timeTable.Tuesday %>
-   <% for (var i in object
- ) {%>
-           
- %>
-               <%  if (object.hasOwnProperty(i)) { %>
-     <td><%- object[i][1]  %></td>
-     <%}%>
+    <% var object3 = data[0].classes.Tuesday %>
+   <% for (var i in object ) {%>
+   <% var name = d2.className%>
+   <% var name2 = name.split(',') %>
+ <% var checker = value => name2.some(element => value.includes(element)) %>
+                       <% var thearray = object3.filter(checker) %>
+               <%  if (thearray.hasOwnProperty(i)) { %>
+               
+    <td><%- thearray[i][1]  %></td>
+    <%}%>
     <%}%>
     
   </tr>
    <tr>
     <td><b><i>Wednesday</i></b></td>
-    <% var object =d2.timeTable.Wednesday %>
-   <% for (var i in object
- ) {%>
-           
- %>
-               <%  if (object.hasOwnProperty(i)) { %>
-     <td><%- object[i][1]  %></td>
-     <%}%>
+     <% var object3 = data[0].classes.Wednesday %>
+   <% for (var i in object ) {%>
+   <% var name = d2.className%>
+   <% var name2 = name.split(',') %>
+ <% var checker = value => name2.some(element => value.includes(element)) %>
+                       <% var thearray = object3.filter(checker) %>
+               <%  if (thearray.hasOwnProperty(i)) { %>
+              
+    <td><%- thearray[i][1]  %></td>
+    <%}%>
     <%}%>
   </tr>
   <tr>
     <td><b><i>Thursday</i></b></td>
-    <% var object =d2.timeTable.Thursday %>
-   <% for (var i in object
- ) {%>
-           
- %>
-               <%  if (object.hasOwnProperty(i)) { %>
-     <td><%- object[i][1]  %></td>
-     <%}%>
+    <% var object3 = data[0].classes.Thursday %>
+   <% for (var i in object ) {%>
+   <% var name = d2.className%>
+   <% var name2 = name.split(',') %>
+ <% var checker = value => name2.some(element => value.includes(element)) %>
+                       <% var thearray = object3.filter(checker) %>
+               <%  if (thearray.hasOwnProperty(i)) { %>
+              
+    <td><%- thearray[i][1]  %></td>
+    <%}%>
     <%}%>
     
   </tr>
   <tr>
     <td><b><i>Friday</i></b></td>
-   <% var object =d2.timeTable.Friday %>
-   <% for (var i in object
- ) {%>
-           
- %>
-               <%  if (object.hasOwnProperty(i)) { %>
-     <td><%- object[i][1]  %></td>
-     <%}%>
+  <% var object3 = data[0].classes.Friday %>
+   <% for (var i in object ) {%>
+   <% var name = d2.className%>
+   <% var name2 = name.split(',') %>
+ <% var checker = value => name2.some(element => value.includes(element)) %>
+                       <% var thearray = object3.filter(checker) %>
+               <%  if (thearray.hasOwnProperty(i)) { %>
+          
+    <td><%- thearray[i][1]  %></td>
+    <%}%>
     <%}%>
   </tr>
   
@@ -537,12 +417,12 @@
    <% var paymentsArrays = d2.payments %>
    <% var actualamount = d2.payments[i].actualfee %> 
   <% var amountPaid = d2.payments[i].amount %> 
-  <% var paymentfor = d2.payments[i].for %>
+  <% var paymentfor = d2.payments[i].form %>
    <% var paymentdate = d2.payments[i].date %>
   <% var date = d2.payments[i].date %>
    <% var d3 = new Date(date) %>
   <% var totalObjectAmountPaid = paymentsArrays.filter((paymentsArrays)=> { %>
-  <% return paymentsArrays.for === paymentfor &&  paymentsArrays.date <= paymentdate %>
+  <% return paymentsArrays.form === paymentfor &&  paymentsArrays.date <= paymentdate %>
   
   <%})%>
   <% var totalArraryAmountPaid = totalObjectAmountPaid %>
@@ -554,7 +434,7 @@
  
   <tr>
 
-    <td><%-d2.payments[i].for%></td>
+    <td><%-d2.payments[i].form%></td>
      
     <td><%-d2.payments[i].paidBy%></td>
     
@@ -810,7 +690,36 @@
  	 		
  	 		
 </script>               
-         <script>
+        
+              <!-- /panel-body -->
+           
+        <!-- /container -->
+      </section>
+      <!-- /wrapper -->
+    </section>
+    </section>
+    <script>function openCity(evt, cityName) {
+  // Declare all variables
+  var i, tabcontent, tablinks;
+
+  // Get all elements with class="tabcontent" and hide them
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+
+  // Get all elements with class="tablinks" and remove the class "active"
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+
+  // Show the current tab, and add an "active" class to the button that opened the tab
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+} </script>
+ 
+          <script>
     
 function myFunction341(selTag) { 
 var x = selTag.options[selTag.selectedIndex].text
@@ -858,26 +767,30 @@ if ( n === 0){ var daysCount = 6 } else{ var daysCount = n-1	}
   
 var d7 = new Date();
  var dyear = d7.getFullYear()
+  document.getElementById("daYear").innerText=	dyear
 
  	document.getElementById("mnth").innerText = attMonth[d.getMonth()];
  	 var attMonth = ["January", "February","March","April","May","June","July","August","September","October","November","December"];
-      var mbnth = document.getElementById("mnth").innerText
-       var attendMonth = attMonth.indexOf(mbnth);
-        var d = new Date();
-         d.setFullYear(document.getElementById("daYear").innerText);
-          d.setMonth(attendMonth);
-           d.setDate(1);
-             var n = d.getDay()
+     var mbnth = document.getElementById("mnth").innerText
+   var attendMonth = attMonth.indexOf(mbnth);
 
-var daysOutPut =""
+  var d = new Date();
+  d.setFullYear(dyear);
+  d.setMonth(attendMonth);
+  d.setDate(1);
+  var n = d.getDay()
+  
+  
+ var daysOutPut =""
 if ( n === 0){ var daysCount = 6 } else{ var daysCount = n-1	}
-  for(ii=0;ii<7;ii++ ){if (ii === daysCount) {break;}
-   daysOutPut += `<li><span class="active" id="${ii}"></span></li>`}
-    document.querySelector('#days').innerHTML = daysOutPut
-     var supone = attendMonth+1
-      var monthCount =  new Date(dyear,supone,0).getDate();
-       for (aa = 1; aa <= monthCount; aa++) { daysOutPut += `<li><span class="active" >${aa}</span> </li>`}
-         document.querySelector('#days').innerHTML = daysOutPut
+  
+for(ii=0;ii<7;ii++ ){if (ii === daysCount ) {break;}
+daysOutPut += `<li><span class="active" id="${ii}"></span></li>`}
+document.querySelector('#days').innerHTML = daysOutPut
+ var supone = attendMonth+1
+  var monthCount =  new Date(dyear,supone,0).getDate();
+   for (aa = 1; aa <= monthCount; aa++) { daysOutPut += `<li><span class="active" >${aa}</span> </li>`}
+     document.querySelector('#days').innerHTML = daysOutPut
          
           var attendanceData = [<%- d2.subjectsLearnt %>]
             for ( var aa in attendanceData){
@@ -901,7 +814,8 @@ if ( n === 0){ var daysCount = 6 } else{ var daysCount = n-1	}
           if (dyear == flyear && mbnth == flmonth && yy[a1].innerText == fldate && fullAttendedTrue === true ){yy[a1].setAttribute("class", "attended")}
 	                          else if (dyear == flyear && mbnth == flmonth && yy[a1].innerText == fldate && fullAttendedTrue !== true){yy[a1].setAttribute("class", "missed")}}}}
 		                   
-  	          	   	     	   		  
+  	          
+    	     	   		  
 function myFunction1()  {
 	
 var monthHeader = document.getElementById("mnth").innerText;
@@ -976,6 +890,7 @@ var attMonth = ["January", "February","March","April","May","June","July","Augus
    var attendMonth = attMonth.indexOf(mbnth);
     var d = new Date();
      d.setFullYear(document.getElementById("daYear").innerText);
+    
       d.setMonth(attendMonth);
        d.setDate(1);
         var n = d.getDay()
@@ -1009,43 +924,15 @@ var daysOutPut =""
                  
                
                 
-             
+              
              	 var yy = document.querySelectorAll('.active');
                             for (a1=0;a1<yy.length;a1++) {
           if (document.getElementById("daYear").innerText == flyear && mbnth == flmonth && yy[a1].innerText == fldate && fullAttendedTrue === true ){yy[a1].setAttribute("class", "attended")}
 	                          else if (document.getElementById("daYear").innerText == flyear && mbnth == flmonth && yy[a1].innerText == fldate && fullAttendedTrue !== true){yy[a1].setAttribute("class", "missed")}}}}	 }        	   	     	   		  
- 	 
+
  	 
  	 	 		  	 
-</script>         
-              <!-- /panel-body -->
-           
-        <!-- /container -->
-      </section>
-      <!-- /wrapper -->
-    </section>
-    </section>
-    <script>function openCity(evt, cityName) {
-  // Declare all variables
-  var i, tabcontent, tablinks;
-
-  // Get all elements with class="tabcontent" and hide them
-  tabcontent = document.getElementsByClassName("tabcontent");
-  for (i = 0; i < tabcontent.length; i++) {
-    tabcontent[i].style.display = "none";
-  }
-
-  // Get all elements with class="tablinks" and remove the class "active"
-  tablinks = document.getElementsByClassName("tablinks");
-  for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace(" active", "");
-  }
-
-  // Show the current tab, and add an "active" class to the button that opened the tab
-  document.getElementById(cityName).style.display = "block";
-  evt.currentTarget.className += " active";
-} </script>
- 
+</script> 
     <script>
     
 function myFunction34(selTag) { 
@@ -1069,7 +956,9 @@ if ( n === 0){ var daysCount = 6 } else{ var daysCount = n-1	}
      var supone = attendMonth+1
       var monthCount =  new Date(x,supone,0).getDate();
         for (aa = 1; aa <= monthCount; aa++) { daysOutPut += `<li><span class="active" >${aa}</span> </li>`}
-         document.querySelector('#days1').innerHTML = daysOutPut   
+         document.querySelector('#days1').innerHTML = daysOutPut  
+         
+          
                var attendanceData = [<%- d2.subjectsLearnt %>]
             for ( var aa in attendanceData){
              	var attendanceInfo = attendanceData[aa].attendance
@@ -1136,7 +1025,7 @@ if ( n === 0){ var daysCount = 6 } else{ var daysCount = n-1	}
                             for (a1=0;a1<yy.length;a1++) {
           if (dyear == flyear && mbnth == flmonth && yy[a1].innerText == fldate && fullAttendedTrue === true ){yy[a1].setAttribute("class", "attended")}
 	                          else if (dyear == flyear && mbnth == flmonth && yy[a1].innerText == fldate && fullAttendedTrue !== true){yy[a1].setAttribute("class", "missed")}}}}
-		                   
+		              
   	          	   	     	   		  
 function myFunction()  {
 var monthHeader = document.getElementById("mnth1").innerText;
@@ -1160,7 +1049,7 @@ var mbnth = document.getElementById("mnth1").innerText
   d.setMonth(attendMonth);
   d.setDate(1);
   var n = d.getDay()
-  
+ 
  var daysOutPut =""
 if ( n === 0){ var daysCount = 6 } else{ var daysCount = n-1	}
   
@@ -1669,12 +1558,12 @@ var Script = function() {
   $(function() {
     function responsiveView() {
       var wSize = $(window).width();
-      if (wSize <= 768) {
+      if (wSize <= 480) {
         $('#container').addClass('sidebar-close');
         $('#sidebar > ul').hide();
       }
 
-      if (wSize > 768) {
+      if (wSize > 480) {
         $('#container').removeClass('sidebar-close');
         $('#sidebar > ul').show();
       }

@@ -12,210 +12,98 @@
    <!-- Favicons -->
   <link href="/img/favicon.png" rel="icon">
   <link href="/img/apple-touch-icon.png" rel="apple-touch-icon">
-
+<link href="/lib/font-awesome/css/font-awesome.css" rel="stylesheet" />
   <!-- Bootstrap core CSS -->
   <link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!--external css-->
-  <link href="/lib/font-awesome/css/font-awesome.css" rel="stylesheet" />
+  
   <!-- Custom styles for this template -->
-  <link href="/css/style.css" rel="stylesheet">
-  <link href="/css/style-responsive.css" rel="stylesheet">
+  <link href="/css/allStudents.css" rel="stylesheet">
+  <link href="/css/tableStudents.css" rel="stylesheet">
 
    
 </head>
 
 <body onload="bodyLoad()">
+
     <section id="container">
     <!-- **********************************************************************************************************************************************************
         TOP BAR CONTENT & NOTIFICATIONS
         *********************************************************************************************************************************************************** -->
     <!--header start-->
-    <header class="header black-bg">
+  <header class="header black-bg">
       <div class="sidebar-toggle-box">
         
       </div>
       <!--logo start-->
-      <a href="index" class="logo"><img src="/img/sahara logo 1 .png"  style="position:fixed;width:8%;  height:auto; margin:-10px;margin-left:-29px" /></a>
+      <a href="index" class="logo"><img src="/img/sahara logo 1 .png" alt=""   class= "topLogo2" /></a>
       <!--logo end-->
       <div class="nav notify-row" id="top_menu">
         <!--  notification start -->
         <ul class="nav top-menu">
           <!-- settings start -->
-          <li class="dropdown">
-            <a data-toggle="dropdown" class="dropdown-toggle" href="index#">
-              <i class="fa fa-tasks"></i>
-              <span class="badge bg-theme">4</span>
-              </a>
-            <ul class="dropdown-menu extended tasks-bar">
-              <div class="notify-arrow notify-arrow-green"></div>
-              <li>
-                <p class="green">You have 4 pending tasks</p>
-              </li>
-              <li>
-                <a href="index#">
-                  <div class="task-info">
-                    <div class="desc">Nebular Admin Panel</div>
-                    <div class="percent">40%</div>
-                  </div>
-                  <div class="progress progress-striped">
-                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
-                      <span class="sr-only">40% Complete (success)</span>
-                    </div>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a href="index#">
-                  <div class="task-info">
-                    <div class="desc">Database Update</div>
-                    <div class="percent">60%</div>
-                  </div>
-                  <div class="progress progress-striped">
-                    <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
-                      <span class="sr-only">60% Complete (warning)</span>
-                    </div>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a href="index#">
-                  <div class="task-info">
-                    <div class="desc">Product Development</div>
-                    <div class="percent">80%</div>
-                  </div>
-                  <div class="progress progress-striped">
-                    <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
-                      <span class="sr-only">80% Complete</span>
-                    </div>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a href="index#">
-                  <div class="task-info">
-                    <div class="desc">Payments Sent</div>
-                    <div class="percent">70%</div>
-                  </div>
-                  <div class="progress progress-striped">
-                    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 70%">
-                      <span class="sr-only">70% Complete (Important)</span>
-                    </div>
-                  </div>
-                </a>
-              </li>
-              <li class="external">
-                <a href="#">See All Tasks</a>
-              </li>
-            </ul>
-          </li>
+          
+           
           <!-- settings end -->
           <!-- inbox dropdown start-->
           <li id="header_inbox_bar" class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="index#">
-              <i class="fa fa-envelope-o"></i>
-              <span class="badge bg-theme">5</span>
+              <i class="fa fa-clipboard"></i>
+             
               </a>
             <ul class="dropdown-menu extended inbox">
               <div class="notify-arrow notify-arrow-green"></div>
               <li>
-                <p class="green">You have 5 new messages</p>
+                <p class="green">Today's Duty Roaster</p>
               </li>
-              <li>
-                <a href="index#">
-                  <span class="photo"><img alt="avatar" src="/img/ui-zac.jpg"></span>
-                  <span class="subject">
-                  <span class="from">Zac Snider</span>
-                  <span class="time">Just now</span>
-                  </span>
-                  <span class="message">
-                  Hi mate, how is everything?
-                  </span>
-                  </a>
-              </li>
-              <li>
-                <a href="index#">
-                  <span class="photo"><img alt="avatar" src="img/ui-divya.jpg"></span>
-                  <span class="subject">
-                  <span class="from">Divya Manian</span>
-                  <span class="time">40 mins.</span>
-                  </span>
-                  <span class="message">
-                  Hi, I need your help with this.
-                  </span>
-                  </a>
-              </li>
-              <li>
-                <a href="index#">
-                  <span class="photo"><img alt="avatar" src="img/ui-danro.jpg"></span>
-                  <span class="subject">
-                  <span class="from">Dan Rogers</span>
-                  <span class="time">2 hrs.</span>
-                  </span>
-                  <span class="message">
-                  Love your new Dashboard.
-                  </span>
-                  </a>
-              </li>
-              <li>
-                <a href="index#">
-                  <span class="photo"><img alt="avatar" src="img/ui-sherman.jpg"></span>
-                  <span class="subject">
-                  <span class="from">Dj Sherman</span>
-                  <span class="time">4 hrs.</span>
-                  </span>
-                  <span class="message">
-                  Please, answer asap.
-                  </span>
-                  </a>
-              </li>
-              <li>
-                <a href="index#">See all messages</a>
-              </li>
-            </ul>
+              <% var currentDateRoaster =  new Date().toLocaleDateString() %>
+              
+              <% var outp = '' %>
+              <% for (let i = 0; i < data[0].teachers.length ; i++ ) { %>
+               <% var object = data[0].teachers[i].duties  %>
+                <% var todayssObject = object.filter((item)=>{return item.date === currentDateRoaster}) %>
+                
+                <% outp += todayssObject + ',' } %>
+               
+               
+              
+              <div id = "daRoaster"> </div>
+           <script>
+           var wat = ''
+            var outp = [<%- outp %>]
+             outp.forEach((item)=>{wat+=  `<li><a href="index#"><span class="photo"><img src="/img/bin/config.js/system/tc/${item.image}.jpg" alt="" /></span><span class="subject"><span class="from">${item.name}</span>
+             <span class="time">${item.time}</span></span><span class="message" id="droaster">${item.duty}</span> </a></li> `	})
+               	document.getElementById('daRoaster').innerHTML = wat
+                </script>
+                 </ul>
           </li>
           <!-- inbox dropdown end -->
           <!-- notification dropdown start-->
           <li id="header_notification_bar" class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="index#">
-              <i class="fa fa-bell-o"></i>
-              <span class="badge bg-warning">7</span>
+              <i class="fa fa-calendar"></i>
+             
               </a>
             <ul class="dropdown-menu extended notification">
               <div class="notify-arrow notify-arrow-yellow"></div>
               <li>
-                <p class="yellow">You have 7 new notifications</p>
+                <p class="yellow">Upcoming School Events</p>
               </li>
+              <% var upcoming = data[0].upcomingSchoolEvents %>
+         <% var filerdEvents = upcoming.filter((ilem) => { return ilem.date >= currentDateRoaster  }) %>
+       
+              <% for(var z in filerdEvents){ %> 
               <li>
                 <a href="index#">
-                  <span class="label label-danger"><i class="fa fa-bolt"></i></span>
-                  Server Overloaded.
-                  <span class="small italic">4 mins.</span>
+                  <span class="label label-success"><i class="fa fa-bolt"></i></span>
+                  
+                 <%- filerdEvents[z].name %>: 
+                  <span class="small italic">&nbsp;<%- filerdEvents[z].date%> </span>
                   </a>
               </li>
-              <li>
-                <a href="index#">
-                  <span class="label label-warning"><i class="fa fa-bell"></i></span>
-                  Memory #2 Not Responding.
-                  <span class="small italic">30 mins.</span>
-                  </a>
-              </li>
-              <li>
-                <a href="index#">
-                  <span class="label label-danger"><i class="fa fa-bolt"></i></span>
-                  Disk Space Reached 85%.
-                  <span class="small italic">2 hrs.</span>
-                  </a>
-              </li>
-              <li>
-                <a href="index#">
-                  <span class="label label-success"><i class="fa fa-plus"></i></span>
-                  New User Registered.
-                  <span class="small italic">3 hrs.</span>
-                  </a>
-              </li>
-              <li>
-                <a href="index#">See all notifications</a>
-              </li>
+             
+              <%}%>
+             
             </ul>
           </li>
           <!-- notification dropdown end -->
@@ -237,7 +125,7 @@
       <div id="sidebar" class="nav-collapse ">
         <!-- sidebar menu start-->
         <ul class="sidebar-menu" id="nav-accordion">
-          <p class="centered"><a href="profile"><img src="/img/ui-sam.jpg" class="img-circle" width="80"></a></p>
+          <p class="centered"><a href="profile"><img src="<%= data[0].imagePath %>" class="img-circle" width="80"></a></p>
           <h5 class="centered"> <%=data[0].name%></h5>
           <li class="mt">
             <a href="/home">
@@ -252,7 +140,7 @@
               </a>
             <ul class="sub">
               <li><a href="/allStudents/<%=school%>">All Students</a></li>
-              <li><a href="addStudent">Add Student</a></li>
+              <li><a href="/addStudent/<%=school%>">Add Student</a></li>
 			 
               </ul>
           </li>
@@ -263,7 +151,7 @@
               </a>
             <ul class="sub">
               <li><a href="/allTeachers/<%=school%>">All Teachers</a></li>
-              <li><a href="addTeachers">Add Teachers</a></li>
+              <li><a href="/addTeachers/<%=school%>">Add Teachers</a></li>
              
               
             
@@ -283,30 +171,19 @@
               <span>Fees</span>
               </a>
             <ul class="sub">
-              <li><a href="feesCollection">Fees Collection</a></li>
-              <li><a href="addFees">Add Fess</a></li>
+              <li><a href="/feesCollection/<%=school%>">Fees Collection</a></li>
+              <li><a href="/addFees/<%=school%>">Add Fess</a></li>
               
             </ul>
           </li>
           <li>
-            <a href="smsGateway">
+            <a href="/textSmS/<%=school%>">
               <i class="fa fa-envelope"></i>
               <span>SMS Gateway </span>
         
               </a>
           </li>
-          <li class="sub-menu">
-            <a href="javascript:;">
-              <i class=" fa fa-database"></i>
-              <span>Insights</span>
-			   </a>
-              <ul class="sub">
-              <li><a href="examResults">Academics</a></li>
-              <li><a href="sports">Extra Curricular</a></li>
-              
-
-            </ul>
-          </li>
+         
           
           
         </ul>
@@ -328,7 +205,7 @@
        
         <div class="row mb">
           <!-- page start-->
-          <div class="content-panel">
+          <div class="content-panel4">
             <div class="adv-table">
               <table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered tbhbgf" id="hidden-table-info">
                 <thead>
@@ -364,12 +241,13 @@
   </section>
 <script>
   var data = [<%- data[0].students %>];
+  var stCount = data.length
    var d = new Date();
         var currentYear = d.getFullYear();
        
     var x = document.querySelector('tbody');
      var output = '' 
-       for ( var i in data){
+       for ( i=0;i<stCount;i++){
        	var agge =  currentYear - data[i].age
        	
        	 var payments = data[i].payments
@@ -378,7 +256,7 @@
     
        	   
          output += `  <tr class="gradeX">
-           <td><a href ="/profile/<%=school%>/${data[i].idNumber}"> <img style = "border-radius:100px; height:50px; width:50px; margin-left:40px;  " src="/img/bin/config.js/system/std/${data[i].image}.jpg" alt=""> </a>  </td>
+           <td><a href ="/profile/<%=school%>/${data[i].idNumber}"> <img style = "border-radius:100px; height:50px; width:50px; margin-left:40px;  " src="" alt=""> </a>  </td>
 			 <td><a href ="/profile/<%=school%>/${data[i].idNumber}"  style = "color:#aeb2b7">${data[i].firstName}</a></td>
                <td>${data[i].className}</td>
                  <td class="hidden-phone" style = "color:#aeb2b7" >${agge}</td>
@@ -394,7 +272,7 @@
                         var actualfees = document.getElementById("totalfees").innerText
                             	
                              if (  y[a].innerText === actualfees){y[a].innerText = "Paid"}
-                            else  if (  y[a].innerText > "0" && y[a].innerText < actualfees){y[a].innerText = "Partly"}
+                            else  if (  y[a].innerText !== "0" && y[a].innerText !== actualfees){y[a].innerText = "Partly"}
                             else  if (  y[a].innerText === "0"){y[a].innerText = "Unpaid"}
                              	
                              if ( y[a].innerText === "Paid"){y[a].setAttribute("class", "mystyle1")}
@@ -13034,12 +12912,12 @@ var Script = function() {
   $(function() {
     function responsiveView() {
       var wSize = $(window).width();
-      if (wSize <= 768) {
+      if (wSize <= 480) {
         $('#container').addClass('sidebar-close');
         $('#sidebar > ul').hide();
       }
 
-      if (wSize > 768) {
+      if (wSize > 480) {
         $('#container').removeClass('sidebar-close');
         $('#sidebar > ul').show();
       }
