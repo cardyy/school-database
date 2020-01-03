@@ -34,27 +34,176 @@ function checkNotAuthenticated(req,res,next ){
 	next()
 }
 	
-	
-app.listen(3000);
+const PORT = process.env.PORT || 5000;	
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
 
 const mongoose = require('mongoose');
-mongoose.connect('mongodb+srv://cardyy:spoon1989@schools-snqvi.mongodb.net/test?retryWrites=true&w=majority', {useNewUrlParser: true});
+mongoose.connect('mongodb+srv://cardyy:spoon1989@schools-snqvi.mongodb.net/vault?retryWrites=true&w=majority', {useNewUrlParser: true});
 mongoose.connection.once('open', function(){
     console.log('connection made');
 
 }).on('error', function(error){
     console.log('connection error', error)
 })
-const appSchema = new mongoose.Schema({
+const appSchema = new mongoose.Schema([{
   
-    name: String,
-    email: String,
-    password:  String
+ name:String,
+ fees:[{levy:String,amount:Number }],
+address:String,
+logo:String,
+contact:String,
+email:String,
+password:String,
+subjects:[String],
+classes: {
+	
+},
+principal:String,
+principalContact:String,
+houses:[String],
+paymentStatus:String,
+sports:[String],
+clubs:[String],
+classNames:[String],
+teachers:[{name:String,
+contact:String,
+address:String,
+image:String,
+subjectsTaken:[],
+extraCurricular:{
+	Sports:[String], 
+	Clubs:[String]},
+duties:[[]] ,
+ timeTable:{
+ 	
+monday:{
+ 		String:{String:String},
+          
+        }, 
+tuesday:{
+    	
+        String:{String:String},
+        
+        },
+wednedsay:{
+    	String:{String:String},
+          
+         },
+thursday:{ 
+       String:{String:String},
     
-});
+       
+         },
+friday:{
+    	String:{String:String},
+         
+          }
+         
+         }
+}
 
-const records = mongoose.model('records',appSchema );
+
+
+
+],
+students:[{
+
+	city: String,
+	newStudent:Boolean,
+	address: String,
+    firstName: String,
+    surname: String,
+    newstudent:Boolean,
+    idNumber: String,
+    image: String,
+    house: String,
+    timeTable:{},
+    friends: [String],
+    booksLost: [String],
+    email: String,
+    leftSchool: Boolean,
+    gender: String,
+    contacts: String,
+    age: String,
+    stream: String,
+    className: String,
+    payments: [{
+        date: String ,
+        for: String,
+        amount: Number,
+        contact:Number,
+        paidBy:String,
+        actualfee:Number
+    }],
+    subjectsLearnt: [{
+            subject: String,
+            
+            courseWork:[{
+            	term:Number,
+                year:String,
+            	date:String,
+            	topic:String,
+            	Mark:Number
+            }],
+            homeWork:[{
+            	term:Number,
+                year:String,
+            	date:String,
+            	topic:String,
+            	Mark:Number
+            }],
+            inClassTest:[{
+            	term:Number,
+                year:String,
+            	date:String,
+            	topic:String,
+            	Mark:Number
+            }],
+            finalTest:[{}],
+            teacher: String,
+            attendance:[{}]
+
+   
+       }
+	
+	
+        
+    ],
+    sports: [String],
+
+    clubs: [String],
+    
+    booksBorrowed: [{
+        book: String,
+        author: String,
+        date: String
+    }],
+    endOfTermResults: {},
+   
+    position: [{}],
+    previousSchools: [String],
+    achievements: [String],
+    teachersComments: [{
+        science: String,
+        history: String
+    }],
+  
+    parentName:[String],
+    parentOccupation:{Mother:String,Father:String},
+    dateOfBirth:String,
+    newStudent:Boolean,
+    dailyAttendance:String	
+  
+}
+  
+]
+
+
+    
+}]);
+
+const records = mongoose.model('schools',appSchema );
 
  
 
@@ -70,13 +219,17 @@ app.get('/allStudents/:id',checkAuthenticated,function (req,res){
 app.get('/profile/:id/:profile',checkAuthenticated,function (req,res){
  records.find({_id:req.params.id}, function (err,data){
  if (err) throw err;
-  res.render('profile',{data:data, profile:req.params.profile ,school:req.params.id }) ;
-   });});
+  
+    res.render('profile',{data:data, profile:req.params.profile ,school:req.params.id , d2:data[0].students.find( ({ idNumber }) => idNumber === req.params.profile) }) ;
+     }); 
+     
+     
+     });
         
 app.get('/allTeachers/:id',checkAuthenticated,function (req,res){
  records.find({_id:req.params.id}, function (err,data){
   if (err) throw err;
-   res.render('allTeachers.ejs',{data:data, school:req.params.id}) ;
+   res.render('allTeachers.ejs',{data:data, school:req.params.id }) ;
     });});
         
 app.get('/events/:id',checkAuthenticated,function (req,res){

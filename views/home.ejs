@@ -7,7 +7,7 @@
   <meta name="description" content="">
   <meta name="author" content="Dashboard">
   <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
-  <title>My Class </title>
+  <title>Nebular </title>
    <!-- Favicons -->
   <link href="img/favicon.png" rel="icon">
   <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
@@ -37,7 +37,7 @@
         
       </div>
       <!--logo start-->
-      <a href="index" class="logo"><img src="/img/sahara logo 1 .png"  style="position:fixed;width:8%;  height:auto; margin:-10px;margin-left:-29px" /></a>
+      <a href="index" class="logo"><img src="/img/sahara logo 1 .png" alt=""   class= "topLogo2" /></a>
       <!--logo end-->
       <div class="nav notify-row" id="top_menu">
         <!--  notification start -->
@@ -45,18 +45,18 @@
           <!-- settings start -->
           <li class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="index#">
-              <i class="fa fa-tasks"></i>
-              <span class="badge bg-theme">4</span>
+              <i class="fa fa-area-chart"></i>
+             
               </a>
             <ul class="dropdown-menu extended tasks-bar">
               <div class="notify-arrow notify-arrow-green"></div>
               <li>
-                <p class="green">You have 4 pending tasks</p>
+                <p class="green">Today's Attendance per stream</p>
               </li>
               <li>
                 <a href="index#">
                   <div class="task-info">
-                    <div class="desc">Nebular Admin Panel</div>
+                    <div class="desc">Form 6</div>
                     <div class="percent">40%</div>
                   </div>
                   <div class="progress progress-striped">
@@ -69,7 +69,7 @@
               <li>
                 <a href="index#">
                   <div class="task-info">
-                    <div class="desc">Database Update</div>
+                    <div class="desc">Form 5</div>
                     <div class="percent">60%</div>
                   </div>
                   <div class="progress progress-striped">
@@ -82,7 +82,7 @@
               <li>
                 <a href="index#">
                   <div class="task-info">
-                    <div class="desc">Product Development</div>
+                    <div class="desc">Form 4</div>
                     <div class="percent">80%</div>
                   </div>
                   <div class="progress progress-striped">
@@ -95,7 +95,7 @@
               <li>
                 <a href="index#">
                   <div class="task-info">
-                    <div class="desc">Payments Sent</div>
+                    <div class="desc">Form 3</div>
                     <div class="percent">70%</div>
                   </div>
                   <div class="progress progress-striped">
@@ -114,17 +114,17 @@
           <!-- inbox dropdown start-->
           <li id="header_inbox_bar" class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="index#">
-              <i class="fa fa-envelope-o"></i>
-              <span class="badge bg-theme">5</span>
+              <i class="fa fa-clipboard"></i>
+             
               </a>
             <ul class="dropdown-menu extended inbox">
               <div class="notify-arrow notify-arrow-green"></div>
               <li>
-                <p class="green">You have 5 new messages</p>
+                <p class="green">Today's Duty Roaster</p>
               </li>
               <li>
                 <a href="index#">
-                  <span class="photo"><img alt="avatar" src="img/ui-zac.jpg"></span>
+                  <span class="photo"><img src="/img/18.jpg" alt="" /></span>
                   <span class="subject">
                   <span class="from">Zac Snider</span>
                   <span class="time">Just now</span>
@@ -136,7 +136,7 @@
               </li>
               <li>
                 <a href="index#">
-                  <span class="photo"><img alt="avatar" src="img/ui-divya.jpg"></span>
+                  <span class="photo"><img src="/img/15.jpg" alt="" /></span>
                   <span class="subject">
                   <span class="from">Divya Manian</span>
                   <span class="time">40 mins.</span>
@@ -148,7 +148,7 @@
               </li>
               <li>
                 <a href="index#">
-                  <span class="photo"><img alt="avatar" src="img/ui-danro.jpg"></span>
+                  <span class="photo"><img src="/img/14.jpg" alt="" /></span>
                   <span class="subject">
                   <span class="from">Dan Rogers</span>
                   <span class="time">2 hrs.</span>
@@ -160,7 +160,7 @@
               </li>
               <li>
                 <a href="index#">
-                  <span class="photo"><img alt="avatar" src="img/ui-sherman.jpg"></span>
+                  <span class="photo"><img src="/img/7 .jpg" alt="" /></span>
                   <span class="subject">
                   <span class="from">Dj Sherman</span>
                   <span class="time">4 hrs.</span>
@@ -179,13 +179,13 @@
           <!-- notification dropdown start-->
           <li id="header_notification_bar" class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="index#">
-              <i class="fa fa-bell-o"></i>
-              <span class="badge bg-warning">7</span>
+              <i class="fa fa-calendar"></i>
+             
               </a>
             <ul class="dropdown-menu extended notification">
               <div class="notify-arrow notify-arrow-yellow"></div>
               <li>
-                <p class="yellow">You have 7 new notifications</p>
+                <p class="yellow">Upcoming School Events</p>
               </li>
               <li>
                 <a href="index#">
@@ -223,6 +223,7 @@
           <!-- notification dropdown end -->
         </ul>
         <!--  notification end -->
+      
       </div>
       <div class="top-menu">
         <form action ="/logout?_method=DELETE" method="POST" class="nav pull-right top-menu">
@@ -239,8 +240,9 @@
       <div id="sidebar" class="nav-collapse ">
         <!-- sidebar menu start-->
         <ul class="sidebar-menu" id="nav-accordion">
-          <p class="centered"><a href="profile"><img src="/img/ui-sam.jpg" class="img-circle" width="80"></a></p>
-          <h5 class="centered"> <%=data[0].name%></h5>
+          <p class="centered"><a href="profile"><img   src="img/bin/config.js/system/sc/<%= data[0].logo%>"  class="img-circle" ></a></p>
+      
+          <h5 class="centered"> <%= data[0].name%> </h5>
           <li class="mt">
             <a href="home">
               <i class="fa fa-home"></i>
@@ -309,9 +311,26 @@
 
             </ul>
           </li>
-          
-          
-        </ul>
+         </ul>
+          <% var wd = data[0].students %>
+                  <ul id="myul">
+                    <% for( g=0;g<wd.length;g++ ){ %>
+                 
+                    <% var studentsAttendanceArray = data[0].students[g].subjectsLearnt %>
+                        
+                        <% var attndArray = studentsAttendanceArray[0] %> 
+                        <% var currentDate =  new Date().toLocaleDateString() %>
+                     
+                          
+                       <% if(attndArray.dailyAttendance == currentDate  ){ %>
+                       <% var array = 1 %>
+                      
+                     
+                      <li class = "attendCounter" ><%- array %></li>
+                      
+                      <%}%>
+                      <%}%>
+                      </ul>
         <!-- sidebar menu end-->
       </div>
     </aside>
@@ -342,6 +361,8 @@
                    <div id = "server"><canvas id="serverstatus01" height="80" width="80"></canvas></div>
 				 
                   <script >
+                  
+                 
                     var doughnutData = [{
                         value: 70,
                         color: "#2c323f"
@@ -361,8 +382,8 @@
 					  
                     </div>
                     <div class="pull-right">
-					
-                      <p>1500</p> 
+					<% var studentsArray = data[0].students %>
+                      <p> <%-studentsArray.length%></p> 
                     </div>
                   </footer>
                 </div>
@@ -372,7 +393,7 @@
               <div class="col-md-4 col-sm-4 mb">
                 <div class="green-panel pn" id = "id2">
                   <div class="green-header">
-                    <h5>Attendance </h5>
+                    <h5>Daily Attendance </h5>
                   </div>
                   <div id = "server2"><canvas id="serverstatus02" height="80" width="80"></canvas></div>
                   <script>
@@ -387,12 +408,18 @@
                     ];
                     var myDoughnut = new Chart(document.getElementById("serverstatus02").getContext("2d")).Doughnut(doughnutData);
                   </script>
+                  <script>
+                  
+                        
+                  </script>
 				  <footer>
                     <div class="pull-left">
-                      <h5>89%</h5>
-                    </div>
+                   <h5  id = "dailyAttendance" ></h5>
+                      </div>
                     <div class="pull-right">
-                      <h5>1240</h5>
+                      <h5 id = "attendancePercentage"> </h5>
+                   
+                      
                     </div>
                   </footer>
               </div>
@@ -420,10 +447,15 @@
 				 
                   <footer>
                     <div class="pull-left">
-                      <h4>155</h4>
+                     <% var studentsArray = data[0].students %>
+                     <% var newStudents = studentsArray.filter((studentsArray)=>{return studentsArray.newStudent == true })%>
+                       <% var oldStudents = studentsArray.filter((studentsArray)=>{return studentsArray.newStudent == false})%>
+                      <h4> <%- newStudents.length %></h4>
                     </div>
                     <div class="pull-right">
-                      <h4>40% Increase</h4>
+                   <%  var newPercentage =  (newStudents.length/studentsArray.length)*100 %>
+                   <% var roundedPercentge = Math.floor(newPercentage) %>
+                      <h4> <%- roundedPercentge %>%</h4>
                     </div>
                   </footer>
                 </div>
@@ -658,7 +690,13 @@ function bodyLoad(){
 	container.classList.replace('red-panel', 'red-panel1')
 	container2.classList.replace('darkblue-panel', 'darkblue-panel1')
 	container3.classList.replace('green-panel', 'green-panel1')
-	
+    var liList = document.getElementById("myul").getElementsByTagName("li");
+    var largo = liList.length
+    var studentsArray = [<%- data[0].students %>] ;
+    var totalStudentList = studentsArray.length
+    var percentage =   Math.floor( (largo/totalStudentList)*100 )
+	document.getElementById("dailyAttendance").innerHTML = largo
+	document.getElementById("attendancePercentage").innerHTML = `${percentage}%`
 	}
 	
   </script>

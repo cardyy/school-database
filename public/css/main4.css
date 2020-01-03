@@ -18,30 +18,38 @@
   display: none;
 }
 #customers {
-	position: relative;
-	left: -40px;
-	top:50px;
-  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	position: absolute;
+	left: -44px;
+	top:25px;
+  font-family: poppins, sans-serif;
   border-collapse: collapse;
-  width: 100%;
+  background:  rgba(6, 6, 33, 0.2);
+ 
+
+
+
 }
 
 #customers td, #customers th {
 
-  padding: 8px;
+  font-family:poppins;
   height: 50px;
  color:black;
+ border: solid;
+  border-color: rgba(6, 6, 33, 1);
 }
 
-#customers tr:nth-child(even){background-color:rgba(60,68,82, 0.3)}
+
 
 
 #customers tr:hover {background-color: #ddd;}
 
 #customers th {
-  padding-top: 12px;
+	text-align: center;
+  padding-top: 4px;
   padding-bottom: 12px;
-  text-align: left;
-  background-color:  rgba(60,68,82, 0.9);
+  
+  background-color:  rgba(6, 6, 33, 1);
   color: #c7c7c7;
+ 
 }

@@ -7,7 +7,7 @@
   <meta name="description" content="">
   <meta name="author" content="Dashboard">
   <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
-  <title>My Class  </title>
+  <title>Nebular  </title>
 
    <!-- Favicons -->
   <link href="/img/favicon.png" rel="icon">
@@ -310,6 +310,11 @@
           
           
         </ul>
+        <% var totalFees = data[0].fees %>
+        
+         <% var schoolFees =  totalFees.reduce((currentTotal,totalFees)=> {return totalFees.amount + currentTotal } ,0) %>
+     
+        <div id = "totalfees"><p><%-schoolFees%></p></div>
         <!-- sidebar menu end-->
       </div>
     </aside>
@@ -358,25 +363,43 @@
     <!--footer end-->
   </section>
 <script>
-  var data = [{stream:"Form 1A ", name:"Cardinal Ncube",age:14,gender:"Male", fees:"Paid"},{stream:"Form 1A ", name:"Grace Makoni",age:14,gender:"Female", fees:"Unpaid"},{stream:"Form 1A ", name:"Luke Gore",age:15,gender:"Male", fees:"Paid"},{stream:"Form 1A ", name:"Mike Nhamo",age:13,gender:"Male", fees:"Partly"}];
+  var data = [<%- data[0].students %>];
+   var d = new Date();
+        var currentYear = d.getFullYear();
+       
     var x = document.querySelector('tbody');
      var output = '' 
        for ( var i in data){
+       	var agge =  currentYear - data[i].age
+       	
+       	 var payments = data[i].payments
+       	   
+       	      var amountPaid  = payments.reduce((currentTotal,payments)=> {return payments.amount + currentTotal } ,0)
+    
+       	   
          output += `  <tr class="gradeX">
-           <td><a href ="/profile/<%=school%>/${data[i].name}"> <img style = "border-radius:100px; height:40px; width:40px; margin-left:40px;  " src="/img/${data[i].name}.jpg" alt=""> </a></td>
-			 <td><a href ="/profile/<%=school%>/${data[i].name}"  style = "color:#aeb2b7">${data[i].name}</a></td>
-               <td>${data[i].stream}</td>
-                 <td class="hidden-phone" style = "color:#aeb2b7" >${data[i].age}</td>
+           <td><a href ="/profile/<%=school%>/${data[i].idNumber}"> <img style = "border-radius:100px; height:50px; width:50px; margin-left:40px;  " src="/img/bin/config.js/system/std/${data[i].image}.jpg" alt=""> </a>  </td>
+			 <td><a href ="/profile/<%=school%>/${data[i].idNumber}"  style = "color:#aeb2b7">${data[i].firstName}</a></td>
+               <td>${data[i].className}</td>
+                 <td class="hidden-phone" style = "color:#aeb2b7" >${agge}</td>
                    <td class="center hidden-phone">${data[i].gender}</td>
-                     <td class="center hidden-phone"  > <p  >${data[i].fees}</p></td>
+                     <td class="center hidden-phone"  > <p>${amountPaid}</p></td>
 				       </tr>`	
-                         x.innerHTML = output ;}
+                         x.innerHTML = output ;
 
                            var y = document.querySelectorAll('td p');
-                            for (i=0;i<y.length;i++) {
-                             if ( y[i].innerText === "Paid"){y[i].setAttribute("class", "mystyle1")}
-	                          else if (y[i].innerText ==="Unpaid"){y[i].setAttribute("class", "mystyle2")}
-		                       else if (y[i].innerText ==="Partly"){y[i].setAttribute("class", "mystyle3")}}
+                            for (a=0;a<y.length;a++) {
+                            	
+                            		
+                        var actualfees = document.getElementById("totalfees").innerText
+                            	
+                             if (  y[a].innerText === actualfees){y[a].innerText = "Paid"}
+                            else  if (  y[a].innerText > "0" && y[a].innerText < actualfees){y[a].innerText = "Partly"}
+                            else  if (  y[a].innerText === "0"){y[a].innerText = "Unpaid"}
+                             	
+                             if ( y[a].innerText === "Paid"){y[a].setAttribute("class", "mystyle1")}
+	                          else if (y[a].innerText ==="Unpaid"){y[a].setAttribute("class", "mystyle2")}
+		                       else if (y[a].innerText ==="Partly"){y[a].setAttribute("class", "mystyle3")}}}
 </script>
   <!-- js placed at the end of the document so the pages load faster -->
    <script>

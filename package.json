@@ -7,7 +7,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "devStart":"nodemon index.js"
+    "start":"node index",
+    "dev":"nodemon index"
   },
   "author": "",
   "license": "ISC",
