@@ -54,12 +54,24 @@
  
 }
 @media screen and  (max-width: 976px) {
-body {
+	html{
+	height: 100%;
+}
 
+body {
+ height: 100%;
+    overflow: auto; 
   width:40%;
 }
 }
 @media screen  and (max-width: 1024px) and  (orientation: landscape){ 
+html{
+	height: 100%;
+}
+body{
+	 height: 100%;
+    overflow: auto; 
+}
 .proFlex21 {
     position: relative;
     top: 20px;

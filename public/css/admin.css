@@ -120,6 +120,12 @@ position: fixed ;
   background-color: #4CAF50;
 }
 @media screen and  (max-width: 976px) {
+	html{
+	height: 100%
+} 
+body{
+	 height: 100%;
+    overflow: auto; }
  .row {
     padding-left: 16%;
 }
@@ -171,7 +177,13 @@ position: fixed ;
     left: 35px;
 }
   
-@media screen  and (max-device-width: 976px) and  (orientation: landscape){ 
+@media screen  and (max-device-width: 976px) and  (orientation: landscape){
+html{
+	height: 100%
+} 
+body{
+	 height: 100%;
+    overflow: auto; }
  .step {
     position: relative;
     height: 15px;

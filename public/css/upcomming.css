@@ -235,6 +235,13 @@ a{
 :-ms-input-placeholder {color: #ffffff; }
 
 @media screen and  (max-width: 976px) {
+	html{
+	height: 100%;
+}
+body{
+	 height: 100%;
+    overflow: auto; 
+}
 	.calendar .col .content {
    padding:0px;
 }
@@ -262,6 +269,13 @@ a{
 }
 
 @media screen  and (max-width: 1024px) and  (orientation: landscape){ 
+html{
+	height: 100%;
+}
+body{
+	 height: 100%;
+    overflow: auto; 
+}
 	.calendar {
     position: absolute;
     overflow: hidden;

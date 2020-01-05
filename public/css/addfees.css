@@ -4563,6 +4563,13 @@ a{
 }
 
 @media screen and  (max-width: 976px) {
+	html{
+	height: 100%;
+}
+body{
+	 height: 100%;
+    overflow: auto; 
+}
  .row {
     padding-left: 16%;
 }
@@ -4595,7 +4602,14 @@ label {
     padding: 10%;
 }
 }  
-@media screen  and (max-width: 1024px) and  (orientation: landscape){  
+@media screen  and (max-width: 1024px) and  (orientation: landscape){ 
+ html{
+	height: 100%;
+}
+body{
+	 height: 100%;
+    overflow: auto; 
+}
   .step {
     height: 15px;
     width: 15px;

@@ -4570,6 +4570,13 @@ a{
 }
 
 @media screen and  (max-width: 976px) {
+	html{
+	height: 100%;
+}
+body {
+	height: 100%;
+    overflow: auto;}
+    
 	.content-panel4{
 	margin-top: 3%;
 	margin-left: -15%;
