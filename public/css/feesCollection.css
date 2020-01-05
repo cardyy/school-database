@@ -4738,6 +4738,9 @@ body {
     padding: 2px 6px;
     margin-left: -45px;
 }
+.h4, h4 {
+    font-size: 13px;
+}
 #sidebar > ul{
 	display:none
 }

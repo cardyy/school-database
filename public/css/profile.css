@@ -279,7 +279,11 @@ font-size:16px;
 
   margin: 0;
 }
-
+.attCalender h3 {
+	text-align: center;
+	
+	color:black;
+}
 .days li {
   list-style-type: none;
   display: inline-block;
@@ -4594,6 +4598,11 @@ html, body {width: auto!important; overflow-x: hidden!important}
     border-spacing: 0;
     width: 100%;
     color: white;
+}
+.attCalender h3 {
+	text-align: center;
+	
+	color:white;
 }
 #library li {
     padding-top: 15px;

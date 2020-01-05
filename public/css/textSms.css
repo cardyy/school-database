@@ -447,9 +447,14 @@ textarea.input100 {
   opacity: 1;
 }
 
-@media (max-width: 992px) {
-  .alert-validate::before {
-    visibility: visible;
-    opacity: 1;
-  }
+@media (max-width: 480px) {
+ .wrap-contact100 {
+    position: relative;
+    top: 40px;
+    padding: 50px 15px 17px 15px;
+}
+.nav>li>a {
+	display: none;
+}
+  
 }

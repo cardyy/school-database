@@ -4738,5 +4738,8 @@ body {
     border: 1px solid #666666 !important;
     padding: 2px 6px;
     margin-left: -45px;
-}   
+}
+   #sidebar > ul{
+	display:none
+} 
     }

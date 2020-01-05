@@ -311,6 +311,7 @@ body{
 .calendar {
     position: absolute;
     width: 98%;
+    height: auto;
     left: 1%;
     top: 11%;
     background-color: #ffffff;
@@ -322,6 +323,7 @@ body{
     border: none;
     width: 110px;
 }
+
 #sidebar > ul{
 	display:none
 }

@@ -204,13 +204,44 @@ body{
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
 }
+
 .dro button {
     border-style: none;
-    background-color: #060621;
+    background-color: #c7c7c7;
     font-size: 12px;
     margin-top: 30px;
-    margin-left: 1%;
-    color: #fff !important;
+    margin-left: 5%;
+    width: 140px;
+    color: #000 !important;
+}
+#customers td, #customers th {
+    font-family: poppins;
+    height: 50px;
+    color: #c7c7c7;
+    border: solid;
+    border-color: rgba(6, 6, 33, 1);
+}
+#subj li {
+    font-weight: !important;
+    padding-top: 5px;
+    margin-top: 15px;
+    color: #c7c7c7;
+    margin-left: -20px;
+    font-size: 14px;
+    height: 30px;
+    list-style-type: disc;
+}
+#sportsList li {
+    padding-top: 15px;
+    color: #c7c7c7;
+}
+#clubsList li {
+    padding-top: 15px;
+    color: #c7c7c7;
+}
+#groupsList li {
+    padding-top: 15px;
+      color: #c7c7c7;
 }
 #sidebar > ul{
 	display:none

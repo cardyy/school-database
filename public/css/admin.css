@@ -198,5 +198,34 @@ body{
 	}
     
 @media screen and (max-width:480px) {
-    
+    .topLogo2 {
+    position: absolute;
+    width: 55%;
+    height: auto;
+    top: -31px;
+    left: -30px;
+}
+#reg {
+    background-color: rgba(6, 6, 33, 0.5);
+    margin-left: 25%;
+    margin-top: 90px;
+    font-family: Raleway;
+    padding: 40px;
+    width: 120%;
+    min-width: 300px;
+}
+#nextBtn {
+    position: fixed;
+    width: 100px;
+    left: 60%;
+    top: 15%;
+}
+#prev {
+    position: fixed;
+    background-color: #bbbbbb;
+    left: 15%;
+    top: 15%;
+    width: 100px;
+}
+
     }

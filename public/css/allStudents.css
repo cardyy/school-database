@@ -4695,6 +4695,9 @@ body {
     transition: transform 8s;
     transition-timing-function: ease-in-out;
 }
+.nav>li>a {
+	display: none;
+}
 fa{
 	display: none;
 }
