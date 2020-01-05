@@ -4598,6 +4598,9 @@ a{
 #sidebar > ul{
 	display:none
 }
+html{
+	height: 100%;
+}
 body {
     color: #949ba2;
     background-image: linear-gradient(45deg,rgba(6, 6, 33, 0.84),rgba(6, 6, 33, 0.90)), url(../img/bg2.jpg);
@@ -4610,7 +4613,8 @@ body {
     padding: 0px !important;
     margin: 0px !important;
     font-size: 13px;
-    height: 700%;
+    height: 100%;
+    overflow: auto;
   
 }
  .mystyle3 {
