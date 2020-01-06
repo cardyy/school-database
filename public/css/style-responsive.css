@@ -82,7 +82,7 @@
 @media (max-width: 480px) {
 
     .header {
-        position: absolute;
+        position: fixed;
     }
 
     /*sidebar*/
