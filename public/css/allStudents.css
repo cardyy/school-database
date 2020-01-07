@@ -17,6 +17,9 @@ body {
      
     
 }
+.wMenu{
+	display: none;
+}
 .content-panel4{
 	margin-top: 3%;
 	margin-left: -10%;
@@ -4667,10 +4670,25 @@ body {
     top: -25px;
     left: -25px;
 }
+.wMenu{
+	width:50px;
+	height:25px;
+	border: 1px solid #666666 !important;
+    padding:  2px 6px;
+    background: #2c323f;
+    border-radius: 4px;
+	display: inline;
+	position: relative;
+	top:29px;
+	left:20%;
+}
 .logout {
+	font-size: 13px;
+	width:50px;
+	height:25px;
     color: #9a9a9a;
     position: absolute;
-    margin-top: 10px;
+    margin-top: -6px;
     -webkit-border-radius: 4px;
     border: 1px solid #666666 !important;
     padding: 2px 6px;

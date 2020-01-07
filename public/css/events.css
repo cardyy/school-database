@@ -17,6 +17,9 @@ body {
      
     
 }
+.wMenu{
+	display: none;
+}
 #crv{
 	position: relative;
 	left:-150px;
@@ -4731,5 +4734,5 @@ html{
 }
     
 @media screen and (max-width:480px) {
-    
+
     }

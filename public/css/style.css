@@ -17,6 +17,9 @@ body {
      
     
 }
+.wMenu{
+	display: none;
+}
 .green-panel1 footer h4 {
     color: white;
     margin-top: 0px;
@@ -4794,7 +4797,30 @@ html{
     font-size: 14px;
 }
 
-
+.wMenu{
+	width:50px;
+	height:25px;
+	border: 1px solid #666666 !important;
+    padding:  2px 6px;
+    background: #2c323f;
+    border-radius: 4px;
+	display: inline;
+	position: relative;
+	top:28px;
+	left:55%;
+}
+.logout {
+	font-size: 13px;
+	width:50px;
+	height:25px;
+    color: #9a9a9a;
+    position: absolute;
+    margin-top: 3px;
+    -webkit-border-radius: 4px;
+    border: 1px solid #666666 !important;
+    padding: 2px 6px;
+    margin-left: -45px;
+}
 .panel-body {
     background-color: rgba(6, 6, 33, 0.7);
     width: 126%;
@@ -4908,15 +4934,7 @@ background: linear-gradient(315deg,#89ff00,#00bcd4);
 }
 
 
- .logout {
-    color: #9a9a9a;
-    position: absolute;
-    margin-top: 29px;
-    -webkit-border-radius: 4px;
-    border: 1px solid #666666 !important;
-    padding: 2px 6px;
-    margin-left: -45px;
-}
+
 #sidebar > ul{
 	display:none
 }
