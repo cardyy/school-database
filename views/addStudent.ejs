@@ -126,7 +126,7 @@
         </ul>
         <!--  notification end -->
       </div>
-       <button type ="submit" class="wMenu" >Menu</button>
+        <button  class="wMenu" onclick="openNav()" >Menu</button>
       <div class="top-menu">
         <form action ="/logout?_method=DELETE" method="POST" class="nav pull-right top-menu">
           <button type ="submit" class="logout" id="logout" >Logout</button>
@@ -399,7 +399,13 @@
       </section>
       <!-- /wrapper -->
     </section>
-     
+    <script>
+      	function openNav() {document.getElementById("sidebar").style.display= "block";}
+ 
+  document.getElementByClassName('every').addEventListener('click', closeNav);
+   function closeNav() {document.getElementById("sidebar").style.display= "none";}
+  
+      </script>  
     
  <script>
 var currentTab = 0; // Current tab is set to be the first tab (0)
@@ -1055,22 +1061,6 @@ var Script = function() {
 
   //    sidebar toggle
 
-  $(function() {
-    function responsiveView() {
-      var wSize = $(window).width();
-      if (wSize <= 480) {
-        $('#container').addClass('sidebar-close');
-        $('#sidebar > ul').hide();
-      }
-
-      if (wSize > 480) {
-        $('#container').removeClass('sidebar-close');
-        $('#sidebar > ul').show();
-      }
-    }
-    $(window).on('load', responsiveView);
-    $(window).on('resize', responsiveView);
-  });
 
   $('.fa-bars').click(function() {
     if ($('#sidebar > ul').is(":visible") === true) {

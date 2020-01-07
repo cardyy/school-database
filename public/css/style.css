@@ -4933,10 +4933,9 @@ background: linear-gradient(315deg,#89ff00,#00bcd4);
     left: -25px;
 }
 
-
-
-#sidebar > ul{
-	display:none
+#sidebar {
+	display:none;
+	
 }
 }
     

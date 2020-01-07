@@ -4605,7 +4605,7 @@ body {
     
     
 @media screen and (max-width:480px) {
-#sidebar > ul{
+#sidebar{
 	display:none
 }
 html{

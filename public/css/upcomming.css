@@ -338,7 +338,7 @@ body{
     width: 110px;
 }
 
-#sidebar > ul{
+#sidebar {
 	display:none
 }
 }

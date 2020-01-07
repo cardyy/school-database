@@ -87,13 +87,18 @@
 
     /*sidebar*/
 
-    #sidebar {
-        height: auto;
-        overflow: hidden;
-        position: absolute;
-        width: 100%;
-        z-index: 1001;
-    }
+   #sidebar {
+    height: 100%;
+    width: 60%;
+    position: fixed;
+    z-index: 1;
+    
+    background-color: rgba(6, 6, 33, 0.95);
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 20px;
+    
+}
 
 
     /* body container */

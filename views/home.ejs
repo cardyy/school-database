@@ -113,7 +113,7 @@
         <!--  notification end -->
       
       </div>
-      <button type ="submit" class="wMenu" >Menu</button>
+      <button  class="wMenu" onclick="openNav()" >Menu</button>
       <div class="top-menu">
         <form action ="/logout?_method=DELETE" method="POST" class="nav pull-right top-menu">
           <button type ="submit" class="logout" >Logout</button>
@@ -125,6 +125,7 @@
         MAIN SIDEBAR MENU
         *********************************************************************************************************************************************************** -->
     <!--sidebar start-->
+    
     <aside>
       <div id="sidebar" class="nav-collapse ">
         <!-- sidebar menu start-->
@@ -442,7 +443,14 @@
             </div>
             </div>
            
-           
+      <script>
+      	function openNav() {document.getElementById("sidebar").style.display= "block";}
+ 
+  document.getElementByClassName('every').addEventListener('click', closeNav);
+   function closeNav() {document.getElementById("sidebar").style.display= "none";}
+  
+      </script>  
+         
 <script>
      var dadays = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday"]
       var todaysDay = new Date()
@@ -504,7 +512,7 @@
         // (string | mandatory) the heading of the notification
         title: 'Welcome to Nebular!',
         // (string | mandatory) the text inside the notification
-        text: 'Hover me to enable the Close Button. You can hide the left sidebar clicking on the button next to the logo. ',
+        text: 'You are now connected to the schools database. You can hide the left sidebar clicking on the button next to the logo. ',
         // (string | optional) the image to display on the left
        
         sticky: false,

@@ -4595,6 +4595,7 @@ body {
     
 @media screen and (max-width:480px) {
 html, body {width: auto!important; overflow-x: hidden!important}
+#sidebar {display: none;}
 .tableFees {
     margin-left: -10px;
     border-collapse: collapse;
