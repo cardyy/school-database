@@ -4602,7 +4602,8 @@ body {
     height: 20px;
 }
 }
- @media screen and (max-width: 1024px) and (orientation: landscape)
+ @media screen and (max-width: 1024px) and (orientation: landscape){
+ 	
 body {
     color: #949ba2;
     background-image: linear-gradient(45deg,rgba(6, 6, 33, 0.84),rgba(6, 6, 33, 0.90)), url(../img/bg2.jpg);
