@@ -199,6 +199,13 @@ body{
 }
 	}
     
+    @media screen  and (max-width: 1024px) and  (orientation: landscape){  
+html{
+	height: 100%;
+}
+body {
+ height: 100%;
+    overflow: auto; }}
 @media screen and (max-width:480px) {
     .topLogo2 {
     position: absolute;
