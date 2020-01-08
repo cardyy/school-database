@@ -4615,7 +4615,7 @@ a{
 	height:25px;
 	border: 1px solid #666666 !important;
     padding:  2px 6px;
-    background: #2c323f;
+     background: rgba(6, 6, 33, 0.7);
     border-radius: 4px;
 	display: inline;
 	position: relative;
@@ -4635,6 +4635,7 @@ a{
     border: 1px solid #666666 !important;
     padding: 2px 6px;
     margin-left: -45px;
+      background: rgba(6, 6, 33, 0.7);
 }
 #sidebar {
 	display:none

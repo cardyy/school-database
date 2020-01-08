@@ -446,7 +446,7 @@
       <script>
       	function openNav() {document.getElementById("sidebar").style.display= "block";}
  
-  document.getElementByClassName('every').addEventListener('click', closeNav);
+  document.getElementById('main-content').addEventListener('click', closeNav);
    function closeNav() {document.getElementById("sidebar").style.display= "none";}
   
       </script>  
@@ -512,7 +512,7 @@
         // (string | mandatory) the heading of the notification
         title: 'Welcome to Nebular!',
         // (string | mandatory) the text inside the notification
-        text: 'You are now connected to the schools database. You can hide the left sidebar clicking on the button next to the logo. ',
+        text: 'You are now connected to your schools database. You can now manage your information in a very flexible and effective manner. ',
         // (string | optional) the image to display on the left
        
         sticky: false,
