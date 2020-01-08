@@ -4602,13 +4602,7 @@ body {
     height: 20px;
 }
 }
-  @media screen  and   (orientation: landscape){  
-html{
-	height: auto;
-}
-body {
- height: auto;
-    overflow: auto; }}  
+ 
     
 @media screen and (max-width:480px) {
 #sidebar{
