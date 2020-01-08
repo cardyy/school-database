@@ -4602,7 +4602,22 @@ body {
     height: 20px;
 }
 }
- 
+ @media screen and (max-width: 1024px) and (orientation: landscape)
+body {
+    color: #949ba2;
+    background-image: linear-gradient(45deg,rgba(6, 6, 33, 0.84),rgba(6, 6, 33, 0.90)), url(../img/bg2.jpg);
+    position: relative;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    font-family: 'Poppins', sans-serif;
+    padding: 0px !important;
+    margin: 0px !important;
+    width: 70%;
+    height: 100%;
+    overflow: auto;
+}
     
 @media screen and (max-width:480px) {
 #sidebar{
