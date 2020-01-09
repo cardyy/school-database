@@ -264,8 +264,15 @@ body{
     height: 750px;
     background-color: rgba(6, 6, 33,1);
 }
-	
-	
+.calendar .weekday li a {
+    width: 45px;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 12px;
+}	
+.calendar .days li {
+    width: 45px;
+}	
 }
 
 @media screen  and (max-width: 1024px) and  (orientation: landscape){ 
@@ -285,6 +292,9 @@ body{
     top: 15%;
     background-color: #ffffff;
     color: #333333;
+}
+.calendar .days li {
+    width: 55px;
 }
 }
 
@@ -354,5 +364,38 @@ body{
 
 #sidebar {
 	display:none
+}
+}
+@media screen  and (max-width: 800px) and  (orientation: landscape){
+ .calendar .weekday li a {
+    width: 35px;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 12px;
+}
+.calendar .days li {
+    width: 35px;
+}
+.calendar {
+    position: absolute;
+    overflow: auto;
+    width: 87%;
+    height: 100%;
+    left: 37%;
+    top: 25%;
+    background-color: #ffffff;
+    color: #333333;
+}
+.calendar .notes input {
+    background-color: rgba(6, 6, 33,1);
+    color: #ffffff;
+    border: none;
+    width: 130px;
+}
+.calendar .addNote, .calendar .removeNote {
+    float: right;
+    color: rgba(255,255,255,0.4);
+    font-weight: bold;
+    margin-top: -4px;
 }
 }

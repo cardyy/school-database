@@ -264,3 +264,25 @@ body {
 }
 
     }
+@media screen  and (max-width: 800px) and  (orientation: landscape){
+	#nextBtn {
+    position: absolute;
+    width: 100px;
+    left: 80%;
+    top: 25%;
+}
+#prev {
+     position: absolute;
+    background-color: #bbbbbb;
+    left: 30%;
+    top: 25%;
+    width: 100px;
+}
+.topLogo2 {
+    position: absolute;
+    width: 30%;
+    height: auto;
+    top: -50px;
+    left: -10px;
+}
+}
