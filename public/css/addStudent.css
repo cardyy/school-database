@@ -4639,7 +4639,7 @@ label {
 }
 
     }
-@media screen  and (max-width: 800px) and  (orientation: landscape){
+@media screen  and (max-width: 860px) and  (orientation: landscape){
   	#sidebar {
     width: 185px;
     height: 100%;

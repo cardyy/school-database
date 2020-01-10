@@ -265,7 +265,7 @@ body{
 
    }
    
-  @media screen  and (max-width: 800px) and  (orientation: landscape){
+  @media screen  and (max-width: 860px) and  (orientation: landscape){
   	.prouserpic{
 	float: left;
     width: 50px;

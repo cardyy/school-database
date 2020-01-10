@@ -4722,7 +4722,7 @@ fa{
 }
 }
 
-@media screen  and (max-width: 800px) and  (orientation: landscape){
+@media screen  and (max-width: 860px) and  (orientation: landscape){
 
  #sidebar {
     width: 185px;
@@ -4747,3 +4747,4 @@ ul.sidebar-menu li a {
     -ms-transition: all 0.3s ease;
     transition: all 0.3s ease;
 }}
+

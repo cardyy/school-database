@@ -458,5 +458,12 @@ textarea.input100 {
 }
   
 }
-@media screen  and (max-width: 800px) and  (orientation: landscape){
+@media screen  and (min-width: 310px) and  (max-width: 350px){ 
+
+.wrap-contact100 {
+    position: relative;
+    top: -20px;
+    padding: 50px 15px 17px 15px;
+}
+}
 	

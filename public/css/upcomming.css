@@ -366,7 +366,7 @@ body{
 	display:none
 }
 }
-@media screen  and (max-width: 800px) and  (orientation: landscape){
+@media screen  and (max-width: 860px) and  (orientation: landscape){
  .calendar .weekday li a {
     width: 35px;
     text-align: center;

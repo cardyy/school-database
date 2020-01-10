@@ -264,7 +264,7 @@ body {
 }
 
     }
-@media screen  and (max-width: 800px) and  (orientation: landscape){
+@media screen  and (max-width: 860px) and  (orientation: landscape){
 	#nextBtn {
     position: absolute;
     width: 100px;
@@ -286,3 +286,19 @@ body {
     left: -10px;
 }
 }
+
+@media screen  and (min-width: 310px) and  (max-width: 350px){
+	#nextBtn {
+    position: fixed;
+    width: 100px;
+    left: 60%;
+    top: 10%;
+}
+#prev {
+     position: absolute;
+    background-color: #bbbbbb;
+    left: 10%;
+    top: 10%;
+    width: 100px;
+}
+	}
