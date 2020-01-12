@@ -416,9 +416,9 @@ body{
 }
 .calendar {
     position: absolute;
-    width: 380px;
-    left: 90%;
-    top: 10%;
+    width: 377px;
+    left: 41.5%;
+    top: 20%;
     background-color: #ffffff;
     color: #333333;
 }
