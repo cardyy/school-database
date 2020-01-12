@@ -4593,7 +4593,7 @@ body {
 }  
     
     
-@media screen and (max-width:480px) {
+@media screen and (max-width:480px) and (orientation:portrait) {
 html, body {width: auto!important; overflow-x: hidden!important}
 #sidebar {display: none;}
 .tableFees {

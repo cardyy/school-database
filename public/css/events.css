@@ -4733,7 +4733,7 @@ html{
 } 
 }
     
-@media screen and (max-width:480px) {
+@media screen and (max-width:480px) and (orientation:portrait) {
 
     }
 @media screen  and (max-width: 860px) and  (orientation: landscape){
