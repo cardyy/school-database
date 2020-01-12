@@ -4784,7 +4784,7 @@ ul.sidebar-menu li a {
     transition: all 0.3s ease;
 }
 }
-@media screen  and (min-width: 500px) and  (max-width: 640px) and (orientation:landscape){
+@media screen  and (min-width: 480px) and  (max-width: 860px) and (orientation:landscape){
 .topLogo2 {
     position: absolute;
     width: 45%;
