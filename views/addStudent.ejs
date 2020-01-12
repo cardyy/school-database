@@ -225,25 +225,39 @@
                 <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
         <div class="form-group ">
                   <div class="col-lg-10">
-                <label class="control-label col-lg-2">Student's Name</label>
-                       <input class=" form-control" type="text" id="name" name="name" placeholder="eg..Martha" required /><br/>
-                        <label class="control-label col-lg-2">Student's Surname</label>
-                        <input class=" form-control" type="text" id="surname" name="surname" placeholder="eg..Smith" required /><br/>
-                        <label class="control-label col-lg-2">Student's Id-#</label>
-                       <input class=" form-control" type="text" id="id" name="id" placeholder="eg..58-288594D08" required /><br/>
-                        <label class="control-label col-lg-2">Student's Address</label>
-                        <input class=" form-control" type="text" id="address" name="address" placeholder="eg..54 Herbert Chitepo" required /><br/>
+                  
+                 <div class = "for" >
+                  <input  type="text" id="name" name="name" placeholder="eg..Martha"  required />
+                <label class=" label-name"><span class="content-name">Student's Name</span></label>
+                </div><br/><br/>
+                
+                       <div class = "for">
+                       <input  type="text" id="surname" name="surname" placeholder="eg..Smith" required />
+                        <label class=" label-name"><span class="content-name">Student's Surname</span></label></div><br/>
+                        
+                        <div class = "for">
+                        <input type="text" id="id" name="id" placeholder="eg..58-288594D08" required />
+                        <label class=" label-name"><span class="content-name">Student's Id-#</span></label></div><br/>
+                       
+                       
+                       <div class = "for">
+                        <input  type="text" id="address" name="address" placeholder="eg..54 Herbert Chitepo" required />
+                          <label class=" label-name"><span class="content-name">Student's Address</span></label></div><br/>
+                        <br/>
                       </div>
                         </div>
                           <div class="form-group ">
-                      <label class="control-label col-lg-2">Student's City</label>
-                        <input class=" form-control" type="text" id="city" name="city" placeholder="eg..Gweru" required /><br/>
-                        <label class="control-label col-lg-2">Student's Contact</label>
-                        <input class=" form-control" type="number"  name="contacts" placeholder="eg..0774575218" required /><br/>
-                        <label class="control-label col-lg-2">Student's DOB</label>
-                        <input class=" form-control" type="text" id="dob" name="dob" placeholder="eg..2000" required /><br/>
-                       <label  class="control-label col-lg-2">Student's Parents</label>
-                        <textarea id = "parents" class="text-area"  rows="10" cols="30" onkeyup="textAreaAdjust(this)" style="overflow:hidden" placeholder="eg..Hilary Phiri" ></textarea> <br>
+                      
+                        <div class="for2"><input  type="text" id="city" name="city" placeholder="eg..Gweru" required />
+                        <label class=" label-name"><span class="content-name">Student's City</span></label></div><br/>
+                       
+                        <div class="for2"><input  type="number"  name="contacts" placeholder="eg..0774575218" required />
+                         <label class=" label-name"><span class="content-name">Student's Contact</span></label></div><br/>
+                        
+                        <div class="for2"><input  type="text" id="dob" name="dob" placeholder="eg..2000" required />
+                        <label class=" label-name"><span class="content-name">Student's DOB</span></label></div><br/>
+                      
+                        <textarea id = "parents" class="txtA text-area"  rows="10" cols="30" onkeyup="textAreaAdjust(this)" style="overflow:hidden" placeholder="Student's Parents eg..Hilary Phiri" ></textarea> 
                          <span class = "parents" ></span>
                    </div>
                   <div class="form-group ">
@@ -295,25 +309,31 @@
   </select><span class = "newstudent" ></span><br/> 
 </div>
    <div class="form-group ">
-                    <label  class="control-label col-lg-2">Mother Occupation</label>
+                    
                      <div class="col-lg-10">
-                         <textarea id = "area7" class="text-area"  rows="10" cols="30" onkeyup="textAreaAdjust(this)" style="overflow:hidden" placeholder="eg...Teacher"  ></textarea> <br>
+                         <textarea id = "area7" class="text-area txtA"  rows="10" cols="30" onkeyup="textAreaAdjust(this)" style="overflow:hidden" placeholder="Mother Occupation,eg...Teacher"  ></textarea> <br>
     <span class = "test7" ></span>
-                       <label  class="control-label col-lg-2">Father Occupation</label>
-                        <textarea id = "area6" class="text-area"  rows="10" cols="30" onkeyup="textAreaAdjust(this)" style="overflow:hidden" placeholder="eg..Banker" ></textarea> <br>
+                 
+                        <textarea id = "area6" class="txtA text-area"  rows="10" cols="30" onkeyup="textAreaAdjust(this)" style="overflow:hidden" placeholder="Father Occupation, eg..Banker" ></textarea> <br>
     <span class = "test6" ></span><br/>
-    <label  class="control-label col-lg-2">Previous School</label>
-                        <input class=" form-control" type="text" id="pschool" name="pschool" placeholder="eg..Loreto" required /><br/>
+    
+     <div class = "for">
+                        <input type="text" id="pschool" name="pschool" placeholder="eg..Loreto" required />
+                        <label class=" label-name"><span class="content-name">Previous School</span></label></div><br/>
+                        <br/>
                     </div>
                   </div>
                                  
  <div class="form-group ">
                  <div class="col-lg-10">
-                 <label  class="control-label col-lg-2">Student's Email</label>
                  
-                 <input class="form-control " type="email" id="email" name="email" required />
-                    <label  class="control-label col-lg-2">Student's Password</label>
-                     <input class="form-control " type="password"  id="password" name="password" required />
+                  <div class = "for">
+                 <input  type="email" id="email" name="email" required />
+                  <label class=" label-name"><span class="content-name">Student's Email</span></label></div><br/>
+                    
+                     <div class = "for">
+                     <input type="password"  id="password" name="password" required />
+                     <label class=" label-name"><span class="content-name">Student's Password</span></label></div><br/>
                        </div>
                   </div>
                  
@@ -339,20 +359,20 @@
                       <span class = "t9" ></span>
                          <span class = "t10" ></span>    
 
-                  <label  class="control-label col-lg-2">Payment Date</label>
+                  
                 
-                         <textarea id = "dayte"  class="text-area"  rows="10" cols="30" onkeyup="textAreaAdjust(this)" style="overflow:hidden" placeholder="eg...02-20-2019"  ></textarea  > <br>
+                         <textarea id = "dayte"  class="txtA text-area"  rows="10" cols="30" onkeyup="textAreaAdjust(this)" style="overflow:hidden" placeholder="Payment Date, eg...02-20-2019"  ></textarea  > <br>
     <span class = "t1" ></span>
     
-    <label  class="control-label col-lg-2">Amount Paid</label>
+   
             
-<textarea id = "amount" class="text-area" onKeyPress="validate(event)" onPaste="validatepaste(event)" rows="10" cols="30" onkeyup="textAreaAdjust(this)" style="overflow:hidden" placeholder="eg...100"  ></textarea> <br>
+<textarea id = "amount" class="txtA text-area" onKeyPress="validate(event)" onPaste="validatepaste(event)" rows="10" cols="30" onkeyup="textAreaAdjust(this)" style="overflow:hidden" placeholder="Amount Paid, eg...100"  ></textarea> <br>
     <span class = "t3" ></span>
-<label  class="control-label col-lg-2">Contact</label>
- <textarea id = "kontact" class="text-area"  onKeyPress="validate(event)" onPaste="validatepaste(event)"  rows="10" cols="30" onkeyup="textAreaAdjust(this)" style="overflow:hidden" placeholder="eg..0773872638" ></textarea> <br>
+
+ <textarea id = "kontact" class="txtA text-area"  onKeyPress="validate(event)" onPaste="validatepaste(event)"  rows="10" cols="30" onkeyup="textAreaAdjust(this)" style="overflow:hidden" placeholder="Contact ,eg..0773872638" ></textarea> <br>
     <span class = "t4" ></span>
-     <label  class="control-label col-lg-2">Paid By</label>
-                        <textarea id = "paidBy" class="text-area"   rows="10" cols="30" onkeyup="textAreaAdjust(this)" style="overflow:hidden" placeholder="eg..Munashe" ></textarea> <br>
+     
+                        <textarea id = "paidBy" class="txtA text-area"   rows="10" cols="30" onkeyup="textAreaAdjust(this)" style="overflow:hidden" placeholder="Paid By ,eg..Munashe" ></textarea> <br>
     <span class = "t5" ></span>
     </div>
     <div class="form-group ">

@@ -5132,7 +5132,7 @@ body {
     color: rgba(255,0,0,0.3);
 }
 }
-@media screen  and (min-width: 480px) and  (max-width: 860px) {
+@media screen  and (min-width: 480px) and  (max-width: 860px) and (orientation:landscape){
 	body {
     width: 45%;
 }
