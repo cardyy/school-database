@@ -5042,3 +5042,135 @@ body {
     width: 100px;
 }
 }
+@media screen  and (min-width: 480px) and  (max-width: 600px) and  (orientation: landscape){
+	body{
+	width: 10%;
+	}
+
+}
+
+@media screen  and (min-width: 500px) and  (max-width: 760px){
+.panels {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    margin-left: -200px;
+    left: 90%;
+}
+.red-panel1 {
+    text-align: center;
+    background: linear-gradient(315deg,#89ff00,#00bcd4);
+    border-radius: 5px;
+    height: 130px;
+    width: 120px;
+}
+.green-panel1 {
+    text-align: center;
+    background: linear-gradient(315deg,#e91e63,#5d02ff);
+    border-radius: 5px;
+    height: 130px;
+    width: 120px;
+}
+.darkblue-panel1 {
+    text-align: center;
+    background: linear-gradient(315deg,#ff0057,#e64a19);
+    border-radius: 5px;
+    height: 130px;
+    width: 120px;
+}
+.darkblue-panel1 footer h4 {
+    color: white;
+    margin-top: -0px;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-weight: 200;
+    font-size: 14px;
+}
+.content-panel {
+    margin-left: -20px;
+    margin-top: 180px;
+    padding-bottom: 25px;
+}
+.panel-body {
+    background-color: rgba(6, 6, 33, 0.7);
+    width: 220%;
+    transition: transform 2s;
+    transition-timing-function: ease-in-out;
+    margin-left: -55px;
+}
+.content-panel h4 {
+    margin-top: -50px;
+    margin-left: -50px;
+}
+	
+}
+@media screen  and (min-width: 640px) and  (max-width: 960px) and (orientation:landscape){
+.topLogo2 {
+    position: absolute;
+    width: 30%;
+    height: auto;
+    top: -70px;
+    
+    left: -40px;
+}
+.content-panel {
+    margin-left: -140px;
+    margin-top: 10px;
+    padding-bottom: 25px;
+}
+.panel-body {
+    background-color: rgba(6, 6, 33, 0.7);
+    width: 107%;
+    transition: transform 2s;
+    transition-timing-function: ease-in-out;
+    margin-left: -25px;
+}
+.key {
+    position: absolute;
+    margin-top: -280px;
+    margin-left: 49%;
+    color: rgba(255,0,0,0.3);
+}
+}
+@media screen  and (min-width: 500px) and  (max-width: 640px) and (orientation:landscape){
+	body {
+    width: 45%;
+}
+.panels {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    margin-left: -190px;
+    left: 63%;
+}
+.topLogo2 {
+    position: absolute;
+    width: 45%;
+    height: auto;
+    top: -55px;
+   
+    left: -40px;
+}
+.content-panel {
+    margin-left: -20px;
+    margin-top: 30px;
+    padding-bottom: 25px;
+}
+.key {
+    position: absolute;
+    margin-top: -280px;
+    margin-left: 0%;
+    color: rgba(255,0,0,0.3);
+}
+.key1 {
+    position: absolute;
+    font-size: 11px;
+    margin-top: -280px;
+    margin-left: 22%;
+    color: #c7c7c7;
+}
+ 
+}
+
+
+	

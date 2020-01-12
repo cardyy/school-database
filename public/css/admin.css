@@ -302,3 +302,64 @@ body {
     width: 100px;
 }
 	}
+	@media screen  and (min-width: 500px) and  (max-width: 760px){
+	#nextBtn {
+    position: relative;
+    width: 100px;
+    left: -40%;
+    top: 0px;
+}
+#prev {
+    position: relative;
+    background-color: #bbbbbb;
+    left: -80%;
+    top: 60%;
+    width: 100px;
+}}
+@media screen  and (min-width: 640px) and  (max-width: 960px) and (orientation:landscape){
+	.header {
+    position: fixed;
+    left: 0;
+    right: 0;
+    z-index: 1002;
+    height: 20px;
+}
+	#prev {
+    position: relative;
+    background-color: #bbbbbb;
+    left: -180%;
+    top: 15%;
+    width: 100px;
+}
+	#nextBtn {
+    position: relative;
+    width: 100px;
+    left: -80%;
+    top: 15%;
+}
+.topLogo2 {
+    position: absolute;
+    width: 30%;
+    height: auto;
+    top: -70px;
+    
+    left: -40px;
+}}
+
+@media screen  and (min-width: 500px) and  (max-width: 640px) and (orientation:landscape){
+	.header {
+    position: fixed;
+    left: 0;
+    right: 0;
+    z-index: 1002;
+    height: 20px;
+}
+		.topLogo2 {
+    position: absolute;
+    width: 45%;
+    height: auto;
+    top: -55px;
+   
+    left: -40px;
+}
+	}

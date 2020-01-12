@@ -350,3 +350,109 @@ ul.sidebar-menu li a {
     left: -10px;
 }
 }
+@media screen  and (min-width: 640px) and  (max-width: 960px) and (orientation:landscape){
+	.prouserpic{
+	float: left;
+    width: 50px;
+	margin-top:20px;
+  transform: translateY(-120%);
+
+	width: 300px;
+	height:507px;
+    text-align: center;
+	background-color:rgba(6, 6, 33, 0.7);
+	border-radius:5px;
+	
+}
+.prouserpic1 {
+    float: left;
+    margin-top: 50px;
+    margin-left: 20px;
+    width: 310px;
+    height: 557px;
+    text-align: center;
+    background-color: rgba(6, 6, 33, 0.7);
+    border-radius: 5px;
+    transition: transform 4s;
+    transition-timing-function: ease-out;
+}
+
+	.tabcontent {
+    position: absolute;
+    left: 334px;
+    top: -480px;
+    background-color: white;
+    padding: 6px 12px;
+    overflow: auto;
+    border-top: none;
+    width: 279%;
+    height: auto;
+    box-shadow: 1px 1px 1px 1px #333;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+.tab {
+    position: absolute;
+    width: 279%;
+    font-family: poppins;
+    font-size: 12px;
+    overflow: hidden;
+    box-shadow: 1px 1px 1px 1px #333;
+    background-color: rgba(6, 6, 33, 0.7);
+    color: #c7c7c7;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    margin-top: -404%;
+    left: 233%;
+}}
+
+@media screen  and (min-width: 500px) and  (max-width: 640px) and (orientation:landscape){
+	.tabcontent {
+    position: absolute;
+    left: -25px;
+    top: 140px;
+    background-color: white;
+    padding: 6px 12px;
+    overflow: auto;
+    border-top: none;
+    width: 1370%;
+    height: auto;
+    box-shadow: 1px 1px 1px 1px #333;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+	.tab {
+    position: absolute;
+    width: 1378%;
+    font-family: poppins;
+    font-size: 12px;
+    overflow: hidden;
+    box-shadow: 1px 1px 1px 1px #333;
+    background-color: rgba(6, 6, 33, 0.7);
+    color: #c7c7c7;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    top: -15%;
+    left: -103%;
+}
+	.topLogo2 {
+    position: absolute;
+    width: 45%;
+    height: auto;
+    top: -55px;
+   
+    left: -40px;
+}
+.prouserpic1 {
+    float: left;
+    margin-top: 50px;
+    margin-left: -20px;
+    width: 370px;
+    height: 557px;
+    text-align: center;
+    background-color: rgba(6, 6, 33, 0.7);
+    border-radius: 5px;
+    transition: transform 4s;
+    transition-timing-function: ease-out;
+}
+}
