@@ -4717,7 +4717,7 @@ body {
 }  
     
     
-@media screen and (max-width:480px) and (orientation:portrait) {
+@media screen and (max-width:480px)  {
 	html{
 	height: 100%;
 }
