@@ -142,16 +142,15 @@ position: fixed ;
 	
 }
 
-.for label{
-position: absolute;
-color: #bab5bf;
-	bottom: -11%;
-	left: -15%;
-	width: 100%;
-	height:100%;
-	border-bottom: 1px solid #5d02ff;
-
-	pointer-events: none;
+.for label {
+    position: absolute;
+    color: #bab5bf;
+    bottom: -11%;
+    left: -12.5%;
+    width: 100%;
+    height: 100%;
+    border-bottom: 2px solid #5d02ff;
+    pointer-events: none;
 }
 
 .for label::after{
