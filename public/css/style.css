@@ -5132,7 +5132,7 @@ body {
     color: rgba(255,0,0,0.3);
 }
 }
-@media screen  and (min-width: 480px) and  (max-width: 860px) and (orientation:landscape){
+@media screen  and (min-width: 500px) and  (max-width: 635px) and (orientation:landscape){
 	body {
     width: 45%;
 }
@@ -5145,11 +5145,60 @@ body {
 }
 .topLogo2 {
     position: absolute;
-    width: 45%;
+    width: 42%;
     height: auto;
-    top: -55px;
-   
-    left: -40px;
+    top: -50px;
+    left: -37px;
+}
+.content-panel {
+    margin-left: -20px;
+    margin-top: 30px;
+    padding-bottom: 25px;
+}
+.key {
+    position: absolute;
+    margin-top: -280px;
+    margin-left: 0%;
+    color: rgba(255,0,0,0.3);
+}
+.key1 {
+    position: absolute;
+    font-size: 11px;
+    margin-top: -280px;
+    margin-left: 22%;
+    color: #c7c7c7;
+}
+}
+@media screen  and (min-width: 640px) and  (max-width: 860px) and (orientation:landscape){
+	ul.sidebar-menu li a {
+    color: #aeb2b7;
+    text-decoration: none;
+    display: block;
+    padding: 4px 0 7px 10px;
+    font-size: 12px;
+    outline: none;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+	body {
+    width: 45%;
+}
+.panels {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    margin-left: -190px;
+    left: 63%;
+}
+.topLogo2 {
+    position: absolute;
+    width: 30%;
+    height: auto;
+    top: -90%;
+    left: -5%;
 }
 .content-panel {
     margin-left: -20px;
