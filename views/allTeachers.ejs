@@ -41,7 +41,7 @@
         
       </div>
       <!--logo start-->
-      <a href="index" class="logo"><img src="/img/sahara logo 1 .png" alt=""   class= "topLogo2" /></a>
+      <a  class="logo"><img src="/img/sahara logo 1 .png" alt=""   class= "topLogo2" /></a>
       <!--logo end-->
       <div class="nav notify-row" id="top_menu">
         <!--  notification start -->
@@ -52,7 +52,7 @@
           <!-- settings end -->
           <!-- inbox dropdown start-->
           <li id="header_inbox_bar" class="dropdown">
-            <a data-toggle="dropdown" class="dropdown-toggle" href="index#">
+            <a data-toggle="dropdown" class="dropdown-toggle" >
               <i class="fa fa-clipboard"></i>
              
               </a>
@@ -76,7 +76,7 @@
            <script>
            var wat = ''
             var outp = [<%- outp %>]
-             outp.forEach((item)=>{wat+=  `<li><a href="index#"><span class="photo"><img src="/img/bin/config.js/system/tc/${item.image}.jpg" alt="" /></span><span class="subject"><span class="from">${item.name}</span>
+             outp.forEach((item)=>{wat+=  `<li><a ><span class="photo"><img src="/img/bin/config.js/system/tc/${item.image}.jpg" alt="" /></span><span class="subject"><span class="from">${item.name}</span>
              <span class="time">${item.time}</span></span><span class="message" id="droaster">${item.duty}</span> </a></li> `	})
                	document.getElementById('daRoaster').innerHTML = wat
                 </script>
@@ -85,7 +85,7 @@
           <!-- inbox dropdown end -->
           <!-- notification dropdown start-->
           <li id="header_notification_bar" class="dropdown">
-            <a data-toggle="dropdown" class="dropdown-toggle" href="index#">
+            <a data-toggle="dropdown" class="dropdown-toggle" >
               <i class="fa fa-calendar"></i>
              
               </a>
@@ -99,7 +99,7 @@
        
               <% for(var z in filerdEvents){ %> 
               <li>
-                <a href="index#">
+                <a >
                   <span class="label label-success"><i class="fa fa-bolt"></i></span>
                   
                  <%- filerdEvents[z].name %>: 
