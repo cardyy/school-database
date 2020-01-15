@@ -448,17 +448,16 @@ body {
     min-width: 300px;
 }
 #nextBtn {
-    position: fixed;
+    position: relative;
     width: 100px;
-    left: 60%;
+    left: -60%;
     top: 15%;
 }
 #prev {
-    position: fixed;
-    background-color: #bbbbbb;
-    left: 15%;
-    top: 15%;
+  position: relative;
     width: 100px;
+    left: -190%;
+    top: 15%;
 }
 
     }
