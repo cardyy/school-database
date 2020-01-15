@@ -450,13 +450,13 @@ body {
 #nextBtn {
     position: relative;
     width: 100px;
-    left: -60%;
+    left: 0%;
     top: 15%;
 }
 #prev {
   position: relative;
     width: 100px;
-    left: -190%;
+    left: -70%;
     top: 15%;
 }
 
