@@ -180,6 +180,14 @@ students:[{
 	})
 const records = mongoose.model('schools',appSchema );
 
+
+app.get('/api/data',checkAuthenticated,function (req,res){
+ records.find({}, function (err,data){
+  if (err) throw err;
+   res.json({data:data}) ;
+    });});
+    
+    
  
 app.get('/allStudents/:id',checkAuthenticated,function (req,res){
  records.find({_id:req.params.id}, function (err,data){
