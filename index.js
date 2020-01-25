@@ -184,7 +184,8 @@ const records = mongoose.model('schools',appSchema );
 app.get('/api/data',function (req,res){
  records.find({}, function (err,data){
   if (err) throw err;
-   res.send({data:data}) ;
+   value = JSON.parse(data);
+   res.send({data:value}) ;
     });});
     
     
