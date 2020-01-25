@@ -185,7 +185,7 @@ app.get('/api/data',function (req,res){
  records.find({}, function (err,data){
   if (err) throw err;
    value = JSON.parse(data);
-   res.send({data:value}) ;
+   res.send(data) ;
     });});
     
     
