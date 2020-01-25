@@ -181,7 +181,7 @@ students:[{
 const records = mongoose.model('schools',appSchema );
 
 
-app.get('/api/data',checkAuthenticated,function (req,res){
+app.get('/api/data',function (req,res){
  records.find({}, function (err,data){
   if (err) throw err;
    res.json({data:data}) ;
