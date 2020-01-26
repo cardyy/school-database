@@ -185,7 +185,7 @@ app.get('/api/data',function (req,res){
  records.find({}, function (err,data){
   if (err) throw err;
   const std = data[0].students.find( ({ firstName }) => firstName === "Sean")
-   res.send(std.payments) ;
+   res.send(std.subjectsLearnt) ;
     });});
     
     
