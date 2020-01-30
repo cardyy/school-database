@@ -186,11 +186,8 @@ app.post('/users',function (req,res){
 	const password = req.body.password
  records.find({}, function (err,data){
   if (err) throw err;
-  const userEmail = data[0].students.find( ({ email }) => email === username)
-  if(userEmail.email === username){
-  	console.log('hie')
-  }
-   res.send({message:"nice"}) ;
+ var isPresent = data[0].students.some(function(el){ return el.email === 'cardyy@gmail.com'})
+   res.send({message:isPresent}) ;
     });});
     
 app.get('/allStudents/:id',checkAuthenticated,function (req,res){
