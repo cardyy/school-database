@@ -187,7 +187,11 @@ app.post('/users',function (req,res){
  records.find({}, function (err,data){
   if (err) throw err;
  var isPresent = data[0].students.some(function(el){ return el.email === 'cardyy@gmail.com'})
-   res.send({message:isPresent}) ;
+if (isPresent === true ){
+  res.send({message:"nice"}) ;
+  } else {
+   res.send({message:"fuck"}) ;
+  }
     });});
     
 app.get('/allStudents/:id',checkAuthenticated,function (req,res){
