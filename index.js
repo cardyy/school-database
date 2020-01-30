@@ -198,11 +198,16 @@ app.get('/api/data',function (req,res){
   if (err) throw err;
   const userEmail = data[0].students.find( ({ email }) => email === "cardyy@gmail.com")
   const userEmailCheck = userEmail.email
+  const userPassword = data[0].students.find( ({ password }) => password === "1234")
+  const userPasswordCheck = userPassword.password
+  if (userEmailCheck=== "cardyy@gmail.com" && userPasswordCheck === "1234"){
+  	   res.send("bho") ;
+  } else {
+  	res.send("maya") ;
+  }
   
   
-  
-  
-   res.send(userEmailCheck) ;
+
     });});
     
     
@@ -325,7 +330,7 @@ app.post('/addStudent/:id',urlencodedParser,  async (req,res)=>{
             var objectStri = (new Function("return [" + wch+ "];")());
  
 let studentsArray 
-const hashPassword = await bcrypt.hash(req.body.password,10)
+
 var mother = req.body.moLi
   var father = req.body.foLi
    if ( mother.constructor == Array ){var mom = req.body.moLi}
@@ -354,7 +359,7 @@ studentsArray = await records.findById(req.params.id)
     clubs: req.body.clubs,
     contacts:req.body.contacts,
     email: req.body.email,
-    password: hashPassword,
+    password: req.body.password,
     age:req.body.dob,
 	parentName:req.body.parents,
 	gender:req.body.gender,
