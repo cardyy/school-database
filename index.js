@@ -200,7 +200,7 @@ app.get('/api/data',function (req,res){
   const userEmailCheck = userEmail.email
   const userPassword = data[0].students.find( ({ password }) => password === "1234")
   const userPasswordCheck = userPassword.password
-  if (userEmailCheck=== "cardyy@gmail.com" && userPasswordCheck === "1234"){
+  if (userEmailCheck=== "cardyy@gmail.com" && userPasswordCheck === "124"){
   	   res.send("bho") ;
   } else {
   	res.send("maya") ;
