@@ -186,11 +186,14 @@ app.post('/users',function (req,res){
 	var password = req.body.password
  records.find({}, function (err,data){
   if (err) throw err;
- 
-  	   	res.send('message':true) ;
- 
+  const std = data[0].students
+   res.send({message:"nice"}) ;
     });});
     
+
+
+
+
     
     
  
