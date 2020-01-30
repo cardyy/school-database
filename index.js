@@ -182,11 +182,11 @@ const records = mongoose.model('schools',appSchema );
 
 
 app.post('/users',function (req,res){
-	var username = req.body.username
-	var password = req.body.password
+	const username = req.body.username
+	const password = req.body.password
  records.find({}, function (err,data){
   if (err) throw err;
-  
+  const userEmail = data[0].students.find( ({ email }) => email === username)
    res.send({message:"nice"}) ;
     });});
     
