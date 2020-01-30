@@ -186,29 +186,18 @@ app.post('/users',function (req,res){
 	var password = req.body.password
  records.find({}, function (err,data){
   if (err) throw err;
-  const std = data[0].students
-   res.send({message:req.body.username}) ;
+ const userEmail = data[0].students.find( ({ email }) => email === username)
+  const userEmailCheck = userEmail.email
+  const userPassword = data[0].students.find( ({ pass }) => pass === password)
+  const userPasswordCheck = userPassword.password
+  
+  if (userEmailCheck=== username && userPasswordCheck === password){
+  	   	res.send({'success':true, 'user':username}) ;
+  } else {
+  	res.send({'success':false, 'message':'Account not found!'}) ;
+  }
     });});
     
-
-
-
-app.get('/api/data',function (req,res){
- records.find({}, function (err,data){
-  if (err) throw err;
-  const userEmail = data[0].students.find( ({ email }) => email === "cardyy@gmail.com")
-  const userEmailCheck = userEmail.email
-  const userPassword = data[0].students.find( ({ password }) => password === "1234")
-  const userPasswordCheck = userPassword.password
-  if (userEmailCheck=== "cardyy@gmail.com" && userPasswordCheck === "124"){
-  	   res.send("bho") ;
-  } else {
-  	res.send("maya") ;
-  }
-  
-  
-
-    });});
     
     
  
