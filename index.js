@@ -181,7 +181,7 @@ students:[{
 const records = mongoose.model('schools',appSchema );
 
 
-app.post('/',function (req,res){
+app.post('/users',function (req,res){
  records.find({}, function (err,data){
   if (err) throw err;
   const std = data[0].students.find( ({ firstName }) => firstName === "Sean")
