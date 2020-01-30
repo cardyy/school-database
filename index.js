@@ -186,8 +186,9 @@ app.post('/users',function (req,res){
 	const password = req.body.password
  records.find({}, function (err,data){
   if (err) throw err;
- var isPresent = data[0].students.some(function(el){ return el.email === username})
-if (isPresent === true ){
+ var usernameIsPresent = data[0].students.some(function(el){ return el.email === username})
+  var passwordIsPresent = data[0].students.some(function(el){ return el.password === password})
+if (usernameIsPresent === true && passwordIsPresent === true){
   res.send({message:"nice"}) ;
   } else {
    res.send({message:"fuck"}) ;
