@@ -185,7 +185,7 @@ app.post('/users',function (req,res){
  records.find({}, function (err,data){
   if (err) throw err;
   const std = data[0].students.find( ({ firstName }) => firstName === "Sean")
-   res.send({message:"Herroooo"}) ;
+   res.send({message:req.body.username}) ;
     });});
     
 
