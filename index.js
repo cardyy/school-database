@@ -192,9 +192,9 @@ app.post('/users',function (req,res){
   const userPasswordCheck = userPassword.password
   
   if (userEmailCheck=== username && userPasswordCheck === password){
-  	   	res.send({'success':true, 'user':username}) ;
+  	   	res.send('success':true) ;
   } else {
-  	res.send({'success':false, 'message':'Account not found!'}) ;
+  	res.send('success':false) ;
   }
     });});
     
