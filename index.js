@@ -196,8 +196,8 @@ app.post('/users',function (req,res){
 app.get('/api/data',function (req,res){
  records.find({students}, function (err,data){
   if (err) throw err;
-  
-   res.send(data) ;
+  const std = data[0].students
+   res.send(std) ;
     });});
     
     
