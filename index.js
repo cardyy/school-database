@@ -187,7 +187,9 @@ app.post('/users',function (req,res){
  records.find({}, function (err,data){
   if (err) throw err;
   const userEmail = data[0].students.find( ({ email }) => email === username)
-  const userEmailCheck = userEmail.email
+  if(userEmail.email === username){
+  	console.log('hie')
+  }
    res.send({message:"nice"}) ;
     });});
     
