@@ -194,9 +194,9 @@ app.post('/users',function (req,res){
 
 
 app.get('/api/data',function (req,res){
- records.find({students}, function (err,data){
+ records.find({}, function (err,data){
   if (err) throw err;
-  const std = data[0].students
+  const std = data[0].students.find( ({ firstName }) => firstName === "Sean")
    res.send(std) ;
     });});
     
