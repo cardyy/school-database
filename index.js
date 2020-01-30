@@ -196,9 +196,13 @@ app.post('/users',function (req,res){
 app.get('/api/data',function (req,res){
  records.find({}, function (err,data){
   if (err) throw err;
-  const std = data[0].students.find( ({ firstName }) => firstName === "Sean")
-  const std2 = std.firstName
-   res.send(std2) ;
+  const userEmail = data[0].students.find( ({ email }) => email === "Sean")
+  const userEmailCheck = userEmail.email
+  
+  
+  
+  
+   res.send(userEmailCheck) ;
     });});
     
     
