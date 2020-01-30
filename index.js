@@ -186,16 +186,9 @@ app.post('/users',function (req,res){
 	var password = req.body.password
  records.find({}, function (err,data){
   if (err) throw err;
- const userEmail = data[0].students.find( ({ email }) => email === username)
-  const userEmailCheck = userEmail.email
-  const userPassword = data[0].students.find( ({ pass }) => pass === password)
-  const userPasswordCheck = userPassword.password
-  
-  if (userEmailCheck=== username && userPasswordCheck === password){
-  	   	res.send('success':true) ;
-  } else {
-  	res.send('success':false) ;
-  }
+ 
+  	   	res.send('message':true) ;
+ 
     });});
     
     
