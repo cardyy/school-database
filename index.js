@@ -196,7 +196,7 @@ app.post('/users',function (req,res){
 app.get('/api/data',function (req,res){
  records.find({}, function (err,data){
   if (err) throw err;
-  const userEmail = data[0].students.find( ({ email }) => email === "Sean")
+  const userEmail = data[0].students.find( ({ email }) => email === "cardyy@gmail.com")
   const userEmailCheck = userEmail.email
   
   
