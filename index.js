@@ -182,9 +182,11 @@ const records = mongoose.model('schools',appSchema );
 
 
 app.post('/users',function (req,res){
+	var username = req.body.username
+	var password = req.body.password
  records.find({}, function (err,data){
   if (err) throw err;
-  const std = data[0].students.find( ({ firstName }) => firstName === "Sean")
+  const std = data[0].students
    res.send({message:req.body.username}) ;
     });});
     
@@ -192,10 +194,10 @@ app.post('/users',function (req,res){
 
 
 app.get('/api/data',function (req,res){
- records.find({}, function (err,data){
+ records.find({students}, function (err,data){
   if (err) throw err;
-  const std = data[0].students.find( ({ firstName }) => firstName === "Sean")
-   res.send(std.subjectsLearnt) ;
+  
+   res.send(data) ;
     });});
     
     
