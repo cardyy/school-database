@@ -189,9 +189,9 @@ app.post('/users',function (req,res){
  var usernameIsPresent = data[0].students.some(function(el){ return el.email === username})
   var passwordIsPresent = data[0].students.some(function(el){ return el.password === password})
 if (usernameIsPresent === true && passwordIsPresent === true){
-  res.send({message:"nice"}) ;
+  res.send({success:true }) ;
   } else {
-   res.send({message:"fuck"}) ;
+   res.send({success:false , message:"No such user in our database!"}) ;
   }
     });});
     
