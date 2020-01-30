@@ -181,11 +181,11 @@ students:[{
 const records = mongoose.model('schools',appSchema );
 
 
-app.get('/users',function (req,res){
+app.post('/',function (req,res){
  records.find({}, function (err,data){
   if (err) throw err;
   const std = data[0].students.find( ({ firstName }) => firstName === "Sean")
-   res.send("Herroooo") ;
+   res.send({message:"Herroooo"}) ;
     });});
     
 
