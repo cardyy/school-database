@@ -190,7 +190,7 @@ app.post('/users',function (req,res){
   var passwordIsPresent = data[0].students.some(function(el){ return el.password === password})
   
 if (usernameIsPresent === true && passwordIsPresent === true){
-  res.send({'success':true, 'user':username, 'test':data[0].name}) ;
+  res.send({'success':true, 'user':username, 'test':data[0].address}) ;
   } else {
    res.send({'success':false , 'message':"No such user in our database!"}) ;
   }
