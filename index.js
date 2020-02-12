@@ -200,7 +200,7 @@ if (usernameIsPresent === true && passwordIsPresent === true){
  app.get('/users',function (req,res){
  records.find({}, function (err,data){
   if (err) throw err;
-   res.send({data:'hie'}) ;
+   res.send(data[0].name) ;
     });});
         
  
