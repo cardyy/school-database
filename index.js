@@ -182,24 +182,18 @@ const records = mongoose.model('schools',appSchema );
 
 
 app.post('/users',function (req,res){
-	const username = req.body.username
-	const password = req.body.password
- records.find({}, function (err,data){
-  if (err) throw err;
- var usernameIsPresent = data[0].students.some(function(el){ return el.email === username && el.password === password})
- 
-  
-if (usernameIsPresent === true ){
-	console.log()
-  res.send({'success':true, 'user':username, 'test':username}) ;
-  } else {
-   res.send({'success':false , 'message':"No such user in our database!"}) ;
-  }
-    });});
+ const username = req.body.username
+  const password = req.body.password
+   records.find({}, function (err,data){
+    if (err) throw err;
+     var usernameIsPresent = data[0].students.some(function(el){ return el.email === username && el.password === password})
+      if (usernameIsPresent === true ){
+	   res.send({'success':true, 'user':username, 'test':{username,password }) ;
+        } else {
+         res.send({'success':false , 'message':"No such user in our database!"}) ;
+          }});});
     
   
- 
-           
 app.get('/allStudents/:id',checkAuthenticated,function (req,res){
  records.find({_id:req.params.id}, function (err,data){
   if (err) throw err;
