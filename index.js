@@ -201,7 +201,7 @@ if (usernameIsPresent === true && passwordIsPresent === true){
  	const password = req.body.password
  records.find({}, function (err,data){
   if (err) throw err;
-   res.send(req.params.hello) ;
+   res.send(req.params.hell) ;
     });});
         
  
