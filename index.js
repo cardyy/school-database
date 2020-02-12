@@ -188,12 +188,22 @@ app.post('/users',function (req,res){
   if (err) throw err;
  var usernameIsPresent = data[0].students.some(function(el){ return el.email === username})
   var passwordIsPresent = data[0].students.some(function(el){ return el.password === password})
+  
 if (usernameIsPresent === true && passwordIsPresent === true){
-  res.send({'success':true, 'user':username}) ;
+  res.send({'success':true, 'user':username, 'test':{name:'Cardinal'}}) ;
   } else {
    res.send({'success':false , 'message':"No such user in our database!"}) ;
   }
     });});
+    
+  
+ app.get('/users',function (req,res){
+ records.find({}, function (err,data){
+  if (err) throw err;
+   res.render({data:data[0].name}) ;
+    });});
+        
+ 
     
 app.get('/allStudents/:id',checkAuthenticated,function (req,res){
  records.find({_id:req.params.id}, function (err,data){
