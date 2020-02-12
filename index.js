@@ -197,11 +197,11 @@ if (usernameIsPresent === true && passwordIsPresent === true){
     });});
     
   
- app.get('/users',function (req,res){
+ app.get('/users/:id',function (req,res){
  	const password = req.body.password
- records.find({}, function (err,data){
+ records.find({_id:req.params.id}, function (err,data){
   if (err) throw err;
-   res.send(password) ;
+   res.send(school:req.params.id) ;
     });});
         
  
