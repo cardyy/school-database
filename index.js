@@ -182,7 +182,7 @@ const records = mongoose.model('schools',appSchema );
 
 
 app.post('/users',function (req,res){
- let username = req.body.username
+ const username = req.body.username
   const password = req.body.password
    records.find({}, function (err,data){
     if (err) throw err;
