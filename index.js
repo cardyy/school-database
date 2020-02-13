@@ -197,7 +197,7 @@ app.post('/users',function (req,res){
  app.get('/users',function (req,res){
  records.find({}, function (err,data){
  	if (err) throw err;
-   res.send([{'username':"kwekwe high", 'id':"263"},{'username':"guine fowl", 'id':"278"},{'username':"chplin", 'id':"457"}]) ;
+   res.send([{'username':"kwekwe high", 'id':"263",'students':[{'name':"sean"},{'name':"sean"}]},{'username':"guine fowl", 'id':"278",'students':[{'name':"sean"},{'name':"sean"}]},{'username':"chplin", 'id':"457",'students':[{'name':"sean"},{'name':"sean"}]}]) ;
     });});
  
   
