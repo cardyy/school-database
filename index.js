@@ -198,7 +198,7 @@ app.post('/users',function (req,res){
  
  records.find({}, function (err,data){
  	if (err) throw err;
-   res.send([1,2,3,4,5]) ;
+   res.send([{name:1, id:a},{name:2, id:b},{name:3, id:c} ]) ;
     });});
  
   
