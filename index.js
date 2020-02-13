@@ -191,14 +191,14 @@ app.post('/users',function (req,res){
 	   res.send({'success':true, 'user':username, 'zita':'cardinal','class':'Form1B','positiontop':'10','attendance':'80%' }) ;
         } else {
          res.send({'success':false , 'message':"No such user in our database!"}) ;
-          
+          }});});
     
  
  app.get('/users',function (req,res){
  records.find({}, function (err,data){
  	if (err) throw err;
    res.send({'username':username}) ;
-    });});}});});
+    });});
  
   
 app.get('/allStudents/:id',checkAuthenticated,function (req,res){
