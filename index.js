@@ -193,6 +193,13 @@ app.post('/users',function (req,res){
          res.send({'success':false , 'message':"No such user in our database!"}) ;
           }});});
     
+ 
+ app.get('/users',function (req,res){
+ records.find({}, function (err,data){
+ 	if (err) throw err;
+   res.send(username) ;
+    });});
+ 
   
 app.get('/allStudents/:id',checkAuthenticated,function (req,res){
  records.find({_id:req.params.id}, function (err,data){
