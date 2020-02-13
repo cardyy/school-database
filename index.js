@@ -188,7 +188,7 @@ app.post('/users',function (req,res){
     if (err) throw err;
      var usernameIsPresent = data[0].students.some(function(el){ return el.email === username && el.password === password})
       if (usernameIsPresent === true ){
-	   res.send({'success':true, 'user':username, 'zita':['cardinal'],'class':'Form1B','positiontop':'10','attendance':'80%' }) ;
+	   res.send({'success':true, 'user':username, 'zita':'cardinal','class':'Form1B','positiontop':'10','attendance':'80%' }) ;
         } else {
          res.send({'success':false , 'message':"No such user in our database!"}) ;
           }});});
