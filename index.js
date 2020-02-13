@@ -195,10 +195,9 @@ app.post('/users',function (req,res){
     
  
  app.get('/users',function (req,res){
- 
  records.find({}, function (err,data){
  	if (err) throw err;
-   res.send({'name':1, 'id':a}) ;
+   res.send({'username':"blams"}) ;
     });});
  
   
