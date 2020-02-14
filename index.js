@@ -187,15 +187,15 @@ app.post('/users',function (req,res){
    records.find({}, function (err,data){
     if (err) throw err;
     for (var i in data){
-	var usernameIsPresent = data[i].students.some(function(el){ return el.email === username && el.password === password})
+		var usernameIsPresent = data[i].students.some(function(el){ return el.email === username && el.password === password})
      console.log(usernameIsPresent)
       if (usernameIsPresent === true ){
       	result = data.filter(a => a.students.some(u => u.email==username && u.password==password));
       	const schoolId = result[0]._id
 	   res.send({'success':true, 'user':username, 'zita':schoolId }) ;
         } else {
-         res.send({'success':false , 'message':"No such user in our database!"}) ;
-          }});})};
+         res.send({'success':false , 'message':"No such user in our database!"}) ;}
+          }});});
     
  
  app.get('/users',function (req,res){
