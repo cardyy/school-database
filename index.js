@@ -187,10 +187,9 @@ app.post('/users',function (req,res){
    records.find({}, function (err,data){
     if (err) throw err;
     for (var i in data){
-		const check = data[i]
-		console.log(data.length)
+		 var usernameIsPresent = data[0].students.some(function(el){ return el.email === username && el.password === password})
 	}
-     var usernameIsPresent = data[0].students.some(function(el){ return el.email === username && el.password === password})
+    
       if (usernameIsPresent === true ){
       	result = data.filter(a => a.students.some(u => u.email==username && u.password==password));
       	const schoolId = result[0]._id
