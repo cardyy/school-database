@@ -188,6 +188,9 @@ app.post('/users',function (req,res){
     if (err) throw err;
     for (var i in data){
 		 var usernameIsPresent = data[i].students.some(function(el){ return el.email === username && el.password === password})
+		 if (usernameIsPresent === true){
+		 	break;
+		 }
 	}
 	console.log(usernameIsPresent)
     if (usernameIsPresent === true ){
