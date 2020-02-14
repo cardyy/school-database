@@ -189,8 +189,8 @@ app.post('/users',function (req,res){
     for (var i in data){
 		 var usernameIsPresent = data[0].students.some(function(el){ return el.email === username && el.password === password})
 	}
-    
-      if (usernameIsPresent === true ){
+	console.log(usernameIsPresent)
+    if (usernameIsPresent === true ){
       	result = data.filter(a => a.students.some(u => u.email==username && u.password==password));
       	const schoolId = result[0]._id
 	   res.send({'success':true, 'user':username, 'zita':schoolId }) ;
