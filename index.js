@@ -57,6 +57,7 @@ const appSchema = new mongoose.Schema([{
  classesName:[String],
  streams:[],
  upcomingSchoolEvents:[{name:String , date:String, time:String}],
+ news:[{headlines:String , main:String, date:String}],
  fees:[{_id:String, type1:String, amount: Number}],
 address:String,
 image:String,
