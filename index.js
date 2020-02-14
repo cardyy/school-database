@@ -186,7 +186,8 @@ app.post('/users',function (req,res){
   const password = req.body.password
    records.find({}, function (err,data){
     if (err) throw err;
-    const usernameIsPresent = data.students.some(function(el){ return el.email === username && el.password === password})
+    result = data.filter(a => a.students.some(u => u.email==username && u.password==password));
+    const usernameIsPresent = result[0]
      console.log(usernameIsPresent)
       if (usernameIsPresent === true ){
       	result = data.filter(a => a.students.some(u => u.email==username && u.password==password));
