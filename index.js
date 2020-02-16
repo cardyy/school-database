@@ -59,6 +59,7 @@ const appSchema = new mongoose.Schema([{
  upcomingSchoolEvents:[{name:String , date:String, time:String}],
  news:[{headlines:String , main:String, date:String}],
  fees:[{_id:String, type1:String, amount: Number}],
+ checkList:[{stream:String, stationery:[{name:String, img:String, imgName:String, imgPrice:Number}], uniforms:[{name:String, key:String, img:String, imgName:String, imgPrice:Number}],books:[{name:String, key:String, img:String, imgName:String, imgPrice:Number}],miscellenious:[{name:String, key:String, img:String, imgName:String, imgPrice:Number}] }],
 address:String,
 image:String,
 contact:String,
