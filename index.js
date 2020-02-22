@@ -214,7 +214,7 @@ app.post('/users',function (req,res){
        payment.add("Bananas", 2.5);
         paynow.sendMobile(
          payment, 
-          '0771111111',
+          '0774444444',
            'ecocash' 
             ).then(function(response) {
              if(response.success) {
