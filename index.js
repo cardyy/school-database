@@ -11,6 +11,8 @@ const fs = require('fs');
 const initializePassport = require('./passport-config.js')
 const path = require('path')
 const methodOverride = require('method-override')
+const { Paynow } = require("paynow");
+
 
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true, parameterLimit: 50000 }));
