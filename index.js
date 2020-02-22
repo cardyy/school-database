@@ -220,12 +220,7 @@ app.post('/users',function (req,res){
              if(response.success) {
               let instructions = response.instructions 
                let pollUrl = response.pollUrl; 
-                let status = paynow.pollTransaction(pollUrl);
-                 if (status.paid()) {
-                  console.log('Yay! Transaction was paid for')
-                   } else {
-                    console.log("Why you no pay?");
-                      }
+                
                        console.log(instructions)
                          } else {
                           console.log(response.error) }
