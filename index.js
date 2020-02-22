@@ -11,7 +11,7 @@ const fs = require('fs');
 const initializePassport = require('./passport-config.js')
 const path = require('path')
 const methodOverride = require('method-override')
-const { Paynow } = require("paynow");
+const Paynow  = require("paynow");
 
 
 app.use(bodyParser.json({ limit: '50mb' }));
@@ -207,6 +207,13 @@ app.post('/users',function (req,res){
  	if (err) throw err;
    res.send(data) ;
     });});
+    
+    app.post('/store',function (req,res){
+ records.find({}, function (err,data){
+ 	if (err) throw err;
+   res.send(data) ;
+    });});
+ 
  
   
 app.get('/allStudents/:id',checkAuthenticated,function (req,res){
