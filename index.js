@@ -214,14 +214,13 @@ app.post('/users',function (req,res){
        payment.add("Bananas", 2.5);
         paynow.sendMobile(
          payment, 
-          '0771111111',
+          '0772927263',
            'ecocash' 
             ).then(function(response) {
              if(response.success) {
               let instructions = response.instructions 
                let pollUrl = response.pollUrl; 
-                
-                       console.log(instructions)
+                console.log(instructions)
                          } else {
                           console.log(response.error) }
                            }).catch(ex => {
