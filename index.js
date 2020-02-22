@@ -11,7 +11,7 @@ const fs = require('fs');
 const initializePassport = require('./passport-config.js')
 const path = require('path')
 const methodOverride = require('method-override')
-const Paynow  = require("paynow");
+const {Paynow}  = require("paynow");
 
 
 app.use(bodyParser.json({ limit: '50mb' }));
@@ -209,10 +209,29 @@ app.post('/users',function (req,res){
     });});
     
     app.post('/store',function (req,res){
- records.find({}, function (err,data){
- 	if (err) throw err;
-   res.send(data) ;
-    });});
+     let paynow = new Paynow("9130", "79e60b36-e2ee-48da-b2f4-a09ed08049d9");
+      let payment = paynow.createPayment("Invoice 37", "cardyy@gmail.com");	
+       payment.add("Bananas", 2.5);
+        paynow.sendMobile(
+         payment, 
+          '0777000000',
+           'ecocash' 
+            ).then(function(response) {
+             if(response.success) {
+              let instructions = response.instructions 
+               let pollUrl = response.pollUrl; 
+                let status = paynow.pollTransaction(pollUrl);
+                 if (status.paid()) {
+                  console.log('Yay! Transaction was paid for')
+                   } else {
+                    console.log("Why you no pay?");
+                      }
+                       console.log(instructions)
+                         } else {
+                          console.log(response.error) }
+                           }).catch(ex => {
+                            console.log('Your application has broken an axle', ex)
+                              }); });
  
  
   
