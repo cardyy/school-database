@@ -211,10 +211,12 @@ app.post('/users',function (req,res){
     app.post('/store',function (req,res){
      let paynow = new Paynow("9130", "79e60b36-e2ee-48da-b2f4-a09ed08049d9");
       let payment = paynow.createPayment("Invoice 37", "cardyy@gmail.com");	
-       payment.add("Bananas", 2.5);
+       const item = req.body.item
+        const amount = req.body.amount
+       payment.add(item, amount);
         paynow.sendMobile(
          payment, 
-          '0773333333',
+          '0771111111',
            'ecocash' 
             ).then(function(response) {
              if(response.success) {
