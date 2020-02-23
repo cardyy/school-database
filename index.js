@@ -213,6 +213,8 @@ app.post('/users',function (req,res){
       let payment = paynow.createPayment("Invoice 37", "cardyy@gmail.com");	
        const item = req.body.item
         const amount = req.body.amount
+        const number = req.body.number
+        console.log('wawa is', number)
        payment.add(item, amount);
         paynow.sendMobile(
          payment, 
