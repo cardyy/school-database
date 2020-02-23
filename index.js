@@ -214,7 +214,7 @@ app.post('/users',function (req,res){
        const item = req.body.item
         const amount = req.body.amount
         const number = req.body.number
-        console.log('wawa is', amount)
+        console.log('wawa is', number)
        payment.add(item, amount);
         paynow.sendMobile(
          payment, 
