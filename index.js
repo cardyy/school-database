@@ -214,11 +214,10 @@ app.post('/users',function (req,res){
        const item = req.body.item
         const amount = req.body.amount
         let phoneNumber = req.body.phoneNumber
-        console.log('wawa is',  item)
-       payment.add(item, amount);
+         payment.add(item, amount);
         paynow.sendMobile(
          payment, 
-          '0771111111',
+          phoneNumber,
            'ecocash' 
             ).then(function(response) {
              if(response.success) {
