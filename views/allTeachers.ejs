@@ -131,7 +131,7 @@
       <div id="sidebar" class="nav-collapse ">
         <!-- sidebar menu start-->
         <ul class="sidebar-menu" id="nav-accordion">
-          <p class="centered"><a href="profile"><img src="<%= data[0].imagePath %>" class="img-circle" width="80"></a></p>
+          <p class="centered"><img src="https://nebularimages.s3.eu-central-1.amazonaws.com/https://nebularimages.s3.eu-central-1.amazonaws.com/<%=data[0].image%>" class="img-circle" width="80"></p>
           <h5 class="centered"> <%=data[0].name%></h5>
           <li class="mt">
             <a href="/home">
@@ -210,7 +210,7 @@
             <% for (let i = 0; i < data[0].teachers.length ; i++ ) { %>
                 <div class="pricing__item">
                  <h3 class="pricing__title"><%- data[0].teachers[i].name %></h3>
-                    <img src="/img/bin/config.js/system/tc/<%- data[0].teachers[i].image %>.jpg"  class = "teacherPic "alt="" />
+                    <img src="https://nebularimages.s3.eu-central-1.amazonaws.com/<%- data[0].teachers[i].image %>"  class = "teacherPic "alt="" />
                     <p class="pricing__sentence"><b>Contact: <%- data[0].teachers[i].contact %></b></p>
                     
                     <ul class="pricing__feature-list">

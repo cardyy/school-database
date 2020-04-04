@@ -221,7 +221,9 @@
             <div class="form-panel">
               <div class="form">
              
-                <form id="reg" class="cmxform form-horizontal style-form" action = "/addStudent/<%=school%>" method="POST"  >
+             
+             
+                <form id="reg" class="cmxform form-horizontal style-form" action = "/addStudent/<%=school%>" method="POST"  enctype="multipart/form-data" >
                 <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
         <div class="form-group ">
                   <div class="col-lg-10">
@@ -378,7 +380,7 @@
     <div class="form-group ">
                     <label  class="control-label col-lg-2">Picture</label>
                     <div class="col-lg-10">
-                      <input class="filepond" type="file"  name="image" />
+                       <input name="myImage" type="file">
                         <div class="col-lg-offset-2 col-lg-10  ">
                       <button class="btn btn-theme" type="submit" onclick="load()">Save</button>
                       

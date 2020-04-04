@@ -126,7 +126,7 @@
       <div id="sidebar" class="nav-collapse ">
         <!-- sidebar menu start-->
         <ul class="sidebar-menu" id="nav-accordion">
-          <p class="centered"><a href="profile"><img src="<%= data[0].imagePath %>" class="img-circle" width="80"></a></p>
+          <p class="centered"><img src="https://nebularimages.s3.eu-central-1.amazonaws.com/<%=data[0].image%>" class="img-circle" width="80"></p>
           <h5 class="centered"> <%=data[0].name%></h5>
           <li class="mt">
             <a href="/home">
@@ -245,19 +245,20 @@
   var stCount = data.length
    var d = new Date();
         var currentYear = d.getFullYear();
-       
+      
     var x = document.querySelector('tbody');
      var output = '' 
        for ( i=0;i<stCount;i++){
        	var agge =  currentYear - data[i].age
        	
        	 var payments = data[i].payments
-       	   
+       	 var profilepic= data[i].propic
+       	 
        	      var amountPaid  = payments.reduce((currentTotal,payments)=> {return payments.amount + currentTotal } ,0)
 
        	  
          output += `  <tr class="gradeX">
-           <td><a href ="/profile/<%=school%>/${data[i].idNumber}"> <img style = "border-radius:100px; height:50px; width:50px; margin-left:40px;" src= "/img/bin/config.js/system/std/${data[i].idNumber}.jpg" alt=""> </a></td>
+           <td><a href ="/profile/<%=school%>/${data[i].idNumber}"> <img style = "border-radius:100px; height:50px; width:50px; margin-left:40px;" src= "https://nebularimages.s3.eu-central-1.amazonaws.com/${profilepic}" alt=""> </a></td>
 			 <td><a href ="/profile/<%=school%>/${data[i].idNumber}"  style = "color:#aeb2b7">${data[i].firstName}</a></td>
                <td>${data[i].className}</td>
                  <td class="hidden-phone" style = "color:#aeb2b7" >${agge}</td>

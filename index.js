@@ -12,6 +12,9 @@ const initializePassport = require('./passport-config.js')
 const path = require('path')
 const methodOverride = require('method-override')
 const {Paynow}  = require("paynow");
+const aws = require( 'aws-sdk' );
+const multerS3 = require( 'multer-s3' );
+const multer = require('multer');
 
 
 app.use(bodyParser.json({ limit: '50mb' }));
@@ -53,13 +56,15 @@ mongoose.connection.once('open', function(){
 }).on('error', function(error){
     console.log('connection error', error)
 })
+
+
 const appSchema = new mongoose.Schema([{
   
  name:String,
  classesName:[String],
  streams:[],
- upcomingSchoolEvents:[{name:String , date:String, time:String}],
- news:[{headlines:String , main:String, date:String}],
+ upcomingSchoolEvents:[{_id:String,name:String , date:String, time:String}],
+ news:[{_id:String,headlines:String , main:String, date:String}],
  fees:[{_id:String, type1:String, amount: Number}],
  checkList:[{stream:String, stationery:[{name:String, img:String, imgName:String, imgPrice:Number}], uniforms:[{name:String, key:String, img:String, imgName:String, imgPrice:Number}],books:[{name:String, key:String, img:String, imgName:String, imgPrice:Number}],miscellenious:[{name:String, key:String, img:String, imgName:String, imgPrice:Number}] }],
 address:String,
@@ -97,12 +102,12 @@ extraCurricular:{
 duties:[{duty:String, date:String, time:String}],
 }],
 students:[{
-    _id:String,
-	city: String,
+	_id:String,
+    city: String,
 	address: String,
     firstName: String,
     surname: String,
-    image:String,
+    propic:String,
     newStudent:String,
     idNumber: String,
     house: String,
@@ -178,10 +183,7 @@ students:[{
 }]);
 
 
-	appSchema.virtual('imagePath').get(function(){
 	
-	if(this.logo != null && this.logoType != null){return `data:${this.logoType};charset=utf-8;base64,${this.logo.toString('base64')}`}
-	})
 const records = mongoose.model('schools',appSchema );
 
 
@@ -195,7 +197,7 @@ app.post('/users',function (req,res){
 	      console.log(usernameIsPresent)
            if (usernameIsPresent === true ){
       	    result = data.filter(a => a.students.some(u => u.email==username && u.password==password));
-      	     const schoolId = result[0]._id
+      	     const schoolId = result[0].idNumber
 	          res.send({'success':true, 'user':username, 'zita':schoolId }) ;
                } else {
                 res.send({'success':false , 'message':"No such user in our database!"}) ;
@@ -304,7 +306,11 @@ app.get('/sms',function (req,res){
    res.render('smsGateway') ;
     });});
         
-   
+    app.get('/h2',function (req,res){
+ records.find({}, function (err,data){
+  if (err) throw err;
+   res.render('test') ;
+    });}); 
  app.get('/',checkNotAuthenticated, function (req,res){
  records.find({}, function (err,data){
   if (err) throw err;
@@ -317,9 +323,60 @@ id => data.find(user => user.id === id) )
  }) ;
  
     });  
-    
+   
+   
+const s3 = new aws.S3({
+	secretAccessKey: 'VGoMf0PAZzdHQ9eDQTwKWhwOeVaqld6Y6BkPLGi1',
+	accessKeyId: 'AKIAX36EJM5WKD6ZGHG3',
+	Bucket: 'nebularimages'
+});   
+   
+const storage = multerS3({
+		s3: s3,
+		bucket: 'nebularimages',
+		acl: 'public-read',
+		key: function (req, file, cb) {
+			cb(null, path.basename( file.originalname, path.extname( file.originalname ) ) + '-' + Date.now() + path.extname( file.originalname ) )
+		}
+	})
 
-app.post('/addStudent/:id',urlencodedParser,  async (req,res)=>{ 
+// Init Upload
+const upload = multer({
+  storage: storage,
+  limits:{fileSize: 1000000},
+  fileFilter: function(req, file, cb){
+    checkFileType(file, cb);
+  }
+}).single('myImage');
+
+// Check File Type
+function checkFileType(file, cb){
+  // Allowed ext
+  const filetypes = /jpeg|jpg|png|gif/;
+  // Check ext
+  const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+  // Check mime
+  const mimetype = filetypes.test(file.mimetype);
+
+  if(mimetype && extname){
+    return cb(null,true);
+  } else {
+    cb('Error: Images Only!');
+  }
+}
+
+
+
+
+
+
+
+
+
+	
+	app.post('/addStudent/:id', upload,  async (req,res)=>{ 
+	
+
      var dt = req.body.dt
 	 var ffr = req.body.sid
 	 var amn = req.body.amn
@@ -366,11 +423,14 @@ var mother = req.body.moLi
              var wat = arra.slice(0, ne) ;
               var occupation = (new Function("return [" + wat+ "];")());
                var real = occupation[0]
+               const imageName = req.file.key
+              
             
     
 studentsArray = await records.findById(req.params.id)
  studentsArray.students = studentsArray.students.concat(
     {city: req.body.city,
+    propic:imageName,
     address: req.body.address,
     firstName:req.body.name,
     surname: req.body.surname,
@@ -407,7 +467,29 @@ try{
 
  })	
 
-
+app.post('/addStudent/:id',  async (req,res)=>{ 
+upload( req, res, ( error ) => {
+		console.log( 'requestOkokok', req.file );
+		
+		if( error ){
+			console.log( 'errors', error );
+			res.json( { error: error } );
+		} else {
+			// If File not found
+			if( req.file === undefined ){
+				console.log( 'Error: No File Selected!' );
+				res.json( 'Error: No File Selected' );
+			} else {
+				// If Success
+				const imageName = req.file.key;
+				const imageLocation = req.file.location;
+// Save the file name into database into profile model
+				res.send( {
+					location: imageLocation
+				} );
+			}
+		}
+	});});
 app.post('/addTeachers/:id',urlencodedParser,  async (req,res)=>{
 	
 	var sp = ""
@@ -579,26 +661,9 @@ paymentStatus:req.body.status,
 sports:req.body.sports,
 clubs:req.body.clubs
 })  
-saveImage(newrecords,req.body.cover)        
-     try{
- 	const newRecord  = await newrecords.save(function(err,data){
-	 if (err) throw err;
-	  })
-		/res.redirect('/')
-		}
-	 catch{
-	res.redirect('/sms')}
-	
-			 }) 
+}) 
         
- function saveImage(newrecords, coverEncoded){
- 	if(coverEncoded == null) return
- 	const cover = JSON.parse(coverEncoded)
- 	if(cover != null){
-	newrecords.logo = new Buffer.from(cover.data, 'base64')
-	newrecords.logoType = cover.type	
-	}
- }
+ 
 
  
 app.post('/',urlencodedParser,passport.authenticate('local',{  
