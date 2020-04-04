@@ -426,8 +426,7 @@ var mother = req.body.moLi
                const imageName = req.file.key
               
             
-    
-studentsArray = await records.findById(req.params.id)
+    studentsArray = await records.findById(req.params.id)
  studentsArray.students = studentsArray.students.concat(
     {city: req.body.city,
     propic:imageName,
