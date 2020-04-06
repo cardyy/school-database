@@ -142,7 +142,7 @@
       <div id="sidebar" class="nav-collapse ">
         <!-- sidebar menu start-->
         <ul class="sidebar-menu" id="nav-accordion">
-          <p class="centered"><a href="profile"><img src="<%= data[0].imagePath %>" class="img-circle" width="80"></a></p>
+          <p class="centered"><a href="profile"><img src="https://nebularimages.s3.eu-central-1.amazonaws.com/<%=data[0].image%>" class="img-circle" width="80"></a></p>
           <h5 class="centered"> <%=data[0].name%></h5>
           <li class="mt">
             <a href="/home">
@@ -221,7 +221,7 @@
             <div class="form-panel">
               <div class="form">
              
-                <form id="reg" class="cmxform form-horizontal style-form" action = "/addTeachers/<%=school%>" method="POST"  >
+                <form id="reg" class="cmxform form-horizontal style-form" action = "/addTeachers/<%=school%>" method="POST"  enctype="multipart/form-data" >
                 <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
         <div class="form-group ">
                   <div class="col-lg-10">
@@ -291,7 +291,7 @@
     <div class="form-group ">
                     <label  class="control-label col-lg-2">Picture</label>
                     <div class="col-lg-10">
-                      <input class="filepond" type="file"  name="image" />
+                      <input name="myImage" type="file">
                         <div class="col-lg-offset-2 col-lg-10  ">
                       <button class="btn btn-theme" type="submit" onclick="load()">Save</button>
                       

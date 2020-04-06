@@ -83,7 +83,7 @@
           
             <div class="form-panel">
               <div class="form">
-                <form id="regForm" class="cmxform form-horizontal style-form" action = "/sms "  method="POST" >
+                <form id="regForm" class="cmxform form-horizontal style-form" action = "/sms "  method="POST" enctype="multipart/form-data" >
                 <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
         <div class="form-group ">
                   <div class="col-lg-10">
@@ -261,7 +261,7 @@
                     <label  class="control-label col-lg-2">Payment Status</label>
                     <div class="col-lg-10">
                       <input class="form-control " type="text"  id="status" name="status" required /><br>
-                      <input class="filepond" type="file"  name="cover" />
+                     <input name="myImage" type="file">
                         <div class="col-lg-offset-2 col-lg-10  ">
                       <button class="btn btn-theme" type="submit" onclick="load()">Save</button>
                       

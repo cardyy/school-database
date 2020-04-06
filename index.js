@@ -88,6 +88,7 @@ paymentStatus:String,
 sports:[String],
 clubs:[String],
 teachers:[{
+	_id:String,
 name:String,
 surname:String,
 email:String,
@@ -489,7 +490,7 @@ upload( req, res, ( error ) => {
 			}
 		}
 	});});
-app.post('/addTeachers/:id',urlencodedParser,  async (req,res)=>{
+app.post('/addTeachers/:id', upload,  async (req,res)=>{
 	
 	var sp = ""
 	var cl = ""
@@ -534,12 +535,13 @@ var date = req.body.date
 	     var newy = array.length -1 
             var watch = array.slice(0, newy) ;
             var ectStringArray = (new Function("return [" + watch+ "];")());	 
-     
+     const imageName = req.file.key
 let teachersArray 
 const hashPassword = await bcrypt.hash(req.body.password,10)
 teachersArray = await records.findById(req.params.id)
  teachersArray.teachers = teachersArray.teachers.concat(
     {name: req.body.tname,
+    image:imageName,
     address: req.body.taddress,
     surname: req.body.tsurname,
     contact:req.body.tcontacts,
@@ -547,7 +549,7 @@ teachersArray = await records.findById(req.params.id)
     password: hashPassword,
     extraCurricular:{Sports:sprts,Clubs:clbs},
 	duties:ectStringArray,
-	subjectsTaken: req.body.id
+	subjectsTaken: ['4a', 'maths']
 	
     })
 try{
@@ -562,8 +564,31 @@ try{
  
 
  })	
+ app.post('/addTeachers/:id',  async (req,res)=>{ 
+upload( req, res, ( error ) => {
+		console.log( 'requestOkokok', req.file );
+		
+		if( error ){
+			console.log( 'errors', error );
+			res.json( { error: error } );
+		} else {
+			// If File not found
+			if( req.file === undefined ){
+				console.log( 'Error: No File Selected!' );
+				res.json( 'Error: No File Selected' );
+			} else {
+				// If Success
+				const imageName = req.file.key;
+				const imageLocation = req.file.location;
+// Save the file name into database into profile model
+				res.send( {
+					location: imageLocation
+				} );
+			}
+		}
+	});});
 
-app.post('/sms',urlencodedParser, async (req,res)=>{
+app.post('/sms', upload,async (req,res)=>{
 	
 	
 	
@@ -639,10 +664,12 @@ app.post('/sms',urlencodedParser, async (req,res)=>{
 	     var newy = array.length -1 
             var watch = array.slice(0, newy) ;
             var objectStringArray = (new Function("return [" + watch+ "];")());
+            const imageName = req.file.key
             
 const hashedPassword = await bcrypt.hash(req.body.password,10)
 const newrecords = records(
 {name:req.body.name,
+image:imageName,
 classesName:req.body.test,
 streams:req.body.streams,
 fees:objectStringArray ,
@@ -660,8 +687,41 @@ paymentStatus:req.body.status,
 sports:req.body.sports,
 clubs:req.body.clubs
 })  
-}) 
         
+     try{
+ 	const newRecord  = await newrecords.save(function(err,data){
+	 if (err) throw err;
+	  })
+		/res.redirect('/')
+		}
+	 catch{
+	res.redirect('/sms')}
+})
+
+ 
+app.post('/sms',  async (req,res)=>{ 
+upload( req, res, ( error ) => {
+		console.log( 'requestOkokok', req.file );
+		
+		if( error ){
+			console.log( 'errors', error );
+			res.json( { error: error } );
+		} else {
+			// If File not found
+			if( req.file === undefined ){
+				console.log( 'Error: No File Selected!' );
+				res.json( 'Error: No File Selected' );
+			} else {
+				// If Success
+				const imageName = req.file.key;
+				const imageLocation = req.file.location;
+// Save the file name into database into profile model
+				res.send( {
+					location: imageLocation
+				} );
+			}
+		}
+	});});        
  
 
  
