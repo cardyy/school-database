@@ -220,130 +220,51 @@
             <div class="form-panel">
               <div class="form">
              
-                <form id="reg" class="cmxform form-horizontal style-form" action = "/addStudent/<%=school%>" method="POST"  >
+                <form id="reg" class="cmxform form-horizontal style-form" action = "/addFees/<%=school%>" method="POST"  >
                 <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
         <div class="form-group ">
                   <div class="col-lg-10">
-                <label class="control-label col-lg-2">Name</label>
-                       <input class=" form-control" type="text" id="name" name="name" placeholder="eg..Martha" required /><br/>
-                        <label class="control-label col-lg-2">Surname</label>
-                        <input class=" form-control" type="text" id="surname" name="surname" placeholder="eg..Smith" required /><br/>
-                        <label class="control-label col-lg-2">Id-#</label>
-                       <input class=" form-control" type="text" id="id" name="id" placeholder="eg..58-288594D08" required /><br/>
-                        <label class="control-label col-lg-2">Address</label>
-                        <input class=" form-control" type="text" id="address" name="address" placeholder="eg..54 Herbert Chitepo" required /><br/>
-                      </div>
+    <label >Student`s Id</label>
+         <input class=" form-control" type="text" id="id" name="id" placeholder="eg..58-288594D08" required /><br/>
+                       </div>
                         </div>
                           <div class="form-group ">
-                      <label class="control-label col-lg-2">City</label>
-                        <input class=" form-control" type="text" id="city" name="city" placeholder="eg..Gweru" required /><br/>
-                        <label class="control-label col-lg-2">Contact</label>
-                        <input class=" form-control" type="text"  name="contacts" placeholder="eg..0774575218" required /><br/>
-                        <label class="control-label col-lg-2">DOB</label>
-                        <input class=" form-control" type="text" id="dob" name="dob" placeholder="eg..2000" required /><br/>
-                       <label  class="control-label col-lg-2">Parents</label>
-                        <textarea id = "parents" class="text-area"  rows="10" cols="30" onkeyup="textAreaAdjust(this)" style="overflow:hidden" placeholder="eg..Hilary Phiri" ></textarea> <br>
-                         <span class = "parents" ></span>
-                   </div>
-                  <div class="form-group ">
-                  
-                    <label  class="control-label col-lg-2">Gender</label>
-<select class="form-control "  onchange="myFunction1(this)">
-  <option value="1" >Choose</option>
-  <option value="2">Male</option>
-  <option value="3">Female</option>
-  </select> <span class = "gender" ></span><br/>
-  
-<label  class="control-label col-lg-2">Stream</label>
-<select class="form-control "  onchange="myFunction2(this)">
-  <option value="1" >Choose</option>
-  <% var streams =  data[0].streams %>
-  <% for(s=0;s<streams.length;s++){ %>
-  	<option ><%- streams[s] %></option>
-  	
- <% }%>
-</select> <span class = "streams" ></span><br/>
-
-
-<label  class="control-label col-lg-2">Class</label>
-<select class="form-control "  onchange="myFunction3(this)">
-  <option value="1" >Choose</option>
-  <% var classesName =  data[0].classesName %>
-  <% for(c=0;c<classesName.length;c++){ %>
-  	<option ><%- classesName[c] %></option>
-  	
- <% }%>
-</select> <span class = "classesName" ></span><br/>
-
- <label  class="control-label col-lg-2">House</label>
-<select class="form-control "  onchange="myFunction4(this)">
-  <option value="1" >Choose</option>
- <% var houses =  data[0].houses %>
-  <% for(h=0;h<houses.length;h++){ %>
-  	<option ><%- houses[h] %></option>
-  	
- <% }%>
-
-</select><span class = "house" ></span><br/>
-   
-           <label  class="control-label col-lg-2">NewStudent</label>
-<select class="form-control "  onchange="myFunction5(this)">
-  <option value="1" >Choose</option>
-  <option value="2">true</option>
-  <option value="3">false</option>
-  </select><span class = "newstudent" ></span><br/> 
-</div>
-   <div class="form-group ">
-                    <label  class="control-label col-lg-2">Mother Occupation</label>
-                     <div class="col-lg-10">
-                         <textarea id = "area7" class="text-area"  rows="10" cols="30" onkeyup="textAreaAdjust(this)" style="overflow:hidden" placeholder="eg...Teacher"  ></textarea> <br>
-    <span class = "test7" ></span>
-                       <label  class="control-label col-lg-2">Father Occupation</label>
-                        <textarea id = "area6" class="text-area"  rows="10" cols="30" onkeyup="textAreaAdjust(this)" style="overflow:hidden" placeholder="eg..Banker" ></textarea> <br>
-    <span class = "test6" ></span><br/>
-    <label  class="control-label col-lg-2">Previous School</label>
-                        <input class=" form-control" type="text" id="pschool" name="pschool" placeholder="eg..Loreto" required /><br/>
-                    </div>
-                  </div>
-                                 
- <div class="form-group ">
-                 <div class="col-lg-10">
-                 <label  class="control-label col-lg-2">Email</label>
-                 
-                 <input class="form-control " type="email" id="email" name="email" required />
-                    <label  class="control-label col-lg-2">Password</label>
-                     <input class="form-control " type="password"  id="password" name="password" required />
-                       </div>
-                  </div>
-                 
-                  <div class="form-group ">
-                  <label  class="control-label col-lg-2">Sports</label>
-                  <% var sports =  data[0].sports %>
-                   <% for(sp=0;sp<sports.length;sp++){ %>
-  <input   type="checkbox" name="sports" value="<%- sports[sp] %>"><span class = 'ltssee' ><%- sports[sp] %></span><br>
-  	
- <% }%>
-     <br>               
-                    
-                    <label  class="control-label col-lg-2">Clubs</label>
-                     <% var clubs =  data[0].clubs %>
-                      <% for(cl=0;cl<clubs.length;cl++){ %>
-                     <input   type="checkbox" name="clubs" value="<%- clubs[cl] %>"><span class = 'ltssee' ><%- clubs[cl] %></span>
-                     <% }%>
-                    </div>
-                    
-                  
-                  
-                 <div class="form-group ">
-                    <label  class="control-label col-lg-2">Picture</label>
-                    <div class="col-lg-10">
-                      <input class="filepond" type="file"  name="image" />
-                        <div class="col-lg-offset-2 col-lg-10  ">
+                                     <label class="control-label col-lg-2">Fees Type</label>
+ <% var fees =   data[0].fees %>
+                <% var fiz = fees.map((fees )=>{return fees.type1}) %>
+               
+             
+<select class="form-control "  onchange="myFunction(this)" required="">
+  <option value="1" >Choose option</option>
+  <% for (var i in fiz){%>
+    <option value="2"><%- fiz[i]%></option><%}%>
+ </select><span class = "fees" ></span><br/>
+ 
+ <div class = "for" >
+                  <input  type="text" id="name" name="date"   required />
+                <label class=" label-name"><span class="content-name" style="margin-left:20px ">Payment Date</span></label>
+                </div><br/><br/>
+                
+                       <div class = "for">
+                       <input  type="number" id="surname" name="amount"  required />
+                        <label class=" label-name"><span class="content-name" style="margin-left:20px "  >Amount Paid</span></label></div><br/>
+                        
+                        <div class = "for">
+                        <input type="number" id="id" name="contact"  required />
+                        <label class=" label-name"><span class="content-name" style="margin-left:20px " >Contact</span></label></div><br/>
+                       
+                       
+                       <div class = "for">
+                        <input  type="text" id="address" name="paidBy" required />
+                          <label class=" label-name"><span class="content-name" style="margin-left:20px " >Paid By</span></label></div><br/>
+                        <br/>
+                     
+            <div class="col-lg-offset-2 col-lg-10  ">
                       <button class="btn btn-theme" type="submit" onclick="load()">Save</button>
                       
                     </div>
-                  </div>
-                  </div>
+</div>
+                      
                       
                    
                   
@@ -364,14 +285,7 @@
   <div classs = 'circles263' style="text-align:center;margin-top:-75px;margin-left:-200px;">
     <span class="step"></span>
     <span class="step"></span>
-    <span class="step"></span>
-    <span class="step"></span>
-    <span class="step"></span>
-    <span class="step"></span>
-    <span class="step"></span>
-    <span class="step"></span>
-    <span class="step"></span>
-    <span class="step"></span>
+   
     
   </div> 
         <!-- /row -->
@@ -380,9 +294,12 @@
     </section>
      <script>
       	function openNav() {document.getElementById("sidebar").style.display= "block";}
- 
-  
-  
+
+  function myFunction(selTag) {
+var n = selTag.options[selTag.selectedIndex].text
+ var output5 = `<input  type="text"  name="fees" value = "${n}" style = "display:none;"/>`
+document.querySelector('.fees').innerHTML =  output5   
+  console.log(output5)};
       </script> 
     
  <script>
@@ -462,58 +379,14 @@ function fixStepIndicator(n) {
 </script>
   
    <script>
-  function myFunction1(selTag) {
-var x = selTag.options[selTag.selectedIndex].text
- var output = `<input  type="text"  name="gender" value = "${x}" style = "display:none;"/>`
-document.querySelector('.gender').innerHTML =  output } ;
-function myFunction2(selTag) {
-var y = selTag.options[selTag.selectedIndex].text
- var output2 = `<input  type="text"  name="streams" value = "${y}" style = "display:none;"/>`
-document.querySelector('.streams').innerHTML =  output2 } ;
-function myFunction3(selTag) {
-var z = selTag.options[selTag.selectedIndex].text
- var output3 = `<input  type="text"  name="classesName" value = "${z}" style = "display:none;"/>`
-document.querySelector('.classesName').innerHTML =  output3 } ;
-
-function myFunction4(selTag) {
-var h = selTag.options[selTag.selectedIndex].text
- var output4 = `<input  type="text"  name="house" value = "${h}" style = "display:none;"/>`
-document.querySelector('.house').innerHTML =  output4 }  ;
-
-function myFunction5(selTag) {
-var n = selTag.options[selTag.selectedIndex].text
- var output5 = `<input  type="text"  name="newstudent" value = "${n}" style = "display:none;"/>`
-document.querySelector('.newstudent').innerHTML =  output5 }  ;
-
- 
-     function textAreaAdjust(o) {
+ function textAreaAdjust(o) {
     o.style.height = "1px";
     setTimeout(function() {
         o.style.height = (o.scrollHeight)+"px";
     }, 1);
 }
       
-     function load(){
-     var parents = document.getElementById("parents"); 
-       var mo = document.getElementById("area7");
-        var fo = document.getElementById("area6");
-        var lines = parents.value.replace(/\r\n/g,"\n").split("\n");
-         var foLi = fo.value.replace(/\r\n/g,"\n").split("\n");
-          var moLi = mo.value.replace(/\r\n/g,"\n").split("\n");
-       
-         var output2 = ""
-           var output3 = ""
-           var output = ""
-           
-  for(i=0;i<lines.length;i++){output += `<input  type="text"  name="parents" value = "${lines[i]}" style = "display:none;"/>`
-document.querySelector('.parents').innerHTML =  output }
-for(i3=0;i3<foLi.length;i3++){output3 += `<input  type="text"  name="foLi" value = "${foLi[i3]}" style = "display:none;"/>`
-document.querySelector('.test6').innerHTML =  output3 }
-for(i2=0;i2<moLi.length;i2++){output2 += `<input  type="text"  name="moLi" value = "${moLi[i2]}" style = "display:none;"/>`
-document.querySelector('.test7').innerHTML =  output2 }
-
-
-}
+    
 
 
 

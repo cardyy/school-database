@@ -218,29 +218,18 @@
 					<img src="/img/img-01.png" alt="IMG">
 				</div>
 
-				<form class="contact100-form validate-form">
+				<form class="contact100-form validate-form"  action = "/textSmS/<%=school%>" method="POST"  >
 					<span class="contact100-form-title">
-						Send Text Messages
+						News & Announcements
 					</span>
-
-					<div class="wrap-input100 validate-input" data-validate = "Name is required">
-				
-						<select class="input100" type="text" name="" placeholder="Name">
-						<span class="focus-input100"></span>
-						<span class="symbol-input100">
-							<i class="fa fa-user" aria-hidden="true"></i>
-						</span>	</select>
-					</div>
-
-					
-
-					<div class="wrap-input100 validate-input" data-validate = "Message is required">
-						<textarea class="input100" name="message" placeholder="Message"></textarea>
+                      <div class="wrap-input100 validate-input" data-validate = "Message is required">
+                       <input type="text"  class="input100" name="headline" required placeholder="Headlines" /><br/><br/><br/>
+						<textarea  type="text" class="input100" name="news" placeholder="Message" required=""></textarea>
 						<span class="focus-input100"></span>
 					</div>
 
 					<div class="container-contact100-form-btn">
-						<button class="contact100-form-btn">
+						<button class="contact100-form-btn" type="submit">
 							Send
 						</button>
 					</div>

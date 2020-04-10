@@ -217,8 +217,11 @@
 					<h1 class="date"><%- zuva[day] %> <span><%- month[numMonth]%>  <%- date %>th</span></h1>
 					<div class="notes">
 						<p>
-							<input type="text" value="" placeholder="add event.."/>
-							<a href="#" title="Add note" class="addNote animate">+</a>
+							<form  action = "/events/<%=school%>" method="POST"  >
+	<textarea id = "events" style="width:250px;border-radius:2px;font-size: 12px; "  name="events" rows="2"  cols="30" placeholder="Add event" required  ></textarea>
+	<span class = "parents" ></span>
+	<input title="Add note"  type="submit" style="position:absolute;margin-top:10px; margin-left:5%; width:80px; " onclick="load()" />   
+							</form>
 						</p>
 						<ul class="noteList">
 						<% var upcomingEvents = data[0].upcomingSchoolEvents %>
@@ -325,8 +328,17 @@ document.querySelector('#days').innerHTML = daysOutPut
     <!--main content end--> 
 <script>
       	function openNav() {document.getElementById("sidebar").style.display= "block";}
+  function load(){
+     	
+var parents = document.getElementById("events");
+   
+  var lines = parents.value.replace(/\r\n/g,"\n").split("\n");
  
+   var output = ""
   
+  for(i=0;i<lines.length;i++){output += `<input  type="text"  name="parents" value = "${lines[i]}" style = "display:none;" />`
+document.querySelector('.parents').innerHTML =  output }
+  }
   
       </script> 
 <script>/*! jQuery v1.12.4 | (c) jQuery Foundation | jquery.org/license */

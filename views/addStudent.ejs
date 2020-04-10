@@ -142,7 +142,7 @@
       <div id="sidebar" class="nav-collapse ">
         <!-- sidebar menu start-->
         <ul class="sidebar-menu" id="nav-accordion">
-          <p class="centered"><a href="profile"><img src="<%= data[0].imagePath %>" class="img-circle" width="80"></a></p>
+          <p class="centered"><a href="profile"><img src="https://nebularimages.s3.eu-central-1.amazonaws.com/<%=data[0].image%>" class="img-circle" width="80"></a></p>
           <h5 class="centered"> <%=data[0].name%></h5>
           <li class="mt">
             <a href="/home">
@@ -256,16 +256,16 @@
                         <div class="for2"><input  type="number"  name="contacts" placeholder="eg..0774575218" required />
                          <label class=" label-name"><span class="content-name">Student's Contact</span></label></div><br/>
                         
-                        <div class="for2"><input  type="text" id="dob" name="dob" placeholder="eg..2000" required />
+                        <div class="for2"><input  type="number" id="dob" name="dob" placeholder="eg..2000" required />
                         <label class=" label-name"><span class="content-name">Student's DOB</span></label></div><br/>
                       
-                        <textarea id = "parents" class="txtA text-area"  rows="10" cols="30" onkeyup="textAreaAdjust(this)" style="overflow:hidden" placeholder="Student's Parents eg..Hilary Phiri" ></textarea> 
+                        <textarea id = "parents" class="txtA text-area"  rows="2"  cols="30" onkeyup="textAreaAdjust(this)" style="overflow:hidden" placeholder="Student's Parents eg..Hilary Phiri" required  ></textarea> 
                          <span class = "parents" ></span>
                    </div>
                   <div class="form-group ">
                   
                     <label  class="control-label col-lg-2">Student's Gender</label>
-<select class="form-control "  onchange="myFunction1(this)">
+<select class="form-control "  onchange="myFunction1(this)"  required >
   <option value="1" >Choose</option>
   <option value="2">Male</option>
   <option value="3">Female</option>
@@ -567,7 +567,8 @@ document.querySelector('.newstudent').innerHTML =  output5 }  ;
 }
       
      function load(){
-     var parents = document.getElementById("parents");
+     	
+var parents = document.getElementById("parents");
       var dayte = document.getElementById("dayte");
 var amount = document.getElementById("amount");
      var kontact = document.getElementById("kontact");
@@ -601,9 +602,9 @@ var fees =  [<%- data[0].fees %>]
 var fiz = fees.map((fees )=>{return fees.type1}) 
   var actfrr = fees.map((fees )=>{return fees.amount})       
            
-  for(i=0;i<lines.length;i++){output += `<input  type="text"  name="parents" value = "${lines[i]}" style = "display:none;"/>`
+  for(i=0;i<lines.length;i++){output += `<input  type="text"  name="parents" value = "${lines[i]}" style = "display:none;" />`
 document.querySelector('.parents').innerHTML =  output }
-for(i3=0;i3<foLi.length;i3++){output3 += `<input  type="text"  name="foLi" value = "${foLi[i3]}" style = "display:none;"/>`
+for(i3=0;i3<foLi.length;i3++){output3 += `<input  type="text"  name="foLi" value = "${foLi[i3]}" style = "display:none;"/ >`
 document.querySelector('.test6').innerHTML =  output3 }
 for(i2=0;i2<moLi.length;i2++){output2 += `<input  type="text"  name="moLi" value = "${moLi[i2]}" style = "display:none;"/>`
 document.querySelector('.test7').innerHTML =  output2 }
@@ -623,7 +624,7 @@ document.querySelector('.t9').innerHTML =  ot9 }
 for(af=0;af<actfrr.length;af++){ot10 += `<input  type="text"  name="af" value = "${actfrr[af]}" style = "display:none;"/>`
 document.querySelector('.t10').innerHTML =  ot10 } 
  
- console.log(ot9)
+
  
 
 
@@ -1068,6 +1069,26 @@ var Script = function() {
 
 
   //    sidebar dropdown menu auto scrolling
+  
+  
+      	$(document).ready(function () {
+
+    var lines = 2;
+
+    $('#parents').keydown(function (e) {
+        newLines = $(this).val().split("\n").length;
+
+        if (newLines > lines) {
+            $("#parents").prop('disabled', true);
+        } else {
+            $("#parents").prop('disabled', false);
+        }
+    });
+    $('#button').click(function () {
+        $("#parents").val('');
+        $("#parents").prop('disabled', false);
+    });
+});
 
   jQuery('#sidebar .sub-menu > a').click(function() {
     var o = ($(this).offset());

@@ -63,8 +63,8 @@ const appSchema = new mongoose.Schema([{
  name:String,
  classesName:[String],
  streams:[],
- upcomingSchoolEvents:[{_id:String,name:String , date:String, time:String}],
- news:[{_id:String,headlines:String , main:String, date:String}],
+ upcomingSchoolEvents:[{_id:String,name:String , date:String, time:String,key:String}],
+ news:[{_id:String,headlines:String , main:String, date:String,key:String}],
  fees:[{_id:String, type1:String, amount: Number}],
  checkList:[{stream:String, stationery:[{name:String, img:String, imgName:String, imgPrice:Number}], uniforms:[{name:String, key:String, img:String, imgName:String, imgPrice:Number}],books:[{name:String, key:String, img:String, imgName:String, imgPrice:Number}],miscellenious:[{name:String, key:String, img:String, imgName:String, imgPrice:Number}] }],
 address:String,
@@ -198,7 +198,7 @@ app.post('/users',function (req,res){
 	      console.log(usernameIsPresent)
            if (usernameIsPresent === true ){
       	    result = data.filter(a => a.students.some(u => u.email==username && u.password==password));
-      	     const schoolId = result[0].idNumber
+      	     const schoolId = result[0]._id
 	          res.send({'success':true, 'user':username, 'zita':schoolId }) ;
                } else {
                 res.send({'success':false , 'message':"No such user in our database!"}) ;
@@ -325,6 +325,91 @@ id => data.find(user => user.id === id) )
  
     });  
    
+
+
+ 
+  
+ app.post('/textSmS/:id', async (req,res)=>{ 
+ 
+ let newsArray
+  var d = new Date();
+ var dat = `${d.getDate()}-${d.getMonth()+1}-${d.getFullYear()}`;
+	 newsArray = await records.findById(req.params.id)
+ newsArray.news = newsArray.news.concat(
+    {
+    	headlines:req.body.headline , 
+    	main:req.body.news, 
+    	date:dat,
+    	key:Date.now()
+    })
+try{
+ await newsArray.save(function(err,data){
+	 if (err) throw err;
+	  })
+  res.redirect(`/textSmS/${req.params.id}`)
+   }catch {
+	if( newsArray== null){
+	 res.redirect('/index')}
+      }
+ })	 
+ 
+  app.post('/events/:id', async (req,res)=>{ 
+ 
+ let  upcomingSchoolEventsArray
+
+	  upcomingSchoolEventsArray = await records.findById(req.params.id)
+  upcomingSchoolEventsArray.upcomingSchoolEvents = upcomingSchoolEventsArray.upcomingSchoolEvents.concat(
+    {
+  name:req.body.parents[0] ,
+  date:req.body.parents[1], 
+  time:req.body.parents[2],
+  key:Date.now()
+    })
+try{
+ await upcomingSchoolEventsArray.save(function(err,data){
+	 if (err) throw err;
+	  })
+  res.redirect(`/events/${req.params.id}`)
+   }catch {
+	if(upcomingSchoolEventsArray== null){
+	 res.redirect('/index')}
+      }
+ })	
+ 
+  app.post('/addFees/:id', async (req,res)=>{ 
+ 
+ let  upcomingSchoolEventsArray
+
+	  upcomingSchoolEventsArray = await records.findById(req.params.id)
+	var feesAmount= await records.findById(req.params.id)
+	var fixx = feesAmount.fees
+	var fx1 = fixx.filter((type)=>{return type.type1 === req.body.fees})
+	var amnt = fx1[0].amount
+	
+  upcomingSchoolEventsArray.students.find( ({ idNumber }) => idNumber === req.body.id).payments= upcomingSchoolEventsArray.students.find( ({ idNumber }) => idNumber === req.body.id ).payments.concat(
+    {
+   date:req.body.date,
+   form:req.body.fees,
+   amount:req.body.amount, 
+   contact:req.body.contact, 
+   paidBy:req.body.paidBy, 
+   actualfee:amnt 
+  
+    })
+try{
+ await upcomingSchoolEventsArray.save(function(err,data){
+	 if (err) throw err;
+	 	
+	  })
+  res.redirect(`/addFees/${req.params.id}`)
+   }catch {
+	if(upcomingSchoolEventsArray== null){
+	 res.redirect('/index')}
+      }
+ })	
+  
+  
+  
    
 const s3 = new aws.S3({
 	secretAccessKey: 'VGoMf0PAZzdHQ9eDQTwKWhwOeVaqld6Y6BkPLGi1',
@@ -365,17 +450,7 @@ function checkFileType(file, cb){
     cb('Error: Images Only!');
   }
 }
-
-
-
-
-
-
-
-
-
-	
-	app.post('/addStudent/:id', upload,  async (req,res)=>{ 
+app.post('/addStudent/:id', upload,  async (req,res)=>{ 
 	
 
      var dt = req.body.dt

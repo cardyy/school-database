@@ -288,6 +288,12 @@
                     
 
                     </div>
+                    <div class="form-group ">
+                     <label  class="control-label col-lg-2">Subjects & Classes</label><br/>
+                   <textarea id = "area10" class="text-area"  rows="10" cols="30" onkeyup="textAreaAdjust(this)" style="overflow:hidden" placeholder="eg..08:00-08:30" ></textarea> <br><span class = "test8" ></span>
+ <textarea id = "area9" class="text-area"  rows="10" cols="30" onkeyup="textAreaAdjust(this)" style="overflow:hidden" placeholder="eg..Free Period" ></textarea> <br><span class = "test9" ></span>
+   </div>
+ 
     <div class="form-group ">
                     <label  class="control-label col-lg-2">Picture</label>
                     <div class="col-lg-10">
@@ -477,7 +483,10 @@ function validate(e) {
         var date = document.getElementById("date");
         var sport = document.getElementById("area8");
         var club = document.getElementById("area11");
-     
+        var area10 = document.getElementById("area10"); 
+        var area9 = document.getElementById("area9");
+         var lines8  = area10.value.replace(/\r\n/g,"\n").split("\n")
+          var lines9  = area9.value.replace(/\r\n/g,"\n").split("\n")
          var newDuty = duty.value.replace(/\r\n/g,"\n").split("\n");
          var newTime = time.value.replace(/\r\n/g,"\n").split("\n");
           var newDate = date.value.replace(/\r\n/g,"\n").split("\n");
@@ -489,8 +498,16 @@ function validate(e) {
            var output3 = ""
            var output4 = ""
            var output5 = ""
-           
+              var output9= ""
+           var output10 = ""
       
+    
+    
+    for(i8=0;i8<lines8.length;i8++){output10 += `<input  type="text"  name="monTime" value = "${lines8[i8]}" style = "display:none;"/>`
+document.querySelector('.test8').innerHTML =  output10 }
+             
+for(i9=0;i9<lines9.length;i9++){output9 += `<input  type="text"  name="monPeriod" value = "${lines9[i9]}" style = "display:none;"/>`
+document.querySelector('.test9').innerHTML =  output9}
            
   for(i=0;i<newDuty.length;i++){output1 += `<input  type="text"  name="duty" value = "${newDuty[i]}" style = "display:none;"/>`
 document.querySelector('.duty').innerHTML =  output1 }
@@ -504,8 +521,7 @@ for(i5=0;i5<cbs.length;i5++){output5 += `<input  type="text"  name="clubs" value
 document.querySelector('.test11').innerHTML =  output5 }
 
 
-console.log(output4)
-console.log(output5)
+
 
  
  
