@@ -198,7 +198,7 @@ app.post('/users',function (req,res){
 	      console.log(usernameIsPresent)
            if (usernameIsPresent === true ){
       	    result = data.filter(a => a.students.some(u => u.email==username && u.password==password));
-      	     const schoolId = result[0].idNumber
+      	     const schoolId = result[0]._id
 	          res.send({'success':true, 'user':username, 'zita':schoolId }) ;
                } else {
                 res.send({'success':false , 'message':"No such user in our database!"}) ;
