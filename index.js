@@ -9,6 +9,7 @@ const flash = require('express-flash')
 const session = require('express-session')
 const fs = require('fs');
 const initializePassport = require('./passport-config.js')
+const initializePassport2 = require('./passport-config2.js')
 const path = require('path')
 const methodOverride = require('method-override')
 const {Paynow}  = require("paynow");
@@ -40,6 +41,20 @@ function checkAuthenticated(req,res,next ){
 function checkNotAuthenticated(req,res,next ){
 	if(req.isAuthenticated()){
 		return res.redirect('/home')
+	}
+	next()
+}
+
+function checkAuthenticated2(req,res,next ){
+	if(req.isAuthenticated()){
+		return next()
+	}
+	res.redirect('/teachers')
+}
+
+function checkNotAuthenticated2(req,res,next ){
+	if(req.isAuthenticated()){
+		return res.redirect('/records')
 	}
 	next()
 }
@@ -193,14 +208,16 @@ app.post('/users',function (req,res){
   const password = req.body.password
    records.find({}, function (err,data){
     if (err) throw err;
-     for (var i in data){var usernameIsPresent = data[i].students.some(function(el){ return el.email === username && el.password ===       password})
+     for (var i in data){var usernameIsPresent = data[i].students.some(function(el){ return el.email === username && el.       password ===  password})
 		 if (usernameIsPresent === true){break; }}
-	      console.log(usernameIsPresent)
+	     
            if (usernameIsPresent === true ){
       	    result = data.filter(a => a.students.some(u => u.email==username && u.password==password));
+      	    
       	     const schoolId = result[0]._id
 	          res.send({'success':true, 'user':username, 'zita':schoolId }) ;
                } else {
+               
                 res.send({'success':false , 'message':"No such user in our database!"}) ;
                  }});});
     
@@ -300,18 +317,25 @@ app.get('/home',checkAuthenticated,function (req,res){
   if (err) throw err;
    res.render('home',{data:data , id:req.user.id , d3:data[0].students}) ;
     });});
+    
+    app.get('/records',checkAuthenticated2,function (req,res){
+  records.find({}, function (err,data){
+  if (err) throw err;
+  	
+   res.render('records', {data:data.filter(a => a.teachers.some(u => u.email==req.user.email ))[0].teachers.find( ({ contact }) => contact === req.user.contact), students: data.filter(a => a.teachers.some(u => u.email==req.user.email ))[0].students }) ;
+    });});
         
 app.get('/sms',function (req,res){
  records.find({}, function (err,data){
   if (err) throw err;
    res.render('smsGateway') ;
     });});
+    
+  
+    
         
-    app.get('/h2',function (req,res){
- records.find({}, function (err,data){
-  if (err) throw err;
-   res.render('test') ;
-    });}); 
+
+    
  app.get('/',checkNotAuthenticated, function (req,res){
  records.find({}, function (err,data){
   if (err) throw err;
@@ -324,6 +348,23 @@ id => data.find(user => user.id === id) )
  }) ;
  
     });  
+    
+    
+     app.get('/teachers',checkNotAuthenticated2, function (req,res){
+ records.find({}, function (err,data){
+  if (err) throw err;
+  res.render('teachers', {data:data})
+
+  initializePassport2(
+passport,
+email => data.filter(a => a.teachers.some(u => u.email==email ))[0].teachers.find(user => user.email === email),
+
+id => data.filter(a => a.teachers.some(u => u.email==email ))[0].teachers.find(user => user.id === id)
+)
+
+ }) ;
+ 
+    }); 
    
 
 
@@ -569,14 +610,25 @@ app.post('/addTeachers/:id', upload,  async (req,res)=>{
 	
 	var sp = ""
 	var cl = ""
-	
-	
+	var mon = ""
+	var mtime = req.body.monTime 
+	var msubjectTaken = req.body.monPeriod 
 	var orts = req.body.sports 
 	var bs = req.body.clubs
 	if ( orts.constructor == Array ){var te = req.body.sports}
 	else if ( orts.constructor !== Array ){var te = [req.body.sports]}
 	if ( bs.constructor == Array ){var at = req.body.clubs}
 	else if ( bs.constructor !== Array ){var at = [req.body.clubs]}
+		
+		  for (zz=0;zz< mtime.length;zz++){
+	     mon += `["${ mtime[zz]}", "${ msubjectTaken[zz]}"],`
+	   }
+	   
+		var e = mon 
+	var na = e.length -1 
+    var w = e.slice(0, na) 
+    var onday = (new Function("return [" + w+ "];")())
+		
 	
     for (z=0;z<  te.length;z++){
 	     sp += `["${ te[z]}"],`
@@ -588,6 +640,7 @@ app.post('/addTeachers/:id', upload,  async (req,res)=>{
  
 	var nn = cl.length -1 
     var clbs = cl.slice(0, nn) ;
+    
    
     
     
@@ -611,6 +664,7 @@ var date = req.body.date
             var watch = array.slice(0, newy) ;
             var ectStringArray = (new Function("return [" + watch+ "];")());	 
      const imageName = req.file.key
+     const emayl = `${req.body.tcontacts}@nebular.co.zw`
 let teachersArray 
 const hashPassword = await bcrypt.hash(req.body.password,10)
 teachersArray = await records.findById(req.params.id)
@@ -620,11 +674,11 @@ teachersArray = await records.findById(req.params.id)
     address: req.body.taddress,
     surname: req.body.tsurname,
     contact:req.body.tcontacts,
-    email: req.body.temail,
+    email: emayl,
     password: hashPassword,
     extraCurricular:{Sports:sprts,Clubs:clbs},
 	duties:ectStringArray,
-	subjectsTaken: ['4a', 'maths']
+	subjectsTaken: onday
 	
     })
 try{
@@ -803,6 +857,13 @@ upload( req, res, ( error ) => {
 app.post('/',urlencodedParser,passport.authenticate('local',{  
 successRedirect: '/home' ,
 failureRedirect:'/' ,
+failureFlash:true
+
+}))
+
+app.post('/teachers',urlencodedParser,passport.authenticate('local',{  
+successRedirect: '/records' ,
+failureRedirect:'/teachers' ,
 failureFlash:true
 
 }))

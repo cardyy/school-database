@@ -22,31 +22,14 @@
 
 	<div class="container" id="container">
 
-    <div class="form-container sign-up-container">
-	
-	 <form action = "/ " method="POST">
-		<img src="/img/sahara logo 1 .png" alt=""   class= "topLogo" />
-			
-			<span><h2 style="color:#c7c7c7;margin-top:-50px ">Admin Account</h2></span>
-			
-			 <% if (messages.error){ %>
-       	<%= messages.error %>
-      <% }%>
-       <!--Register Section-->
-     
-        <input type="email" placeholder="Username"id="email1" name="email" required /> 
-         <input type="password" placeholder="Password" id="password1" name="password" required /> 
-         <button type="submit">Login</button>
-         
-		</form>
-	</div>
+    
 
 	<div class="form-container sign-in-container">
 
-		 <form action = "/ " method="POST">
+		 <form action = "/teachers " method="POST">
 		<img src="/img/sahara logo 1 .png" alt=""   class= "topLogo" />
 			
-			<span><h2 style="color:#c7c7c7;margin-top:-50px ">Admin Account</h2></span>
+			<span><h2 style="color:#c7c7c7;margin-top:-50px ">Teachers Account</h2></span>
 			 <% if (messages.error){ %>
        	<%= messages.error %>
       <% }%>
@@ -67,7 +50,7 @@
 			<div class="overlay-panel overlay-right">
 			<b>	<h1>Welcome..</h1></b>
 				<p>Nebular is a state of the art cloud-based student-database system. Its  built on the latest technology using Chrome's V8 JavaScript Engine providing  a high-performance solution which helps schools manage student records, curriculum, attendance, grades, discipline, reporting and more. </p>
-				<button class="ghost" id="signUp">See Features</button>
+				
 				
 			</div>
 		</div>
@@ -78,34 +61,7 @@
 
 </body>
 	
-<script>
 
-
-   document.getElementById("signUp").addEventListener("click", function(){
-   	if( document.getElementById("demo").innerText=== ""){
-function printSentence(id, sentence, speed) {
-  var index = 0,
-      timer = setInterval(function() {
-    var char= sentence.charAt(index);
-    
-    if(char === '<') index= sentence.indexOf('>',index);
-    document.getElementById("demo").innerHTML= sentence.substr(0,index);
-    if(++index === sentence.length){
-      clearInterval(timer);
-      
-    }
-  }, speed); 
-} printSentence
-
-printSentence(
-  'contentDiv',
-  '<ul><li>Mobile App for parents<li>Attendance Register<li>Monitor school accademic results<li>Course Work - home work,inclass exersises etc.<li>View Students merits, prizes and trophies<li>View Extra curricular activities, sports and clubs<li>SmS gateway to send Bulk Text messages to parents<li>View upcoming events and announcements<li>Coursework tracking per student<li>Student personal information<li>Student medical details and special needs<li>Student accounts overview<li>Integrated online grade book<li>Integrated library system</ul>',
-  70
-  
-)}})
-
-    
-</script>
 
 <script>
 const signUpButton = document.getElementById('signUp');
