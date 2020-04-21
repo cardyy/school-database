@@ -19,7 +19,7 @@ body {
 	display: none;
 }
 #regForm {
-  background-color:rgba(6, 6, 33, 0.5);
+  background-color:rgba(6, 6, 33, 0.7);
   margin-left: 15%;
   font-family: Raleway;
   padding: 40px;
@@ -28,7 +28,7 @@ body {
 
 }
 #reg {
-  background-color:rgba(6, 6, 33, 0.5);
+  background-color:rgba(6, 6, 33, 0.7);
   margin-left: 20%;
   margin-top: 90px;
   font-family: Raleway;
@@ -180,7 +180,7 @@ transform:translateX(0%);
 }	
 
 ::placeholder {
-  color: rgba(6, 6, 33, 0.5);
+  color: rgba(6, 6, 33, 0.7);
  
 }
 
@@ -317,7 +317,7 @@ body{
     height: 20px;
 }
 #reg {
-   background-color: rgba(6, 6, 33, 0.5);
+   background-color: rgba(6, 6, 33, 0.7);
     margin-left: 10%;
     margin-top: 90px;
     font-family: Raleway;
@@ -439,7 +439,7 @@ body {
       background: rgba(6, 6, 33, 0.7);
 }
 #reg {
-    background-color: rgba(6, 6, 33, 0.5);
+    background-color: rgba(6, 6, 33, 0.7);
     margin-left: 25%;
     margin-top: 90px;
     font-family: Raleway;

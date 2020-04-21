@@ -354,12 +354,11 @@ id => data.find(user => user.id === id) )
  records.find({}, function (err,data){
   if (err) throw err;
   res.render('teachers', {data:data})
-
-  initializePassport2(
+initializePassport2(
 passport,
 email => data.filter(a => a.teachers.some(u => u.email==email ))[0].teachers.find(user => user.email === email),
 
-id => data.filter(a => a.teachers.some(u => u.email==email ))[0].teachers.find(user => user.id === id)
+id => data.filter(a => a.teachers.some(u => u.id==id ))[0].teachers.find(user => user.id === id)
 )
 
  }) ;
@@ -448,6 +447,35 @@ try{
 	 res.redirect('/index')}
       }
  })	
+
+
+ app.post('/records', async (req,res)=>{ 
+ 
+ let attendanceArray
+attendanceArray = await records.findById('5e9dd8411c9d440000e1a481')
+	 var leng=  attendanceArray.students.filter((item)=>{return item.className === 'Form4A'}).length
+	console.log(req.body.boolean)
+	 for(i=0;i<leng; i++){
+	 	attendanceArray.students.filter((item)=>{return item.className === 'Form4A'})[i].subjectsLearnt.find( ({ subject }) => subject === 'English').attendance= attendanceArray.students.filter((item)=>{return item.className === 'Form4A'})[i].subjectsLearnt.find( ({ subject }) => subject === 'English').attendance.concat(
+    {
+   date:req.body.dateofbirth,
+   attended:req.body.boolean[i]
+  
+    })}
+try{
+ await attendanceArray.save(function(err,data){
+	 if (err) throw err;
+	 	
+	  })
+  res.redirect(`/records`)
+   }catch {
+	if(attendanceArray== null){
+	 res.redirect('/index')}
+      }
+ })	
+
+
+
   
   
   

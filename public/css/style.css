@@ -986,7 +986,7 @@ hr {
     width: 210px;
     height: 100%;
     position: fixed;
-    background: rgba(6, 6, 33, 0.5);
+    background: rgba(6, 6, 33, 0.7);
   
 	
 }
@@ -1281,7 +1281,7 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
  
 .dropdown-menu.extended li p {
 	
-    background: rgba(6, 6, 33, 0.5);
+    background: rgba(6, 6, 33, 0.7);
     color: #c7c7c7;
     margin: 0;
     padding: 10px;
@@ -4944,7 +4944,7 @@ background: linear-gradient(315deg,#89ff00,#00bcd4);
     width: 185px;
     height: 100%;
     position: fixed;
-    background: rgba(6, 6, 33, 0.5);
+    background: rgba(6, 6, 33, 0.7);
 }
 ul.sidebar-menu li a {
     color: #aeb2b7;

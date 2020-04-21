@@ -327,7 +327,7 @@ body{
     width: 185px;
     height: 100%;
     position: fixed;
-    background: rgba(6, 6, 33, 0.5);
+    background: rgba(6, 6, 33, 0.7);
 }
 ul.sidebar-menu li a {
     color: #aeb2b7;
