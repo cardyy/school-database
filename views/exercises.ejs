@@ -90,6 +90,18 @@ input {
   left: 34%;
     display:none;	
 }
+#flex{
+	display: flex;
+	
+}
+
+select{
+	
+	margin-left:15%;
+	margin-top:1%;
+	width:300px;
+	height:30px 
+	}
 </style>
   
 </head>
@@ -179,10 +191,10 @@ input {
           <li class="sub-menu">
             <a href="javascript:;">
               <i class="fa fa-users"></i>
-              <span>Academic Results</span>
+              <span>My Classes</span>
               </a>
             <ul class="sub">
-              <li><a href="/exercises">InClass Exercises</a></li>
+               <li><a href="/exercises">InClass Exercises</a></li>
               <li><a href="/homeWork">Home Work</a></li>
               <li><a href="/tests">InClass Tests</a></li>
               <li><a href="/finalExams">End Of Term Exams</a></li>
@@ -204,22 +216,38 @@ input {
      <!--main content start-->
 	
     <section id="main-content" class="wrapper">
-    <form id="reg" class="cmxform form-horizontal style-form" action = "/records" method="POST"  >
+    <form id="reg" class="cmxform form-horizontal style-form" action = "/exercises" method="POST"  >
     <input type="text" value="<%-id._id%> " name="id" style="display:none "/>
-         <select style="margin-left:30%;margin-top:1%;width:300px;height:30px "  onchange="myFunction(this)">
+    <div id="flex">
+   
+ <select   onchange="term(this)" >
+  <option value="1" >Term</option>
+ <option >1</option>
+  <option >2</option>
+   <option >3</option>
+ </select><span class = "streams" ></span>
+         <select   onchange="myFunction(this)">
   <option value="1" >Class</option>
   <% var arra =  data.subjectsTaken %>
   <% for(var i in arra){%> 
  <option value="2"><%- arra[i] %></option> <%}%>
  </select><span class = "gender" ></span>
+ 
+ </div>
  <div id="date">
 <label for="dateofbirth">Date</label>
-<input type="date" name="dateofbirth" id="dateofbirth" required=""></div>
-  <div id = "sports"  >
+<input type="date" name="dateofbirth" id="dateofbirth" required><br/><br/>
+	<input type="text" placeholder="Enter Topic" name="topic" required/>
+
+</div>
+  <div   >
 <table id="customers">
+
 </table>
+
 </div><br/>
- <input type="submit" id="btn" onclick="myFunction3()" />
+<span id="count"></span>
+ <input type="submit" id="btn"  />
  </form>
      </section>
      </section>
@@ -235,68 +263,37 @@ document.getElementById('btn').style.display = 'inline'
 var array = x.split(",")
 var output=`<tr>
 		<th>Students</th>
-		<th>Present</th>
-		<th>Absent</th>
+	
+		<th>Mark</th>
 	</tr>`
+
 var data = [<%-students%>]
 var std = data.filter((type)=>{return type.className === array[0]} ).filter(a => a.subjectsLearnt.some(u => u.subject==array[1]))
-	  for(var s in std){
+
+	  for(s=0;s<std.length;s++){
+	  	var count = std.length
 	  	output += `
 <tr>
-	<td><span class="text" style="color:white" >${std[s].firstName} ${ std[s].surname } <input   type="text" name="name" value=${std[s].idNumber} style="color:black;display:none"></span></td>
-		<td><input class="myCheck"  type="checkbox" name="boolean" value="true"  onclick="myFunction1()"></td>
-		<td><input class="myCheck2"  type="checkbox" name="boolean" value="false" onclick="myFunction2()"></td>
+	<td><span class="text" style="color:white" >${std[s].firstName} ${ std[s].surname } </span></td>
+	   <td><input type="number"  name="boolean" style="color:grey;width:50px" required/></td>
+	   
 		</tr>`
 	  }
+
+document.getElementById('count').innerHTML= `<input  type="text"  name="count" value = "${count}" style = "display:none;"/>`
 document.getElementById('customers').innerHTML = output	
 var output1 = `<input  type="text"  name="options" value = "${x}" style = "display:none;"/>`
-document.querySelector('.gender').innerHTML =  output1
-	  var text = document.querySelectorAll(".text");
+document.querySelector('.gender').innerHTML =  output1 
 	
-for(i=0;i<text.length;i++){
-	   if ( text[i].style.color == 'white'){
-	  document.getElementById('btn').disabled = true;
-	 }}
+}
+ 
+function term(selTag) {
+var y = selTag.options[selTag.selectedIndex].text
+ var output2 = `<input  type="text"  name="term" value = "${y}" style = "display:none;"/>`
+document.querySelector('.streams').innerHTML =  output2 
+console.log(output2)
 }
 
-function  myFunction1(){
-var text = document.querySelectorAll(".text");
- var checkBox = document.querySelectorAll(".myCheck");
-  var checkBox2 = document.querySelectorAll(".myCheck2");
-   for(i=0;i<text.length;i++){
-	if (checkBox[i].checked == true){checkBox2[i].checked = false
-	  text[i].style.color = 'green'}
-	  
-	   if (checkBox[i].checked == false && checkBox2[i].checked == false ){text[i].style.color = 'white'}
-	    if ( text[i].style.color !== 'white'){document.getElementById('btn').disabled = false;} 
-	   	else{ document.getElementById('btn').disabled = true;}}
-	   		
-for (let a = text.length - 1; a >=0 ; a--){
-	  if ( text[a].style.color == 'white'){
-	  	 document.getElementById('btn').disabled = true;
-}}
-
-
-}
-
-function  myFunction2(){
-      var text = document.querySelectorAll(".text");
-	   var checkBox = document.querySelectorAll(".myCheck2");
-	    var checkBox2 = document.querySelectorAll(".myCheck");
-	     for(i=0;i<text.length;i++){
-	      if (checkBox[i].checked == true){
-	   	   checkBox2[i].checked = false
-	        text[i].style.color = 'red'}
-	         if (checkBox[i].checked == false && checkBox2[i].checked == false ){
-	        	text[i].style.color = 'white'}
-	            if ( text[i].style.color !== 'white' ){document.getElementById('btn').disabled = false;} 
-	             else{document.getElementById('btn').disabled = true;}}
-	             	
-for (let a = text.length - 1; a >=0 ; a--){
-	  if ( text[a].style.color == 'white'){
-	  	 document.getElementById('btn').disabled = true;
-}}
-}
 
 
 </script>

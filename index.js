@@ -81,8 +81,7 @@ const appSchema = new mongoose.Schema([{
  upcomingSchoolEvents:[{_id:String,name:String , date:String, time:String,key:String}],
  news:[{_id:String,headlines:String , main:String, date:String,key:String}],
  fees:[{_id:String, type1:String, amount: Number}],
- checkList:[{stream:String, stationery:[{name:String, img:String, imgName:String, imgPrice:Number}], uniforms:[{name:String, key:String, img:String, imgName:String, imgPrice:Number}],books:[{name:String, key:String, img:String, imgName:String, imgPrice:Number}],miscellenious:[{name:String, key:String, img:String, imgName:String, imgPrice:Number}] }],
-address:String,
+ address:String,
 image:String,
 contact:String,
 email:String,
@@ -99,11 +98,10 @@ Friday:[[String,String,String]]
 principal:String,
 principalContact:String,
 houses:[String],
-paymentStatus:String,
 sports:[String],
 clubs:[String],
 teachers:[{
-	_id:String,
+_id:String,
 name:String,
 surname:String,
 email:String,
@@ -127,7 +125,6 @@ students:[{
     newStudent:String,
     idNumber: String,
     house: String,
-    friends: [String],
     booksLost: [String],
     email: String,
     password: String,
@@ -149,13 +146,15 @@ students:[{
     subjectsLearnt: [{
             subject: String,
             courseWork:[{
+            	_id:String,
             	term:Number,
                 year:String,
             	date:String,
-            	topic:String,
+            	Topic:String,
             	Mark:Number
             }],
             homeWork:[{
+            	_id:String,
             	term:Number,
                 year:String,
             	date:String,
@@ -163,15 +162,27 @@ students:[{
             	Mark:Number
             }],
             inClassTest:[{
+            	_id:String,
             	term:Number,
                 year:String,
             	date:String,
             	topic:String,
             	Mark:Number
             }],
-            finalTest:[{}],
+            finalTest:[{
+            	_id:String,
+            	term:Number,
+                year:String,
+            	date:String,
+            	Mark:Number
+            }],
             teacher: String,
-            attendance:[{}]
+            attendance:[{
+            	_id:String,
+            	attended:String,
+            	date:String
+                 
+            }]
 }
 	],
     sports: [String],
@@ -182,18 +193,11 @@ students:[{
         date: String
     }],
     endOfTermResults: {},
-   position: [{}],
-    previousSchools: [String],
-    achievements: [String],
-    teachersComments: [{
-        science: String,
-        history: String
-    }],
-  parentName:[String],
+   previousSchools: [String],
+   parentName:[String],
     parentOccupation:{mother:String,father:String},
     dateOfBirth:String,
-   dailyAttendance:String,
-    paidAmount: Number
+   paidAmount: Number
     	}
 ]
 }]);
@@ -315,15 +319,55 @@ app.get('/events/:id',checkAuthenticated,function (req,res){
 app.get('/home',checkAuthenticated,function (req,res){
  records.find({_id:req.user.id}, function (err,data){
   if (err) throw err;
-   res.render('home',{data:data , id:req.user.id , d3:data[0].students}) ;
+  	var wd = data[0].students;
+  var d = new Date();
+  var year= d.getFullYear();
+  var month= ("0" + (d.getMonth() + 1)).slice(-2);
+  var day= ("0" + d.getDate()).slice(-2);
+var  newdate = year + "-" + month + "-" + day;
+var attCount = 0
+for( i=0;i<wd.length;i++ ){ 
+ var sbjL = wd[i].subjectsLearnt.map((item)=>{return item.attendance}).reduce(function(a,b) { return a.concat(b);  }).filter(function(obj) { return obj.attended ==='true' && obj.date == newdate})
+ if(sbjL.some((q)=>{return q.date == newdate}) ){attCount += 1}}
+res.render('home',{data:data , id:req.user.id, daily:attCount }) ;
     });});
     
     app.get('/records',checkAuthenticated2,function (req,res){
   records.find({}, function (err,data){
   if (err) throw err;
   	
-   res.render('records', {data:data.filter(a => a.teachers.some(u => u.email==req.user.email ))[0].teachers.find( ({ contact }) => contact === req.user.contact), students: data.filter(a => a.teachers.some(u => u.email==req.user.email ))[0].students }) ;
+   res.render('records', {data:data.filter(a => a.teachers.some(u => u.email==req.user.email ))[0].teachers.find( ({ contact }) => contact === req.user.contact),id:data.filter(a => a.teachers.some(u => u.email==req.user.email))[0] ,students: data.filter(a => a.teachers.some(u => u.email==req.user.email ))[0].students }) ;
     });});
+    
+    
+    app.get('/exercises',checkAuthenticated2,function (req,res){
+  records.find({}, function (err,data){
+  if (err) throw err;
+  	res.render('exercises', {data:data.filter(a => a.teachers.some(u => u.email==req.user.email ))[0].teachers.find( ({ contact }) => contact === req.user.contact),id:data.filter(a => a.teachers.some(u => u.email==req.user.email))[0] , students: data.filter(a => a.teachers.some(u => u.email==req.user.email ))[0].students }) ;
+    });});
+    
+    app.get('/homeWork',checkAuthenticated2,function (req,res){
+  records.find({}, function (err,data){
+  if (err) throw err;
+  	res.render('homeWork', {data:data.filter(a => a.teachers.some(u => u.email==req.user.email ))[0].teachers.find( ({ contact }) => contact === req.user.contact),id:data.filter(a => a.teachers.some(u => u.email==req.user.email))[0] , students: data.filter(a => a.teachers.some(u => u.email==req.user.email ))[0].students }) ;
+    });}); 
+    
+     app.get('/tests',checkAuthenticated2,function (req,res){
+  records.find({}, function (err,data){
+  if (err) throw err;
+  	res.render('tests', {data:data.filter(a => a.teachers.some(u => u.email==req.user.email ))[0].teachers.find( ({ contact }) => contact === req.user.contact),id:data.filter(a => a.teachers.some(u => u.email==req.user.email))[0] , students: data.filter(a => a.teachers.some(u => u.email==req.user.email ))[0].students }) ;
+    });});
+    
+     app.get('/finalExams',checkAuthenticated2,function (req,res){
+  records.find({}, function (err,data){
+  if (err) throw err;
+  	res.render('finalExams', {data:data.filter(a => a.teachers.some(u => u.email==req.user.email ))[0].teachers.find( ({ contact }) => contact === req.user.contact),id:data.filter(a => a.teachers.some(u => u.email==req.user.email))[0] , students: data.filter(a => a.teachers.some(u => u.email==req.user.email ))[0].students }) ;
+    });});
+    
+    
+    
+    
+    
         
 app.get('/sms',function (req,res){
  records.find({}, function (err,data){
@@ -448,15 +492,19 @@ try{
       }
  })	
 
-
+//Attendance Post request
  app.post('/records', async (req,res)=>{ 
- 
- let attendanceArray
-attendanceArray = await records.findById('5e9dd8411c9d440000e1a481')
-	 var leng=  attendanceArray.students.filter((item)=>{return item.className === 'Form4A'}).length
-	console.log(req.body.boolean)
-	 for(i=0;i<leng; i++){
-	 	attendanceArray.students.filter((item)=>{return item.className === 'Form4A'})[i].subjectsLearnt.find( ({ subject }) => subject === 'English').attendance= attendanceArray.students.filter((item)=>{return item.className === 'Form4A'})[i].subjectsLearnt.find( ({ subject }) => subject === 'English').attendance.concat(
+let attendanceArray
+  var x= req.body.options
+   var classn= x.split(",")[0]
+   var subjct= x.split(",")[1]
+    var ob= req.body.id
+   var id= ob.replace(/\s+/g, '')
+   
+attendanceArray = await records.findById(id)
+var leng=  attendanceArray.students.filter((type)=>{return type.className === classn} ).filter(a => a.subjectsLearnt.some(u => u.subject==subjct))
+for(var i in leng){ 
+attendanceArray.students.filter((type)=>{return type.className === classn} ).filter(a => a.subjectsLearnt.some(u => u.subject==subjct))[i].subjectsLearnt.find( ({ subject }) => subject === subjct).attendance= attendanceArray.students.filter((type)=>{return type.className === classn} ).filter(a => a.subjectsLearnt.some(u => u.subject==subjct))[i].subjectsLearnt.find( ({ subject }) => subject === subjct).attendance.concat(
     {
    date:req.body.dateofbirth,
    attended:req.body.boolean[i]
@@ -473,20 +521,159 @@ try{
 	 res.redirect('/index')}
       }
  })	
+ 
+
+ 
+ //Coursework Post request 
+  app.post('/exercises', async (req,res)=>{ 
+  var d = new Date(req.body.dateofbirth)
+ var yea = d.getFullYear()
+ var x= req.body.options
+  var classn= x.split(",")[0]
+ var subjct= x.split(",")[1]
+let attendanceArray
+var ob= req.body.id
+   var id= ob.replace(/\s+/g, '')
+   attendanceArray = await records.findById(id)
+var leng=  attendanceArray.students.filter((type)=>{return type.className === classn} ).filter(a => a.subjectsLearnt.some(u => u.subject==subjct))
+for(var i in leng){ 
+attendanceArray.students.filter((type)=>{return type.className === classn} ).filter(a => a.subjectsLearnt.some(u => u.subject==subjct))[i].subjectsLearnt.find( ({ subject }) => subject === subjct).courseWork = attendanceArray.students.filter((type)=>{return type.className === classn} ).filter(a => a.subjectsLearnt.some(u => u.subject==subjct))[i].subjectsLearnt.find( ({ subject }) => subject === subjct).courseWork.concat(
+    {
+   date:req.body.dateofbirth,
+   year:yea,
+   term:req.body.term,
+   Topic:req.body.topic,
+   Mark:req.body.boolean[i]
+  
+    })}
+   try{
+ await attendanceArray.save(function(err,data){
+	 if (err) throw err;
+	 	
+	  })
+  res.redirect(`/records`)
+   }catch {
+	if(attendanceArray== null){
+	 res.redirect('/index')}
+      }
+ })	
+ 
+ //Final Exams Post request
+ 
+   app.post('/finalExams', async (req,res)=>{ 
+ let attendanceArray
+   var d = new Date(req.body.dateofbirth)
+ var yea = d.getFullYear()
+  var x= req.body.options
+  var classn= x.split(",")[0]
+ var subjct= x.split(",")[1]
+ var ob= req.body.id
+   var id= ob.replace(/\s+/g, '')
+   attendanceArray = await records.findById(id)
+	var leng=  attendanceArray.students.filter((type)=>{return type.className === classn} ).filter(a => a.subjectsLearnt.some(u => u.subject==subjct))
 
 
+	for(var i in leng){ 
+attendanceArray.students.filter((type)=>{return type.className === classn} ).filter(a => a.subjectsLearnt.some(u => u.subject==subjct))[i].subjectsLearnt.find( ({ subject }) => subject === subjct).finalTest = attendanceArray.students.filter((type)=>{return type.className === classn} ).filter(a => a.subjectsLearnt.some(u => u.subject==subjct))[i].subjectsLearnt.find( ({ subject }) => subject === subjct).finalTest.concat(
+    {
+   date:req.body.dateofbirth,
+   year:yea,
+   term:req.body.term,
+   Mark:req.body.boolean[i]
+  
+    })}
+try{
+ await attendanceArray.save(function(err,data){
+	 if (err) throw err;
+	 	
+	  })
+  res.redirect(`/records`)
+   }catch {
+	if(attendanceArray== null){
+	 res.redirect('/index')}
+      }
+ })
+ 
+ //Homework Post request
 
-  
-  
-  
+app.post('/homeWork', async (req,res)=>{ 
+ let attendanceArray
+   var d = new Date(req.body.dateofbirth)
+ var yea = d.getFullYear()
+  var x= req.body.options
+  var classn= x.split(",")[0]
+ var subjct= x.split(",")[1]
+ var ob= req.body.id
+   var id= ob.replace(/\s+/g, '')
    
-const s3 = new aws.S3({
+attendanceArray = await records.findById(id)
+	var leng=  attendanceArray.students.filter((type)=>{return type.className === classn} ).filter(a => a.subjectsLearnt.some(u => u.subject==subjct))
+
+
+	for(var i in leng){ 
+attendanceArray.students.filter((type)=>{return type.className === classn} ).filter(a => a.subjectsLearnt.some(u => u.subject==subjct))[i].subjectsLearnt.find( ({ subject }) => subject === subjct).homeWork = attendanceArray.students.filter((type)=>{return type.className === classn} ).filter(a => a.subjectsLearnt.some(u => u.subject==subjct))[i].subjectsLearnt.find( ({ subject }) => subject === subjct).homeWork.concat(
+    {
+   date:req.body.dateofbirth,
+   year:yea,
+   term:req.body.term,
+   Topic:req.body.topic,
+   Mark:req.body.boolean[i]
+  
+    })}
+try{
+ await attendanceArray.save(function(err,data){
+	 if (err) throw err;
+	 	
+	  })
+  res.redirect(`/records`)
+   }catch {
+	if(attendanceArray== null){
+	 res.redirect('/index')}
+      }
+ })
+ 
+ //Inclass tests Post request
+
+app.post('/tests', async (req,res)=>{ 
+ let attendanceArray
+  var d = new Date(req.body.dateofbirth)
+ var yea = d.getFullYear()
+  var x= req.body.options
+  var classn= x.split(",")[0]
+ var subjct= x.split(",")[1]
+ var ob= req.body.id
+   var id= ob.replace(/\s+/g, '')
+   
+attendanceArray = await records.findById(id)
+	var leng=  attendanceArray.students.filter((type)=>{return type.className === classn} ).filter(a => a.subjectsLearnt.some(u => u.subject==subjct))
+for(var i in leng){ 
+attendanceArray.students.filter((type)=>{return type.className === classn} ).filter(a => a.subjectsLearnt.some(u => u.subject==subjct))[i].subjectsLearnt.find( ({ subject }) => subject === subjct).inClassTest= attendanceArray.students.filter((type)=>{return type.className === classn} ).filter(a => a.subjectsLearnt.some(u => u.subject==subjct))[i].subjectsLearnt.find( ({ subject }) => subject === subjct).inClassTest.concat(
+    {
+   date:req.body.dateofbirth,
+   year:yea,
+   term:req.body.term,
+   Topic:req.body.topic,
+   Mark:req.body.boolean[i]
+  
+    })}
+try{
+ await attendanceArray.save(function(err,data){
+	 if (err) throw err;
+	 	})
+  res.redirect(`/records`)
+   }catch {
+	if(attendanceArray== null){
+	 res.redirect('/index')}
+      }
+ })
+
+ //Configurations for AWS image storage 
+ const s3 = new aws.S3({
 	secretAccessKey: 'VGoMf0PAZzdHQ9eDQTwKWhwOeVaqld6Y6BkPLGi1',
 	accessKeyId: 'AKIAX36EJM5WKD6ZGHG3',
 	Bucket: 'nebularimages'
 });   
-   
-const storage = multerS3({
+   const storage = multerS3({
 		s3: s3,
 		bucket: 'nebularimages',
 		acl: 'public-read',
@@ -519,10 +706,10 @@ function checkFileType(file, cb){
     cb('Error: Images Only!');
   }
 }
-app.post('/addStudent/:id', upload,  async (req,res)=>{ 
-	
 
-     var dt = req.body.dt
+//Post request to add students in database
+app.post('/addStudent/:id', upload,  async (req,res)=>{ 
+	var dt = req.body.dt
 	 var ffr = req.body.sid
 	 var amn = req.body.amn
 	 var knt = req.body.knt
@@ -611,6 +798,7 @@ try{
 
  })	
 
+//Post request to upload student`s image to AWS 
 app.post('/addStudent/:id',  async (req,res)=>{ 
 upload( req, res, ( error ) => {
 		console.log( 'requestOkokok', req.file );
@@ -634,6 +822,8 @@ upload( req, res, ( error ) => {
 			}
 		}
 	});});
+
+//Post request to add teachers to database
 app.post('/addTeachers/:id', upload,  async (req,res)=>{
 	
 	var sp = ""

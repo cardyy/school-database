@@ -572,14 +572,14 @@
   	
 
 function bodyLoad(){
-	
-      
+
+    
  container.classList.replace('red-panel', 'red-panel1')
 	container2.classList.replace('darkblue-panel', 'darkblue-panel1')
 	container3.classList.replace('green-panel', 'green-panel1')
     var liList = document.getElementById("myul").getElementsByTagName("li");
-    var largo = liList.length
-    var studentsArray = `<%- data[0].students %>` ;
+    var largo = <%-daily%>
+    var studentsArray = [<%- data[0].students %>] ;
     var totalStudentList = studentsArray.length
     var percentage =   Math.floor( (largo/totalStudentList)*100 )
 	document.getElementById("dailyAttendance").innerHTML = largo
