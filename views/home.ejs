@@ -42,74 +42,7 @@
       <!--logo end-->
       <div class="nav notify-row" id="top_menu">
         <!--  notification start -->
-        <ul class="nav top-menu">
-          <!-- settings start -->
-          
-           
-          <!-- settings end -->
-          <!-- inbox dropdown start-->
-          <li id="header_inbox_bar" class="dropdown">
-            <a data-toggle="dropdown" class="dropdown-toggle" >
-              <i class="fa fa-clipboard"></i>
-             
-              </a>
-            <ul class="dropdown-menu extended inbox">
-              <div class="notify-arrow notify-arrow-green"></div>
-              <li>
-                <p class="green">Today's Duty Roaster</p>
-              </li>
-              <% var currentDateRoaster =  new Date().toLocaleDateString() %>
-              
-              <% var outp = '' %>
-              <% for (let i = 0; i < data[0].teachers.length ; i++ ) { %>
-               <% var object = data[0].teachers[i].duties  %>
-                <% var todayssObject = object.filter((item)=>{return item.date === currentDateRoaster}) %>
-                
-                <% outp += todayssObject + ',' } %>
-               
-               
-              
-              <div id = "daRoaster"> </div>
-           <script>
-           var wat = ''
-            var outp = [<%- outp %>]
-             outp.forEach((item)=>{wat+=  `<li><a ><span class="photo"><img src="/img/bin/config.js/system/tc/${item.image}.jpg" alt="" /></span><span class="subject"><span class="from">${item.name}</span>
-             <span class="time">${item.time}</span></span><span class="message" id="droaster">${item.duty}</span> </a></li> `	})
-               	document.getElementById('daRoaster').innerHTML = wat
-                </script>
-                 </ul>
-          </li>
-          <!-- inbox dropdown end -->
-          <!-- notification dropdown start-->
-          <li id="header_notification_bar" class="dropdown">
-            <a data-toggle="dropdown" class="dropdown-toggle" >
-              <i class="fa fa-calendar"></i>
-             
-              </a>
-            <ul class="dropdown-menu extended notification">
-              <div class="notify-arrow notify-arrow-yellow"></div>
-              <li>
-                <p class="yellow">Upcoming School Events</p>
-              </li>
-              <% var upcoming = data[0].upcomingSchoolEvents %>
-         <% var filerdEvents = upcoming.filter((ilem) => { return ilem.date >= currentDateRoaster  }) %>
-       
-              <% for(var z in filerdEvents){ %> 
-              <li>
-                <a >
-                  <span class="label label-success"><i class="fa fa-bolt"></i></span>
-                  
-                 <%- filerdEvents[z].name %>: 
-                  <span class="small italic">&nbsp;<%- filerdEvents[z].date%> </span>
-                  </a>
-              </li>
-             
-              <%}%>
-             
-            </ul>
-          </li>
-          <!-- notification dropdown end -->
-        </ul>
+        
         <!--  notification end -->
       
       </div>

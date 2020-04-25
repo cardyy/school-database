@@ -103,7 +103,6 @@ clubs:[String],
 teachers:[{
 _id:String,
 name:String,
-surname:String,
 email:String,
 password:String,
 contact:String,
@@ -125,8 +124,7 @@ students:[{
     newStudent:String,
     idNumber: String,
     house: String,
-    booksLost: [String],
-    email: String,
+   email: String,
     password: String,
     leftSchool: Boolean,
     gender: String,
@@ -144,7 +142,9 @@ students:[{
         actualfee:Number
     }],
     subjectsLearnt: [{
+    	_id:String,
             subject: String,
+            teacher: String,
             courseWork:[{
             	_id:String,
             	term:Number,
@@ -176,8 +176,7 @@ students:[{
             	date:String,
             	Mark:Number
             }],
-            teacher: String,
-            attendance:[{
+             attendance:[{
             	_id:String,
             	attended:String,
             	date:String
@@ -335,8 +334,7 @@ res.render('home',{data:data , id:req.user.id, daily:attCount }) ;
     app.get('/records',checkAuthenticated2,function (req,res){
   records.find({}, function (err,data){
   if (err) throw err;
-  	
-   res.render('records', {data:data.filter(a => a.teachers.some(u => u.email==req.user.email ))[0].teachers.find( ({ contact }) => contact === req.user.contact),id:data.filter(a => a.teachers.some(u => u.email==req.user.email))[0] ,students: data.filter(a => a.teachers.some(u => u.email==req.user.email ))[0].students }) ;
+  	res.render('records', {data:data.filter(a => a.teachers.some(u => u.email==req.user.email ))[0].teachers.find( ({ contact }) => contact === req.user.contact),id:data.filter(a => a.teachers.some(u => u.email==req.user.email))[0] ,students: data.filter(a => a.teachers.some(u => u.email==req.user.email ))[0].students }) ;
     });});
     
     
@@ -707,6 +705,9 @@ function checkFileType(file, cb){
   }
 }
 
+ 
+
+
 //Post request to add students in database
 app.post('/addStudent/:id', upload,  async (req,res)=>{ 
 	var dt = req.body.dt
@@ -729,23 +730,25 @@ app.post('/addStudent/:id', upload,  async (req,res)=>{
 	if ( af.constructor == Array ){var six = req.body.af}
 	else if ( af.constructor !== Array ){var six = [req.body.af]}
 	
+ 
 	 var chk = ""
 	  for (a=0;a< one.length;a++){
 	     chk += `{date:"${ one[a]}", form:"${ two[a]}",amount:${three[a]}, contact:${ four[a]}, paidBy:"${five[a]}", actualfee:${six[a]}  },`
 	    }
+	    
 	     var aray = chk 
 	     var nwy = aray.length -1 
             var wch = aray.slice(0, nwy) ;
             var objectStri = (new Function("return [" + wch+ "];")());
- 
+            
 let studentsArray 
 
-var mother = req.body.moLi
-  var father = req.body.foLi
-   if ( mother.constructor == Array ){var mom = req.body.moLi}
-    else if ( mother.constructor !== Array ){var  mom = [req.body.moLi]}
-     if ( father.constructor == Array ){var dad = req.body.foLi}
-	  else if ( father.constructor !== Array ){var dad = [req.body.foLi]}
+var mother = req.body.mom
+  var father = req.body.dad
+   if ( mother.constructor == Array ){var mom = req.body.mom}
+    else if ( mother.constructor !== Array ){var  mom = [req.body.mom]}
+     if ( father.constructor == Array ){var dad = req.body.dad}
+	  else if ( father.constructor !== Array ){var dad = [req.body.dad]}
 	   var see = ""
 	    for (aa=0;aa<  mom.length;aa++){
 	     see += `{mother:"${  mom[aa]}",  father:"${dad[aa]}"},`
@@ -757,8 +760,35 @@ var mother = req.body.moLi
                var real = occupation[0]
                const imageName = req.file.key
               
-            
-    studentsArray = await records.findById(req.params.id)
+        studentsArray = await records.findById(req.params.id)
+        var teachers = studentsArray.teachers
+         var nwe=""
+         var twe=""
+          
+          for (t=0;t<teachers.length;t++){
+          	
+          	for(var tt2 in  teachers[t].subjectsTaken){
+           var allTeachers = teachers[t].subjectsTaken
+          if (allTeachers.hasOwnProperty(tt2)) {
+            	
+             if(allTeachers[tt2][0]== req.body.classesName){
+            nwe += `${allTeachers[tt2][1]},`
+    	      twe += `${allTeachers[tt2][2]},`}} }}
+    	       var tar = nwe.length -1 
+    	       var rar =  twe.length -1 
+    	        var ww = nwe.slice(0, tar) 
+    	        var xx = twe.slice(0, rar) 
+    	        var newww = ww.split(',');
+    	        var newxx = xx.split(',');
+    	         
+    	        var subjL= ""
+    	          for (aa=0;aa< newww .length;aa++){
+	                subjL += `{subject:"${newww [aa]}",teacher:"${newxx[aa]}" },`}
+	                  var aray = subjL 
+	                   var nwy = aray.length -1 
+                        var wch = aray.slice(0, nwy) ;
+                         var object = (new Function("return [" + wch+ "];")());
+                     	var claNam=req.body.streams+req.body.classesName
  studentsArray.students = studentsArray.students.concat(
     {city: req.body.city,
     propic:imageName,
@@ -775,16 +805,15 @@ var mother = req.body.moLi
 	parentName:req.body.parents,
 	gender:req.body.gender,
 	stream:req.body.streams,
-	className:req.body.classesName,
+	className:claNam,
     house:req.body.house,
     newStudent:req.body.newstudent,
     previousSchools:req.body.pschool,
     parentOccupation:real,
-    payments:objectStri
+    payments:objectStri,
+    subjectsLearnt:object
     })
-
-
-   
+    
 try{
  await studentsArray.save(function(err,data){
 	 if (err) throw err;
@@ -794,11 +823,14 @@ try{
 	if(studentsArray== null){
 	 res.redirect('/index')}
       }
+      
+
+
  
 
  })	
-
-//Post request to upload student`s image to AWS 
+ 
+ //Post request to upload student`s image to AWS 
 app.post('/addStudent/:id',  async (req,res)=>{ 
 upload( req, res, ( error ) => {
 		console.log( 'requestOkokok', req.file );
@@ -833,13 +865,19 @@ app.post('/addTeachers/:id', upload,  async (req,res)=>{
 	var msubjectTaken = req.body.monPeriod 
 	var orts = req.body.sports 
 	var bs = req.body.clubs
-	if ( orts.constructor == Array ){var te = req.body.sports}
+	
+	
+	if ( mtime.constructor == Array ){var mmtime = req.body.monTime }
+	else if ( mtime.constructor !== Array ){var mmtime = [req.body.monTime]}
+	if ( msubjectTaken.constructor == Array ){var mmmsubjectTaken = req.body.monPeriod  }
+	else if ( msubjectTaken.constructor !== Array ){var mmmsubjectTaken = [req.body.monPeriod]}	
+		if ( orts.constructor == Array ){var te = req.body.sports}
 	else if ( orts.constructor !== Array ){var te = [req.body.sports]}
 	if ( bs.constructor == Array ){var at = req.body.clubs}
 	else if ( bs.constructor !== Array ){var at = [req.body.clubs]}
-		
-		  for (zz=0;zz< mtime.length;zz++){
-	     mon += `["${ mtime[zz]}", "${ msubjectTaken[zz]}"],`
+		var nmme= req.body.tname + "" + req.body.tsurname
+		  for (zz=0;zz< mmtime.length;zz++){
+	     mon += `["${ mmtime[zz]}", "${ mmmsubjectTaken[zz]}","${nmme}" ],`
 	   }
 	   
 		var e = mon 
@@ -887,10 +925,9 @@ let teachersArray
 const hashPassword = await bcrypt.hash(req.body.password,10)
 teachersArray = await records.findById(req.params.id)
  teachersArray.teachers = teachersArray.teachers.concat(
-    {name: req.body.tname,
+    {name: nmme,
     image:imageName,
     address: req.body.taddress,
-    surname: req.body.tsurname,
     contact:req.body.tcontacts,
     email: emayl,
     password: hashPassword,

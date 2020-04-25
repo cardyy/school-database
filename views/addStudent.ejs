@@ -56,74 +56,7 @@
       <!--logo end-->
       <div class="nav notify-row" id="top_menu">
         <!--  notification start -->
-        <ul class="nav top-menu">
-          <!-- settings start -->
-          
-           
-          <!-- settings end -->
-          <!-- inbox dropdown start-->
-          <li id="header_inbox_bar" class="dropdown">
-            <a data-toggle="dropdown" class="dropdown-toggle" >
-              <i class="fa fa-clipboard"></i>
-             
-              </a>
-            <ul class="dropdown-menu extended inbox">
-              <div class="notify-arrow notify-arrow-green"></div>
-              <li>
-                <p class="green">Today's Duty Roaster</p>
-              </li>
-              <% var currentDateRoaster =  new Date().toLocaleDateString() %>
-              
-              <% var outp = '' %>
-              <% for (let i = 0; i < data[0].teachers.length ; i++ ) { %>
-               <% var object = data[0].teachers[i].duties  %>
-                <% var todayssObject = object.filter((item)=>{return item.date === currentDateRoaster}) %>
-                
-                <% outp += todayssObject + ',' } %>
-               
-               
-              
-              <div id = "daRoaster"> </div>
-           <script>
-           var wat = ''
-            var outp = [<%- outp %>]
-             outp.forEach((item)=>{wat+=  `<li><a ><span class="photo"><img src="/img/bin/config.js/system/tc/${item.image}.jpg" alt="" /></span><span class="subject"><span class="from">${item.name}</span>
-             <span class="time">${item.time}</span></span><span class="message" id="droaster">${item.duty}</span> </a></li> `	})
-               	document.getElementById('daRoaster').innerHTML = wat
-                </script>
-                 </ul>
-          </li>
-          <!-- inbox dropdown end -->
-          <!-- notification dropdown start-->
-          <li id="header_notification_bar" class="dropdown">
-            <a data-toggle="dropdown" class="dropdown-toggle" >
-              <i class="fa fa-calendar"></i>
-             
-              </a>
-            <ul class="dropdown-menu extended notification">
-              <div class="notify-arrow notify-arrow-yellow"></div>
-              <li>
-                <p class="yellow">Upcoming School Events</p>
-              </li>
-              <% var upcoming = data[0].upcomingSchoolEvents %>
-         <% var filerdEvents = upcoming.filter((ilem) => { return ilem.date >= currentDateRoaster  }) %>
-       
-              <% for(var z in filerdEvents){ %> 
-              <li>
-                <a >
-                  <span class="label label-success"><i class="fa fa-bolt"></i></span>
-                  
-                 <%- filerdEvents[z].name %>: 
-                  <span class="small italic">&nbsp;<%- filerdEvents[z].date%> </span>
-                  </a>
-              </li>
-             
-              <%}%>
-             
-            </ul>
-          </li>
-          <!-- notification dropdown end -->
-        </ul>
+        
         <!--  notification end -->
       </div>
         <button  class="wMenu" onclick="openNav()" >Menu</button>
@@ -313,11 +246,11 @@
    <div class="form-group ">
                     
                      <div class="col-lg-10">
-                         <textarea id = "area7" class="text-area txtA"  rows="10" cols="30" onkeyup="textAreaAdjust(this)" style="overflow:hidden" placeholder="Mother Occupation,eg...Teacher"  ></textarea> <br>
-    <span class = "test7" ></span>
-                 
-                        <textarea id = "area6" class="txtA text-area"  rows="10" cols="30" onkeyup="textAreaAdjust(this)" style="overflow:hidden" placeholder="Father Occupation, eg..Banker" ></textarea> <br>
-    <span class = "test6" ></span><br/>
+   <div class = "for"> <input  type="text" placeholder="eg...Teacher" name="mom"  required></input>
+     <label class=" label-name"><span class="content-name">Mother Occupation</span></label></div><br/>
+  
+ <div class = "for"><input  type="text" placeholder="eg..Banker" name="dad" required></input>
+ <label class=" label-name"><span class="content-name">Father Occupation</span></label></div><br/>
     
      <div class = "for">
                         <input type="text" id="pschool" name="pschool" placeholder="eg..Loreto" required />
@@ -380,7 +313,7 @@
     <div class="form-group ">
                     <label  class="control-label col-lg-2">Picture</label>
                     <div class="col-lg-10">
-                       <input name="myImage" type="file">
+                       <input name="myImage" type="file" required>
                         <div class="col-lg-offset-2 col-lg-10  ">
                       <button class="btn btn-theme" type="submit" onclick="load()">Save</button>
                       
@@ -573,13 +506,11 @@ var parents = document.getElementById("parents");
 var amount = document.getElementById("amount");
      var kontact = document.getElementById("kontact");
      var paidBy = document.getElementById("paidBy");
-     var mo = document.getElementById("area7");
-        var fo = document.getElementById("area6");
+   
         
        
         var lines = parents.value.replace(/\r\n/g,"\n").split("\n");
-         var foLi = fo.value.replace(/\r\n/g,"\n").split("\n");
-          var moLi = mo.value.replace(/\r\n/g,"\n").split("\n");
+       
           var dt = dayte.value.replace(/\r\n/g,"\n").split("\n");
           
           var amn = amount.value.replace(/\r\n/g,"\n").split("\n");
@@ -587,8 +518,7 @@ var amount = document.getElementById("amount");
           var pyd = paidBy.value.replace(/\r\n/g,"\n").split("\n");
           
        
-         var output2 = ""
-           var output3 = ""
+      
            var output = ""
            var ot4 = ""
            var ot9 = ""
@@ -604,11 +534,6 @@ var fiz = fees.map((fees )=>{return fees.type1})
            
   for(i=0;i<lines.length;i++){output += `<input  type="text"  name="parents" value = "${lines[i]}" style = "display:none;" />`
 document.querySelector('.parents').innerHTML =  output }
-for(i3=0;i3<foLi.length;i3++){output3 += `<input  type="text"  name="foLi" value = "${foLi[i3]}" style = "display:none;"/ >`
-document.querySelector('.test6').innerHTML =  output3 }
-for(i2=0;i2<moLi.length;i2++){output2 += `<input  type="text"  name="moLi" value = "${moLi[i2]}" style = "display:none;"/>`
-document.querySelector('.test7').innerHTML =  output2 }
-
 for(i4=0;i4<dt.length;i4++){ot4 += `<input  type="text"  name="dt" value = "${dt[i4]}" style = "display:none;"/>`
 document.querySelector('.t1').innerHTML =  ot4 }
 for(i6=0;i6<amn.length;i6++){ot6 += `<input  type="text"  name="amn" value = "${amn[i6]}" style = "display:none;"/>`
