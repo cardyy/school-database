@@ -193,7 +193,9 @@
                         <label class=" label-name"><span class="content-name">Student's DOB</span></label></div><br/>
                       
                         <textarea id = "parents" class="txtA text-area"  rows="2"  cols="30" onkeyup="textAreaAdjust(this)" style="overflow:hidden" placeholder="Student's Parents eg..Hilary Phiri" required  ></textarea> 
-                         <span class = "parents" ></span>
+                         <span class = "parents" ></span><marquee width="100%" direction="left" height="40px" style="color:white;font-size:13px" >
+On the Student's Parents Input-Area, write the first parent's name and press enter to move to the next line then write the second parent's name.
+</marquee>
                    </div>
                   <div class="form-group ">
                   
@@ -276,10 +278,10 @@
                     <% var clubs =  data[0].clubs %>
                     <% var sports =  data[0].sports %>
 <label  class="control-label col-lg-2">Sports</label>
-<% for(sp=0;sp<sports.length;sp++){ %> <input   type="checkbox" name="sports" value="<%- sports[sp] %>"><span class = 'ltss' > <%- sports[sp] %></span><% }%><br><br/><br/>
+<% for(sp=0;sp<sports.length;sp++){ %> <input   type="checkbox" name="sports" value="<%- sports[sp] %>"><span class = 'ltss' > <%- sports[sp] %></span><% }%><br/><br/><br/>
   	
-<label  class="control-label col-lg-2">Clubs</label
-<% for(cl=0;cl<clubs.length;cl++){ %><input   type="checkbox" name="clubs" value="<%- clubs[cl] %>"><span class = 'ltss' ><%- clubs[cl] %> </span><% }%>
+<label  class="control-label col-lg-2">Clubs</label>
+<% for(p=0;p<clubs.length;p++){ %> <input   type="checkbox" name="clubs" value="<%- clubs[p] %>"><span class = 'ltss' > <%- clubs[p] %></span><% }%><br>
 	
 </div>
                     
@@ -291,6 +293,10 @@
                 <% var fees =   data[0].fees %>
                 <% var fiz = fees.map((fees )=>{return fees.type1}) %>
                <p>  Data is enterd in the order : [<%- fiz%>] </p>
+                   <marquee width="100%" direction="left" height="40px" style="color:white;font-size:13px" >
+On the Input-Areas below,eg..for 'Payment Date',  first write the date <%- fiz[0]%> was paid then press enter to move to the next line inside the same Input-Area to write the date <%- fiz[1]%> was paid.NB The first Payment Date information should coincide with first Amount Paid information and second Payment Date information with second Amount Paid information etc.
+</marquee>
+               
                       <span class = "t9" ></span>
                          <span class = "t10" ></span>    
 
@@ -315,7 +321,7 @@
                     <div class="col-lg-10">
                        <input name="myImage" type="file" required>
                         <div class="col-lg-offset-2 col-lg-10  ">
-                      <button class="btn btn-theme" type="submit" onclick="load()">Save</button>
+                      <button class="btn btn-theme" type="submit" onclick="load()" >Save</button>
                       
                     </div>
                   </div>

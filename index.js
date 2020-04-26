@@ -158,7 +158,7 @@ students:[{
             	term:Number,
                 year:String,
             	date:String,
-            	topic:String,
+            	Topic:String,
             	Mark:Number
             }],
             inClassTest:[{
@@ -166,7 +166,7 @@ students:[{
             	term:Number,
                 year:String,
             	date:String,
-            	topic:String,
+            	Topic:String,
             	Mark:Number
             }],
             finalTest:[{
@@ -392,7 +392,7 @@ id => data.find(user => user.id === id) )
     });  
     
     
-     app.get('/teachers',checkNotAuthenticated2, function (req,res){
+app.get('/teachers',checkNotAuthenticated2, function (req,res){
  records.find({}, function (err,data){
   if (err) throw err;
   res.render('teachers', {data:data})
@@ -665,6 +665,9 @@ try{
       }
  })
 
+ //Automated Put to all students 
+
+
  //Configurations for AWS image storage 
  const s3 = new aws.S3({
 	secretAccessKey: 'VGoMf0PAZzdHQ9eDQTwKWhwOeVaqld6Y6BkPLGi1',
@@ -764,14 +767,14 @@ var mother = req.body.mom
         var teachers = studentsArray.teachers
          var nwe=""
          var twe=""
-          
+          var claNam=req.body.streams+req.body.classesName
           for (t=0;t<teachers.length;t++){
           	
           	for(var tt2 in  teachers[t].subjectsTaken){
            var allTeachers = teachers[t].subjectsTaken
           if (allTeachers.hasOwnProperty(tt2)) {
             	
-             if(allTeachers[tt2][0]== req.body.classesName){
+             if(allTeachers[tt2][0]== claNam){
             nwe += `${allTeachers[tt2][1]},`
     	      twe += `${allTeachers[tt2][2]},`}} }}
     	       var tar = nwe.length -1 
@@ -783,12 +786,12 @@ var mother = req.body.mom
     	         
     	        var subjL= ""
     	          for (aa=0;aa< newww .length;aa++){
-	                subjL += `{subject:"${newww [aa]}",teacher:"${newxx[aa]}" },`}
+	subjL += `{subject:"${newww [aa]}",teacher:"${newxx[aa]}",courseWork:[{term:0,year:0,date:0,Topic:0,Mark:0}],homeWork:[{term:0,year:0,date:0,Topic:0,Mark:0}],inClassTest:[{term:0,year:0,date:0,Topic:0,Mark:0}],finalTest:[{term:0,year:0,date:0,Mark:0}],attendance:[{attended:0,date:0}]},`}
 	                  var aray = subjL 
 	                   var nwy = aray.length -1 
                         var wch = aray.slice(0, nwy) ;
                          var object = (new Function("return [" + wch+ "];")());
-                     	var claNam=req.body.streams+req.body.classesName
+                     	
  studentsArray.students = studentsArray.students.concat(
     {city: req.body.city,
     propic:imageName,

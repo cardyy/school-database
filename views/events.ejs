@@ -151,6 +151,9 @@
 					<div class="notes">
 						<p>
 							<form  action = "/events/<%=school%>" method="POST"  >
+							 <marquee width="100%" direction="left" height="20px" style="color:white;font-size:13px ">
+To enter an upcoming event start with entering the name of the event then press enter to move to the next line and write the date of the event in the formart "month/date/year" then press enter to move to the next line and write time of the event in format "08:00am"
+</marquee>
 	<textarea id = "events" style="width:250px;border-radius:2px;font-size: 12px; "  name="events" rows="2"  cols="30" placeholder="Add event" required  ></textarea>
 	<span class = "parents" ></span>
 	<input title="Add note"  type="submit" style="position:absolute;margin-top:10px; margin-left:5%; width:80px; " onclick="load()" />   

@@ -182,6 +182,10 @@
   
                  <div class="form-group ">
                  <div class="col-lg-10">
+                   <marquee width="100%" direction="left" height="40px" style="color:white;font-size:13px">
+On the Input-Areas below,eg..for 'Duty', first write the first duty allocated to teacher then press enter to move to the next line inside the same Input-Area to write second duty allocation.NB The first Duty information should coincide with the first Date information and second Duty information with second Date information etc.
+</marquee>
+                 
                     <label  class="control-label col-lg-2">Duty</label>
                      
                          <textarea id = "duty" class="text-area"  rows="10" cols="30" onkeyup="textAreaAdjust(this)" style="overflow:hidden" placeholder="eg...Assembly"  ></textarea> <br>
@@ -198,7 +202,7 @@
                   </div>
                   
                      <div class="form-group ">
-                    
+             
                     <label class="control-label col-lg-2">ExtraCurricular</label>
 
 <select class="form-control "  onchange="myFunction(this)">
@@ -208,6 +212,7 @@
   
 </select>
   <div id = "sports"  style="display:none" >
+           
 <label  class="control-label col-lg-2">Sports</label><textarea id = "area8" class="text-area"  rows="10" cols="30" onkeyup="textAreaAdjust(this)" style="overflow:hidden" placeholder="eg..BasketBall" ></textarea> <br><span class = "test8" ></span>
 
  </div>
@@ -222,6 +227,9 @@
 
                     </div>
                     <div class="form-group ">
+                          <marquee width="100%" direction="left" height="40px" style="color:white;font-size:13px">
+On the Input-Area below,eg..for 'Class Name',write the first class the teacher takes then press enter to move to the next line inside the same Input-Area to write second class the teacher takes.NB The first Class Name information should coincide with first Subject information and second Class Name information with second Subject information etc.
+</marquee>
                      <label  class="control-label col-lg-2">Subjects & Classes</label><br/>
                    <textarea id = "area10" class="text-area"  rows="10" cols="30" onkeyup="textAreaAdjust(this)" style="overflow:hidden" placeholder="Class Name..eg 4A" ></textarea> <br><span class = "test10" ></span>
  <textarea id = "area9" class="text-area"  rows="10" cols="30" onkeyup="textAreaAdjust(this)" style="overflow:hidden" placeholder="Subject eg..Mathematics" ></textarea> <br><span class = "test9" ></span>
@@ -230,7 +238,7 @@
     <div class="form-group ">
                     <label  class="control-label col-lg-2">Picture</label>
                     <div class="col-lg-10">
-                      <input name="myImage" type="file">
+                      <input name="myImage" type="file" required>
                         <div class="col-lg-offset-2 col-lg-10  ">
                       <button class="btn btn-theme" type="submit" onclick="load()">Save</button>
                       

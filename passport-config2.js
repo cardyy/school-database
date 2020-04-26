@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs');
 function initialize(passport,getUserByEmail,getUserById){
 const authenticateUser = async (email,password,done)=>{
 const user = getUserByEmail(email)	
+
 if(user==null){
 	return done(null,false,{message:'There is no institution registered on Nebular with that email! '})
 }

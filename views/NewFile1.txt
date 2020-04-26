@@ -1,0 +1,19 @@
+setTimeout(async function () {
+  let attendanceArray
+  
+attendanceArray = await records.findById('5e9dd8411c9d440000e1a481')
+
+	var leng=  attendanceArray.students
+	for(i=0;i<leng.length;i++){ 
+		console.log(attendanceArray.students[i].className)
+attendanceArray.students[i].className= attendanceArray.students[i].className.replace("Form3B", "Form9A")}
+try{
+ await attendanceArray.save(function(err,data){
+	 if (err) throw err;
+	 	})
+	 console.log('done')
+ 
+   }catch {
+	console.log('hameno')
+      }
+}, 5000);

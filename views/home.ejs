@@ -125,27 +125,6 @@
           
          </ul>
       
-         <% var wd = data[0].students %>
-                  <ul id="myul">
-                    <% for( g=0;g<wd.length;g++ ){ %>
-                 
-                    <% var studentsAttendanceArray = data[0].students[g] %>
-                        
-                       
-                        <% var currentDate =  new Date().toLocaleDateString() %>
-                     
-                          
-                       <% if( studentsAttendanceArray.dailyAttendance == currentDate  ){ %>
-                       <% var array = 1 %>
-                       
-                      <li class = "attendCounter" ><%- array %></li>
-                      
-                      <%}%>
-                      <%}%>
-                       
-                       
-                       <ul id ='reportGraph'></ul>
-                      </ul>
         <!-- sidebar menu end-->
       </div>
     </aside>
@@ -510,7 +489,7 @@ function bodyLoad(){
  container.classList.replace('red-panel', 'red-panel1')
 	container2.classList.replace('darkblue-panel', 'darkblue-panel1')
 	container3.classList.replace('green-panel', 'green-panel1')
-    var liList = document.getElementById("myul").getElementsByTagName("li");
+ 
     var largo = <%-daily%>
     var studentsArray = [<%- data[0].students %>] ;
     var totalStudentList = studentsArray.length

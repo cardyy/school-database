@@ -173,7 +173,8 @@
   	               <% if (totalAmountPaid < totalSchoolFees ){ %>
   	                <%  newStudentsList += data[0].students[s].firstName + ','  ;  newStudentsStream += data[0].students[s].className + ',' %>
   	               
-  	                 <% newStudentsPayments += data[0].students[s].paidAmount + ','  }%>
+  	               
+  	                 <% newStudentsPayments += totalAmountPaid + ','  }%>
   	                
   	                 <%}%>
   	                 

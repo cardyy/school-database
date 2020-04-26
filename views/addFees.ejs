@@ -172,11 +172,12 @@
   <% for (var i in fiz){%>
     <option value="2"><%- fiz[i]%></option><%}%>
  </select><span class = "fees" ></span><br/>
+    
  
- <div class = "for" >
-                  <input  type="text" id="name" name="date"   required />
-                <label class=" label-name"><span class="content-name" style="margin-left:20px ">Payment Date</span></label>
-                </div><br/><br/>
+                 
+<input type="date" style="border-radius:0;width:300px;color:white;margin-left:20%;margin-top:3%;background-color:rgba(6, 6, 33, 0.2);border-color:#5d02ff" name="date"  id="name" required>
+   
+               <br/><br/>
                 
                        <div class = "for">
                        <input  type="number" id="surname" name="amount"  required />
@@ -193,7 +194,7 @@
                         <br/>
                      
             <div class="col-lg-offset-2 col-lg-10  ">
-                      <button class="btn btn-theme" type="submit" onclick="load()">Save</button>
+                      <button class="btn btn-theme" type="submit" >Save</button>
                       
                     </div>
 </div>
