@@ -947,6 +947,7 @@ teachersArray = await records.findById(req.params.id)
     image:imageName,
     address: req.body.taddress,
     contact:req.body.tcontacts,
+    session:0,
     email: emayl,
     password: req.body.password,
     extraCurricular:{Sports:sprts,Clubs:clbs},
