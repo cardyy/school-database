@@ -164,7 +164,7 @@ select{
       </div>
       <button  class="wMenu" onclick="openNav()" >Menu</button>
       <div class="top-menu">
-        <form action ="/logout?_method=DELETE" method="POST" class="nav pull-right top-menu">
+        <form action ="/logout" method="POST" class="nav pull-right top-menu">
           <button type ="submit" class="logout" >Logout</button>
         </form>
       </div> 
@@ -183,7 +183,7 @@ select{
       
           <h5 class="centered"> <%= data.name%> </h5>
           <li class="mt">
-            <a href="records">
+            <a href="/records/<%= email %>">
               <i class="fa fa-home"></i>
               <span>Daily Attendance</span>
               </a>
@@ -194,10 +194,10 @@ select{
               <span>My Classes</span>
               </a>
             <ul class="sub">
-               <li><a href="/exercises">InClass Exercises</a></li>
-              <li><a href="/homeWork">Home Work</a></li>
-              <li><a href="/tests">InClass Tests</a></li>
-              <li><a href="/finalExams">End Of Term Exams</a></li>
+              <li><a href="/exercises/<%= email %>">InClass Exercises</a></li>
+              <li><a href="/homeWork/<%= email %>">Home Work</a></li>
+              <li><a href="/tests/<%= email %>">InClass Tests</a></li>
+              <li><a href="/finalExams/<%= email %>">End Of Term Exams</a></li>
 			
               </ul>
           </li>
@@ -216,7 +216,7 @@ select{
      <!--main content start-->
 	
     <section id="main-content" class="wrapper">
-    <form id="reg" class="cmxform form-horizontal style-form" action = "/exercises" method="POST"  >
+    <form id="reg" class="cmxform form-horizontal style-form" action = "/exercises/<%= email %>" method="POST"  >
     <input type="text" value="<%-id._id%> " name="id" style="display:none "/>
     <div id="flex">
    

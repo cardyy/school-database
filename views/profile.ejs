@@ -464,10 +464,10 @@
              	  var inClassTestArraySum = initialInClassTest.length
              	   var initialTestArraySum = initialTest.length 
              	
-             	var averageHomeWork = (totalHw/homeWrkArraySum)
-             	 var averageCourseWork = totalCourseWork/courseWorkArraySum
-             	  var averageInClassTest = totalInClassTest/inClassTestArraySum
-             	   var finalTest = totalTest/initialTestArraySum
+             	var averageHomeWork = totalHw/(homeWrkArraySum-1)
+             	 var averageCourseWork = totalCourseWork/(courseWorkArraySum-1)
+             	  var averageInClassTest = totalInClassTest/(inClassTestArraySum-1)
+             	   var finalTest = totalTest/(initialTestArraySum-1)
     output +=` 
              <tr >
 		   <td id= "tb1">${resultData[a].subject}</td>

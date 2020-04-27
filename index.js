@@ -9,7 +9,6 @@ const flash = require('express-flash')
 const session = require('express-session')
 const fs = require('fs');
 const initializePassport = require('./passport-config.js')
-const initializePassport2 = require('./passport-config2.js')
 const path = require('path')
 const methodOverride = require('method-override')
 const {Paynow}  = require("paynow");
@@ -31,6 +30,9 @@ saveUninitialized:false
 app.use(methodOverride('_method'))
 app.use(passport.initialize())
 app.use(passport.session())
+ 
+
+ 
 function checkAuthenticated(req,res,next ){
 	if(req.isAuthenticated()){
 		return next()
@@ -44,20 +46,7 @@ function checkNotAuthenticated(req,res,next ){
 	}
 	next()
 }
-
-function checkAuthenticated2(req,res,next ){
-	if(req.isAuthenticated()){
-		return next()
-	}
-	res.redirect('/teachers')
-}
-
-function checkNotAuthenticated2(req,res,next ){
-	if(req.isAuthenticated()){
-		return res.redirect('/records')
-	}
-	next()
-}
+var logged = 0
 
 const PORT = process.env.PORT || 5000;	
 app.listen(PORT, () => console.log(`Nerbular Server running on port ${PORT}`));
@@ -106,6 +95,7 @@ name:String,
 email:String,
 password:String,
 contact:String,
+session:Number,
 address:String,
 image:String,
 subjectsTaken:[],
@@ -223,6 +213,24 @@ app.post('/users',function (req,res){
                
                 res.send({'success':false , 'message':"No such user in our database!"}) ;
                  }});});
+                 
+app.post('/teachers',function (req,res){
+ const username = req.body.username
+  const password = req.body.password
+   records.find({}, function (err,data){
+    if (err) throw err;
+   for (var i in data){var usernameIsPresent = data[i].teachers.some(function(el){ return el.email === username && el.       password ===  password})
+     
+		 if (usernameIsPresent === true){break; }}
+	     
+           if (usernameIsPresent === true ){
+           	logged=1
+           	var result = data.filter(a => a.teachers.some(u => u.email==username && u.password==password));
+           res.render('records',{data:result.filter(a => a.teachers.some(u => u.email==username ))[0].teachers.find( ({ email }) => email === username),id:result.filter(a => a.teachers.some(u => u.email==username))[0] ,students: result.filter(a => a.teachers.some(u => u.email==username ))[0].students , email:username}) ;
+               } else {
+               
+                res.send({'success':false , 'message':"No such user in our database!"}) ;
+                 }});});
     
  
  app.get('/users',function (req,res){
@@ -331,42 +339,46 @@ for( i=0;i<wd.length;i++ ){
 res.render('home',{data:data , id:req.user.id, daily:attCount }) ;
     });});
     
-    app.get('/records',checkAuthenticated2,function (req,res){
+    
+app.get('/exercises/:id',function (req,res){
   records.find({}, function (err,data){
   if (err) throw err;
-  	res.render('records', {data:data.filter(a => a.teachers.some(u => u.email==req.user.email ))[0].teachers.find( ({ contact }) => contact === req.user.contact),id:data.filter(a => a.teachers.some(u => u.email==req.user.email))[0] ,students: data.filter(a => a.teachers.some(u => u.email==req.user.email ))[0].students }) ;
-    });});
-    
-    
-    app.get('/exercises',checkAuthenticated2,function (req,res){
-  records.find({}, function (err,data){
-  if (err) throw err;
-  	res.render('exercises', {data:data.filter(a => a.teachers.some(u => u.email==req.user.email ))[0].teachers.find( ({ contact }) => contact === req.user.contact),id:data.filter(a => a.teachers.some(u => u.email==req.user.email))[0] , students: data.filter(a => a.teachers.some(u => u.email==req.user.email ))[0].students }) ;
-    });});
-    
-    app.get('/homeWork',checkAuthenticated2,function (req,res){
-  records.find({}, function (err,data){
-  if (err) throw err;
-  	res.render('homeWork', {data:data.filter(a => a.teachers.some(u => u.email==req.user.email ))[0].teachers.find( ({ contact }) => contact === req.user.contact),id:data.filter(a => a.teachers.some(u => u.email==req.user.email))[0] , students: data.filter(a => a.teachers.some(u => u.email==req.user.email ))[0].students }) ;
-    });}); 
-    
-     app.get('/tests',checkAuthenticated2,function (req,res){
-  records.find({}, function (err,data){
-  if (err) throw err;
-  	res.render('tests', {data:data.filter(a => a.teachers.some(u => u.email==req.user.email ))[0].teachers.find( ({ contact }) => contact === req.user.contact),id:data.filter(a => a.teachers.some(u => u.email==req.user.email))[0] , students: data.filter(a => a.teachers.some(u => u.email==req.user.email ))[0].students }) ;
-    });});
-    
-     app.get('/finalExams',checkAuthenticated2,function (req,res){
-  records.find({}, function (err,data){
-  if (err) throw err;
-  	res.render('finalExams', {data:data.filter(a => a.teachers.some(u => u.email==req.user.email ))[0].teachers.find( ({ contact }) => contact === req.user.contact),id:data.filter(a => a.teachers.some(u => u.email==req.user.email))[0] , students: data.filter(a => a.teachers.some(u => u.email==req.user.email ))[0].students }) ;
-    });});
-    
-    
-    
-    
-    
+ if(logged == 1 ){
+  	res.render('exercises', {data:data.filter(a => a.teachers.some(u => u.email==req.params.id ))[0].teachers.find( ({ email }) => email === req.params.id),id:data.filter(a => a.teachers.some(u => u.email==req.params.id))[0] , students: data.filter(a => a.teachers.some(u => u.email==req.params.id ))[0].students, email:req.params.id  })  } 
+  	else{res.redirect('/teachers') }
+   });});
         
+app.get('/records/:id',function (req,res){
+  records.find({}, function (err,data){
+  if (err) throw err;
+ if(logged == 1 ){
+  	res.render('records', {data:data.filter(a => a.teachers.some(u => u.email==req.params.id ))[0].teachers.find( ({ email }) => email === req.params.id),id:data.filter(a => a.teachers.some(u => u.email==req.params.id))[0] , students: data.filter(a => a.teachers.some(u => u.email==req.params.id ))[0].students, email:req.params.id  })  } 
+  	else{res.redirect('/teachers') }
+   });});
+    
+    app.get('/homeWork/:id',function (req,res){
+  records.find({}, function (err,data){
+  if (err) throw err;
+ if(logged == 1 ){
+  	res.render('homeWork', {data:data.filter(a => a.teachers.some(u => u.email==req.params.id ))[0].teachers.find( ({ email }) => email === req.params.id),id:data.filter(a => a.teachers.some(u => u.email==req.params.id))[0] , students: data.filter(a => a.teachers.some(u => u.email==req.params.id ))[0].students, email:req.params.id  })  } 
+  	else{res.redirect('/teachers') }
+   });});
+   
+     app.get('/tests/:id',function (req,res){
+  records.find({}, function (err,data){
+  if (err) throw err;
+ if(logged == 1 ){
+  	res.render('tests', {data:data.filter(a => a.teachers.some(u => u.email==req.params.id ))[0].teachers.find( ({ email }) => email === req.params.id),id:data.filter(a => a.teachers.some(u => u.email==req.params.id))[0] , students: data.filter(a => a.teachers.some(u => u.email==req.params.id ))[0].students, email:req.params.id  })  } 
+  	else{res.redirect('/teachers') }
+   });});
+    
+ app.get('/finalExams/:id',function (req,res){
+  records.find({}, function (err,data){
+   if (err) throw err;
+   if(logged == 1 ){res.render('finalExams', {data:data.filter(a => a.teachers.some(u => u.email==req.params.id ))[0].teachers.find( ({ email }) => email === req.params.id),id:data.filter(a => a.teachers.some(u => u.email==req.params.id))[0] , students: data.filter(a => a.teachers.some(u => u.email==req.params.id ))[0].students, email:req.params.id  })  } 
+  	else{res.redirect('/teachers') }
+   });});
+    
 app.get('/sms',function (req,res){
  records.find({}, function (err,data){
   if (err) throw err;
@@ -374,11 +386,7 @@ app.get('/sms',function (req,res){
     });});
     
   
-    
-        
-
-    
- app.get('/',checkNotAuthenticated, function (req,res){
+app.get('/',checkNotAuthenticated, function (req,res){
  records.find({}, function (err,data){
   if (err) throw err;
   res.render('index', {data:data})
@@ -392,25 +400,14 @@ id => data.find(user => user.id === id) )
     });  
     
     
-app.get('/teachers',checkNotAuthenticated2, function (req,res){
+app.get('/teachers', function (req,res){
  records.find({}, function (err,data){
   if (err) throw err;
   res.render('teachers', {data:data})
-initializePassport2(
-passport,
-email => data.filter(a => a.teachers.some(u => u.email==email ))[0].teachers.find(user => user.email === email),
-
-id => data.filter(a => a.teachers.some(u => u.id==id ))[0].teachers.find(user => user.id === id)
-)
-
  }) ;
  
     }); 
    
-
-
- 
-  
  app.post('/textSmS/:id', async (req,res)=>{ 
  
  let newsArray
@@ -491,7 +488,7 @@ try{
  })	
 
 //Attendance Post request
- app.post('/records', async (req,res)=>{ 
+ app.post('/records/:id', async (req,res)=>{ 
 let attendanceArray
   var x= req.body.options
    var classn= x.split(",")[0]
@@ -513,7 +510,7 @@ try{
 	 if (err) throw err;
 	 	
 	  })
-  res.redirect(`/records`)
+  res.render(`records`)
    }catch {
 	if(attendanceArray== null){
 	 res.redirect('/index')}
@@ -523,7 +520,7 @@ try{
 
  
  //Coursework Post request 
-  app.post('/exercises', async (req,res)=>{ 
+  app.post('/exercises/:id', async (req,res)=>{ 
   var d = new Date(req.body.dateofbirth)
  var yea = d.getFullYear()
  var x= req.body.options
@@ -549,7 +546,7 @@ attendanceArray.students.filter((type)=>{return type.className === classn} ).fil
 	 if (err) throw err;
 	 	
 	  })
-  res.redirect(`/records`)
+  res.render(`exercises`)
    }catch {
 	if(attendanceArray== null){
 	 res.redirect('/index')}
@@ -558,7 +555,7 @@ attendanceArray.students.filter((type)=>{return type.className === classn} ).fil
  
  //Final Exams Post request
  
-   app.post('/finalExams', async (req,res)=>{ 
+   app.post('/finalExams/:id', async (req,res)=>{ 
  let attendanceArray
    var d = new Date(req.body.dateofbirth)
  var yea = d.getFullYear()
@@ -585,7 +582,7 @@ try{
 	 if (err) throw err;
 	 	
 	  })
-  res.redirect(`/records`)
+  res.render(`finalExams`)
    }catch {
 	if(attendanceArray== null){
 	 res.redirect('/index')}
@@ -594,7 +591,7 @@ try{
  
  //Homework Post request
 
-app.post('/homeWork', async (req,res)=>{ 
+app.post('/homeWork/:id', async (req,res)=>{ 
  let attendanceArray
    var d = new Date(req.body.dateofbirth)
  var yea = d.getFullYear()
@@ -609,6 +606,7 @@ attendanceArray = await records.findById(id)
 
 
 	for(var i in leng){ 
+		
 attendanceArray.students.filter((type)=>{return type.className === classn} ).filter(a => a.subjectsLearnt.some(u => u.subject==subjct))[i].subjectsLearnt.find( ({ subject }) => subject === subjct).homeWork = attendanceArray.students.filter((type)=>{return type.className === classn} ).filter(a => a.subjectsLearnt.some(u => u.subject==subjct))[i].subjectsLearnt.find( ({ subject }) => subject === subjct).homeWork.concat(
     {
    date:req.body.dateofbirth,
@@ -623,7 +621,7 @@ try{
 	 if (err) throw err;
 	 	
 	  })
-  res.redirect(`/records`)
+  res.render(`homeWork`)
    }catch {
 	if(attendanceArray== null){
 	 res.redirect('/index')}
@@ -632,7 +630,7 @@ try{
  
  //Inclass tests Post request
 
-app.post('/tests', async (req,res)=>{ 
+app.post('/tests/:id', async (req,res)=>{ 
  let attendanceArray
   var d = new Date(req.body.dateofbirth)
  var yea = d.getFullYear()
@@ -658,7 +656,7 @@ try{
  await attendanceArray.save(function(err,data){
 	 if (err) throw err;
 	 	})
-  res.redirect(`/records`)
+  res.render('records')
    }catch {
 	if(attendanceArray== null){
 	 res.redirect('/index')}
@@ -925,7 +923,6 @@ var date = req.body.date
      const imageName = req.file.key
      const emayl = `${req.body.tcontacts}@nebular.co.zw`
 let teachersArray 
-const hashPassword = await bcrypt.hash(req.body.password,10)
 teachersArray = await records.findById(req.params.id)
  teachersArray.teachers = teachersArray.teachers.concat(
     {name: nmme,
@@ -933,7 +930,7 @@ teachersArray = await records.findById(req.params.id)
     address: req.body.taddress,
     contact:req.body.tcontacts,
     email: emayl,
-    password: hashPassword,
+    password: req.body.password,
     extraCurricular:{Sports:sprts,Clubs:clbs},
 	duties:ectStringArray,
 	subjectsTaken: onday
@@ -1119,15 +1116,19 @@ failureFlash:true
 
 }))
 
-app.post('/teachers',urlencodedParser,passport.authenticate('local',{  
-successRedirect: '/records' ,
-failureRedirect:'/teachers' ,
-failureFlash:true
+app.post('/logout',async (req,res)=>{
+	 logged=0
 
-}))
+try {
+res.redirect('/teachers')
+  console.log('You are now logged out')
+   }catch {
+	console.log('not done')
+      }
+ })	     
 
 app.delete('/logout', (req,res)=>{
 	req.logOut()
 	res.redirect('/')
 })
-  
+ 
