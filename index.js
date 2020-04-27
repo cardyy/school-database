@@ -46,7 +46,7 @@ function checkNotAuthenticated(req,res,next ){
 	}
 	next()
 }
-var logged = 0
+
 
 const PORT = process.env.PORT || 5000;	
 app.listen(PORT, () => console.log(`Nerbular Server running on port ${PORT}`));
@@ -196,7 +196,7 @@ students:[{
 const records = mongoose.model('schools',appSchema );
 
 
-app.post('/users',function (req,res){
+app.post('/users', function  (req,res){
  const username = req.body.username
   const password = req.body.password
    records.find({}, function (err,data){
@@ -220,14 +220,26 @@ app.post('/teachers',function (req,res){
    records.find({}, function (err,data){
     if (err) throw err;
    for (var i in data){var usernameIsPresent = data[i].teachers.some(function(el){ return el.email === username && el.       password ===  password})
-     
+     	
 		 if (usernameIsPresent === true){break; }}
 	     
            if (usernameIsPresent === true ){
-           	logged=1
-           	var result = data.filter(a => a.teachers.some(u => u.email==username && u.password==password));
+          var result = data.filter(a => a.teachers.some(u => u.email==username && u.password==password));
+          var redID = result[0]._id
            res.render('records',{data:result.filter(a => a.teachers.some(u => u.email==username ))[0].teachers.find( ({ email }) => email === username),id:result.filter(a => a.teachers.some(u => u.email==username))[0] ,students: result.filter(a => a.teachers.some(u => u.email==username ))[0].students , email:username}) ;
-               } else {
+setTimeout(async function () {       
+let attendanceArray
+  attendanceArray = await records.findById(redID)
+ attendanceArray.teachers.find( ({ email }) => email === username).session= attendanceArray.teachers.find( ({ email }) => email === username).session =1
+try {
+ await attendanceArray.save(function(err,data){
+	 if (err) throw err;
+	 	 })
+	console.log('Session logged')
+   }catch {
+	console.log('Could not log user')
+      }
+	},1);} else {
                
                 res.send({'success':false , 'message':"No such user in our database!"}) ;
                  }});});
@@ -343,7 +355,8 @@ res.render('home',{data:data , id:req.user.id, daily:attCount }) ;
 app.get('/exercises/:id',function (req,res){
   records.find({}, function (err,data){
   if (err) throw err;
- if(logged == 1 ){
+  var user = data.filter(a => a.teachers.some(u => u.email==req.params.id ))[0].teachers.find( ({ email }) => email === req.params.id).session
+if(user == 1 ){
   	res.render('exercises', {data:data.filter(a => a.teachers.some(u => u.email==req.params.id ))[0].teachers.find( ({ email }) => email === req.params.id),id:data.filter(a => a.teachers.some(u => u.email==req.params.id))[0] , students: data.filter(a => a.teachers.some(u => u.email==req.params.id ))[0].students, email:req.params.id  })  } 
   	else{res.redirect('/teachers') }
    });});
@@ -351,31 +364,36 @@ app.get('/exercises/:id',function (req,res){
 app.get('/records/:id',function (req,res){
   records.find({}, function (err,data){
   if (err) throw err;
- if(logged == 1 ){
-  	res.render('records', {data:data.filter(a => a.teachers.some(u => u.email==req.params.id ))[0].teachers.find( ({ email }) => email === req.params.id),id:data.filter(a => a.teachers.some(u => u.email==req.params.id))[0] , students: data.filter(a => a.teachers.some(u => u.email==req.params.id ))[0].students, email:req.params.id  })  } 
+var user = data.filter(a => a.teachers.some(u => u.email==req.params.id ))[0].teachers.find( ({ email }) => email === req.params.id).session
+if(user == 1 ){
+  	res.render('exercises', {data:data.filter(a => a.teachers.some(u => u.email==req.params.id ))[0].teachers.find( ({ email }) => email === req.params.id),id:data.filter(a => a.teachers.some(u => u.email==req.params.id))[0] , students: data.filter(a => a.teachers.some(u => u.email==req.params.id ))[0].students, email:req.params.id  })  } 
   	else{res.redirect('/teachers') }
    });});
     
     app.get('/homeWork/:id',function (req,res){
   records.find({}, function (err,data){
   if (err) throw err;
- if(logged == 1 ){
-  	res.render('homeWork', {data:data.filter(a => a.teachers.some(u => u.email==req.params.id ))[0].teachers.find( ({ email }) => email === req.params.id),id:data.filter(a => a.teachers.some(u => u.email==req.params.id))[0] , students: data.filter(a => a.teachers.some(u => u.email==req.params.id ))[0].students, email:req.params.id  })  } 
+  var user = data.filter(a => a.teachers.some(u => u.email==req.params.id ))[0].teachers.find( ({ email }) => email === req.params.id).session
+if(user == 1 ){
+  	res.render('exercises', {data:data.filter(a => a.teachers.some(u => u.email==req.params.id ))[0].teachers.find( ({ email }) => email === req.params.id),id:data.filter(a => a.teachers.some(u => u.email==req.params.id))[0] , students: data.filter(a => a.teachers.some(u => u.email==req.params.id ))[0].students, email:req.params.id  })  } 
   	else{res.redirect('/teachers') }
    });});
    
      app.get('/tests/:id',function (req,res){
   records.find({}, function (err,data){
   if (err) throw err;
- if(logged == 1 ){
-  	res.render('tests', {data:data.filter(a => a.teachers.some(u => u.email==req.params.id ))[0].teachers.find( ({ email }) => email === req.params.id),id:data.filter(a => a.teachers.some(u => u.email==req.params.id))[0] , students: data.filter(a => a.teachers.some(u => u.email==req.params.id ))[0].students, email:req.params.id  })  } 
+  var user = data.filter(a => a.teachers.some(u => u.email==req.params.id ))[0].teachers.find( ({ email }) => email === req.params.id).session
+if(user == 1 ){
+  	res.render('exercises', {data:data.filter(a => a.teachers.some(u => u.email==req.params.id ))[0].teachers.find( ({ email }) => email === req.params.id),id:data.filter(a => a.teachers.some(u => u.email==req.params.id))[0] , students: data.filter(a => a.teachers.some(u => u.email==req.params.id ))[0].students, email:req.params.id  })  } 
   	else{res.redirect('/teachers') }
    });});
     
  app.get('/finalExams/:id',function (req,res){
   records.find({}, function (err,data){
-   if (err) throw err;
-   if(logged == 1 ){res.render('finalExams', {data:data.filter(a => a.teachers.some(u => u.email==req.params.id ))[0].teachers.find( ({ email }) => email === req.params.id),id:data.filter(a => a.teachers.some(u => u.email==req.params.id))[0] , students: data.filter(a => a.teachers.some(u => u.email==req.params.id ))[0].students, email:req.params.id  })  } 
+  if (err) throw err;
+  var user = data.filter(a => a.teachers.some(u => u.email==req.params.id ))[0].teachers.find( ({ email }) => email === req.params.id).session
+if(user == 1 ){
+  	res.render('exercises', {data:data.filter(a => a.teachers.some(u => u.email==req.params.id ))[0].teachers.find( ({ email }) => email === req.params.id),id:data.filter(a => a.teachers.some(u => u.email==req.params.id))[0] , students: data.filter(a => a.teachers.some(u => u.email==req.params.id ))[0].students, email:req.params.id  })  } 
   	else{res.redirect('/teachers') }
    });});
     
@@ -603,7 +621,7 @@ app.post('/homeWork/:id', async (req,res)=>{
    
 attendanceArray = await records.findById(id)
 	var leng=  attendanceArray.students.filter((type)=>{return type.className === classn} ).filter(a => a.subjectsLearnt.some(u => u.subject==subjct))
-
+console.log(req.body.boolean[i])
 
 	for(var i in leng){ 
 		
@@ -1116,12 +1134,16 @@ failureFlash:true
 
 }))
 
-app.post('/logout',async (req,res)=>{
-	 logged=0
-
+app.post('/logout',async (req,res)=>{ 
+let attendanceArray
+  attendanceArray = await records.findById('5e9dd8411c9d440000e1a481')
+ attendanceArray.teachers.find( ({ email }) => email === 't2@gmail.com').session= attendanceArray.teachers.find( ({ email }) => email === 't2@gmail.com').session =0
 try {
-res.redirect('/teachers')
-  console.log('You are now logged out')
+ await attendanceArray.save(function(err,data){
+	 if (err) throw err;
+	 	 })
+	 res.redirect('/teachers')
+  console.log('Session logged out')
    }catch {
 	console.log('not done')
       }
