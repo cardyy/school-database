@@ -28,7 +28,7 @@
   border-collapse: collapse;
   width: 70%;
  margin-top: 3%;
- margin-left: 4%;
+ margin-left: 0%;
   
 
 }
@@ -57,7 +57,7 @@
    box-shadow: 1px 1px #333;
     background: rgba(6, 6, 33, 1);
 	width:140px;
-	margin-left:36.2% ;
+	margin-left:29% ;
 	display: none;
 }
 
@@ -86,7 +86,7 @@ input {
 #date,#date2,#date3,#date4,#date5{
 	position: relative;
 	top: 20px;
-  left: 34%;
+  left: 27%;
     display:none;	
 }
 </style>
@@ -107,7 +107,7 @@ input {
       <!--logo start-->
       <a  class="logo"><img src="/img/sahara logo 1 .png" alt=""   class= "topLogo2" /></a>
       <!--logo end-->
-      <div class="nav notify-row" id="top_menu" style="margin-left:50% ">
+      <div class="nav notify-row" id="top_menu" style="margin-left:45% ">
           <p class="yellow"> <h5 class="centered"> <%= data.name%> </h5></p>
        </div>
       <button  class="wMenu" onclick="openNav()" >Menu</button>
@@ -149,14 +149,14 @@ input {
     <form id="reg" class="cmxform form-horizontal style-form" action = "/records" method="POST"  >
     <input type="text" style="display:none " name="userID" value="<%= email%>" />
     <input type="text" value="<%-id._id%> " name="id" style="display:none "/>
-         <select style="margin-left:30%;margin-top:1%;width:300px;height:30px "  onchange="myFunction(this)">
+         <select style="margin-left:23.5%;margin-top:1%;width:300px;height:50px;border-radius:0;background-color:rgba(6, 6, 33, 0.7);color: white;border-color:#5d02ff "   onchange="myFunction(this)">
   <option value="1" >Class</option>
   <% var arra =  data.subjectsTaken %>
   <% for(var i in arra){%> 
  <option value="2"><%- arra[i] %></option> <%}%>
  </select><span class = "gender" ></span>
  <div id="date">
-<label for="dateofbirth">Date</label>
+<label for="dateofbirth" style="margin-left:80px ">Date</label>
 <input type="date" name="dateofbirth" id="dateofbirth" required=""></div>
   <div id = "sports"  >
 <table id="customers">
@@ -172,13 +172,13 @@ input {
     <input type="text" value="<%-id._id%> " name="id" style="display:none "/>
     <div id="flex">
     
- <select   onchange="term2(this)" >
+ <select  style="margin-left:20%;margin-top:1%;width:190px;height:50px;border-radius:0;background-color:rgba(6, 6, 33, 0.7);color: white;border-color:#5d02ff " onchange="term2(this)" >
   <option value="1" >Term</option>
  <option >1</option>
   <option >2</option>
    <option >3</option>
  </select><span class = "streams" ></span>
-         <select   onchange="myFunction2(this)">
+         <select  style="margin-left:1%;margin-top:1%;width:190px;height:50px;border-radius:0;background-color:rgba(6, 6, 33, 0.7);color: white;border-color:#5d02ff " onchange="myFunction2(this)">
   <option value="1" >Class</option>
   <% var arra =  data.subjectsTaken %>
   <% for(var i in arra){%> 
@@ -187,7 +187,7 @@ input {
  
  </div>
  <div id="date2">
-<label for="dateofbirth">Date</label>
+<label for="dateofbirth" style="margin-left:80px ">Date</label>
 <input type="date" name="dateofbirth" id="dateofbirth" required><br/><br/>
 	<input type="text" placeholder="Enter Topic" name="topic" required/>
 
@@ -208,13 +208,13 @@ input {
     <input type="text" value="<%-id._id%> " name="id" style="display:none "/>
     <div id="flex">
      
- <select   onchange="term3(this)" >
+ <select  style="margin-left:20%;margin-top:1%;width:190px;height:50px;border-radius:0;background-color:rgba(6, 6, 33, 0.7);color: white;border-color:#5d02ff " onchange="term3(this)" >
   <option value="1" >Term</option>
  <option >1</option>
   <option >2</option>
    <option >3</option>
  </select><span class = "streams" ></span>
-         <select   onchange="myFunction3(this)">
+         <select style="margin-left:1%;margin-top:1%;width:190px;height:50px;border-radius:0;background-color:rgba(6, 6, 33, 0.7);color: white;border-color:#5d02ff "  onchange="myFunction3(this)">
   <option value="1" >Class</option>
   <% var arra =  data.subjectsTaken %>
   <% for(var i in arra){%> 
@@ -223,7 +223,7 @@ input {
  
  </div>
  <div id="date3">
-<label for="dateofbirth">Date</label>
+<label for="dateofbirth" style="margin-left:80px ">Date</label>
 <input type="date" name="dateofbirth" id="dateofbirth" required><br/><br/>
 	<input type="text" placeholder="Enter Topic" name="topic" required/>
 
@@ -245,13 +245,13 @@ input {
     <input type="text" value="<%-id._id%> " name="id" style="display:none "/>
     <div id="flex">
     
- <select   onchange="term4(this)" >
+ <select style="margin-left:20%;margin-top:1%;width:190px;height:50px;border-radius:0;background-color:rgba(6, 6, 33, 0.7);color: white;border-color:#5d02ff "  onchange="term4(this)" >
   <option value="1" >Term</option>
  <option >1</option>
   <option >2</option>
    <option >3</option>
  </select><span class = "streams" ></span>
-         <select   onchange="myFunction4(this)">
+         <select style="margin-left:1%;margin-top:1%;width:190px;height:50px;border-radius:0;background-color:rgba(6, 6, 33, 0.7);color: white;border-color:#5d02ff "  onchange="myFunction4(this)">
   <option value="1" >Class</option>
   <% var arra =  data.subjectsTaken %>
   <% for(var i in arra){%> 
@@ -260,7 +260,7 @@ input {
  
  </div>
  <div id="date4">
-<label for="dateofbirth">Date</label>
+<label for="dateofbirth" style="margin-left:80px ">Date</label>
 <input type="date" name="dateofbirth" id="dateofbirth" required><br/><br/>
 
 
@@ -282,13 +282,13 @@ input {
     <input type="text" value="<%-id._id%> " name="id" style="display:none "/>
     <div id="flex">
    
- <select   onchange="term5(this)" >
+ <select style="margin-left:20%;margin-top:1%;width:190px;height:50px;border-radius:0;background-color:rgba(6, 6, 33, 0.7);color: white;border-color:#5d02ff "  onchange="term5(this)" >
   <option value="1" >Term</option>
  <option >1</option>
   <option >2</option>
    <option >3</option>
  </select><span class = "streams" ></span>
-         <select   onchange="myFunction5(this)">
+         <select style="margin-left:1%;margin-top:1%;width:190px;height:50px;border-radius:0;background-color:rgba(6, 6, 33, 0.7);color: white;border-color:#5d02ff "  onchange="myFunction5(this)">
   <option value="1" >Class</option>
   <% var arra =  data.subjectsTaken %>
   <% for(var i in arra){%> 
@@ -297,7 +297,7 @@ input {
  
  </div>
  <div id="date5">
-<label for="dateofbirth">Date</label>
+<label for="dateofbirth" style="margin-left:80px ">Date</label>
 <input type="date" name="dateofbirth" id="dateofbirth" required><br/><br/>
 	<input type="text" placeholder="Enter Topic" name="topic" required/>
 
