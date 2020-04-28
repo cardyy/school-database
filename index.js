@@ -226,7 +226,8 @@ app.post('/teachers',function (req,res){
            if (usernameIsPresent === true ){
           var result = data.filter(a => a.teachers.some(u => u.email==username && u.password==password));
           var redID = result[0]._id
-           res.render('records',{data:result.filter(a => a.teachers.some(u => u.email==username ))[0].teachers.find( ({ email }) => email === username),id:result.filter(a => a.teachers.some(u => u.email==username))[0] ,students: result.filter(a => a.teachers.some(u => u.email==username ))[0].students , email:username}) ;
+          
+           res.render('records',{data:result.filter(a => a.teachers.some(u => u.email==username ))[0].teachers.find( ({ email }) => email === username),id:result.filter(a => a.teachers.some(u => u.email==username))[0] ,students: result.filter(a => a.teachers.some(u => u.email==username ))[0].students , email:result.filter(a => a.teachers.some(u => u.email==username ))[0].teachers.find( ({ email }) => email === username).contact}) ;
 setTimeout(async function () {       
 let attendanceArray
   attendanceArray = await records.findById(redID)
@@ -351,15 +352,6 @@ for( i=0;i<wd.length;i++ ){
 res.render('home',{data:data , id:req.user.id, daily:attCount }) ;
     });});
     
-    
-app.get('/exercises/:id',function (req,res){
-  records.find({}, function (err,data){
-  if (err) throw err;
-  var user = data.filter(a => a.teachers.some(u => u.email==req.params.id ))[0].teachers.find( ({ email }) => email === req.params.id).session
-if(user == 1 ){
-  	res.render('exercises', {data:data.filter(a => a.teachers.some(u => u.email==req.params.id ))[0].teachers.find( ({ email }) => email === req.params.id),id:data.filter(a => a.teachers.some(u => u.email==req.params.id))[0] , students: data.filter(a => a.teachers.some(u => u.email==req.params.id ))[0].students, email:req.params.id  })  } 
-  	else{res.redirect('/teachers') }
-   });});
         
 app.get('/records/:id',function (req,res){
   records.find({}, function (err,data){
@@ -370,34 +362,7 @@ if(user == 1 ){
   	else{res.redirect('/teachers') }
    });});
     
-    app.get('/homeWork/:id',function (req,res){
-  records.find({}, function (err,data){
-  if (err) throw err;
-  var user = data.filter(a => a.teachers.some(u => u.email==req.params.id ))[0].teachers.find( ({ email }) => email === req.params.id).session
-if(user == 1 ){
-  	res.render('exercises', {data:data.filter(a => a.teachers.some(u => u.email==req.params.id ))[0].teachers.find( ({ email }) => email === req.params.id),id:data.filter(a => a.teachers.some(u => u.email==req.params.id))[0] , students: data.filter(a => a.teachers.some(u => u.email==req.params.id ))[0].students, email:req.params.id  })  } 
-  	else{res.redirect('/teachers') }
-   });});
-   
-     app.get('/tests/:id',function (req,res){
-  records.find({}, function (err,data){
-  if (err) throw err;
-  var user = data.filter(a => a.teachers.some(u => u.email==req.params.id ))[0].teachers.find( ({ email }) => email === req.params.id).session
-if(user == 1 ){
-  	res.render('exercises', {data:data.filter(a => a.teachers.some(u => u.email==req.params.id ))[0].teachers.find( ({ email }) => email === req.params.id),id:data.filter(a => a.teachers.some(u => u.email==req.params.id))[0] , students: data.filter(a => a.teachers.some(u => u.email==req.params.id ))[0].students, email:req.params.id  })  } 
-  	else{res.redirect('/teachers') }
-   });});
-    
- app.get('/finalExams/:id',function (req,res){
-  records.find({}, function (err,data){
-  if (err) throw err;
-  var user = data.filter(a => a.teachers.some(u => u.email==req.params.id ))[0].teachers.find( ({ email }) => email === req.params.id).session
-if(user == 1 ){
-  	res.render('exercises', {data:data.filter(a => a.teachers.some(u => u.email==req.params.id ))[0].teachers.find( ({ email }) => email === req.params.id),id:data.filter(a => a.teachers.some(u => u.email==req.params.id))[0] , students: data.filter(a => a.teachers.some(u => u.email==req.params.id ))[0].students, email:req.params.id  })  } 
-  	else{res.redirect('/teachers') }
-   });});
-    
-app.get('/sms',function (req,res){
+  app.get('/sms',function (req,res){
  records.find({}, function (err,data){
   if (err) throw err;
    res.render('smsGateway') ;
@@ -506,13 +471,16 @@ try{
  })	
 
 //Attendance Post request
- app.post('/records/:id', async (req,res)=>{ 
+ app.post('/records', async (req,res)=>{ 
 let attendanceArray
   var x= req.body.options
    var classn= x.split(",")[0]
    var subjct= x.split(",")[1]
-    var ob= req.body.id
-   var id= ob.replace(/\s+/g, '')
+  var ob= req.body.id
+  var id= ob.replace(/\s+/g, '')
+    var cont = req.body.userID
+  
+    var username= cont.replace(/\s+/g, '')
    
 attendanceArray = await records.findById(id)
 var leng=  attendanceArray.students.filter((type)=>{return type.className === classn} ).filter(a => a.subjectsLearnt.some(u => u.subject==subjct))
@@ -528,7 +496,7 @@ try{
 	 if (err) throw err;
 	 	
 	  })
-  res.render(`records`)
+res.render('records',{data:attendanceArray.teachers.find( ({ contact }) => contact === username), id:id ,students:attendanceArray.students , email:username})
    }catch {
 	if(attendanceArray== null){
 	 res.redirect('/index')}
@@ -538,7 +506,7 @@ try{
 
  
  //Coursework Post request 
-  app.post('/exercises/:id', async (req,res)=>{ 
+  app.post('/exercises', async (req,res)=>{ 
   var d = new Date(req.body.dateofbirth)
  var yea = d.getFullYear()
  var x= req.body.options
@@ -547,6 +515,8 @@ try{
 let attendanceArray
 var ob= req.body.id
    var id= ob.replace(/\s+/g, '')
+    var cont = req.body.userID
+    var username= cont.replace(/\s+/g, '')
    attendanceArray = await records.findById(id)
 var leng=  attendanceArray.students.filter((type)=>{return type.className === classn} ).filter(a => a.subjectsLearnt.some(u => u.subject==subjct))
 for(var i in leng){ 
@@ -564,7 +534,7 @@ attendanceArray.students.filter((type)=>{return type.className === classn} ).fil
 	 if (err) throw err;
 	 	
 	  })
-  res.render(`exercises`)
+res.render('records',{data:attendanceArray.teachers.find( ({ contact }) => contact === username), id:id ,students:attendanceArray.students , email:username})
    }catch {
 	if(attendanceArray== null){
 	 res.redirect('/index')}
@@ -573,7 +543,7 @@ attendanceArray.students.filter((type)=>{return type.className === classn} ).fil
  
  //Final Exams Post request
  
-   app.post('/finalExams/:id', async (req,res)=>{ 
+   app.post('/finalExams', async (req,res)=>{ 
  let attendanceArray
    var d = new Date(req.body.dateofbirth)
  var yea = d.getFullYear()
@@ -582,6 +552,8 @@ attendanceArray.students.filter((type)=>{return type.className === classn} ).fil
  var subjct= x.split(",")[1]
  var ob= req.body.id
    var id= ob.replace(/\s+/g, '')
+    var cont = req.body.userID
+    var username= cont.replace(/\s+/g, '')
    attendanceArray = await records.findById(id)
 	var leng=  attendanceArray.students.filter((type)=>{return type.className === classn} ).filter(a => a.subjectsLearnt.some(u => u.subject==subjct))
 
@@ -600,7 +572,7 @@ try{
 	 if (err) throw err;
 	 	
 	  })
-  res.render(`finalExams`)
+res.render('records',{data:attendanceArray.teachers.find( ({ contact }) => contact === username), id:id ,students:attendanceArray.students , email:username})
    }catch {
 	if(attendanceArray== null){
 	 res.redirect('/index')}
@@ -609,7 +581,7 @@ try{
  
  //Homework Post request
 
-app.post('/homeWork/:id', async (req,res)=>{ 
+app.post('/homeWork', async (req,res)=>{ 
  let attendanceArray
    var d = new Date(req.body.dateofbirth)
  var yea = d.getFullYear()
@@ -618,7 +590,8 @@ app.post('/homeWork/:id', async (req,res)=>{
  var subjct= x.split(",")[1]
  var ob= req.body.id
    var id= ob.replace(/\s+/g, '')
-   
+    var cont = req.body.userID
+    var username= cont.replace(/\s+/g, '')
 attendanceArray = await records.findById(id)
 	var leng=  attendanceArray.students.filter((type)=>{return type.className === classn} ).filter(a => a.subjectsLearnt.some(u => u.subject==subjct))
 console.log(req.body.boolean[i])
@@ -639,7 +612,7 @@ try{
 	 if (err) throw err;
 	 	
 	  })
-  res.render(`homeWork`)
+res.render('records',{data:attendanceArray.teachers.find( ({ contact }) => contact === username), id:id ,students:attendanceArray.students , email:username})
    }catch {
 	if(attendanceArray== null){
 	 res.redirect('/index')}
@@ -648,7 +621,7 @@ try{
  
  //Inclass tests Post request
 
-app.post('/tests/:id', async (req,res)=>{ 
+app.post('/tests', async (req,res)=>{ 
  let attendanceArray
   var d = new Date(req.body.dateofbirth)
  var yea = d.getFullYear()
@@ -657,7 +630,8 @@ app.post('/tests/:id', async (req,res)=>{
  var subjct= x.split(",")[1]
  var ob= req.body.id
    var id= ob.replace(/\s+/g, '')
-   
+    var cont = req.body.userID
+    var username= cont.replace(/\s+/g, '')
 attendanceArray = await records.findById(id)
 	var leng=  attendanceArray.students.filter((type)=>{return type.className === classn} ).filter(a => a.subjectsLearnt.some(u => u.subject==subjct))
 for(var i in leng){ 
@@ -674,7 +648,7 @@ try{
  await attendanceArray.save(function(err,data){
 	 if (err) throw err;
 	 	})
-  res.render('records')
+res.render('records',{data:attendanceArray.teachers.find( ({ contact }) => contact === username), id:id ,students:attendanceArray.students , email:username})
    }catch {
 	if(attendanceArray== null){
 	 res.redirect('/index')}
@@ -1137,8 +1111,12 @@ failureFlash:true
 
 app.post('/logout',async (req,res)=>{ 
 let attendanceArray
-  attendanceArray = await records.findById('5e9dd8411c9d440000e1a481')
- attendanceArray.teachers.find( ({ email }) => email === 't2@gmail.com').session= attendanceArray.teachers.find( ({ email }) => email === 't2@gmail.com').session =0
+var ob= req.body.id
+   var id= ob.replace(/\s+/g, '')
+    var cont = req.body.userID
+    var username= cont.replace(/\s+/g, '')
+  attendanceArray = await records.findById(id)
+ attendanceArray.teachers.find( ({ contact }) => contact === username).session= attendanceArray.teachers.find( ({ contact }) => contact === username).session =0
 try {
  await attendanceArray.save(function(err,data){
 	 if (err) throw err;
