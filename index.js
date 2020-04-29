@@ -17,6 +17,7 @@ const multerS3 = require( 'multer-s3' );
 const multer = require('multer');
 
 
+
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true, parameterLimit: 50000 }));
 app.set('view engine', 'ejs');
@@ -241,8 +242,8 @@ try {
 	console.log('Could not log user')
       }
 	},1);} else {
+           res.render('teachers', { errormessage: 'your message' });
                
-                res.send({'success':false , 'message':"No such user in our database!"}) ;
                  }});});
     
  
@@ -386,7 +387,7 @@ id => data.find(user => user.id === id) )
 app.get('/teachers', function (req,res){
  records.find({}, function (err,data){
   if (err) throw err;
-  res.render('teachers', {data:data})
+  res.render('teachers', {data:data, errormessage: ''})
  }) ;
  
     }); 
