@@ -113,7 +113,7 @@ input {
       <button  class="wMenu" onclick="openNav()" >Menu</button>
       <div class="top-menu">
         <form action ="/logout" method="POST" class="nav pull-right top-menu">
-          <input type="text" value="<%-id._id%> " name="id" style="display:none "/>
+          <input type="text" value=" <%-id%> " name="id" style="display:none "/>
         <input type="text" style="display:none " name="userID" value="<%= email%>" />
           <button type ="submit" class="logout" >Logout</button>
         </form>
@@ -135,6 +135,7 @@ input {
      <!--main content start-->
 	
     <section id="main-content" class="wrapper">
+    
      <select style="margin-left:20%;margin-top:1%;width:400px;height:50px;border-radius:0;background-color:rgba(6, 6, 33, 0.7);color: white;border-color:#5d02ff "  onchange="myFunction10(this)">
     <option value="0" >Select Option</option> 
   <option value="1" >Attendance</option>
@@ -148,7 +149,7 @@ input {
    
     <form id="reg" class="cmxform form-horizontal style-form" action = "/records" method="POST"  >
     <input type="text" style="display:none " name="userID" value="<%= email%>" />
-    <input type="text" value="<%-id._id%> " name="id" style="display:none "/>
+    <input type="text" value=" <%-id%> " name="id" style="display:none "/>
          <select style="margin-left:23.5%;margin-top:1%;width:300px;height:50px;border-radius:0;background-color:rgba(6, 6, 33, 0.7);color: white;border-color:#5d02ff "   onchange="myFunction(this)">
   <option value="1" >Class</option>
   <% var arra =  data.subjectsTaken %>
@@ -169,7 +170,7 @@ input {
 
     <form id="reg" class="cmxform form-horizontal style-form" action = "/homeWork" method="POST"  >
     <input type="text" style="display:none " name="userID" value="<%= email%>" />
-    <input type="text" value="<%-id._id%> " name="id" style="display:none "/>
+    <input type="text" value=" <%-id%> " name="id" style="display:none "/>
     <div id="flex">
     
  <select  style="margin-left:20%;margin-top:1%;width:190px;height:50px;border-radius:0;background-color:rgba(6, 6, 33, 0.7);color: white;border-color:#5d02ff " onchange="term2(this)" >
@@ -205,7 +206,7 @@ input {
    
     <form id="reg" class="cmxform form-horizontal style-form" action = "/tests" method="POST"  >
     <input type="text" style="display:none " name="userID" value="<%= email%>" />
-    <input type="text" value="<%-id._id%> " name="id" style="display:none "/>
+    <input type="text" value=" <%-id%> " name="id" style="display:none "/>
     <div id="flex">
      
  <select  style="margin-left:20%;margin-top:1%;width:190px;height:50px;border-radius:0;background-color:rgba(6, 6, 33, 0.7);color: white;border-color:#5d02ff " onchange="term3(this)" >
@@ -242,7 +243,7 @@ input {
    
     <form id="reg" class="cmxform form-horizontal style-form" action = "/finalExams" method="POST"  >
     <input type="text" style="display:none " name="userID" value="<%= email%>" />
-    <input type="text" value="<%-id._id%> " name="id" style="display:none "/>
+    <input type="text" value=" <%-id%> " name="id" style="display:none "/>
     <div id="flex">
     
  <select style="margin-left:20%;margin-top:1%;width:190px;height:50px;border-radius:0;background-color:rgba(6, 6, 33, 0.7);color: white;border-color:#5d02ff "  onchange="term4(this)" >
@@ -279,7 +280,7 @@ input {
   
     <form id="reg" class="cmxform form-horizontal style-form" action = "/exercises" method="POST"  >
     <input type="text" style="display:none " name="userID" value="<%= email%>" />
-    <input type="text" value="<%-id._id%> " name="id" style="display:none "/>
+    <input type="text" value=" <%-id%> " name="id" style="display:none "/>
     <div id="flex">
    
  <select style="margin-left:20%;margin-top:1%;width:190px;height:50px;border-radius:0;background-color:rgba(6, 6, 33, 0.7);color: white;border-color:#5d02ff "  onchange="term5(this)" >

@@ -227,7 +227,7 @@ app.post('/teachers',function (req,res){
           var result = data.filter(a => a.teachers.some(u => u.email==username && u.password==password));
           var redID = result[0]._id
           
-           res.render('records',{data:result.filter(a => a.teachers.some(u => u.email==username ))[0].teachers.find( ({ email }) => email === username),id:result.filter(a => a.teachers.some(u => u.email==username))[0] ,students: result.filter(a => a.teachers.some(u => u.email==username ))[0].students , email:result.filter(a => a.teachers.some(u => u.email==username ))[0].teachers.find( ({ email }) => email === username).contact}) ;
+           res.render('records',{data:result.filter(a => a.teachers.some(u => u.email==username ))[0].teachers.find( ({ email }) => email === username),id:result.filter(a => a.teachers.some(u => u.email==username))[0]._id ,students: result.filter(a => a.teachers.some(u => u.email==username ))[0].students , email:result.filter(a => a.teachers.some(u => u.email==username ))[0].teachers.find( ({ email }) => email === username).contact}) ;
 setTimeout(async function () {       
 let attendanceArray
   attendanceArray = await records.findById(redID)
