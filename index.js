@@ -228,7 +228,7 @@ app.post('/teachers',function (req,res){
           var result = data.filter(a => a.teachers.some(u => u.email==username && u.password==password));
           var redID = result[0]._id
           
-           res.render('records',{data:result.filter(a => a.teachers.some(u => u.email==username ))[0].teachers.find( ({ email }) => email === username),id:result.filter(a => a.teachers.some(u => u.email==username))[0]._id ,students: result.filter(a => a.teachers.some(u => u.email==username ))[0].students , email:result.filter(a => a.teachers.some(u => u.email==username ))[0].teachers.find( ({ email }) => email === username).contact}) ;
+           res.render('records',{data:result.filter(a => a.teachers.some(u => u.email==username ))[0].teachers.find( ({ email }) => email === username),id:result.filter(a => a.teachers.some(u => u.email==username))[0]._id ,students: result.filter(a => a.teachers.some(u => u.email==username ))[0].students , email:result.filter(a => a.teachers.some(u => u.email==username ))[0].teachers.find( ({ email }) => email === username).contact, popup:''}) ;
 setTimeout(async function () {       
 let attendanceArray
   attendanceArray = await records.findById(redID)
@@ -304,25 +304,25 @@ app.get('/allTeachers/:id',checkAuthenticated,function (req,res){
     app.get('/textSmS/:id',checkAuthenticated,function (req,res){
  records.find({_id:req.params.id}, function (err,data){
   if (err) throw err;
-   res.render('textSmS.ejs',{data:data, school:req.params.id }) ;
+   res.render('textSmS.ejs',{data:data[0], school:req.params.id, popup:'' }) ;
     });});
     
     app.get('/addStudent/:id',checkAuthenticated,function (req,res){
  records.find({_id:req.params.id}, function (err,data){
   if (err) throw err;
-   res.render('addStudent.ejs',{data:data, school:req.params.id }) ;
+   res.render('addStudent.ejs',{data:data[0], school:req.params.id, popup:'' }) ;
     });});
     
     app.get('/addTeachers/:id',checkAuthenticated,function (req,res){
  records.find({_id:req.params.id}, function (err,data){
   if (err) throw err;
-   res.render('addTeachers.ejs',{data:data, school:req.params.id }) ;
+   res.render('addTeachers.ejs',{data:data[0], school:req.params.id, popup:'' }) ;
     });});
     
     app.get('/addFees/:id',checkAuthenticated,function (req,res){
  records.find({_id:req.params.id}, function (err,data){
   if (err) throw err;
-   res.render('addFees.ejs',{data:data, school:req.params.id }) ;
+   res.render('addFees.ejs',{data:data[0], school:req.params.id, popup:'' }) ;
     });});
     
     app.get('/feesCollection/:id',checkAuthenticated,function (req,res){
@@ -334,7 +334,7 @@ app.get('/allTeachers/:id',checkAuthenticated,function (req,res){
 app.get('/events/:id',checkAuthenticated,function (req,res){
  records.find({_id:req.params.id}, function (err,data){
   if (err) throw err;
-   res.render('events',{data:data, school:req.params.id}) ;
+   res.render('events',{data:data[0], school:req.params.id, popup:'' }) ;
     });});
         
 app.get('/home',checkAuthenticated,function (req,res){
@@ -354,14 +354,7 @@ res.render('home',{data:data , id:req.user.id, daily:attCount }) ;
     });});
     
         
-app.get('/records/:id',function (req,res){
-  records.find({}, function (err,data){
-  if (err) throw err;
-var user = data.filter(a => a.teachers.some(u => u.email==req.params.id ))[0].teachers.find( ({ email }) => email === req.params.id).session
-if(user == 1 ){
-  	res.render('exercises', {data:data.filter(a => a.teachers.some(u => u.email==req.params.id ))[0].teachers.find( ({ email }) => email === req.params.id),id:data.filter(a => a.teachers.some(u => u.email==req.params.id))[0] , students: data.filter(a => a.teachers.some(u => u.email==req.params.id ))[0].students, email:req.params.id  })  } 
-  	else{res.redirect('/teachers') }
-   });});
+
     
   app.get('/sms',function (req,res){
  records.find({}, function (err,data){
@@ -409,7 +402,7 @@ try{
  await newsArray.save(function(err,data){
 	 if (err) throw err;
 	  })
-  res.redirect(`/textSmS/${req.params.id}`)
+  res.render(`textSmS`,{data:newsArray, school:req.params.id, popup:'done' })
    }catch {
 	if( newsArray== null){
 	 res.redirect('/index')}
@@ -432,7 +425,7 @@ try{
  await upcomingSchoolEventsArray.save(function(err,data){
 	 if (err) throw err;
 	  })
-  res.redirect(`/events/${req.params.id}`)
+  res.render(`events`,{data:upcomingSchoolEventsArray, school:req.params.id, popup:'done' })
    }catch {
 	if(upcomingSchoolEventsArray== null){
 	 res.redirect('/index')}
@@ -464,7 +457,7 @@ try{
 	 if (err) throw err;
 	 	
 	  })
-  res.redirect(`/addFees/${req.params.id}`)
+  res.render(`addFees`,{data:upcomingSchoolEventsArray, school:req.params.id, popup:'done' })
    }catch {
 	if(upcomingSchoolEventsArray== null){
 	 res.redirect('/index')}
@@ -497,7 +490,7 @@ try{
 	 if (err) throw err;
 	 	
 	  })
-res.render('records',{data:attendanceArray.teachers.find( ({ contact }) => contact === username), id:id ,students:attendanceArray.students , email:username})
+res.render('records',{data:attendanceArray.teachers.find( ({ contact }) => contact === username), id:id ,students:attendanceArray.students , email:username,popup:'done'})
    }catch {
 	if(attendanceArray== null){
 	 res.redirect('/index')}
@@ -535,7 +528,7 @@ attendanceArray.students.filter((type)=>{return type.className === classn} ).fil
 	 if (err) throw err;
 	 	
 	  })
-res.render('records',{data:attendanceArray.teachers.find( ({ contact }) => contact === username), id:id ,students:attendanceArray.students , email:username})
+res.render('records',{data:attendanceArray.teachers.find( ({ contact }) => contact === username), id:id ,students:attendanceArray.students , email:username,popup:'done'})
    }catch {
 	if(attendanceArray== null){
 	 res.redirect('/index')}
@@ -573,7 +566,7 @@ try{
 	 if (err) throw err;
 	 	
 	  })
-res.render('records',{data:attendanceArray.teachers.find( ({ contact }) => contact === username), id:id ,students:attendanceArray.students , email:username})
+res.render('records',{data:attendanceArray.teachers.find( ({ contact }) => contact === username), id:id ,students:attendanceArray.students , email:username,popup:'done'})
    }catch {
 	if(attendanceArray== null){
 	 res.redirect('/index')}
@@ -613,7 +606,7 @@ try{
 	 if (err) throw err;
 	 	
 	  })
-res.render('records',{data:attendanceArray.teachers.find( ({ contact }) => contact === username), id:id ,students:attendanceArray.students , email:username})
+res.render('records',{data:attendanceArray.teachers.find( ({ contact }) => contact === username), id:id ,students:attendanceArray.students , email:username,popup:'done'})
    }catch {
 	if(attendanceArray== null){
 	 res.redirect('/index')}
@@ -649,7 +642,7 @@ try{
  await attendanceArray.save(function(err,data){
 	 if (err) throw err;
 	 	})
-res.render('records',{data:attendanceArray.teachers.find( ({ contact }) => contact === username), id:id ,students:attendanceArray.students , email:username})
+res.render('records',{data:attendanceArray.teachers.find( ({ contact }) => contact === username), id:id ,students:attendanceArray.students , email:username,popup:'done'})
    }catch {
 	if(attendanceArray== null){
 	 res.redirect('/index')}
@@ -812,7 +805,7 @@ try{
  await studentsArray.save(function(err,data){
 	 if (err) throw err;
 	  })
-  res.redirect(`/allStudents/${req.params.id}`)
+  res.render(`addStudent`,{data:studentsArray, school:req.params.id, popup:'done' })
    }catch {
 	if(studentsArray== null){
 	 res.redirect('/index')}
@@ -934,7 +927,7 @@ try{
  await teachersArray.save(function(err,data){
 	 if (err) throw err;
 	  })
-  res.redirect(`/allTeachers/${req.params.id}`)
+  res.render(`addTeachers`,{data:teachersArray, school:req.params.id, popup:'done' })
    }catch {
 	if(teachersArray== null){
 	 res.redirect('/index')}

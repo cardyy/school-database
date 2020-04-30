@@ -39,7 +39,52 @@
       <script defer src="/javascripts/fileUpload.js"></script>
   
 </head>
+<style>
+	.invisible {
+display: none;
+visibility: hidden;
+   }
+   
+   /* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 25%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+ margin-top: 15%;
+ margin-left: 45%;
+}
 
+
+/* Modal Content */
+.modal-content {
+ background: #FFFFFF;
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  margin: auto;
+  padding: 20px;
+  width: 100%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+</style>
 <body>
     <section id="container">
     <!-- **********************************************************************************************************************************************************
@@ -74,8 +119,8 @@
       <div id="sidebar" class="nav-collapse ">
         <!-- sidebar menu start-->
         <ul class="sidebar-menu" id="nav-accordion">
-          <p class="centered"><img src="https://nebularimages.s3.eu-central-1.amazonaws.com/<%=data[0].image%>" class="img-circle" width="80"></p>
-          <h5 class="centered"> <%=data[0].name%></h5>
+          <p class="centered"><img src="https://nebularimages.s3.eu-central-1.amazonaws.com/<%=data.image%>" class="img-circle" width="80"></p>
+          <h5 class="centered"> <%=data.name%></h5>
           <li class="mt">
             <a href="/home">
               <i class="fa fa-home"></i>
@@ -145,7 +190,16 @@
         *********************************************************************************************************************************************************** -->
     <!--main content start-->
      <section id="main-content">
-     
+     <!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <p>The payment has been recorded!</p>
+  </div>
+<div id='status' class='invisible'><%= popup %></div>
+</div>
       
          <div class="row mt">
           <div class="col-lg-12">
@@ -163,7 +217,7 @@
                         </div>
                           <div class="form-group ">
                                      <label class="control-label col-lg-2">Fees Type</label>
- <% var fees =   data[0].fees %>
+ <% var fees =   data.fees %>
                 <% var fiz = fees.map((fees )=>{return fees.type1}) %>
                
              
@@ -363,6 +417,35 @@ function fixStepIndicator(n) {
     </tr>
     {% } %}
   </script>
+  <script>
+
+// Get the modal
+var modal = document.getElementById("myModal");
+
+
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+      if(document.getElementById('status').innerHTML != '')
+      {
+            modal.style.display = "block";
+               
+      }
+      // When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+	window.location="/addFees/<%=school%>";
+  
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+   window.location="/addFees/<%=school%>";
+  }
+}
+
+</script>
 <!-- js placed at the end of the document so the pages load faster -->
    <!-- js placed at the end of the document so the pages load faster -->
   <script>/*! jQuery v1.12.4 | (c) jQuery Foundation | jquery.org/license */

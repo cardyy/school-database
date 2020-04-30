@@ -40,7 +40,52 @@
       <script defer src="/javascripts/fileUpload.js"></script>
   
 </head>
+<style>
+	.invisible {
+display: none;
+visibility: hidden;
+   }
+   
+   /* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 25%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+ margin-top: 10%;
+ margin-left: 45%;
+}
 
+
+/* Modal Content */
+.modal-content {
+ background: #FFFFFF;
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  margin: auto;
+  padding: 20px;
+  width: 100%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+</style>
 <body>
     <section id="container">
     <!-- **********************************************************************************************************************************************************
@@ -75,8 +120,8 @@
       <div id="sidebar" class="nav-collapse ">
         <!-- sidebar menu start-->
         <ul class="sidebar-menu" id="nav-accordion">
-          <p class="centered"><a href="profile"><img src="https://nebularimages.s3.eu-central-1.amazonaws.com/<%=data[0].image%>" class="img-circle" width="80"></a></p>
-          <h5 class="centered"> <%=data[0].name%></h5>
+          <p class="centered"><a href="profile"><img src="https://nebularimages.s3.eu-central-1.amazonaws.com/<%=data.image%>" class="img-circle" width="80"></a></p>
+          <h5 class="centered"> <%=data.name%></h5>
           <li class="mt">
             <a href="/home">
               <i class="fa fa-home"></i>
@@ -147,7 +192,16 @@
     <!--main content start-->
      <section id="main-content">
      
-      
+      <!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <p>Student has been added to your school`s database!</p>
+  </div>
+<div id='status' class='invisible'><%= popup %></div>
+</div>
          <div class="row mt">
           <div class="col-lg-12">
           
@@ -209,7 +263,7 @@ On the Student's Parents Input-Area, write the first parent's name and press ent
 <label  class="control-label col-lg-2">Student's Stream</label>
 <select class="form-control "  onchange="myFunction2(this)">
   <option value="1" >Choose</option>
-  <% var streams =  data[0].streams %>
+  <% var streams =  data.streams %>
   <% for(s=0;s<streams.length;s++){ %>
   	<option ><%- streams[s] %></option>
   	
@@ -220,7 +274,7 @@ On the Student's Parents Input-Area, write the first parent's name and press ent
 <label  class="control-label col-lg-2">Student's Class</label>
 <select class="form-control "  onchange="myFunction3(this)">
   <option value="1" >Choose</option>
-  <% var classesName =  data[0].classesName %>
+  <% var classesName =  data.classesName %>
   <% for(c=0;c<classesName.length;c++){ %>
   	<option ><%- classesName[c] %></option>
   	
@@ -230,7 +284,7 @@ On the Student's Parents Input-Area, write the first parent's name and press ent
  <label  class="control-label col-lg-2">Student's House</label>
 <select class="form-control "  onchange="myFunction4(this)">
   <option value="1" >Choose</option>
- <% var houses =  data[0].houses %>
+ <% var houses =  data.houses %>
   <% for(h=0;h<houses.length;h++){ %>
   	<option ><%- houses[h] %></option>
   	
@@ -275,8 +329,8 @@ On the Student's Parents Input-Area, write the first parent's name and press ent
                   </div>
                  
                   <div class="form-group " >
-                    <% var clubs =  data[0].clubs %>
-                    <% var sports =  data[0].sports %>
+                    <% var clubs =  data.clubs %>
+                    <% var sports =  data.sports %>
 <label  class="control-label col-lg-2">Sports</label>
 <% for(sp=0;sp<sports.length;sp++){ %> <input   type="checkbox" name="sports" value="<%- sports[sp] %>"><span class = 'ltss' > <%- sports[sp] %></span><% }%><br/><br/><br/>
   	
@@ -290,7 +344,7 @@ On the Student's Parents Input-Area, write the first parent's name and press ent
                   
                   
                  <div class="form-group ">
-                <% var fees =   data[0].fees %>
+                <% var fees =   data.fees %>
                 <% var fiz = fees.map((fees )=>{return fees.type1}) %>
                <p>  Data is enterd in the order : [<%- fiz%>] </p>
                    <marquee width="100%" direction="left" height="40px" style="color:white;font-size:13px" >
@@ -533,7 +587,7 @@ var amount = document.getElementById("amount");
            var ot8 = ""
            var ot10 = ""
            
-var fees =  [<%- data[0].fees %>]
+var fees =  [<%- data.fees %>]
 
 var fiz = fees.map((fees )=>{return fees.type1}) 
   var actfrr = fees.map((fees )=>{return fees.amount})       
@@ -564,14 +618,35 @@ document.querySelector('.t10').innerHTML =  ot10 }
 
 
 </script>
+<script>
+
+// Get the modal
+var modal = document.getElementById("myModal");
 
 
-    
 
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+      if(document.getElementById('status').innerHTML != '')
+      {
+            modal.style.display = "block";
+               
+      }
+      // When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+	window.location="/addStudent/<%=school%>";
   
- 
-  
-  
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+   window.location="/addStudent/<%=school%>";
+  }
+}
+
+</script>
  <script id="template-upload" type="text/x-tmpl">
     {% for (var i=0, file; file=o.files[i]; i++) { %}
     <tr class="template-upload fade">

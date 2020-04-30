@@ -89,6 +89,50 @@ input {
   left: 27%;
     display:none;	
 }
+.invisible {
+display: none;
+visibility: hidden;
+   }
+   
+   /* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 25%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+ margin-top: 10%;
+ margin-left: 45%;
+}
+
+
+/* Modal Content */
+.modal-content {
+ background: #FFFFFF;
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  margin: auto;
+  padding: 20px;
+  width: 100%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
 </style>
   
 </head>
@@ -135,7 +179,16 @@ input {
      <!--main content start-->
 	
     <section id="main-content" class="wrapper">
-    
+    <!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <p>Update successful!</p>
+  </div>
+<div id='status' class='invisible'><%= popup %></div>
+</div>
      <select style="margin-left:20%;margin-top:1%;width:400px;height:50px;border-radius:0;background-color:rgba(6, 6, 33, 0.7);color: white;border-color:#5d02ff "  onchange="myFunction10(this)">
     <option value="0" >Select Option</option> 
   <option value="1" >Attendance</option>
@@ -567,7 +620,35 @@ console.log(output2)
 }
 
 </script>
+<script>
 
+// Get the modal
+var modal = document.getElementById("myModal");
+
+
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+      if(document.getElementById('status').innerHTML != '')
+      {
+            modal.style.display = "block";
+               
+      }
+      // When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+	window.location="/teachers";
+  
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+   window.location="/teachers";
+  }
+}
+
+</script>
   <script src="/lib/jquery/jquery.min.js"></script>
 
   <script src="/lib/bootstrap/js/bootstrap.min.js"></script>
