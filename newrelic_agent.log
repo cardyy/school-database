@@ -1,0 +1,4 @@
+{"v":0,"level":30,"name":"newrelic","hostname":"DESKTOP-0OIUVT1","pid":4904,"time":"2020-05-01T13:19:01.793Z","msg":"Using New Relic for Node.js. Agent version: 6.6.0; Node version: v13.9.0."}
+{"v":0,"level":30,"name":"newrelic","hostname":"DESKTOP-0OIUVT1","pid":4904,"time":"2020-05-01T13:19:01.828Z","msg":"Module not enabled in configuration; not starting."}
+{"v":0,"level":30,"name":"newrelic","hostname":"DESKTOP-0OIUVT1","pid":7900,"time":"2020-05-01T13:19:12.358Z","msg":"Using New Relic for Node.js. Agent version: 6.6.0; Node version: v13.9.0."}
+{"v":0,"level":30,"name":"newrelic","hostname":"DESKTOP-0OIUVT1","pid":7900,"time":"2020-05-01T13:19:12.363Z","msg":"Module not enabled in configuration; not starting."}
