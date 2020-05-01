@@ -160,6 +160,20 @@ border-color:#5d02ff
     background-color: rgba(6, 6, 33, 0.7);
     color: white;
     border-color: #5d02ff;
+    
+}
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 100px;
+    left: -40px;
+    top: 10px;
+    width: 45%;
+    height: 100%;
+    overflow: auto;
+    margin-top: 10%;
+    margin-left: 45%;
 }
 .selector2 {
     margin-left: 15%;
