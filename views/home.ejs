@@ -51,6 +51,7 @@
         <form action ="/logout?_method=DELETE" method="POST" class="nav pull-right top-menu">
           <button type ="submit" class="logout" >Logout</button>
         </form>
+        <form  name="autoUpdate" action ="/update" method="POST"></form>
       </div> 
     </header>
     <!--header end-->
@@ -484,7 +485,12 @@
   	
 
 function bodyLoad(){
+	var currentYear = <%=currentYear%>
+	var schoolYear = <%=data[0].currentYear%>
 
+if(currentYear !== schoolYear ){
+	document.autoUpdate.submit();
+}
     
  container.classList.replace('red-panel', 'red-panel1')
 	container2.classList.replace('darkblue-panel', 'darkblue-panel1')

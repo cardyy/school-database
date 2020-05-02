@@ -16,7 +16,8 @@ const {Paynow}  = require("paynow");
 const aws = require( 'aws-sdk' );
 const multerS3 = require( 'multer-s3' );
 const multer = require('multer');
-
+const d = new Date();
+const daYear = d.getFullYear();
 
 
 app.use(bodyParser.json({ limit: '50mb' }));
@@ -74,6 +75,7 @@ const appSchema = new mongoose.Schema([{
  fees:[{_id:String, type1:String, amount: Number}],
  address:String,
 image:String,
+currentYear:Number,
 contact:String,
 email:String,
 password:String,
@@ -351,7 +353,7 @@ var attCount = 0
 for( i=0;i<wd.length;i++ ){ 
  var sbjL = wd[i].subjectsLearnt.map((item)=>{return item.attendance}).reduce(function(a,b) { return a.concat(b);  }).filter(function(obj) { return obj.attended ==='true' && obj.date == newdate})
  if(sbjL.some((q)=>{return q.date == newdate}) ){attCount += 1}}
-res.render('home',{data:data , id:req.user.id, daily:attCount }) ;
+res.render('home',{data:data , id:req.user.id, daily:attCount , currentYear:daYear}) ;
     });});
     
         
@@ -368,6 +370,7 @@ app.get('/',checkNotAuthenticated, function (req,res){
  records.find({}, function (err,data){
   if (err) throw err;
   res.render('index', {data:data})
+  
   initializePassport(
 passport,
 email => data.find(user => user.email === email),
@@ -752,7 +755,7 @@ var mother = req.body.mom
         var teachers = studentsArray.teachers
          var nwe=""
          var twe=""
-          var claNam=req.body.streams+req.body.classesName
+          var claNam = req.body.classesName
           for (t=0;t<teachers.length;t++){
           	
           	for(var tt2 in  teachers[t].subjectsTaken){
@@ -1045,6 +1048,7 @@ image:imageName,
 classesName:req.body.test,
 streams:req.body.streams,
 fees:objectStringArray ,
+currentYear:daYear,
 address:req.body.address,
 contact:req.body.contact,
 email:req.body.email,
@@ -1121,7 +1125,22 @@ try {
    }catch {
 	console.log('not done')
       }
- })	     
+ })	
+ 
+ 
+app.post('/update',async (req,res)=>{  
+ let attendanceArray
+  attendanceArray = await records.findById('5e9dd8411c9d440000e1a481')
+   attendanceArray.currentYear=attendanceArray.currentYear=daYear
+    try{
+     await attendanceArray.save(function(err,data){
+	  if (err) throw err;
+	 	})
+	  res.redirect('/home')
+	     console.log('done')
+          }catch {console.log('hameno')}
+   })	
+     
 
 app.delete('/logout', (req,res)=>{
 	req.logOut()

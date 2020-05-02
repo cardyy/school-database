@@ -1,0 +1,11 @@
+var leng=  attendanceArray.students
+ var  newClass = 0
+  for(i=0;i<leng.length;i++){
+   var allClasses = attendanceArray.students[i].className
+    var classesArray = attendanceArray.classesName
+     for(j=0;j<classesArray.length;j++){
+	  if (allClasses == classesArray[j]){newClass = classesArray[j+1]}}
+	   attendanceArray.students[i].className= attendanceArray.students[i].className.replace(allClasses, newClass)}
+
+
+	
