@@ -125,6 +125,7 @@ students:[{
     contacts: String,
     age: String,
     stream: String,
+    symbol:String,
     className: String,
     payments: [{
     	_id:String,
@@ -139,6 +140,7 @@ students:[{
     	_id:String,
             subject: String,
             teacher: String,
+            className:String,
             courseWork:[{
             	_id:String,
             	term:Number,
@@ -755,7 +757,7 @@ var mother = req.body.mom
         var teachers = studentsArray.teachers
          var nwe=""
          var twe=""
-          var claNam = req.body.classesName
+          var claNam=req.body.streams+req.body.classesName
           for (t=0;t<teachers.length;t++){
           	
           	for(var tt2 in  teachers[t].subjectsTaken){
@@ -774,7 +776,7 @@ var mother = req.body.mom
     	         
     	        var subjL= ""
     	          for (aa=0;aa< newww .length;aa++){
-	subjL += `{subject:"${newww [aa]}",teacher:"${newxx[aa]}",courseWork:[{term:0,year:0,date:0,Topic:0,Mark:0}],homeWork:[{term:0,year:0,date:0,Topic:0,Mark:0}],inClassTest:[{term:0,year:0,date:0,Topic:0,Mark:0}],finalTest:[{term:0,year:0,date:0,Mark:0}],attendance:[{attended:0,date:0}]},`}
+	subjL += `{subject:"${newww [aa]}",teacher:"${newxx[aa]}",className:"${claNam}",courseWork:[{term:0,year:0,date:0,Topic:0,Mark:0}],homeWork:[{term:0,year:0,date:0,Topic:0,Mark:0}],inClassTest:[{term:0,year:0,date:0,Topic:0,Mark:0}],finalTest:[{term:0,year:0,date:0,Mark:0}],attendance:[{attended:0,date:0}]},`}
 	                  var aray = subjL 
 	                   var nwy = aray.length -1 
                         var wch = aray.slice(0, nwy) ;
@@ -796,6 +798,7 @@ var mother = req.body.mom
 	parentName:req.body.parents,
 	gender:req.body.gender,
 	stream:req.body.streams,
+	symbol:req.body.classesName,
 	className:claNam,
     house:req.body.house,
     newStudent:req.body.newstudent,
@@ -1131,6 +1134,26 @@ try {
 app.post('/update',async (req,res)=>{  
  let attendanceArray
   attendanceArray = await records.findById('5e9dd8411c9d440000e1a481')
+var leng=  attendanceArray.students
+ var  newStream = 0
+  var newClass = 0
+   var nwe=""
+   var twe=""
+  for(i=0;i<leng.length;i++){
+   var allClasses = attendanceArray.students[i].stream
+    var classesArray = attendanceArray.streams
+     var symbol = attendanceArray.students[i].symbol
+      var classN = attendanceArray.students[i].className
+       var teachers = attendanceArray.teachers
+     for(j=0;j<classesArray.length;j++){
+	  if (allClasses == classesArray[j]){
+	  	newStream = classesArray[j+1]
+	  	newClass = classesArray[j+1]+symbol
+	  	}}
+	   attendanceArray.students[i].stream= attendanceArray.students[i].stream.replace(allClasses, newStream)
+	   attendanceArray.students[i].className= attendanceArray.students[i].className.replace(classN, newClass)
+	 
+	     }
    attendanceArray.currentYear=attendanceArray.currentYear=daYear
     try{
      await attendanceArray.save(function(err,data){
