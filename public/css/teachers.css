@@ -7,9 +7,18 @@
   
 
 }
-#customers td, #customers th,#customers2 td, #customers2 th,#customers3 td, #customers3 th,#customers4 td, #customers4 th, #customers5 td, #customers5 th{
+#customers6{
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 70%;
+ margin-top: 0%;
+ margin-left:15%;
+  
+
+}
+#customers td, #customers th,#customers2 td, #customers2 th,#customers3 td, #customers3 th,#customers4 td, #customers4 th, #customers5 td, #customers5 th, #customers6 td, #customers6 th{
     padding: 15px;
-    text-align: left;
+    text-align: center;
     vertical-align: middle;
     font-weight: 300;
     font-size: 12px;
@@ -20,13 +29,15 @@
 
 }
 
-#customers th,#customers2 th,#customers3 th,#customers4 th,#customers5 th {
+
+#customers th,#customers2 th,#customers3 th,#customers4 th,#customers5 th,#customers6 th {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: left;
   background-color: rgba(6, 6, 33, 0.7);
   color: white;
 }
+
 #btn,#btn2,#btn3,#btn4,#btn5{
 	color:#c7c7c7;
    box-shadow: 1px 1px #333;
@@ -34,6 +45,13 @@
 	width:140px;
 	margin-left:29% ;
 	display: none;
+}
+.btn{
+color:#c7c7c7;
+   box-shadow: 1px 1px #333;
+    background: rgba(6, 6, 33, 1);
+	width:140px;
+	margin-left:0% ;	
 }
 
 [type="date"] {

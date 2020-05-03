@@ -136,6 +136,7 @@ box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
             <ul class="sub">
               <li><a href="/allStudents/<%=school%>">All Students</a></li>
               <li><a href="/addStudent/<%=school%>">Add Student</a></li>
+               <li><a href="/classes/<%=school%>">Form3 Class Allocation</a></li>
 			 
               </ul>
           </li>
@@ -210,7 +211,7 @@ box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
              
              
              
-                <form id="reg" class="cmxform form-horizontal style-form" action = "/addStudent/<%=school%>" method="POST"  enctype="multipart/form-data" >
+                <form id="reg" class="cmxform form-horizontal style-form" name="addStudent" action = "/addStudent/<%=school%>" method="POST"  enctype="multipart/form-data" >
                 <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
         <div class="form-group ">
                   <div class="col-lg-10">
@@ -359,7 +360,7 @@ On the Input-Areas below,eg..for 'Payment Date',  first write the date <%- fiz[0
                          <textarea id = "dayte"  class="txtA text-area"  rows="10" cols="30" onkeyup="textAreaAdjust(this)" style="overflow:hidden" placeholder="Payment Date, eg...02-20-2019"  ></textarea  > <br>
     <span class = "t1" ></span>
     
-   
+ 
             
 <textarea id = "amount" class="txtA text-area" onKeyPress="validate(event)" onPaste="validatepaste(event)" rows="10" cols="30" onkeyup="textAreaAdjust(this)" style="overflow:hidden" placeholder="Amount Paid, eg...100"  ></textarea> <br>
     <span class = "t3" ></span>
@@ -373,9 +374,9 @@ On the Input-Areas below,eg..for 'Payment Date',  first write the date <%- fiz[0
     <div class="form-group ">
                     <label  class="control-label col-lg-2">Picture</label>
                     <div class="col-lg-10">
-                       <input name="myImage" type="file" required>
+                       <input name="myImage" id="pic" type="file" required>
                         <div class="col-lg-offset-2 col-lg-10  ">
-                      <button class="btn btn-theme" type="submit" onclick="load()" >Save</button>
+                      <button class="btn btn-theme" type="button" onclick="load()" >Save</button>
                       
                     </div>
                   </div>
@@ -559,15 +560,15 @@ document.querySelector('.newstudent').innerHTML =  output5 }  ;
     }, 1);
 }
       
-     function load(){
-     	
-var parents = document.getElementById("parents");
+ function load(){
+ 	var pic = document.getElementById("pic");
+     	var parents = document.getElementById("parents");
       var dayte = document.getElementById("dayte");
 var amount = document.getElementById("amount");
      var kontact = document.getElementById("kontact");
      var paidBy = document.getElementById("paidBy");
    
-        
+ if(dayte.value !== '' && amount.value !== '' && kontact.value !== '' && paidBy.value !== '' && pic.value !== '' ){
        
         var lines = parents.value.replace(/\r\n/g,"\n").split("\n");
        
@@ -608,9 +609,15 @@ document.querySelector('.t9').innerHTML =  ot9 }
 
 for(af=0;af<actfrr.length;af++){ot10 += `<input  type="text"  name="af" value = "${actfrr[af]}" style = "display:none;"/>`
 document.querySelector('.t10').innerHTML =  ot10 } 
- 
 
- 
+ document.addStudent.submit();
+}
+else if(dayte.value == '' || amount.value == '' || kontact.value == '' || paidBy.value == ''){window.alert("Fees payment should not be empt, you need to enter atleast one payment to register student to the database!");
+	}
+
+ if(pic.value == ''){
+ 	window.alert("You need to upload a profile picture to continue!");
+ }
 
 
 }

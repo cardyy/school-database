@@ -136,6 +136,7 @@ box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
             <ul class="sub">
               <li><a href="/allStudents/<%=school%>">All Students</a></li>
               <li><a href="/addStudent/<%=school%>">Add Student</a></li>
+               <li><a href="/classes/<%=school%>">Form3 Class Allocation</a></li>
 			 
               </ul>
           </li>
@@ -208,7 +209,7 @@ box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
             <div class="form-panel">
               <div class="form">
              
-                <form id="reg" class="cmxform form-horizontal style-form" action = "/addTeachers/<%=school%>" method="POST"  enctype="multipart/form-data" >
+                <form id="reg" class="cmxform form-horizontal style-form" name="addTeacher" action = "/addTeachers/<%=school%>" method="POST"  enctype="multipart/form-data" >
                 <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
         <div class="form-group ">
                   <div class="col-lg-10">
@@ -285,16 +286,16 @@ On the Input-Areas below,eg..for 'Duty', first write the first duty allocated to
 On the Input-Area below,eg..for 'Class Name',write the first class the teacher takes then press enter to move to the next line inside the same Input-Area to write second class the teacher takes.NB The first Class Name information should coincide with first Subject information and second Class Name information with second Subject information etc.
 </marquee>
                      <label  class="control-label col-lg-2">Subjects & Classes</label><br/>
-                   <textarea id = "area10" class="text-area"  rows="10" cols="30" onkeyup="textAreaAdjust(this)" style="overflow:hidden" placeholder="Class Name..eg 4A" ></textarea> <br><span class = "test10" ></span>
+                   <textarea id = "area10" class="text-area"  rows="10" cols="30" onkeyup="textAreaAdjust(this)" style="overflow:hidden" placeholder="Class Name..eg Form4A" ></textarea> <br><span class = "test10" ></span>
  <textarea id = "area9" class="text-area"  rows="10" cols="30" onkeyup="textAreaAdjust(this)" style="overflow:hidden" placeholder="Subject eg..Mathematics" ></textarea> <br><span class = "test9" ></span>
    </div>
  
     <div class="form-group ">
                     <label  class="control-label col-lg-2">Picture</label>
                     <div class="col-lg-10">
-                      <input name="myImage" type="file" required>
+                      <input name="myImage" id="pic" type="file" required>
                         <div class="col-lg-offset-2 col-lg-10  ">
-                      <button class="btn btn-theme" type="submit" onclick="load()">Save</button>
+                      <button class="btn btn-theme" type="button" onclick="load()">Save</button>
                       
                     </div>
                   </div>
@@ -472,7 +473,8 @@ function validate(e) {
     }, 1);
 }
       
-     function load(){
+function load(){
+	var pic = document.getElementById("pic");
      var duty = document.getElementById("duty");
       var time = document.getElementById("time");
         var date = document.getElementById("date");
@@ -480,6 +482,9 @@ function validate(e) {
         var club = document.getElementById("area11");
         var area10 = document.getElementById("area10"); 
         var area9 = document.getElementById("area9");
+        
+        if(area10.value !== '' && area9.value !== '' && pic.value !== '' ){
+        
          var lines8  = area10.value.replace(/\r\n/g,"\n").split("\n")
           var lines9  = area9.value.replace(/\r\n/g,"\n").split("\n")
          var newDuty = duty.value.replace(/\r\n/g,"\n").split("\n");
@@ -514,16 +519,15 @@ for(i4=0;i4<sps.length;i4++){output4 += `<input  type="text"  name="sports" valu
 document.querySelector('.test8').innerHTML =  output4 }
 for(i5=0;i5<cbs.length;i5++){output5 += `<input  type="text"  name="clubs" value = "${cbs[i5]}" style = "display:none;"/>`
 document.querySelector('.test11').innerHTML =  output5 }
+document.addTeacher.submit();
 
-
-console.log(output10, output9)
-
- 
- 
- 
-
-
+} else if(area10.value == '' || area9.value == ''){
+	window.alert("You need to enter at least one class the teacher takes, eg Form1A - Mathematics!");
 }
+if(pic.value == ''){
+	window.alert("You need to upload a profile picture to continue!");
+}
+ }
 
 
 

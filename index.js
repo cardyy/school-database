@@ -126,7 +126,8 @@ students:[{
     age: String,
     stream: String,
     symbol:String,
-    className: String,
+    newClass:Number,
+  className: String,
     payments: [{
     	_id:String,
         date: String ,
@@ -139,8 +140,6 @@ students:[{
     subjectsLearnt: [{
     	_id:String,
             subject: String,
-            teacher: String,
-            className:String,
             courseWork:[{
             	_id:String,
             	term:Number,
@@ -305,6 +304,14 @@ app.get('/allTeachers/:id',checkAuthenticated,function (req,res){
   if (err) throw err;
    res.render('allTeachers.ejs',{data:data, school:req.params.id }) ;
     });});
+    
+   
+    app.get('/classes/:id',checkAuthenticated,function (req,res){
+ records.find({_id:req.params.id}, function (err,data){
+  if (err) throw err;
+   res.render('classes.ejs',{data:data,students:data[0].students ,school:req.params.id}) ;
+    });});
+    
     
     app.get('/textSmS/:id',checkAuthenticated,function (req,res){
  records.find({_id:req.params.id}, function (err,data){
@@ -697,8 +704,60 @@ function checkFileType(file, cb){
     cb('Error: Images Only!');
   }
 }
-
+app.post('/classes/:id',  async (req,res)=>{
+ studentsArray = await records.findById(req.params.id)
+ var id = req.body.id
+ var newClass = req.body.newC
+ var symbol = newClass.slice(-1)
+ var teachers = studentsArray.teachers
+         var nwe=""
+         var twe=""
+          var claNam=newClass
+          for (t=0;t<teachers.length;t++){
+          	
+          	for(var tt2 in  teachers[t].subjectsTaken){
+           var allTeachers = teachers[t].subjectsTaken
+          if (allTeachers.hasOwnProperty(tt2)) {
+            	
+             if(allTeachers[tt2][0]== claNam){
+            nwe += `${allTeachers[tt2][1]},`
+    	      twe += `${allTeachers[tt2][2]},`}} }}
+    	       var tar = nwe.length -1 
+    	       var rar =  twe.length -1 
+    	        var ww = nwe.slice(0, tar) 
+    	        var xx = twe.slice(0, rar) 
+    	        var newww = ww.split(',');
+    	        var newxx = xx.split(',');
+    	         
+    	        var subjL= ""
+    	          for (aa=0;aa< newww .length;aa++){
+	subjL += `{subject:"${newww [aa]}",courseWork:[{term:0,year:0,date:0,Topic:0,Mark:0}],homeWork:[{term:0,year:0,date:0,Topic:0,Mark:0}],inClassTest:[{term:0,year:0,date:0,Topic:0,Mark:0}],finalTest:[{term:0,year:0,date:0,Mark:0}],attendance:[{attended:0,date:0}]},`}
+	                  var aray = subjL 
+	                   var nwy = aray.length -1 
+                        var wch = aray.slice(0, nwy) ;
+                         var object = (new Function("return [" + wch+ "];")());
  
+studentsArray.students.filter((type)=>{return type.idNumber === id})[0].className = studentsArray.students.filter((type)=>{return type.idNumber === id})[0].className=newClass
+
+studentsArray.students.filter((type)=>{return type.idNumber === id})[0].newClass = studentsArray.students.filter((type)=>{return type.idNumber === id})[0].newClass=1
+
+studentsArray.students.filter((type)=>{return type.idNumber === id})[0].symbol = studentsArray.students.filter((type)=>{return type.idNumber === id})[0].symbol=symbol
+
+studentsArray.students.filter((type)=>{return type.idNumber === id})[0].subjectsLearnt = studentsArray.students.filter((type)=>{return type.idNumber === id})[0].subjectsLearnt=[]
+
+studentsArray.students.filter((type)=>{return type.idNumber === id})[0].subjectsLearnt = studentsArray.students.filter((type)=>{return type.idNumber === id})[0].subjectsLearnt.concat(object)
+try{
+ await studentsArray.save(function(err,data){
+	 if (err) throw err;
+	  })
+   res.redirect(`/classes/${req.params.id}`)
+   console.log('done') 
+   }catch {
+	if(studentsArray== null){
+		console.log('error')
+	 res.redirect('/index')}
+      }
+})
 
 
 //Post request to add students in database
@@ -776,7 +835,7 @@ var mother = req.body.mom
     	         
     	        var subjL= ""
     	          for (aa=0;aa< newww .length;aa++){
-	subjL += `{subject:"${newww [aa]}",teacher:"${newxx[aa]}",className:"${claNam}",courseWork:[{term:0,year:0,date:0,Topic:0,Mark:0}],homeWork:[{term:0,year:0,date:0,Topic:0,Mark:0}],inClassTest:[{term:0,year:0,date:0,Topic:0,Mark:0}],finalTest:[{term:0,year:0,date:0,Mark:0}],attendance:[{attended:0,date:0}]},`}
+	subjL += `{subject:"${newww [aa]}",courseWork:[{term:0,year:0,date:0,Topic:0,Mark:0}],homeWork:[{term:0,year:0,date:0,Topic:0,Mark:0}],inClassTest:[{term:0,year:0,date:0,Topic:0,Mark:0}],finalTest:[{term:0,year:0,date:0,Mark:0}],attendance:[{attended:0,date:0}]},`}
 	                  var aray = subjL 
 	                   var nwy = aray.length -1 
                         var wch = aray.slice(0, nwy) ;
@@ -799,6 +858,7 @@ var mother = req.body.mom
 	gender:req.body.gender,
 	stream:req.body.streams,
 	symbol:req.body.classesName,
+	newClass:0,
 	className:claNam,
     house:req.body.house,
     newStudent:req.body.newstudent,
@@ -817,12 +877,7 @@ try{
 	if(studentsArray== null){
 	 res.redirect('/index')}
       }
-      
-
-
- 
-
- })	
+})	
  
  //Post request to upload student`s image to AWS 
 app.post('/addStudent/:id',  async (req,res)=>{ 
@@ -1146,15 +1201,20 @@ var leng=  attendanceArray.students
       var classN = attendanceArray.students[i].className
        var teachers = attendanceArray.teachers
      for(j=0;j<classesArray.length;j++){
-	  if (allClasses == classesArray[j]){
-	  	newStream = classesArray[j+1]
+	  if (allClasses == classesArray[j] && allClasses !== 'Form4' && allClasses !== 'Form6' && allClasses !== 'Grade7'){newStream = classesArray[j+1]
 	  	newClass = classesArray[j+1]+symbol
-	  	}}
+	  	}
+	 if(allClasses =='Form4' ||  allClasses =='Form6'  || allClasses == 'Grade7'){
+	 	newStream = 'nill'
+	  	newClass = 'nill'
+	 	} 	
+	  	}
 	   attendanceArray.students[i].stream= attendanceArray.students[i].stream.replace(allClasses, newStream)
 	   attendanceArray.students[i].className= attendanceArray.students[i].className.replace(classN, newClass)
-	 
-	     }
+	  
+	   }
    attendanceArray.currentYear=attendanceArray.currentYear=daYear
+ 
     try{
      await attendanceArray.save(function(err,data){
 	  if (err) throw err;
@@ -1164,7 +1224,9 @@ var leng=  attendanceArray.students
           }catch {console.log('hameno')}
    })	
      
-
+	
+   
+   
 app.delete('/logout', (req,res)=>{
 	req.logOut()
 	res.redirect('/')

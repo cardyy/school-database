@@ -135,6 +135,7 @@ box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
             <ul class="sub">
               <li><a href="/allStudents/<%=school%>">All Students</a></li>
               <li><a href="/addStudent/<%=school%>">Add Student</a></li>
+               <li><a href="/classes/<%=school%>">Form3 Class Allocation</a></li>
 			 
               </ul>
           </li>
@@ -207,7 +208,7 @@ box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
             <div class="form-panel">
               <div class="form">
              
-            <form id="reg" class="cmxform form-horizontal style-form" action = "/addFees/<%=school%>" method="POST"  >
+            <form id="reg" class="cmxform form-horizontal style-form" name="addFees" action = "/addFees/<%=school%>" method="POST"  >
                 <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
         <div class="form-group ">
                   <div class="col-lg-10">
@@ -222,8 +223,7 @@ box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
                
              
 <select class="form-control "  onchange="myFunction(this)" required="">
-  <option value="1" >Choose option</option>
-  <% for (var i in fiz){%>
+   <% for (var i in fiz){%>
     <option value="2"><%- fiz[i]%></option><%}%>
  </select><span class = "fees" ></span><br/>
     
@@ -248,7 +248,7 @@ box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
                         <br/>
                      
             <div class="col-lg-offset-2 col-lg-10  ">
-                      <button class="btn btn-theme" type="submit" >Save</button>
+                      <button class="btn btn-theme" type="button" onclick="load()" >Save</button>
                       
                     </div>
 </div>
@@ -374,7 +374,19 @@ function fixStepIndicator(n) {
     }, 1);
 }
       
-    
+ 
+  function load(){
+  	var id = document.getElementById("id").value;
+  	var data = [<%-data.students%>]
+  	var check = data.some(function(el){ return el.idNumber === id})
+  	if(check === true){
+  	document.addFees.submit();
+  	}
+  	if(check === false){
+ 	window.alert("Please enter a valid ID number for the student!");
+ }
+  
+  }  
 
 
 

@@ -92,6 +92,7 @@
             <ul class="sub">
               <li><a href="/allStudents/<%=school%>">All Students</a></li>
               <li><a href="/addStudent/<%=school%>">Add Student</a></li>
+               <li><a href="/classes/<%=school%>">Form3 Class Allocation</a></li>
 			 
               </ul>
           </li>
@@ -406,7 +407,7 @@
   
   <ul id = "subj" >
                   <% for (let i = 0; i < d2.subjectsLearnt.length ; i++ ) { %>
-  <li><%-d2.subjectsLearnt[i].subject%> : Teacher-<%-d2.subjectsLearnt[i].teacher%> </li>
+  <li><%-d2.subjectsLearnt[i].subject%> </li>
  <%}%>
                  
                  
