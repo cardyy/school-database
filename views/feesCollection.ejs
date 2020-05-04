@@ -156,6 +156,17 @@
   <div class="tbl-content">
     <table cellpadding="0" cellspacing="0" border="0">
       <tbody>
+       <% var terms =[['January','February','March','April'],['May','June','July','August'],['September','October','November','December']] %>
+ <% var d = new Date(); %>
+ <% var cal=['January','February','March','April','May','June','July','August','September','October','November','December'] %>
+   <%  var currentMonth = cal[d.getMonth()]; %>
+    <%  for(var i in terms){if (terms[i].includes(currentMonth)){var theTerm = terms[i]}} %>
+     <%  var last = theTerm.length-1 %>
+      <%  var firstMonth = cal.indexOf(theTerm[0] )+1; %>
+       <%  var lastMonth =	cal.indexOf(theTerm[last])+1; %>
+        <%  var fullCurrentYear = d.getFullYear(); %>
+          <%  var initialMonth = fullCurrentYear+'-'+String("0" + firstMonth).slice(-2)+'-'+String("0" + 1).slice(-2) %>
+           <% var finalMonth =  fullCurrentYear+'-'+String("0" + lastMonth).slice(-2)+'-'+30 %>
       <%  var newStudentsList = "" %>
        <%  var newStudentsStream = "" %>
       <% var newStudentsPayments = "" %>
@@ -166,7 +177,8 @@
   	
             <% var studentzList = data[0].students %>
              <% for (s=0; s<studentzList.length ; s++){ %>
-              <% var studentzPaymentArray = data[0].students[s].payments %>
+              <% var asd= data[0].students[s].payments %>
+               <%  var studentzPaymentArray = asd.filter((da)=>{return da.date >= initialMonth && da.date <= finalMonth }) %>
                <% var  totalAmountPaid =  studentzPaymentArray.reduce((currentTotal,studentzPaymentArray)=> { %>
   	            <% return studentzPaymentArray.amount + currentTotal %>
   	             <%} ,0)%>
@@ -189,8 +201,9 @@
                              <%})%>
                              <%for(var rr in stdnt){%> 
                              <% var id = stdnt[rr].idNumber }%>
+                             <% var balance =  totalSchoolFees-stdntzC[d] %>
                           
-                           <tr><td><a class= "removeHova"   href ="/profile/<%=school%>/<%- id %>"><%- stdntzA[d] %> </a></td><td><%- stdntzB[d] %> </td><td>$<%- stdntzC[d] %></td></tr>
+                           <tr><td><a class= "removeHova"   href ="/profile/<%=school%>/<%- id %>"><%- stdntzA[d] %> </a></td><td><%- stdntzB[d] %> </td><td>$<%- balance %></td></tr>
                               <%}%>
                                </tbody>
                                 </table>
@@ -198,15 +211,16 @@
                                  <script>
                                  	var a = [<%- stdntzC%>]
                                  	 var totalA = a.reduce(function(a, b) { return a + b; }, 0)
-                                 	 document.getElementById('aa').innerText = totalA
+                                 	 
                                  	 var students = [<%- data[0].students %>]
                                  	  var totalStudents = students.length
                                  	  var fees2 = [<%-data[0].fees %>]
                                         var  totalSchoolFeesSum =  fees2.reduce((currentTotal,fees2)=> { return fees2.amount + currentTotal } ,0)
                                         var totalSchoolFees = totalStudents *  totalSchoolFeesSum
                                         document.getElementById('cc').innerText = totalSchoolFees
-                                        var amountCollected = totalSchoolFees - totalA
+                                        var amountCollected = totalA
                                           document.getElementById('bb').innerText = amountCollected
+                                          document.getElementById('aa').innerText = totalSchoolFees-totalA
                                  	 	
                                  	 
                                  	

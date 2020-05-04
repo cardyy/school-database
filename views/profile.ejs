@@ -342,13 +342,26 @@
     <th>Amount Paid</th>
     <th>Balance owing</th>
   </tr>
-   <% for (let i = 0; i < d2.payments.length ; i++ ) { %>
-   <% var paymentsArrays = d2.payments %>
-   <% var actualamount = d2.payments[i].actualfee %> 
-  <% var amountPaid = d2.payments[i].amount %> 
-  <% var paymentfor = d2.payments[i].form %>
-   <% var paymentdate = d2.payments[i].date %>
-  <% var date = d2.payments[i].date %>
+  <% var terms =[['January','February','March','April'],['May','June','July','August'],['September','October','November','December']] %>
+ <% var d = new Date(); %>
+ <% var cal=['January','February','March','April','May','June','July','August','September','October','November','December'] %>
+   <%  var currentMonth = cal[d.getMonth()]; %>
+    <%  for(var i in terms){if (terms[i].includes(currentMonth)){var theTerm = terms[i]}} %>
+     <%  var last = theTerm.length-1 %>
+      <%  var firstMonth = cal.indexOf(theTerm[0] )+1; %>
+       <%  var lastMonth =	cal.indexOf(theTerm[last])+1; %>
+        <%  var fullCurrentYear = d.getFullYear(); %>
+          <%  var initialMonth = fullCurrentYear+'-'+String("0" + firstMonth).slice(-2)+'-'+String("0" + 1).slice(-2) %>
+           <% var finalMonth =  fullCurrentYear+'-'+String("0" + lastMonth).slice(-2)+'-'+30 %>
+         
+	  <% var d2a = d2.payments.filter((da)=>{return da.date >= initialMonth && da.date <= finalMonth }) %>
+   <% for (let i = 0; i < d2a.length ; i++ ) { %>
+   <% var paymentsArrays = d2a %>
+   <% var actualamount = d2a[i].actualfee %> 
+  <% var amountPaid = d2a[i].amount %> 
+  <% var paymentfor = d2a[i].form %>
+   <% var paymentdate = d2a[i].date %>
+  <% var date = d2a[i].date %>
    <% var d3 = new Date(date) %>
   <% var totalObjectAmountPaid = paymentsArrays.filter((paymentsArrays)=> { %>
   <% return paymentsArrays.form === paymentfor &&  paymentsArrays.date <= paymentdate %>
@@ -363,13 +376,13 @@
  
   <tr>
 
-    <td><%-d2.payments[i].form%></td>
+    <td><%-d2a[i].form%></td>
      
-    <td><%-d2.payments[i].paidBy%></td>
+    <td><%-d2a[i].paidBy%></td>
     
-    <td><%-d2.payments[i].contact%></td>
-    <td><%-d2.payments[i].date%></td>
-    <td>$<%-d2.payments[i].amount%></td>
+    <td><%-d2a[i].contact%></td>
+    <td><%-d2a[i].date%></td>
+    <td>$<%-d2a[i].amount%></td>
     <td>$ <%-finalBalance%> </td>
   
   </tr>
@@ -445,15 +458,25 @@
 	
 	 <script>
 	  var resultData = [<%- d2.subjectsLearnt %>]
-	
+	var terms =[['January','February','March','April'],['May','June','July','August'],['September','October','November','December']]
+ var d = new Date();
+  var cal=['January','February','March','April','May','June','July','August','September','October','November','December']
+     var currentMonth = cal[d.getMonth()];
+      for(var i in terms){if (terms[i].includes(currentMonth)){var theTerm = terms[i]}}
+       var last = theTerm.length-1
+        var firstMonth = cal.indexOf(theTerm[0] )+1;
+         var lastMonth =	cal.indexOf(theTerm[last])+1;
+          var fullCurrentYear = d.getFullYear();
+           var initialMonth = fullCurrentYear+'-'+String("0" + firstMonth).slice(-2)+'-'+String("0" + 1).slice(-2)
+            var finalMonth =  fullCurrentYear+'-'+String("0" + lastMonth).slice(-2)+'-'+30
        
         
            var output = ''
              for ( var a in resultData){
-             	var initialHw = resultData[a].homeWork
-             	 var initialCourseWork =resultData[a].courseWork
-             	  var initialInClassTest = resultData[a].inClassTest
-             	   var initialTest = resultData[a].finalTest
+             	var initialHw = resultData[a].homeWork.filter((da)=>{return da.date >= initialMonth && da.date <= finalMonth })
+             	 var initialCourseWork =resultData[a].courseWork.filter((da)=>{return da.date >= initialMonth && da.date <= finalMonth })
+             	  var initialInClassTest = resultData[a].inClassTest.filter((da)=>{return da.date >= initialMonth && da.date <= finalMonth })
+             	   var initialTest = resultData[a].finalTest.filter((da)=>{return da.date >= initialMonth && da.date <= finalMonth })
              	   
             var totalHw = initialHw.reduce((currentTotal,initialHw)=> {return initialHw.Mark + currentTotal } ,0)
              	 var totalCourseWork = initialCourseWork.reduce((currentTotal,initialCourseWork)=> {return initialCourseWork.Mark + currentTotal } ,0)
@@ -465,10 +488,10 @@
              	  var inClassTestArraySum = initialInClassTest.length
              	   var initialTestArraySum = initialTest.length 
              	
-             	var averageHomeWork = totalHw/(homeWrkArraySum-1)
-             	 var averageCourseWork = totalCourseWork/(courseWorkArraySum-1)
-             	  var averageInClassTest = totalInClassTest/(inClassTestArraySum-1)
-             	   var finalTest = totalTest/(initialTestArraySum-1)
+             	var averageHomeWork = totalHw/(homeWrkArraySum)
+             	 var averageCourseWork = totalCourseWork/(courseWorkArraySum)
+             	  var averageInClassTest = totalInClassTest/(inClassTestArraySum)
+             	   var finalTest = totalTest/(initialTestArraySum)
     output +=` 
              <tr >
 		   <td id= "tb1">${resultData[a].subject}</td>

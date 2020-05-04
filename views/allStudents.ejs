@@ -179,13 +179,23 @@
   var stCount = data.length
    var d = new Date();
         var currentYear = d.getFullYear();
-      
+      var terms =[['January','February','March','April'],['May','June','July','August'],['September','October','November','December']]
+
+  var cal=['January','February','March','April','May','June','July','August','September','October','November','December']
+     var currentMonth = cal[d.getMonth()];
+      for(var i in terms){if (terms[i].includes(currentMonth)){var theTerm = terms[i]}}
+       var last = theTerm.length-1
+        var firstMonth = cal.indexOf(theTerm[0] )+1;
+         var lastMonth =	cal.indexOf(theTerm[last])+1;
+          var fullCurrentYear = d.getFullYear();
+           var initialMonth = fullCurrentYear+'-'+String("0" + firstMonth).slice(-2)+'-'+String("0" + 1).slice(-2)
+            var finalMonth =  fullCurrentYear+'-'+String("0" + lastMonth).slice(-2)+'-'+30
     var x = document.querySelector('tbody');
      var output = '' 
        for ( i=0;i<stCount;i++){
        	var agge =  currentYear - data[i].age
        	
-       	 var payments = data[i].payments
+       	 var payments = data[i].payments.filter((da)=>{return da.date >= initialMonth && da.date <= finalMonth })
        	 var profilepic= data[i].propic
        	 
        	      var amountPaid  = payments.reduce((currentTotal,payments)=> {return payments.amount + currentTotal } ,0)

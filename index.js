@@ -1188,7 +1188,8 @@ try {
  
 app.post('/update',async (req,res)=>{  
  let attendanceArray
-  attendanceArray = await records.findById('5e9dd8411c9d440000e1a481')
+ var id = req.body.id
+  attendanceArray = await records.findById(id)
 var leng=  attendanceArray.students
  var  newStream = 0
   var newClass = 0

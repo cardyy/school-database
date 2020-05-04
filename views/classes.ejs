@@ -187,7 +187,9 @@ var std = data.filter((type)=>{return type.stream === "Form3" && type.newClass =
 		</tr>`
 	  }
 document.getElementById('customers6').innerHTML = output	
-
+if (std==''){
+document.getElementById('customers6').innerHTML	= `<p>All the student classes have been updated!</p>`
+	}
 function mySub(x){
 	var buttonId = x
 	var inputClass = document.getElementById(buttonId).value
@@ -195,7 +197,8 @@ function mySub(x){
 document.getElementById('id').innerHTML= `<input   type="text" name="id" value="${buttonId}" style="display:none"  >`
 document.getElementById('class').innerHTML=`<input type="text" name="newC" value="${inputClass}" style="display:none">`
 document.subm.submit();
-console.log('done')
+
+console.log('Updated')
 	}else if (inputClass == ''){window.alert("Please enter the students's class to submit!..eg Form3B");}
 }	
 	

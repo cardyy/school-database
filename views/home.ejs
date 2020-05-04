@@ -51,7 +51,9 @@
         <form action ="/logout?_method=DELETE" method="POST" class="nav pull-right top-menu">
           <button type ="submit" class="logout" >Logout</button>
         </form>
-        <form  name="autoUpdate" action ="/update" method="POST"></form>
+        <form  name="autoUpdate" action ="/update" method="POST">
+        	<input type="text" name="id" style="display:none " value="<%= data[0]._id%>"/>
+        </form>
      
       </div> 
     </header>
