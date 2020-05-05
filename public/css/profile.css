@@ -459,7 +459,7 @@ width:90%;
   text-align: left;
   padding: 16px;
 }
-.tableFees tr:nth-child(even) {
+.tableFees tbody tr:nth-child(odd) {
   background-color: rgba(60,68,82, 0.3)
 }
 .panels{
