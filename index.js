@@ -659,7 +659,7 @@ attendanceArray.students.filter((type)=>{return type.className === classn} ).fil
    Topic:req.body.topic,
    Mark:req.body.boolean[i]
   
-    })}
+})}
 try{
  await attendanceArray.save(function(err,data){
 	 if (err) throw err;
