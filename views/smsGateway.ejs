@@ -37,11 +37,9 @@
       <script defer src="https://unpkg.com/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.js"></script>
       <script defer src="https://unpkg.com/filepond/dist/filepond.js"></script>
       <script defer src="/javascripts/fileUpload.js"></script>
-  
+  </head>
 
 
-  
-</head>
 
 <body>
    <section id="container">
@@ -100,24 +98,33 @@
                   
                     <label class="control-label col-lg-2">Streams</label>
                      <div class="col-lg-10"><br/>
-                    <input   type="checkbox" name="streams" value="ECD1"><span class = 'ltssee' >ECD1</span><br>
-                    <input   type="checkbox" name="streams" value="ECD2"><span class = 'ltssee' >ECD2 </span><br>
-                    <input  type="checkbox" name="streams" value="Grade1"><span class = 'ltssee' >Grade1</span><br>
-                    <input   type="checkbox" name="streams" value="Grade2"><span class = 'ltssee' >Grade2 </span><br>
-                    <input  type="checkbox" name="streams" value="Grade3"><span class = 'ltssee' >Grade3</span><br>
-                    <input   type="checkbox" name="streams" value="Grade4"><span class = 'ltssee' >Grade4</span> <br>
-                    <input  type="checkbox" name="streams" value="Grade5"><span class = 'ltssee' >Grade5</span><br>
-                    <input  type="checkbox" name="streams" value="Grade6"><span class = 'ltssee' >Grade6</span><br>
-                    <input   type="checkbox" name="streams" value="Grade7"><span class = 'ltssee' >Grade7</span> <br>
-                    <input  type="checkbox" name="streams" value="Form1"><span class = 'ltssee' >Form1</span><br>
-                    <input   type="checkbox" name="streams" value="Form2"><span class = 'ltssee' >Form2</span> <br>
-                    <input  type="checkbox" name="streams" value="Form3"><span class = 'ltssee' >Form3</span><br>
-                    <input   type="checkbox" name="streams" value="Form4"><span class = 'ltssee' >Form4</span> <br>
-                    <input  type="checkbox" name="streams" value="Form5"><span class = 'ltssee' >Form5</span><br>
-                    <input   type="checkbox" name="streams" value="Form6"><span class = 'ltssee' >Form6 </span><br><br>
+                    <input   type="checkbox" name="streams" value="ECD1" id="1" ><span class = 'ltssee' id="lbl_1" >ECD1</span><br>
+                    <input   type="checkbox" name="streams" value="ECD2" id="2" ><span class = 'ltssee'  id="lbl_2">ECD2</span><br>
+                    <input  type="checkbox" name="streams" value="Grade1" id="3" ><span class = 'ltssee' id="lbl_3">Grade1</span><br>
+                    <input   type="checkbox" name="streams" value="Grade2" id="4" ><span class = 'ltssee' id="lbl_4">Grade2</span><br>
+                    <input  type="checkbox" name="streams" value="Grade3" id="5" ><span class = 'ltssee' id="lbl_5">Grade3</span><br>
+                    <input   type="checkbox" name="streams" value="Grade4" id="6" ><span class = 'ltssee' id="lbl_6">Grade4</span> <br>
+                    <input  type="checkbox" name="streams" value="Grade5"id="7"  ><span class = 'ltssee' id="lbl_7">Grade5</span><br>
+                    <input  type="checkbox" name="streams" value="Grade6" id="8" ><span class = 'ltssee' id="lbl_8">Grade6</span><br>
+                    <input   type="checkbox" name="streams" value="Grade7" id="9" ><span class = 'ltssee' id="lbl_9">Grade7</span> <br>
+                    <input  type="checkbox" name="streams" value="Form1" id="10" ><span class = 'ltssee' id="lbl_10">Form1</span><br>
+                    <input   type="checkbox" name="streams" value="Form2" id="11" ><span class = 'ltssee' id="lbl_11">Form2</span> <br>
+                    <input  type="checkbox" name="streams" value="Form3" id="12" ><span class = 'ltssee' id="lbl_12">Form3</span><br>
+                    <input   type="checkbox" name="streams" value="Form4" id="13" ><span class = 'ltssee' id="lbl_13">Form4</span> <br>
+                    <input  type="checkbox" name="streams" value="Form5" id="14" ><span class = 'ltssee' id="lbl_14">Form5</span><br>
+                    <input   type="checkbox" name="streams" value="Form6" id="15" ><span class = 'ltssee' id="lbl_15">Form6 </span><br><br>
                     </div>
                   </div>
-                 
+                  <div class="form-group ">
+                  
+                     <div class="col-lg-10"><br/>
+                  <select name="selector" style="margin-left:20%;margin-top:1%;width:190px;height:50px;border-radius:0;background-color:rgba(6, 6, 33, 0.7);color: white;border-color:#5d02ff " onchange="myFunction5(this)"	>
+                   <option>Choose Option</option>
+                  	<option>Students's Checklist</option>
+                  	</select><br/>
+                  <span class="checklist"></span>
+                  </div>
+                 </div>
                   <div class="form-group ">
                     <label  class="control-label col-lg-2">Fees Structure</label>
                      <div class="col-lg-10">
@@ -262,6 +269,10 @@
                     <div class="col-lg-10">
                       <input class="form-control " type="text"  id="status" name="status" required /><br>
                      <input name="myImage" type="file">
+                     <span class = "c1" ></span>
+                     <span class = "c2" ></span>
+                     <span class = "c3" ></span>
+                     <span class = "c4" ></span>
                         <div class="col-lg-offset-2 col-lg-10  ">
                       <button class="btn btn-theme" type="submit" onclick="load()">Save</button>
                       
@@ -303,7 +314,41 @@
       <!-- /wrapper -->
     </section>
        </section>
+    <script>
+    function myFunction5(selTag) {
+var x = selTag.options[selTag.selectedIndex].text
+
+var test = "";
+        var newArray= []
+      var checkBoxes = document.getElementsByName("streams");
+      for(var i=0; i < checkBoxes.length;i++)
+      { 
+          if(checkBoxes[i].checked)
+          {           newArray.push(document.getElementById("lbl_" + checkBoxes[i].id).innerHTML)
+          
+          }
+      }
+     
+      var array =  newArray
+      var output =""
+       for(var i in array){
+          output += `<div id="${array[i]}""><br/>
+                  <input class=" form-control" type="text" id="${array[i]}C" name="stream" value="${array[i]}" style="color:black" readonly/><br/>
+                  	<textarea id = "${array[i]}U"  class="text-area"  rows="10" cols="30" onkeyup="textAreaAdjust(this)" style="overflow:hidden" placeholder="Uniforms"  ></textarea> <br>
     
+                  	<textarea id = "${array[i]}S" class="text-area"  rows="10" cols="30" onkeyup="textAreaAdjust(this)" style="overflow:hidden" placeholder="Stationery"  ></textarea> <br>
+    
+    	<textarea id = "${array[i]}B" class="text-area"  rows="10" cols="30" onkeyup="textAreaAdjust(this)" style="overflow:hidden" placeholder="Books"  ></textarea> <br>
+    
+                  	<textarea id = "${array[i]}M" class="text-area"  rows="10" cols="30" onkeyup="textAreaAdjust(this)" style="overflow:hidden" placeholder="Miscellaneous"  ></textarea> <br>
+    
+                  </div>`
+                  
+            document.querySelector('.checklist').innerHTML =  output      
+                  }
+    
+    }
+    </script>
  <script>
 var currentTab = 0; // Current tab is set to be the first tab (0)
 showTab(currentTab); // Display the current tab
@@ -381,6 +426,7 @@ function fixStepIndicator(n) {
 </script>
   
    <script>
+   
   function myFunction(selTag) {
 var x = selTag.options[selTag.selectedIndex].text
 
@@ -452,7 +498,7 @@ document.getElementById('wednesday').style.display = 'none'
      var area21 = document.getElementById("area21");
      var area22= document.getElementById("area22");
      
-var lines = area.value.replace(/\r\n/g,"\n").split("\n")
+var lines   = area.value.replace(/\r\n/g,"\n").split("\n")
 var lines0  = area0.value.replace(/\r\n/g,"\n").split("\n")
 var lines1  = area1.value.replace(/\r\n/g,"\n").split("\n")
 var lines2  = area2.value.replace(/\r\n/g,"\n").split("\n")
@@ -497,6 +543,8 @@ var output19 = ""
 var output20 = ""
 var output21 = ""
 var output22 = ""
+
+
 for(i=0;i<lines.length;i++){output += `<input  type="text"  name="test" value = "${lines[i]}" style = "display:none;"/>`
 document.querySelector('.test').innerHTML =  output }
              
@@ -562,6 +610,50 @@ document.querySelector('.test21').innerHTML =  output21 }
              
 for(i22=0;i22<lines22.length;i22++){output22 += `<input  type="text"  name="friClass" value = "${lines22[i22]}" style = "display:none;"/>`
 document.querySelector('.test22').innerHTML =  output22 }
+
+//checklist
+var test = "";
+        var newArray= []
+      var checkBoxes = document.getElementsByName("streams");
+      for(var i=0; i < checkBoxes.length;i++)
+      { 
+          if(checkBoxes[i].checked)
+          {           newArray.push(document.getElementById("lbl_" + checkBoxes[i].id).innerHTML)
+          
+          }
+      }
+     
+      var array =  newArray
+      var output =""
+      var decU = []
+      var decS = []
+      var decM = []
+      var decB = []
+      var ot = ''
+      var ot2 = ''
+      var ot3 = ''
+      var ot4 = ''
+       for(var i in array){
+       	decU.push(document.getElementById(`${array[i]}U`).value.replace(/\r\n/g,"\n").split("\n"));
+        decS.push(document.getElementById(`${array[i]}S`).value.replace(/\r\n/g,"\n").split("\n"));
+        decM.push(document.getElementById(`${array[i]}M`).value.replace(/\r\n/g,"\n").split("\n"));
+        decB.push(document.getElementById(`${array[i]}B`).value.replace(/\r\n/g,"\n").split("\n"));
+       
+for(a=0;a<decU[i].length;a++){ ot +=  `<input  type="text"  name="U${i}" value = '"${decU[i][a]}"' style = "display:none;"/>` }
+for(a=0;a<decS[i].length;a++){ ot2 +=  `<input  type="text"  name="S${i}" value = '"${decS[i][a]}"' style = "display:none;"/>` }
+for(a=0;a<decM[i].length;a++){ ot3 +=  `<input  type="text"  name="M${i}" value = '"${decM[i][a]}"' style = "display:none;"/>` }         	
+for(a=0;a<decB[i].length;a++){ ot4 +=  `<input  type="text"  name="B${i}" value = '"${decB[i][a]}"' style = "display:none;"/>` }         	
+         	
+         	
+         	
+         	
+         	}
+         	
+   document.querySelector('.c1').innerHTML= ot     	
+    document.querySelector('.c2').innerHTML =  ot2  	
+      document.querySelector('.c3').innerHTML =  ot3   	
+       document.querySelector('.c4').innerHTML  =  ot4
+      console.log(ot)	
 
 
 }

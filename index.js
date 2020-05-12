@@ -68,11 +68,20 @@ mongoose.connection.once('open', function(){
 const appSchema = new mongoose.Schema([{
   
  name:String,
- classesName:[String],
+ __v:Number,
+classesName:[String],
  streams:[],
  upcomingSchoolEvents:[{_id:String,name:String , date:String, time:String,key:String}],
  news:[{_id:String,headlines:String , main:String, date:String,key:String}],
  fees:[{_id:String, type1:String, amount: Number}],
+ checkList:[{
+ 	_id:String,
+ 	stream:String, 
+ 	stationery:[String], 
+ 	uniforms:[String],
+ 	books:[String],
+ 	miscellenious:[String] 
+ 	}],
  address:String,
 image:String,
 currentYear:Number,
@@ -601,7 +610,7 @@ app.post('/homeWork', async (req,res)=>{
     var username= cont.replace(/\s+/g, '')
 attendanceArray = await records.findById(id)
 	var leng=  attendanceArray.students.filter((type)=>{return type.className === classn} ).filter(a => a.subjectsLearnt.some(u => u.subject==subjct))
-console.log(req.body.boolean[i])
+
 
 	for(var i in leng){ 
 		
@@ -1099,6 +1108,32 @@ app.post('/sms', upload,async (req,res)=>{
             var objectStringArray = (new Function("return [" + watch+ "];")());
             const imageName = req.file.key
             
+            //Checklist
+           
+    var dt = req.body.stream
+    if ( dt.constructor == Array ){var newww = req.body.stream}
+	else if ( dt.constructor !== Array ){var newww = [req.body.stream]}
+      var decU = []
+      var decS = []
+      var decM = []
+      var decB = []
+      var subjL= ''
+    for (var bb in newww){
+    	decU.push(`U${bb}`);
+        decS.push(`S${bb}`);
+        decM.push(`M${bb}`);
+        decB.push(`B${bb}`);
+        	
+    	
+    subjL += `{stream:"${newww[bb]}",stationery:[${req.body[decS[bb]]}],uniforms:[${req.body[decU[bb]]}],books:[${req.body[decB[bb]]}],miscellenious:[${req.body[decM[bb]]}] },`}
+	                  var aray = subjL
+	                   
+	                   var nwy = aray.length -1 
+                        var wch = aray.slice(0, nwy) ;
+                         var object = (new Function("return [" + wch+ "];")());
+                         
+                         //End of Checklist
+            
 const hashedPassword = await bcrypt.hash(req.body.password,10)
 const newrecords = records(
 {name:req.body.name,
@@ -1106,6 +1141,7 @@ image:imageName,
 classesName:req.body.test,
 streams:req.body.streams,
 fees:objectStringArray ,
+checkList:object,
 currentYear:daYear,
 address:req.body.address,
 contact:req.body.contact,
