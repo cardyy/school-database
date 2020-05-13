@@ -118,10 +118,8 @@
                   <div class="form-group ">
                   
                      <div class="col-lg-10"><br/>
-                  <select name="selector" style="margin-left:20%;margin-top:1%;width:190px;height:50px;border-radius:0;background-color:rgba(6, 6, 33, 0.7);color: white;border-color:#5d02ff " onchange="myFunction5(this)"	>
-                   <option>Choose Option</option>
-                  	<option>Students's Checklist</option>
-                  	</select><br/>
+                  <input id="button" type="submit" style="margin-left:30%;border-radius:2px " name="button" onclick="myFunction5()" value="Stream Checklist" /><br/>
+                  	
                   <span class="checklist"></span>
                   </div>
                  </div>
@@ -315,9 +313,7 @@
     </section>
        </section>
     <script>
-    function myFunction5(selTag) {
-var x = selTag.options[selTag.selectedIndex].text
-
+    function myFunction5() {
 var test = "";
         var newArray= []
       var checkBoxes = document.getElementsByName("streams");

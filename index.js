@@ -56,7 +56,7 @@ app.listen(PORT, () => console.log(`Nerbular Server running on port ${PORT}`));
 
 
 const mongoose = require('mongoose');
-mongoose.connect('mongodb+srv://cardyy:spoon1989@schools-snqvi.mongodb.net/vault?retryWrites=true&w=majority', {useNewUrlParser: true});
+mongoose.connect('mongodb+srv://cardyy:spoon1989@schools-snqvi.mongodb.net/vault?retryWrites=true&w=majority', {useNewUrlParser: true,useUnifiedTopology: true  });
 mongoose.connection.once('open', function(){
     console.log('You are now connected to the Nebular database');
 
@@ -222,7 +222,9 @@ app.post('/users', function  (req,res){
       	    result = data.filter(a => a.students.some(u => u.email==username && u.password==password));
       	    
       	     const schoolId = result[0]._id
-	          res.send({'success':true, 'user':username, 'zita':schoolId }) ;
+      	     const stream = result[0].filter((s)=>s.email==username && s.password==password).stream
+      	     console.log(stream)
+	          res.send({'success':true, 'user':username, 'zita':schoolId,'stream':stream }) ;
                } else {
                
                 res.send({'success':false , 'message':"No such user in our database!"}) ;
@@ -1113,26 +1115,23 @@ app.post('/sms', upload,async (req,res)=>{
     var dt = req.body.stream
     if ( dt.constructor == Array ){var newww = req.body.stream}
 	else if ( dt.constructor !== Array ){var newww = [req.body.stream]}
-      var decU = []
-      var decS = []
-      var decM = []
-      var decB = []
-      var subjL= ''
-    for (var bb in newww){
+var decU = []
+ var decS = []
+  var decM = []
+   var decB = []
+    var subjL= ''
+      for (var bb in newww){
     	decU.push(`U${bb}`);
-        decS.push(`S${bb}`);
-        decM.push(`M${bb}`);
-        decB.push(`B${bb}`);
-        	
-    	
-    subjL += `{stream:"${newww[bb]}",stationery:[${req.body[decS[bb]]}],uniforms:[${req.body[decU[bb]]}],books:[${req.body[decB[bb]]}],miscellenious:[${req.body[decM[bb]]}] },`}
+         decS.push(`S${bb}`);
+          decM.push(`M${bb}`);
+           decB.push(`B${bb}`);
+        	subjL += `{stream:"${newww[bb]}",stationery:[${req.body[decS[bb]]}],uniforms:[${req.body[decU[bb]]}],books:[${req.body[decB[bb]]}],miscellenious:[${req.body[decM[bb]]}] },`}
 	                  var aray = subjL
-	                   
 	                   var nwy = aray.length -1 
                         var wch = aray.slice(0, nwy) ;
                          var object = (new Function("return [" + wch+ "];")());
                          
-                         //End of Checklist
+                       
             
 const hashedPassword = await bcrypt.hash(req.body.password,10)
 const newrecords = records(
@@ -1155,6 +1154,7 @@ principalContact:req.body.principalContact,
 houses:req.body.houses,
 paymentStatus:req.body.status,
 sports:req.body.sports,
+__v:1,
 clubs:req.body.clubs
 })  
         
