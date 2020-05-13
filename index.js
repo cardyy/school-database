@@ -222,9 +222,8 @@ app.post('/users', function  (req,res){
       	    result = data.filter(a => a.students.some(u => u.email==username && u.password==password));
       	    
       	     const schoolId = result[0]._id
-      	     const stream = result[0].filter((s)=>s.email==username && s.password==password).stream
-      	     console.log(stream)
-	          res.send({'success':true, 'user':username, 'zita':schoolId,'stream':stream }) ;
+      	     
+	          res.send({'success':true, 'user':username, 'zita':schoolId}) ;
                } else {
                
                 res.send({'success':false , 'message':"No such user in our database!"}) ;
