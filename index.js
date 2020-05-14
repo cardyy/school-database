@@ -223,8 +223,8 @@ app.post('/users', function  (req,res){
       	    
       	     const schoolId = result[0]._id
       	     const stream = result[0].students.filter((s)=>s.email==username && s.password==password)[0].stream
-      	      const check = result[0].checkList.filter((s)=>s.stream == stream).map((img)=>{
-              	return img.stationery})
+      	      result[0].checkList.filter((s)=>s.stream == stream).forEach((img)=>{
+              	const check =  img.stationery})
                console.log(check)
       	  
       	     
