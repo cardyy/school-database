@@ -224,7 +224,7 @@ app.post('/users', function  (req,res){
       	     const schoolId = result[0]._id
       	     const stream = result[0].students.filter((s)=>s.email==username && s.password==password)[0].stream
       	      const check = result[0].checkList.filter((s)=>s.stream == stream)[0].stationery
-
+               console.log(check)
       	  
       	     
 	          res.send({'success':true, 'user':username, 'zita':schoolId,'stream':check}) ;
