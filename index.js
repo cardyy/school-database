@@ -223,12 +223,10 @@ app.post('/users', function  (req,res){
       	    
       	     const schoolId = result[0]._id
       	     const stream = result[0].students.filter((s)=>s.email==username && s.password==password)[0].stream
-      	      result[0].checkList.filter((s)=>s.stream == stream).forEach((img)=>{
-              	const check =  img.stationery})
-               console.log(check)
+      	     
       	  
       	     
-	          res.send({'success':true, 'user':username, 'zita':schoolId,'stream':check}) ;
+	          res.send({'success':true, 'user':username, 'zita':schoolId,'stream':stream}) ;
                } else {
                
                 res.send({'success':false , 'message':"No such user in our database!"}) ;
