@@ -284,8 +284,7 @@ app.post('/users', function  (req,res){
       	     const stream = result[0].students.filter((s)=>s.email==username && s.password==password)[0].stream
       	     
       	  
-      	     
-	          res.send({'success':true, 'user':username, 'zita':schoolId,'stream':stream}) ;
+res.send({'success':true, 'user':username, 'zita':schoolId,'stream':stream,'events':'Upcoming School Events','news':'News & Announcements'}) ;
                } else {
                
                 res.send({'success':false , 'message':"No such user in our database!"}) ;
