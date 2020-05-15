@@ -204,10 +204,69 @@ students:[{
     	}
 ]
 }]);
+const appSchema2 = new mongoose.Schema([{
+	name:String,
+  contact: Number,
+  city: String,
+  ecocashnumber:Number,
+  rating:Number,
+  schools:[String],
+  staionary:[
+    {
+      name:String,
+      price:Number,
+      image:String,
+      dreails:String,
+      quantity:Number,
+      key:Number
+    }],
+  uniforms: [
+    {
+      name:String,
+      price:Number,
+      image:String,
+      dreails:String,
+      quantity:Number,
+      key:Number
+      }],
+  books: [
+    {
+    name:String,
+      price:Number,
+      image:String,
+      dreails:String,
+      quantity:Number,
+      key:Number
+    }],
+    miscellaneous: [
+    {
+      name:String,
+      price:Number,
+      image:String,
+      dreails:String,
+      quantity:Number,
+      key:Number
+      }],
+  purchases: [
+    {
+      school:String,
+      name: String,
+      date: Number,
+      contact:Number,
+      Items: [
+        {
+          name: String,
+          price:Number,
+          image: String,
+          dreails: String,
+          quantity:Number
+        }]
+    }
+  ]
 
-
-	
+}]);	
 const records = mongoose.model('schools',appSchema );
+const outlets = mongoose.model('outlets',appSchema2 );
 
 
 app.post('/users', function  (req,res){
@@ -266,6 +325,12 @@ try {
  
  app.get('/users',function (req,res){
  records.find({}, function (err,data){
+ 	if (err) throw err;
+   res.send(data) ;
+    });});
+    
+    app.get('/outlets',function (req,res){
+ outlets.find({}, function (err,data){
  	if (err) throw err;
    res.send(data) ;
     });});
@@ -1156,7 +1221,6 @@ principalContact:req.body.principalContact,
 houses:req.body.houses,
 paymentStatus:req.body.status,
 sports:req.body.sports,
-__v:1,
 clubs:req.body.clubs
 })  
         
