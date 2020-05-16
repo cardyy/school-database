@@ -260,7 +260,8 @@ const appSchema2 = new mongoose.Schema([{
           price:Number,
           image: String,
           dreails: String,
-          quantity:Number
+          quantity:Number,
+          delivered:String
         }]
     }
   ]
@@ -287,7 +288,7 @@ app.post('/users', function  (req,res){
       	     const school=result[0].name
       	     
       	  
-res.send({'success':true, 'user':username, 'zita':schoolId,'stream':stream,'events':'Upcoming School Events','news':'News & Announcements', 'city':city,'school':scholl}) ;
+res.send({'success':true, 'user':username, 'zita':schoolId,'stream':stream,'events':'Upcoming School Events','news':'News & Announcements', 'city':city,'school':school}) ;
                } else {
                
                 res.send({'success':false , 'message':"No such user in our database!"}) ;
