@@ -71,6 +71,7 @@ const appSchema = new mongoose.Schema([{
  __v:Number,
 classesName:[String],
  streams:[],
+ city:String,
  upcomingSchoolEvents:[{_id:String,name:String , date:String, time:String,key:String}],
  news:[{_id:String,headlines:String , main:String, date:String,key:String}],
  fees:[{_id:String, type1:String, amount: Number}],
@@ -211,7 +212,7 @@ const appSchema2 = new mongoose.Schema([{
   ecocashnumber:Number,
   rating:Number,
   schools:[String],
-  staionary:[
+  stationery:[
     {
       name:String,
       price:Number,
@@ -282,9 +283,11 @@ app.post('/users', function  (req,res){
       	    
       	     const schoolId = result[0]._id
       	     const stream = result[0].students.filter((s)=>s.email==username && s.password==password)[0].stream
+      	     const city=result[0].city
+      	     const school=result[0].name
       	     
       	  
-res.send({'success':true, 'user':username, 'zita':schoolId,'stream':stream,'events':'Upcoming School Events','news':'News & Announcements'}) ;
+res.send({'success':true, 'user':username, 'zita':schoolId,'stream':stream,'events':'Upcoming School Events','news':'News & Announcements', 'city':city,'school':scholl}) ;
                } else {
                
                 res.send({'success':false , 'message':"No such user in our database!"}) ;
@@ -1203,6 +1206,7 @@ const hashedPassword = await bcrypt.hash(req.body.password,10)
 const newrecords = records(
 {name:req.body.name,
 image:imageName,
+city:req.body.city,
 classesName:req.body.test,
 streams:req.body.streams,
 fees:objectStringArray ,
