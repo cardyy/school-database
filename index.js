@@ -338,9 +338,8 @@ try {
    res.send(data) ;
     });});
     
-    app.post('/store', async function (req,res){
-    	let outletsArray
-    	 outletsArray = await outlets.findById(req.body.outletId)
+    app.post('/store',function (req,res){
+    	
           let paynow = new Paynow("9130", "79e60b36-e2ee-48da-b2f4-a09ed08049d9");
            let payment = paynow.createPayment("Invoice 37", "cardyy@gmail.com");	
             const item = req.body.item
@@ -358,10 +357,10 @@ try {
                         console.log(instructions)
                 
                 //save to outlets
-                 outletsArray.purchases= outletsArray.purchases.concat(
-    {
-   school:'test'
-   })
+                setTimeout(async function () { 
+                 let outletsArray
+    	 outletsArray = await outlets.findById(req.body.outletId)
+    outletsArray.purchases= outletsArray.purchases.concat({school:'test'})
 try{
  await outletsArray.save(function(err,data){
 	 if (err) throw err;
@@ -371,10 +370,23 @@ try{
    }catch {
 	if(outletsArray== null){
 	 console.log('not done')}
-      }
+      }},1);
                 
                          } else {
-                         	       
+                         	 setTimeout(async function () { 
+                 let outletsArray
+    	 outletsArray = await outlets.findById(req.body.outletId)
+    outletsArray.purchases= outletsArray.purchases.concat({school:'test'})
+try{
+ await outletsArray.save(function(err,data){
+	 if (err) throw err;
+	 	
+	  })
+ console.log('done')
+   }catch {
+	if(outletsArray== null){
+	 console.log('not done')}
+      }},1);       
                           console.log(response.error) }
                            }).catch(ex => {
                             console.log('Your application has broken an axle', ex)
