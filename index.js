@@ -219,8 +219,6 @@ const appSchema2 = new mongoose.Schema([{
       image:String,
       dreails:String,
       quantity:Number,
-      outLet:String,
-      city:String,
       key:Number
     }],
   uniforms: [
@@ -230,8 +228,6 @@ const appSchema2 = new mongoose.Schema([{
       image:String,
       dreails:String,
       quantity:Number,
-      outLet:String,
-      city:String,
       key:Number
       }],
   books: [
@@ -241,8 +237,6 @@ const appSchema2 = new mongoose.Schema([{
       image:String,
       dreails:String,
       quantity:Number,
-      outLet:String,
-      city:String,
       key:Number
     }],
     miscellaneous: [
@@ -252,8 +246,6 @@ const appSchema2 = new mongoose.Schema([{
       image:String,
       dreails:String,
       quantity:Number,
-      outLet:String,
-      city:String,
       key:Number
       }],
   purchases: [
