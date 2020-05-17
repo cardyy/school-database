@@ -338,9 +338,9 @@ try {
    res.send(data) ;
     });});
     
-    app.post('/store', async function (req,res){
+    app.post('/store',  function (req,res){
     	let outletsArray
-    	 outletsArray = await outlets.findById(req.body.outletId)
+    	 outletsArray = outlets.findById(req.body.outletId)
           outletsArray.purchases= outletsArray.purchases.concat({school:'test'})
           let paynow = new Paynow("9130", "79e60b36-e2ee-48da-b2f4-a09ed08049d9");
            let payment = paynow.createPayment("Invoice 37", "cardyy@gmail.com");	
@@ -357,20 +357,9 @@ try {
                       let instructions = response.instructions 
                        let pollUrl = response.pollUrl; 
                         console.log(instructions)
-                
-                //save to outlets
-    
-try{
- await outletsArray.save(function(err,data){
+            outletsArray.save(function(err,data){
 	 if (err) throw err;
-	 	})
- console.log('done')
-   }catch {
-	if(outletsArray== null){
-	 console.log('not done')}
-      }
-                
-                         } else {
+	 	}) } else {
                          	       
                           console.log(response.error) }
                            }).catch(ex => {
