@@ -341,12 +341,13 @@ try {
     app.post('/store', async function (req,res){
     	let outletsArray
     	outletsArray = await outlets.findById(req.params.outletId)
-    	console.log(outletsArray)
+    	
      let paynow = new Paynow("9130", "79e60b36-e2ee-48da-b2f4-a09ed08049d9");
       let payment = paynow.createPayment("Invoice 37", "cardyy@gmail.com");	
        const item = req.body.item
         const amount = req.body.amount
         let phoneNumber = req.body.phoneNumber
+        console.log(outletsArray)
          payment.add(item, amount);
         paynow.sendMobile(
          payment, 
