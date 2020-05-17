@@ -358,20 +358,7 @@ try {
                         console.log(instructions)
                 
                 //save to outlets
-                 outletsArray.purchases= outletsArra.purchases.concat(
-    {
-   school:'test'
-   })
-try{
- await outletsArray.save(function(err,data){
-	 if (err) throw err;
-	 	
-	  })
- console.log('done')
-   }catch {
-	if(outletsArray== null){
-	 console.log('not done')}
-      }
+     
                 
                          } else {
                          	       
