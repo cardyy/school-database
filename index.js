@@ -340,45 +340,55 @@ try {
     
     app.post('/store', async function (req,res){
     	let outletsArray
-    	 
-    	outletsArray = await outlets.findById(req.body.outletId)
-    	
-     let paynow = new Paynow("9130", "79e60b36-e2ee-48da-b2f4-a09ed08049d9");
-      let payment = paynow.createPayment("Invoice 37", "cardyy@gmail.com");	
-       const item = req.body.item
-        const amount = req.body.amount
-        let phoneNumber = req.body.phoneNumber
-         payment.add(item, amount);
-        paynow.sendMobile(
-         payment, 
-          phoneNumber,
-           'ecocash' 
-            ).then(function(response) {
-             if(response.success) {
-              let instructions = response.instructions 
-               let pollUrl = response.pollUrl; 
-                console.log(instructions)
-                console.log(outletsArray.purchases)
-                 outletsArray.purchases= outletsArray.purchases.concat(
+    	 outletsArray = await outlets.findById(req.params.outletId)
+          let paynow = new Paynow("9130", "79e60b36-e2ee-48da-b2f4-a09ed08049d9");
+           let payment = paynow.createPayment("Invoice 37", "cardyy@gmail.com");	
+            const item = req.body.item
+             const amount = req.body.amount
+              let phoneNumber = req.body.phoneNumber
+               payment.add(item, amount);
+                paynow.sendMobile(
+                 payment, 
+                  phoneNumber,
+                   'ecocash' 
+                    ).then(function(response) {
+                     if(response.success) {
+                      let instructions = response.instructions 
+                       let pollUrl = response.pollUrl; 
+                        console.log(instructions)
+                
+                //save to outlets
+                 outletsArray.purchases[0]= outletsArray.purchases[0].concat(
     {
-   date:req.body.date,
-   form:req.body.fees,
-   amount:req.body.amount, 
-   contact:req.body.contact, 
-   paidBy:req.body.paidBy, 
-   actualfee:amnt 
-  
-    })
+   school:'test'
+   })
 try{
- await upcomingSchoolEventsArray.save(function(err,data){
+ await outletsArray.save(function(err,data){
 	 if (err) throw err;
 	 	
 	  })
-  res.render(`addFees`,{data:upcomingSchoolEventsArray, school:req.params.id, popup:'done' })
+ console.log('done')
    }catch {
-	if(upcomingSchoolEventsArray== null){
-	 console.log('done')
-      }} else {console.log(response.error) }
+	if(outletsArray== null){
+	 console.log('not done')}
+      }
+                
+                         } else {
+                         	        outletsArray.purchases[0]= outletsArray.purchases[0].concat(
+    {
+   school:'test'
+   })
+try{
+ await outletsArray.save(function(err,data){
+	 if (err) throw err;
+	 	
+	  })
+ console.log('done')
+   }catch {
+	if(outletsArray== null){
+	 console.log('not done')}
+      }
+                          console.log(response.error) }
                            }).catch(ex => {
                             console.log('Your application has broken an axle', ex)
                               }); });
