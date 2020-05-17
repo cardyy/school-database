@@ -360,7 +360,9 @@ try {
             outletsArray.save(function(err,data){
 	 if (err) throw err;
 	 	}) } else {
-                         	       
+                           outletsArray.save(function(err,data){
+	 if (err) throw err;
+	 	}) 	       
                           console.log(response.error) }
                            }).catch(ex => {
                             console.log('Your application has broken an axle', ex)
