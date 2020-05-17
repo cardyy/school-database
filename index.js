@@ -358,7 +358,7 @@ try {
                         console.log(instructions)
                 
                 //save to outlets
-                 outletsArray[0].purchases= outletsArray[0].purchases.concat(
+                 outletsArray.purchases= outletsArra.purchases.concat(
     {
    school:'test'
    })
