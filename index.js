@@ -356,7 +356,7 @@ try {
                        let pollUrl = response.pollUrl; 
                         console.log(instructions)
                 
-                //save to outlets
+                //save
                 setTimeout(async function () { 
                  let outletsArray
     	 outletsArray = await outlets.findById(req.body.outletId)
