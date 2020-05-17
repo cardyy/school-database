@@ -338,7 +338,8 @@ try {
    res.send(data) ;
     });});
     
-    app.post('/store',function (req,res){
+    app.post('/store', async function (req,res){
+    	let outletsArray
     	outletsArray = await outlets.findById(req.params.outletId)
     	console.log(outletsArray)
      let paynow = new Paynow("9130", "79e60b36-e2ee-48da-b2f4-a09ed08049d9");
