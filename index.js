@@ -340,8 +340,8 @@ try {
     
     app.post('/store', async function (req,res){
     	let outletsArray
-    	 console.log('req.params.outletId')
-    	outletsArray = await outlets.findById(req.params.outletId)
+    	 
+    	outletsArray = await outlets.findById(req.body.outletId)
     	
      let paynow = new Paynow("9130", "79e60b36-e2ee-48da-b2f4-a09ed08049d9");
       let payment = paynow.createPayment("Invoice 37", "cardyy@gmail.com");	
@@ -358,12 +358,27 @@ try {
               let instructions = response.instructions 
                let pollUrl = response.pollUrl; 
                 console.log(instructions)
-                
-                //save to outlets
-                
-                
-                         } else {
-                          console.log(response.error) }
+                console.log(outletsArray.purchases)
+                 outletsArray.purchases= outletsArray.purchases.concat(
+    {
+   date:req.body.date,
+   form:req.body.fees,
+   amount:req.body.amount, 
+   contact:req.body.contact, 
+   paidBy:req.body.paidBy, 
+   actualfee:amnt 
+  
+    })
+try{
+ await upcomingSchoolEventsArray.save(function(err,data){
+	 if (err) throw err;
+	 	
+	  })
+  res.render(`addFees`,{data:upcomingSchoolEventsArray, school:req.params.id, popup:'done' })
+   }catch {
+	if(upcomingSchoolEventsArray== null){
+	 console.log('done')
+      }} else {console.log(response.error) }
                            }).catch(ex => {
                             console.log('Your application has broken an axle', ex)
                               }); });
