@@ -357,7 +357,21 @@ try {
                        let pollUrl = response.pollUrl; 
                         console.log(instructions)
                 
-
+                //save to outlets
+                 outletsArray[0].purchases= outletsArray[0].purchases.concat(
+    {
+   school:'test'
+   })
+try{
+ await outletsArray.save(function(err,data){
+	 if (err) throw err;
+	 	
+	  })
+ console.log('done')
+   }catch {
+	if(outletsArray== null){
+	 console.log('not done')}
+      }
                 
                          } else {
                          	       
