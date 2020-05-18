@@ -339,7 +339,9 @@ try {
     });});
     
     app.post('/store',function (req,res){
-    	console.log(req.body.outId)
+    	let outletsArray
+    	 outletsArray = await outlets.findById(req.body.outId)
+    	console.log(outletsArray)
           let paynow = new Paynow("9130", "79e60b36-e2ee-48da-b2f4-a09ed08049d9");
            let payment = paynow.createPayment("Invoice 37", "cardyy@gmail.com");	
             const item = req.body.item
@@ -358,8 +360,7 @@ try {
                 
                 //save
                 setTimeout(async function () { 
-                 let outletsArray
-    	 outletsArray = await outlets.findById(req.body.outId)
+                 
     outletsArray.purchases= outletsArray.purchases.concat({school:'test'})
 try{
  await outletsArray.save(function(err,data){
@@ -374,8 +375,7 @@ try{
                 
                          } else {
                          	 setTimeout(async function () { 
-                 let outletsArray
-    	 outletsArray = await outlets.findById(req.body.outletId)
+               
     outletsArray.purchases= outletsArray.purchases.concat({school:'test'})
 try{
  await outletsArray.save(function(err,data){
