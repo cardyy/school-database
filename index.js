@@ -252,8 +252,8 @@ const appSchema2 = new mongoose.Schema([{
     {
       school:String,
       name: String,
-      date: Number,
-      contact:Number,
+      date: String,
+      contact:String,
       Items: [
         {
           name: String,
