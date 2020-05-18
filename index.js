@@ -382,7 +382,7 @@ try{
 	 if (err) throw err;
 	 	
 	  })
- console.log('done')
+ console.log('its done')
    }catch {
 	if(outletsArray== null){
 	 console.log('not done')}
