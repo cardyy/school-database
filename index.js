@@ -250,6 +250,7 @@ const appSchema2 = new mongoose.Schema([{
       }],
   purchases: [
     {
+    	_id:String,
       school:String,
       name: String,
       date: String,
