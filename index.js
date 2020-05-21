@@ -257,8 +257,8 @@ const appSchema2 = new mongoose.Schema([{
       contact:String,
       address:String,
       idNumber:String,
-      className:String
-      itemName: String,
+      className:String,
+      itemName:String,
       price:Number,
       dreails: String,
       quantity:Number,
