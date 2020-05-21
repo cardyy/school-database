@@ -291,10 +291,10 @@ app.post('/users', function  (req,res){
       	     const className = result[0].students.filter((s)=>s.email==username && s.password==password)[0].className
       	     const address = result[0].students.filter((s)=>s.email==username && s.password==password)[0].address
       	     const contact = result[0].students.filter((s)=>s.email==username && s.password==password)[0].contacts
-      	     const id = result[0].students.filter((s)=>s.email==username && s.password==password)[0].idNumber
+      	     const idNumber = result[0].students.filter((s)=>s.email==username && s.password==password)[0].idNumber
       	     
       	  
-res.send({'success':true, 'user':username, 'zita':schoolId,'stream':stream,'events':'Upcoming School Events','news':'News & Announcements', 'city':city,'school':school, 'firstName':name,'contact':contact,'address':address, 'idNumber':id,'className':className }) ;
+res.send({'success':true, 'user':username, 'zita':schoolId,'stream':stream,'events':'Upcoming School Events','news':'News & Announcements', 'city':city,'school':school, 'firstName':name,'contact':contact,'address':address, 'idNumber':idNumber,'className':className }) ;
                } else {
                
                 res.send({'success':false , 'message':"No such user in our database!"}) ;
