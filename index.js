@@ -250,20 +250,20 @@ const appSchema2 = new mongoose.Schema([{
       }],
   purchases: [
     {
-    	_id:String,
+      _id:String,
       school:String,
       name: String,
       date: String,
       contact:String,
-      Items: [
-        {
-          name: String,
-          price:Number,
-          image: String,
-          dreails: String,
-          quantity:Number,
-          delivered:String
-        }]
+      address:String,
+      idNumber:String,
+      className:String
+      itemName: String,
+      price:Number,
+      dreails: String,
+      quantity:Number,
+      delivered:String
+    
     }
   ]
 
@@ -287,9 +287,14 @@ app.post('/users', function  (req,res){
       	     const stream = result[0].students.filter((s)=>s.email==username && s.password==password)[0].stream
       	     const city=result[0].city
       	     const school=result[0].name
+      	     const name = result[0].students.filter((s)=>s.email==username && s.password==password)[0].firstName
+      	     const className = result[0].students.filter((s)=>s.email==username && s.password==password)[0].className
+      	     const address = result[0].students.filter((s)=>s.email==username && s.password==password)[0].address
+      	     const contact = result[0].students.filter((s)=>s.email==username && s.password==password)[0].contacts
+      	     const id = result[0].students.filter((s)=>s.email==username && s.password==password)[0].idNumber
       	     
       	  
-res.send({'success':true, 'user':username, 'zita':schoolId,'stream':stream,'events':'Upcoming School Events','news':'News & Announcements', 'city':city,'school':school}) ;
+res.send({'success':true, 'user':username, 'zita':schoolId,'stream':stream,'events':'Upcoming School Events','news':'News & Announcements', 'city':city,'school':school, 'firstName':name,'contact':contact,'address':address, 'idNumber':id,'className':className }) ;
                } else {
                
                 res.send({'success':false , 'message':"No such user in our database!"}) ;
@@ -342,8 +347,7 @@ try {
     app.post('/store',function (req,res){
     	var d =req.body.outId
     	var id = d[0]
-    	console.log(id)
-          let paynow = new Paynow("9130", "79e60b36-e2ee-48da-b2f4-a09ed08049d9");
+    	let paynow = new Paynow("9130", "79e60b36-e2ee-48da-b2f4-a09ed08049d9");
            let payment = paynow.createPayment("Invoice 37", "cardyy@gmail.com");	
             const item = req.body.item
              const amount = req.body.amount
@@ -363,7 +367,20 @@ try {
                 setTimeout(async function () { 
                  let outletsArray
     	 outletsArray = await outlets.findById(id)
-    outletsArray.purchases= outletsArray.purchases.concat({school:'test'})
+    outletsArray.purchases= outletsArray.purchases.concat({
+    school:req.body.school,
+    name:req.body.name,
+    date:'02',
+    contact:req.body.contact,
+    address:req.body.address,
+    idNumber:req.body.idNumber,
+    className:req.body.className,
+    itemName:req.body.item,
+    price:req.body.amount,
+    dreails:req.body.dreails,
+    quantity:req.body.quantity,
+    delivered:'No'
+     })
 try{
  await outletsArray.save(function(err,data){
 	 if (err) throw err;
@@ -379,7 +396,21 @@ try{
                          	 setTimeout(async function () { 
                  let outletsArray
     	 outletsArray = await outlets.findById(id)
-    outletsArray.purchases= outletsArray.purchases.concat({school:'test'})
+    outletsArray.purchases= outletsArray.purchases.concat({
+    	school:req.body.school,
+    name:req.body.name,
+    date:'02',
+    contact:req.body.contact,
+    address:req.body.address,
+    idNumber:req.body.idNumber,
+    className:req.body.className,
+    itemName:req.body.item,
+    price:req.body.amount,
+    dreails:req.body.dreails,
+    quantity:req.body.quantity,
+    delivered:'No'
+    	
+    	})
 try{
  await outletsArray.save(function(err,data){
 	 if (err) throw err;
