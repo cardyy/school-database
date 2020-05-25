@@ -472,10 +472,9 @@ app.post("/store", function (req, res) {
         //save
         
         setTimeout(async function () {
-        
+        	console.log(d[i])
           let outletsArray;
           for (var i in d){
-          		console.log(d[i])
           outletsArray = await outlets.findById(d[i]);
           outletsArray[i].purchases = outletsArray[i].purchases.concat({
             school: req.body.school,
@@ -503,8 +502,8 @@ app.post("/store", function (req, res) {
       } else {
       	
         setTimeout(async function () {
-        	let outletsArray;
-        	for (var i in d){
+        	
+          let outletsArray;
           outletsArray = await outlets.findById(d[i]);
           outletsArray[i].purchases = outletsArray[i].purchases.concat({
             school: req.body.school,
@@ -517,7 +516,7 @@ app.post("/store", function (req, res) {
             itemName: req.body.itemName,
             totalAmount: req.body.amount,
             delivered: "No",
-          });}
+          });
           try {
             await outletsArray.save(function (err, data) {
               if (err) throw err;
