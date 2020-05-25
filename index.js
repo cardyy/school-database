@@ -498,8 +498,9 @@ app.post("/store", function (req, res) {
           }
         }, 1);
       } else {
+      	for (var i in d){
         setTimeout(async function () {
-        	console.log(d)
+        	
           let outletsArray;
           outletsArray = await outlets.findById(d);
           outletsArray.purchases = outletsArray.purchases.concat({
@@ -525,6 +526,7 @@ app.post("/store", function (req, res) {
             }
           }
         }, 1);
+				}
         console.log(response.error);
       }
     })
