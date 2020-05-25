@@ -472,10 +472,10 @@ app.post("/store", function (req, res) {
         //save
         
         setTimeout(async function () {
-        	var outletsArray=[]
+        	let outletsArray;
           for (var i in d){
           
-          outletsArray.push(outlets.findById(d[i]))
+          outletsArray = await outlets.findById(d[i]);
           	console.log(outletsArray)
           outletsArray.purchases = outletsArray.purchases.concat({
             school: req.body.school,
