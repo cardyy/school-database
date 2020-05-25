@@ -471,12 +471,10 @@ app.post("/store", function (req, res) {
 
         //save
         setTimeout(async function () {
-        	let outletsArray;
-        	for(ot=0;ot<2;ot++){
-        	outletsArray = await outlets.findById(d[ot]);
-        	console.log(outletsArray)
-        
-          outletsArray[ot].purchases = outletsArray[ot].purchases.concat({
+        	console.log(d)
+          let outletsArray;
+          outletsArray = await outlets.findById(d);
+          outletsArray.purchases = outletsArray.purchases.concat({
             school: req.body.school,
             name: req.body.name,
             date: "02",
@@ -487,7 +485,7 @@ app.post("/store", function (req, res) {
             itemName: req.body.itemName,
             totalAmount: req.body.amount,
             delivered: "No",
-          })}
+          });
           try {
             await outletsArray.save(function (err, data) {
               if (err) throw err;
@@ -501,13 +499,10 @@ app.post("/store", function (req, res) {
         }, 1);
       } else {
         setTimeout(async function () {
-        	let outletsArray;
-        		for(ot=0;ot<2;ot++){
-        		
-        		console.log(outletsArray)
-        	
-          outletsArray = await outlets.findById(d[ot]);
-          outletsArray[ot].purchases = outletsArray[ot].purchases.concat({
+        	console.log(d)
+          let outletsArray;
+          outletsArray = await outlets.findById(d);
+          outletsArray.purchases = outletsArray.purchases.concat({
             school: req.body.school,
             name: req.body.name,
             date: "02",
@@ -518,12 +513,12 @@ app.post("/store", function (req, res) {
             itemName: req.body.itemName,
             totalAmount: req.body.amount,
             delivered: "No",
-          })}
+          });
           try {
             await outletsArray.save(function (err, data) {
               if (err) throw err;
             });
-            console.log("done");
+            console.log("its done");
           } catch {
             if (outletsArray == null) {
               console.log("not done");
