@@ -501,7 +501,7 @@ app.post("/store", function (req, res) {
             address: req.body.address,
             idNumber: req.body.idNumber,
             className: req.body.className,
-            itemName: req.body.item,
+            itemName: req.body.itemName,
             price: req.body.amount,
             dreails: req.body.dreails,
             quantity: req.body.quantity,
