@@ -480,8 +480,8 @@ app.post("/store", function (req, res) {
           var con= outletsArray.contact
           var items = req.body.itemName
           console.log(con)
-            var usernameIsPresent = items.filter((a)=>{return a.cnt === con})
-             console.log(usernameIsPresent)
+            var usernameIsPresent = items.filter((a)=>{return a.cnt == con})
+             console.log(items)
              if (usernameIsPresent.length>0) {
           console.log(items)
           outletsArray.purchases = outletsArray.purchases.concat({
