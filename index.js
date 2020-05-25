@@ -253,6 +253,8 @@ const appSchema2 = new mongoose.Schema([
     stationery: [
       {
         name: String,
+        outletName:String,
+        outletId:String,
         price: Number,
         image: String,
         dreails: String,
@@ -263,6 +265,8 @@ const appSchema2 = new mongoose.Schema([
     uniforms: [
       {
         name: String,
+        outletName:String,
+        outletId:String,
         price: Number,
         image: String,
         dreails: String,
@@ -273,6 +277,8 @@ const appSchema2 = new mongoose.Schema([
     books: [
       {
         name: String,
+        outletName:String,
+        outletId:String,
         price: Number,
         image: String,
         dreails: String,
@@ -283,6 +289,8 @@ const appSchema2 = new mongoose.Schema([
     miscellaneous: [
       {
         name: String,
+        outletName:String,
+        outletId:String,
         price: Number,
         image: String,
         dreails: String,
@@ -446,7 +454,7 @@ app.get("/outlets", function (req, res) {
 
 app.post("/store", function (req, res) {
   var d = req.body.outId;
-  var id = d[0];
+  
   let paynow = new Paynow("9130", "79e60b36-e2ee-48da-b2f4-a09ed08049d9");
   let payment = paynow.createPayment("Invoice 37", "cardyy@gmail.com");
   const item = req.body.item;
@@ -463,8 +471,10 @@ app.post("/store", function (req, res) {
 
         //save
         setTimeout(async function () {
-          let outletsArray;
-          outletsArray = await outlets.findById(id);
+        	for(var ot in d){
+        		console.log(d)
+        	let outletsArray;
+          outletsArray = await outlets.findById(d);
           outletsArray.purchases = outletsArray.purchases.concat({
             school: req.body.school,
             name: req.body.name,
@@ -476,7 +486,7 @@ app.post("/store", function (req, res) {
             itemName: req.body.itemName,
             totalAmount: req.body.amount,
             delivered: "No",
-          });
+          });}
           try {
             await outletsArray.save(function (err, data) {
               if (err) throw err;
@@ -490,8 +500,10 @@ app.post("/store", function (req, res) {
         }, 1);
       } else {
         setTimeout(async function () {
-          let outletsArray;
-          outletsArray = await outlets.findById(id);
+        	for(var ot in d){
+        		console.log(d)
+        	let outletsArray;
+          outletsArray = await outlets.findById(d);
           outletsArray.purchases = outletsArray.purchases.concat({
             school: req.body.school,
             name: req.body.name,
@@ -503,12 +515,12 @@ app.post("/store", function (req, res) {
             itemName: req.body.itemName,
             totalAmount: req.body.amount,
             delivered: "No",
-          });
+          });}
           try {
             await outletsArray.save(function (err, data) {
               if (err) throw err;
             });
-            console.log("its done");
+            console.log("done");
           } catch {
             if (outletsArray == null) {
               console.log("not done");
