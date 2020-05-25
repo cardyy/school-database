@@ -481,7 +481,7 @@ app.post("/store", function (req, res) {
           var items = req.body.itemName
             var usernameIsPresent = items.filter((a)=>{return a.cnt === con})
              console.log(usernameIsPresent)
-             if (usernameIsPresent.length>1) {
+             if (usernameIsPresent.length>0) {
           console.log(items)
           outletsArray.purchases = outletsArray.purchases.concat({
             school: req.body.school,
