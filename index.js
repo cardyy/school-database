@@ -494,7 +494,7 @@ app.post("/store", function (req, res) {
             idNumber: req.body.idNumber,
             className: req.body.className,
             itemName: products,
-            totalAmount: req.body.amount,
+           
             delivered: "No",
           })}
            try {
@@ -509,12 +509,17 @@ app.post("/store", function (req, res) {
           }}
         }, 1);
       } else {
-      	for (var i in d){
-        setTimeout(async function () {
+      	setTimeout(async function () {
+        	let outletsArray;
         	
-          let outletsArray;
+          for (var i in d){
           outletsArray = await outlets.findById(d[i]);
-          outletsArray[i].purchases = outletsArray[i].purchases.concat({
+          var con= outletsArray.contact
+          var items = req.body.itemName
+          var usernameIsPresent = items.filter((a)=>{return a.cnt == con})
+            if (usernameIsPresent.length>0) {
+            	var products = usernameIsPresent
+          outletsArray.purchases = outletsArray.purchases.concat({
             school: req.body.school,
             name: req.body.name,
             date: "02",
@@ -522,20 +527,20 @@ app.post("/store", function (req, res) {
             address: req.body.address,
             idNumber: req.body.idNumber,
             className: req.body.className,
-            itemName: req.body.itemName,
-            totalAmount: req.body.amount,
+            itemName: products,
+           
             delivered: "No",
-          });
-          try {
+          })}
+           try {
             await outletsArray.save(function (err, data) {
               if (err) throw err;
             });
-            console.log("its done");
+            console.log("done");
           } catch {
             if (outletsArray == null) {
               console.log("not done");
             }
-          }
+          }}
         }, 1);
 				}
         console.log(response.error);
