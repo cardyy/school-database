@@ -472,12 +472,8 @@ app.post("/store", function (req, res) {
         //save
         setTimeout(async function () {
         	let outletsArray;
-        	for(ot=0;ot<d.length;ot++){
-        		
-        		
-        		
-        	
-          outletsArray = await outlets.findById(d[ot]);
+        	for(ot=0;ot<2;ot++){
+        	outletsArray = await outlets.findById(d[ot]);
         	console.log(outletsArray)
         
           outletsArray[ot].purchases = outletsArray[ot].purchases.concat({
@@ -506,7 +502,7 @@ app.post("/store", function (req, res) {
       } else {
         setTimeout(async function () {
         	let outletsArray;
-        		for(ot=0;ot<d.length;ot++){
+        		for(ot=0;ot<2;ot++){
         		
         		console.log(outletsArray)
         	
