@@ -472,7 +472,7 @@ app.post("/store", function (req, res) {
         //save
         setTimeout(async function () {
         	let outletsArray;
-        	for(ot=0;ot<d.lenght;ot++){
+        	for(var ot in d){
         		
         		var oid = d[ot]
         		console.log(oid)
@@ -491,7 +491,7 @@ app.post("/store", function (req, res) {
             itemName: req.body.itemName,
             totalAmount: req.body.amount,
             delivered: "No",
-          });}
+          })}
           try {
             await outletsArray.save(function (err, data) {
               if (err) throw err;
@@ -506,7 +506,7 @@ app.post("/store", function (req, res) {
       } else {
         setTimeout(async function () {
         	let outletsArray;
-        	for(ot=0;ot<d.lenght;ot++){
+        		for(var ot in d){
         		var oid = d[ot]
         		console.log( oid)
         	
@@ -522,7 +522,7 @@ app.post("/store", function (req, res) {
             itemName: req.body.itemName,
             totalAmount: req.body.amount,
             delivered: "No",
-          });}
+          })}
           try {
             await outletsArray.save(function (err, data) {
               if (err) throw err;
