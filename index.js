@@ -470,6 +470,7 @@ app.post("/store", function (req, res) {
         console.log(instructions);
 
         //save
+        for (var i in d){
         setTimeout(async function () {
         	console.log(d)
           let outletsArray;
@@ -496,7 +497,7 @@ app.post("/store", function (req, res) {
               console.log("not done");
             }
           }
-        }, 1);
+        }, 1);}
       } else {
       	for (var i in d){
         setTimeout(async function () {
