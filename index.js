@@ -472,7 +472,7 @@ app.post("/store", function (req, res) {
         //save
         setTimeout(async function () {
         	let outletsArray;
-        	for(var ot in d){
+        	for(ot=0;ot<d.length;ot++){
         		
         		var oid = d[ot]
         		console.log(oid)
@@ -506,7 +506,7 @@ app.post("/store", function (req, res) {
       } else {
         setTimeout(async function () {
         	let outletsArray;
-        		for(var ot in d){
+        		for(ot=0;ot<d.length;ot++){
         		var oid = d[ot]
         		console.log( oid)
         	
