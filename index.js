@@ -480,14 +480,11 @@ app.post("/store", function (req, res) {
         	
           for (var i in d){
           outletsArray = await outlets.findById(d[i]);
-          
           var con= outletsArray.contact
           var items = req.body.itemName
-          console.log(con)
-            var usernameIsPresent = items.filter((a)=>{return a.cnt == con})
-             console.log(items)
-             if (usernameIsPresent.length>0) {
-          console.log(items)
+          var usernameIsPresent = items.filter((a)=>{return a.cnt == con})
+            if (usernameIsPresent.length>0) {
+            	var products = usernameIsPresent
           outletsArray.purchases = outletsArray.purchases.concat({
             school: req.body.school,
             name: req.body.name,
@@ -496,7 +493,7 @@ app.post("/store", function (req, res) {
             address: req.body.address,
             idNumber: req.body.idNumber,
             className: req.body.className,
-            itemName: req.body.itemName,
+            itemName: products,
             totalAmount: req.body.amount,
             delivered: "No",
           })}
