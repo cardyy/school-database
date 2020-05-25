@@ -475,7 +475,7 @@ app.post("/store", function (req, res) {
         	console.log(d)
           let outletsArray;
           outletsArray = await outlets.findById(d);
-          outletsArray.purchases = outletsArray.purchases.concat({
+          outletsArray[i].purchases = outletsArray[i].purchases.concat({
             school: req.body.school,
             name: req.body.name,
             date: "02",
@@ -504,7 +504,7 @@ app.post("/store", function (req, res) {
         	
           let outletsArray;
           outletsArray = await outlets.findById(d);
-          outletsArray.purchases = outletsArray.purchases.concat({
+          outletsArray[i].purchases = outletsArray[i].purchases.concat({
             school: req.body.school,
             name: req.body.name,
             date: "02",
