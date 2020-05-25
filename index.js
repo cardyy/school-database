@@ -475,10 +475,10 @@ app.post("/store", function (req, res) {
         	for(ot=0;ot<d.length;ot++){
         		
         		
-        		console.log(d[ot])
+        		
         	
           outletsArray = await outlets.findById(d[ot]);
-        	
+        	console.log(outletsArray)
         
           outletsArray[ot].purchases = outletsArray[ot].purchases.concat({
             school: req.body.school,
@@ -508,7 +508,7 @@ app.post("/store", function (req, res) {
         	let outletsArray;
         		for(ot=0;ot<d.length;ot++){
         		
-        		console.log(d[ot])
+        		console.log(outletsArray)
         	
           outletsArray = await outlets.findById(d[ot]);
           outletsArray[ot].purchases = outletsArray[ot].purchases.concat({
