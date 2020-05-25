@@ -470,14 +470,13 @@ app.post("/store", function (req, res) {
         console.log(instructions);
 
         //save
-        let outletsArray;
-          for (var i in d){
+        
         setTimeout(async function () {
-        	
+        	var outletsArray=[]
+          for (var i in d){
           
-          	
-          outletsArray = await outlets.findById(d[i]);
-          console.log(d[i])
+          outletsArray.push(await outlets.findById(d[i]))
+          	console.log(outletsArray)
           outletsArray.purchases = outletsArray.purchases.concat({
             school: req.body.school,
             name: req.body.name,
@@ -489,7 +488,7 @@ app.post("/store", function (req, res) {
             itemName: req.body.itemName,
             totalAmount: req.body.amount,
             delivered: "No",
-          });
+          });}
           try {
             await outletsArray.save(function (err, data) {
               if (err) throw err;
@@ -500,9 +499,9 @@ app.post("/store", function (req, res) {
               console.log("not done");
             }
           }
-        }, 1);}
+        }, 1);
       } else {
-      	
+      	for (var i in d){
         setTimeout(async function () {
         	
           let outletsArray;
@@ -530,7 +529,7 @@ app.post("/store", function (req, res) {
             }
           }
         }, 1);
-				
+				}
         console.log(response.error);
       }
     })
