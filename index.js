@@ -479,7 +479,7 @@ app.post("/store", function (req, res) {
         	
           outletsArray = await outlets.findById(oid);
         	
-          outletsArray = await outlets.findById(d);
+        
           outletsArray[ot].purchases = outletsArray[ot].purchases.concat({
             school: req.body.school,
             name: req.body.name,
