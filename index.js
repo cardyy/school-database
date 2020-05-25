@@ -479,6 +479,7 @@ app.post("/store", function (req, res) {
           
           var con= outletsArray.contact
           var items = req.body.itemName
+          console.log(con)
             var usernameIsPresent = items.filter((a)=>{return a.cnt === con})
              console.log(usernameIsPresent)
              if (usernameIsPresent.length>0) {
