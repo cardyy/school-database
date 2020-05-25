@@ -494,8 +494,7 @@ app.post("/store", function (req, res) {
             idNumber: req.body.idNumber,
             className: req.body.className,
             itemName: products,
-           
-            delivered: "No",
+           delivered: "No",
           })}
            try {
             await outletsArray.save(function (err, data) {
@@ -528,8 +527,7 @@ app.post("/store", function (req, res) {
             idNumber: req.body.idNumber,
             className: req.body.className,
             itemName: products,
-           
-            delivered: "No",
+           delivered: "No",
           })}
            try {
             await outletsArray.save(function (err, data) {
@@ -542,7 +540,6 @@ app.post("/store", function (req, res) {
             }
           }}
         }, 1);
-				}
         console.log(response.error);
       }
     })
