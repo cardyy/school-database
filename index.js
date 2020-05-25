@@ -476,8 +476,13 @@ app.post("/store", function (req, res) {
         	
           for (var i in d){
           outletsArray = await outlets.findById(d[i]);
+          var nm = outletsArray.name 
+          var con= outletsArray.contact
+          var cit= outletsArray.city
           var items = req.body.itemName
-          	console.log(items)
+            var usernameIsPresent = items.filter((a)=>{return a.oName === nm && a.oCity === cit && a.oContact === con})
+             if (usernameIsPresent !== '') {
+          console.log(items)
           outletsArray.purchases = outletsArray.purchases.concat({
             school: req.body.school,
             name: req.body.name,
@@ -489,7 +494,7 @@ app.post("/store", function (req, res) {
             itemName: req.body.itemName,
             totalAmount: req.body.amount,
             delivered: "No",
-          })
+          })}
            try {
             await outletsArray.save(function (err, data) {
               if (err) throw err;
