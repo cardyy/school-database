@@ -500,7 +500,7 @@ app.post("/store", function (req, res) {
             itemName: req.body.itemName,
             totalAmount: req.body.amount,
             delivered: "No",
-          })) }
+          })) 
           try {
             await outletsArray.save(function (err, data) {
               if (err) throw err;
@@ -510,7 +510,7 @@ app.post("/store", function (req, res) {
             if (outletsArray == null) {
               console.log("not done");
             }
-          }
+          }}
         }, 1);
       } else {
       	for (var i in d){
