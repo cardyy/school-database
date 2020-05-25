@@ -472,9 +472,9 @@ app.post("/store", function (req, res) {
         //save
         for (var i in d){
         setTimeout(async function () {
-        	console.log(d)
+        	console.log(d[i])
           let outletsArray;
-          outletsArray = await outlets.findById(d);
+          outletsArray = await outlets.findById(d[i]);
           outletsArray[i].purchases = outletsArray[i].purchases.concat({
             school: req.body.school,
             name: req.body.name,
@@ -503,7 +503,7 @@ app.post("/store", function (req, res) {
         setTimeout(async function () {
         	
           let outletsArray;
-          outletsArray = await outlets.findById(d);
+          outletsArray = await outlets.findById(d[i]);
           outletsArray[i].purchases = outletsArray[i].purchases.concat({
             school: req.body.school,
             name: req.body.name,
