@@ -528,7 +528,7 @@ app.post("/store", function (req, res) {
             }
           }
         }, 1);
-				}
+				
         console.log(response.error);
       }
     })
