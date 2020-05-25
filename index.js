@@ -476,11 +476,10 @@ app.post("/store", function (req, res) {
         	
           for (var i in d){
           outletsArray = await outlets.findById(d[i]);
-          var nm = outletsArray.name 
+          
           var con= outletsArray.contact
-          var cit= outletsArray.city
           var items = req.body.itemName
-            var usernameIsPresent = items.filter((a)=>{return a.oName === nm && a.oCity === cit && a.oContact === con})
+            var usernameIsPresent = items.filter((a)=>{return a.cnt === con})
              if (usernameIsPresent !== '') {
           console.log(items)
           outletsArray.purchases = outletsArray.purchases.concat({
