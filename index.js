@@ -500,9 +500,10 @@ app.post("/store", function (req, res) {
         }, 1);
       } else {
         setTimeout(async function () {
+        	let outletsArray;
         	for(var ot in d){
         		console.log(d)
-        	let outletsArray;
+        	
           outletsArray = await outlets.findById(d);
           outletsArray.purchases = outletsArray.purchases.concat({
             school: req.body.school,
