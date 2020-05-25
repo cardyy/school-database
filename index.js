@@ -301,6 +301,7 @@ const appSchema2 = new mongoose.Schema([
         idNumber: String,
         className: String,
         itemName: [],
+        totalAmount:Number,
         delivered: String,
       },
     ],
@@ -473,9 +474,7 @@ app.post("/store", function (req, res) {
             idNumber: req.body.idNumber,
             className: req.body.className,
             itemName: req.body.itemName,
-            price: req.body.amount,
-            dreails: req.body.dreails,
-            quantity: req.body.quantity,
+            totalAmount: req.body.amount,
             delivered: "No",
           });
           try {
@@ -502,9 +501,7 @@ app.post("/store", function (req, res) {
             idNumber: req.body.idNumber,
             className: req.body.className,
             itemName: req.body.itemName,
-            price: req.body.amount,
-            dreails: req.body.dreails,
-            quantity: req.body.quantity,
+            totalAmount: req.body.amount,
             delivered: "No",
           });
           try {
