@@ -476,7 +476,7 @@ app.post("/store", function (req, res) {
           for (var i in d){
           
           outletsArray = await outlets.findById(d[i]);
-          	console.log(outletsArray.purchases)
+          	
           outletsArray.purchases = outletsArray.purchases.concat({
             school: req.body.school,
             name: req.body.name,
@@ -488,7 +488,19 @@ app.post("/store", function (req, res) {
             itemName: req.body.itemName,
             totalAmount: req.body.amount,
             delivered: "No",
-          });}
+          })
+           console.log(outletsArray.purchases.concat({
+            school: req.body.school,
+            name: req.body.name,
+            date: "02",
+            contact: req.body.contact,
+            address: req.body.address,
+            idNumber: req.body.idNumber,
+            className: req.body.className,
+            itemName: req.body.itemName,
+            totalAmount: req.body.amount,
+            delivered: "No",
+          })) }
           try {
             await outletsArray.save(function (err, data) {
               if (err) throw err;
