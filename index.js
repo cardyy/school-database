@@ -473,7 +473,11 @@ app.post("/store", function (req, res) {
         setTimeout(async function () {
         	let outletsArray;
         	for(var ot in d){
-        		console.log(d)
+        		
+        		var oid = d[ot]
+        		console.log(oid)
+        	
+          outletsArray = await outlets.findById(oid);
         	
           outletsArray = await outlets.findById(d);
           outletsArray[ot].purchases = outletsArray[ot].purchases.concat({
@@ -503,9 +507,10 @@ app.post("/store", function (req, res) {
         setTimeout(async function () {
         	let outletsArray;
         	for(var ot in d){
-        		console.log(d)
+        		var oid = d[ot]
+        		console.log( oid)
         	
-          outletsArray = await outlets.findById(d);
+          outletsArray = await outlets.findById(oid);
           outletsArray[ot].purchases = outletsArray[ot].purchases.concat({
             school: req.body.school,
             name: req.body.name,
