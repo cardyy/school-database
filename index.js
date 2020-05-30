@@ -362,6 +362,9 @@ app.post("/users", function (req, res) {
       const idNumber = result[0].students.filter(
         (s) => s.email == username && s.password == password
       )[0].idNumber;
+      const propic = result[0].students.filter(
+        (s) => s.email == username && s.password == password
+      )[0].propic;
 
       res.send({
         success: true,
@@ -377,6 +380,7 @@ app.post("/users", function (req, res) {
         address: address,
         idNumber: idNumber,
         className: className,
+        propic:propic,
       });
     } else {
       res.send({ success: false, message: "No such user in our database!" });
@@ -472,13 +476,9 @@ app.post("/store", function (req, res) {
         let instructions = response.instructions;
         let pollUrl = response.pollUrl;
         console.log(instructions);
-
-        //save
-        
-        setTimeout(async function () {
+setTimeout(async function () {
         	let outletsArray;
-        	
-          for (var i in d){
+        	for (var i in d){
           outletsArray = await outlets.findById(d[i]);
           var con= outletsArray.contact
           var items = req.body.itemName
