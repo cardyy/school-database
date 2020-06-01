@@ -77,7 +77,7 @@ mongoose.connection
   
   
   io.on("connection", socket => {
-  console.log("a user connected :D");
+  console.log("ndati connected :D");
 socket.emit('update','hello world')
  
 });
