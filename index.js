@@ -75,12 +75,12 @@ mongoose.connection
     console.log("connection error", error);
   });
   
-  
-  io.on("connection", socket => {
-  console.log("a user connected :D");
-  socket.on("chat message", msg => {
-    console.log(msg);
-    io.emit("chat message", msg);
+io.on('connection', function(socket) {
+  console.log('Alguien se ha conectado con Sockets');
+
+  socket.on('update:component', function(data) {
+    socket.emit('Thanks', data);
+    console.log(data);
   });
 });
 
@@ -753,7 +753,7 @@ app.post("/textSmS/:id", async (req, res) => {
 
 app.post("/events/:id", async (req, res) => {
   let upcomingSchoolEventsArray;
-
+io.sockets.emit("events", req.body);
   upcomingSchoolEventsArray = await records.findById(req.params.id);
   upcomingSchoolEventsArray.upcomingSchoolEvents = upcomingSchoolEventsArray.upcomingSchoolEvents.concat(
     {
