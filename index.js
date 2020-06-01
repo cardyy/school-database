@@ -18,8 +18,8 @@ const multerS3 = require("multer-s3");
 const multer = require("multer");
 const d = new Date();
 const daYear = d.getFullYear();
-const server = require("http").createServer(app);
-const io = require("socket.io").listen(server);
+const socketIo = require("socket.io");
+
 
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(
@@ -58,8 +58,8 @@ function checkNotAuthenticated(req, res, next) {
 }
 
 const PORT = process.env.PORT || 5000;
-server.listen(PORT, () => console.log(`Nerbular Server running on port ${PORT}`));
-
+const expressServer = app.listen(PORT, () => console.log(`Nerbular Server running on port ${PORT}`));
+const io = socketIo(expressServer);
 
 
 const mongoose = require("mongoose");
@@ -77,10 +77,9 @@ mongoose.connection
   
   
  io.on("connection", socket => {
-  console.log("mhata");
   socket.on("upgrade", msg => {
     console.log(msg);
-    io.emit("upgrade", msg);
+    socket.emit("upgrade", 'ma1');
   });
 });
 
