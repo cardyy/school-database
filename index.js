@@ -60,7 +60,7 @@ function checkNotAuthenticated(req, res, next) {
 const PORT = process.env.PORT || 5000;
 const expressServer = app.listen(PORT, () => console.log(`Nerbular Server running on port ${PORT}`));
 const io = socketIo(expressServer);
-console.log(io)
+
 
 const mongoose = require("mongoose");
 mongoose.connect(
@@ -75,13 +75,11 @@ mongoose.connection
     console.log("connection error", error);
   });
   
-io.on('connection', function(socket) {
-  console.log('Alguien se ha conectado con Sockets');
-
-  socket.on('update:component', function(data) {
-    socket.emit('Thanks', data);
-    console.log(data);
-  });
+  
+  io.on("connection", socket => {
+  console.log("a user connected :D");
+socket.emit('update','hello world')
+ 
 });
 
 const appSchema = new mongoose.Schema([
@@ -753,7 +751,7 @@ app.post("/textSmS/:id", async (req, res) => {
 
 app.post("/events/:id", async (req, res) => {
   let upcomingSchoolEventsArray;
-io.sockets.emit("events", req.body);
+
   upcomingSchoolEventsArray = await records.findById(req.params.id);
   upcomingSchoolEventsArray.upcomingSchoolEvents = upcomingSchoolEventsArray.upcomingSchoolEvents.concat(
     {
