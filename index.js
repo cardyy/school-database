@@ -76,12 +76,10 @@ mongoose.connection
   });
   
   
-io.on("connection", socket => {
-  console.log("a user connected :D");
-  socket.on("upgrade", msg => {
-    console.log(msg);
-    io.emit("upgrade", msg);
-  });
+  io.on("connection", socket => {
+  console.log("ndati connected :D");
+socket.emit('update','hello world')
+ 
 });
 
 const appSchema = new mongoose.Schema([
