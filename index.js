@@ -76,10 +76,12 @@ mongoose.connection
   });
   
   
-  io.on("connection", socket => {
-  console.log("ndati connected :D");
-socket.emit('update','hello world')
- 
+ io.on("connection", socket => {
+  console.log("mhata");
+  socket.on("upgrade", msg => {
+    console.log(msg);
+    io.emit("upgrade", msg);
+  });
 });
 
 const appSchema = new mongoose.Schema([
