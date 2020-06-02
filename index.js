@@ -332,6 +332,7 @@ io.on("connection", socket => {
   socket.on("update", msg => {
     console.log(msg);
     
+    
   });
 });
 app.post("/users", function (req, res) {
@@ -758,9 +759,16 @@ app.post("/events/:id", async (req, res) => {
  
 
   upcomingSchoolEventsArray = await records.findById(req.params.id);
-var data= await records.find({}).toArray()
-  io.emit("update",data);
-  console.log(data)
+   records.find().toArray(function(err, res){
+            if(err){
+                throw err;
+            }
+
+            io.emit("update",res);
+             console.log(res)
+        });
+
+ 
 
  upcomingSchoolEventsArray.upcomingSchoolEvents = upcomingSchoolEventsArray.upcomingSchoolEvents.concat(
     {
