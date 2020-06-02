@@ -687,7 +687,7 @@ app.get("/home", checkAuthenticated, function (req, res) {
         attCount += 1;
       }
     }
-    io.emit("update",JSON.parse(data));
+    io.emit("update",data);
     res.render("home", {
       data: data,
       id: req.user.id,
