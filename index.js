@@ -659,7 +659,6 @@ app.get("/events/:id", checkAuthenticated, function (req, res) {
 });
 
 app.get("/home", checkAuthenticated, function (req, res) {
-	io.emit("update",'Fuck');
   records.find({ _id: req.user.id }, function (err, data) {
     if (err) throw err;
     var wd = data[0].students;
@@ -688,6 +687,7 @@ app.get("/home", checkAuthenticated, function (req, res) {
         attCount += 1;
       }
     }
+    io.emit("update",data);
     res.render("home", {
       data: data,
       id: req.user.id,
