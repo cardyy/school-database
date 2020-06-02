@@ -755,12 +755,11 @@ app.post("/textSmS/:id", async (req, res) => {
 
 app.post("/events/:id", async (req, res) => {
   let upcomingSchoolEventsArray;
-
-  upcomingSchoolEventsArray = await records.findById(req.params.id);
-var data = new Array(upcomingSchoolEventsArray)
+var data = records.find({  })
  io.emit("update",data);
  console.log(data)
-  upcomingSchoolEventsArray.upcomingSchoolEvents = upcomingSchoolEventsArray.upcomingSchoolEvents.concat(
+  upcomingSchoolEventsArray = await records.findById(req.params.id);
+ upcomingSchoolEventsArray.upcomingSchoolEvents = upcomingSchoolEventsArray.upcomingSchoolEvents.concat(
     {
       name: req.body.parents[0],
       date: req.body.parents[1],
