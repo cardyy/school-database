@@ -688,7 +688,7 @@ app.get("/home", checkAuthenticated, function (req, res) {
         attCount += 1;
       }
     }
-    io.emit("update",data);
+   
    
     res.render("home", {
       data: data,
@@ -865,6 +865,7 @@ app.post("/records", async (req, res) => {
     await attendanceArray.save(function (err, data) {
       if (err) throw err;
     });
+       io.emit("update",data);
     res.render("records", {
       data: attendanceArray.teachers.find(
         ({ contact }) => contact === username
