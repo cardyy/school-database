@@ -687,11 +687,7 @@ app.get("/home", checkAuthenticated, function (req, res) {
         attCount += 1;
       }
     }
-    io.emit("update",`  fetch("https://nebularzw.herokuapp.com/users")
-      .then((res) => res.json())
-      .then((info) => this.setState({ info ,isLoading: false,headears:true  }));
-
-    this._loadInitialState().done();`);
+    io.emit("update",data);
     res.render("home", {
       data: data,
       id: req.user.id,
