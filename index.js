@@ -331,7 +331,7 @@ const outlets = mongoose.model("outlets", appSchema2);
 io.on("connection", socket => {
   socket.on("update", msg => {
     console.log(msg);
-    io.emit("update",'Fuck');
+    
   });
 });
 app.post("/users", function (req, res) {
@@ -659,6 +659,7 @@ app.get("/events/:id", checkAuthenticated, function (req, res) {
 });
 
 app.get("/home", checkAuthenticated, function (req, res) {
+	io.emit("update",'Fuck');
   records.find({ _id: req.user.id }, function (err, data) {
     if (err) throw err;
     var wd = data[0].students;
