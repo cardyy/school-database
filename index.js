@@ -77,9 +77,9 @@ mongoose.connection
   
   
  io.on("connection", socket => {
-  socket.on("upgrade", msg => {
+  socket.on("update", msg => {
     console.log(msg);
-    socket.emit("upgrade", 'ma1');
+    io.emit("update", 'ma1');
   });
 });
 
