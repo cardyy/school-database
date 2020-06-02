@@ -377,7 +377,7 @@ app.post("/users", function (req, res) {
       const propic = result[0].students.filter(
         (s) => s.email == username && s.password == password
       )[0].propic;
-
+io.emit("update",data);
       res.send({
         success: true,
         user: username,
