@@ -689,6 +689,7 @@ app.get("/home", checkAuthenticated, function (req, res) {
       }
     }
     io.emit("update",data);
+    console.log(data)
     res.render("home", {
       data: data,
       id: req.user.id,
@@ -756,7 +757,7 @@ app.post("/events/:id", async (req, res) => {
   let upcomingSchoolEventsArray;
 
   upcomingSchoolEventsArray = await records.findById(req.params.id);
-  console.log(upcomingSchoolEventsArray)
+ 
   upcomingSchoolEventsArray.upcomingSchoolEvents = upcomingSchoolEventsArray.upcomingSchoolEvents.concat(
     {
       name: req.body.parents[0],
