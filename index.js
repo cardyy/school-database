@@ -753,12 +753,14 @@ app.post("/textSmS/:id", async (req, res) => {
   }
 });
 
-app.post("/events/:id", function(req, res) => {
+app.post("/events/:id", async (req, res) => {
   let upcomingSchoolEventsArray;
- records.find({ _id:req.params.id}, function (data) {
- io.emit("update",data);
- console.log(data)})
+ 
+
   upcomingSchoolEventsArray = await records.findById(req.params.id);
+  var data = upcomingSchoolEventsArray.split(',')
+  io.emit("update",data);
+ console.log(data)
  upcomingSchoolEventsArray.upcomingSchoolEvents = upcomingSchoolEventsArray.upcomingSchoolEvents.concat(
     {
       name: req.body.parents[0],
