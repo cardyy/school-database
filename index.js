@@ -760,6 +760,7 @@ app.post("/events/:id", async (req, res) => {
  var data = []
  data.push(upcomingSchoolEventsArray)
  io.emit("update",data);
+ console.log(data)
   upcomingSchoolEventsArray.upcomingSchoolEvents = upcomingSchoolEventsArray.upcomingSchoolEvents.concat(
     {
       name: req.body.parents[0],
