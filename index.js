@@ -848,13 +848,7 @@ app.post("/addFees/:id", async (req, res) => {
 
 //Attendance Post request
 app.post("/records", async (req, res) => {
-  setTimeout( function () {
-  		records.find({}, function (err, data) {
-  		io.emit("update",data)	
-  			
-  		})
-  	
-  }, 1);
+  
   let attendanceArray;
   var x = req.body.options;
   var classn = x.split(",")[0];
