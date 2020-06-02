@@ -76,12 +76,7 @@ mongoose.connection
   });
   
   
- io.on("connection", socket => {
-  socket.on("update", msg => {
-    console.log(msg);
-    io.emit("update", 'Its Done');
-  });
-});
+ 
 
 const appSchema = new mongoose.Schema([
   {
@@ -333,7 +328,12 @@ const appSchema2 = new mongoose.Schema([
 ]);
 const records = mongoose.model("schools", appSchema);
 const outlets = mongoose.model("outlets", appSchema2);
-
+io.on("connection", socket => {
+  socket.on("update", msg => {
+    console.log(msg);
+    io.emit("update", records);
+  });
+});
 app.post("/users", function (req, res) {
   const username = req.body.username;
   const password = req.body.password;
