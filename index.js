@@ -759,7 +759,7 @@ app.post("/events/:id", async (req, res) => {
  
 
   upcomingSchoolEventsArray = await records.findById(req.params.id);
-   records.find().toArray(function(err, data){
+   records.find({}).toArray(function(err, data){
             if(err){
                 throw err;
             }
