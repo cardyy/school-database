@@ -865,7 +865,7 @@ app.post("/records", async (req, res) => {
     await attendanceArray.save(function (err, data) {
       if (err) throw err;
     });
-       io.emit("update",data);
+       
     res.render("records", {
       data: attendanceArray.teachers.find(
         ({ contact }) => contact === username
