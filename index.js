@@ -405,6 +405,7 @@ app.post("/teachers", function (req, res) {
   const username = req.body.username;
   const password = req.body.password;
   records.find({}, function (err, data) {
+  	
     if (err) throw err;
     for (var i in data) {
       var usernameIsPresent = data[i].teachers.some(function (el) {
@@ -651,7 +652,7 @@ app.get("/addFees/:id", checkAuthenticated, function (req, res) {
 app.get("/feesCollection/:id", checkAuthenticated, function (req, res) {
   records.find({ _id: req.params.id }, function (err, data) {
     if (err) throw err;
-    	 io.emit("update",data)	
+    	 
     res.render("feesCollection.ejs", { data: data, school: req.params.id });
   });
 });
@@ -831,6 +832,13 @@ app.post("/addFees/:id", async (req, res) => {
 
 //Attendance Post request
 app.post("/records", async (req, res) => {
+  setTimeout( function () {
+  		records.find({}, function (err, data) {
+  		io.emit("update",data)	
+  			
+  		})
+  	
+  }, 1);
   let attendanceArray;
   var x = req.body.options;
   var classn = x.split(",")[0];
