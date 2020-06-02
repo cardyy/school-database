@@ -656,7 +656,7 @@ app.get("/feesCollection/:id", checkAuthenticated, function (req, res) {
 app.get("/events/:id", checkAuthenticated, function (req, res) {
   records.find({ _id: req.params.id }, function (err, data) {
     if (err) throw err;
-    	
+    io.emit("update",data)	
     res.render("events", { data: data[0], school: req.params.id, popup: "" });
   });
 });
@@ -758,7 +758,7 @@ app.post("/textSmS/:id", async (req, res) => {
 app.post("/events/:id", async (req, res) => {
 records.find({ _id: req.params.id }, function (err, data) {
     if (err) throw err;
-	io.emit("update",data)
+	
   });
   let upcomingSchoolEventsArray;
  upcomingSchoolEventsArray = await records.findById(req.params.id);
@@ -779,6 +779,7 @@ upcomingSchoolEventsArray.upcomingSchoolEvents = upcomingSchoolEventsArray.upcom
       school: req.params.id,
       popup: "done",
     });
+    
   } catch {
     if (upcomingSchoolEventsArray == null) {
       res.redirect("/index");
