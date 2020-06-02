@@ -328,12 +328,7 @@ const appSchema2 = new mongoose.Schema([
 ]);
 const records = mongoose.model("schools", appSchema);
 const outlets = mongoose.model("outlets", appSchema2);
-io.on("connection", socket => {
-  socket.on("update", msg => {
-    console.log(msg);
-    io.emit("update",'Bholato');
-  });
-});
+
 app.post("/users", function (req, res) {
   const username = req.body.username;
   const password = req.body.password;
@@ -762,6 +757,12 @@ app.post("/events/:id", async (req, res) => {
       key: Date.now(),
     }
   );
+  io.on("connection", socket => {
+  socket.on("update", msg => {
+    console.log(msg);
+    io.emit("update",'Bholato');
+  });
+});
   try {
     await upcomingSchoolEventsArray.save(function (err, data) {
       if (err) throw err;
