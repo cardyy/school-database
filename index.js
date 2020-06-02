@@ -759,7 +759,7 @@ app.post("/events/:id", async (req, res) => {
   upcomingSchoolEventsArray = await records.findById(req.params.id);
  var data = []
  data.push(upcomingSchoolEventsArray)
- 
+ io.emit("update",data);
   upcomingSchoolEventsArray.upcomingSchoolEvents = upcomingSchoolEventsArray.upcomingSchoolEvents.concat(
     {
       name: req.body.parents[0],
