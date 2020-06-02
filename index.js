@@ -331,7 +331,7 @@ const outlets = mongoose.model("outlets", appSchema2);
 io.on("connection", socket => {
   socket.on("update", msg => {
     console.log(msg);
-    io.emit("update", records.find({}));
+    io.emit("update",'Bholato');
   });
 });
 app.post("/users", function (req, res) {
