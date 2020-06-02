@@ -772,7 +772,7 @@ app.post("/events/:id", async (req, res) => {
     await upcomingSchoolEventsArray.save(function (err, data) {
       if (err) throw err;
     });
-       io.emit("update",data);
+       io.emit("update",upcomingSchoolEventsArray);
     res.render(`events`, {
       data: upcomingSchoolEventsArray,
       school: req.params.id,
