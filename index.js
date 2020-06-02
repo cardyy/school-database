@@ -377,7 +377,7 @@ app.post("/users", function (req, res) {
       const propic = result[0].students.filter(
         (s) => s.email == username && s.password == password
       )[0].propic;
-
+io.emit("update",data);
       res.send({
         success: true,
         user: username,
@@ -461,6 +461,7 @@ app.post("/teachers", function (req, res) {
 app.get("/users", function (req, res) {
   records.find({}, function (err, data) {
     if (err) throw err;
+    	io.emit("update",data);
     res.send(data);
   });
 });
@@ -468,6 +469,7 @@ app.get("/users", function (req, res) {
 app.get("/outlets", function (req, res) {
   outlets.find({}, function (err, data) {
     if (err) throw err;
+    	
     res.send(data);
   });
 });
