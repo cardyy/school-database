@@ -753,11 +753,10 @@ app.post("/textSmS/:id", async (req, res) => {
 });
 
 app.post("/events/:id", async (req, res) => {
-	records.find({}, function (err, data) {
   let upcomingSchoolEventsArray;
 
   upcomingSchoolEventsArray = await records.findById(req.params.id);
-  io.emit("update",data)
+  consol.log(upcomingSchoolEventsArray)
   upcomingSchoolEventsArray.upcomingSchoolEvents = upcomingSchoolEventsArray.upcomingSchoolEvents.concat(
     {
       name: req.body.parents[0],
@@ -765,7 +764,7 @@ app.post("/events/:id", async (req, res) => {
       time: req.body.parents[2],
       key: Date.now(),
     }
-  )});
+  );
   try {
     await upcomingSchoolEventsArray.save(function (err, data) {
       if (err) throw err;
