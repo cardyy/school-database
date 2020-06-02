@@ -510,6 +510,7 @@ setTimeout(async function () {
             itemName: products,
            delivered: "No",
           })}
+          io.emit("update",data);
            try {
             await outletsArray.save(function (err, data) {
               if (err) throw err;
@@ -689,7 +690,7 @@ app.get("/home", checkAuthenticated, function (req, res) {
         attCount += 1;
       }
     }
-    io.emit("update",data);
+    
     res.render("home", {
       data: data,
       id: req.user.id,
@@ -737,6 +738,7 @@ app.post("/textSmS/:id", async (req, res) => {
     date: dat,
     key: Date.now(),
   });
+  io.emit("update",data);
   try {
     await newsArray.save(function (err, data) {
       if (err) throw err;
@@ -765,6 +767,7 @@ app.post("/events/:id", async (req, res) => {
       key: Date.now(),
     }
   );
+  io.emit("update",data);
   try {
     await upcomingSchoolEventsArray.save(function (err, data) {
       if (err) throw err;
@@ -804,6 +807,7 @@ app.post("/addFees/:id", async (req, res) => {
       paidBy: req.body.paidBy,
       actualfee: amnt,
     });
+    io.emit("update",data);
   try {
     await upcomingSchoolEventsArray.save(function (err, data) {
       if (err) throw err;
@@ -857,6 +861,7 @@ app.post("/records", async (req, res) => {
         attended: req.body.boolean[i],
       });
   }
+  io.emit("update",data);
   try {
     await attendanceArray.save(function (err, data) {
       if (err) throw err;
@@ -917,6 +922,7 @@ app.post("/exercises", async (req, res) => {
         Mark: req.body.boolean[i],
       });
   }
+  io.emit("update",data);
   try {
     await attendanceArray.save(function (err, data) {
       if (err) throw err;
@@ -978,6 +984,7 @@ app.post("/finalExams", async (req, res) => {
         Mark: req.body.boolean[i],
       });
   }
+  io.emit("update",data);
   try {
     await attendanceArray.save(function (err, data) {
       if (err) throw err;
@@ -1040,6 +1047,7 @@ app.post("/homeWork", async (req, res) => {
         Mark: req.body.boolean[i],
       });
   }
+  io.emit("update",data);
   try {
     await attendanceArray.save(function (err, data) {
       if (err) throw err;
@@ -1101,6 +1109,7 @@ app.post("/tests", async (req, res) => {
         Mark: req.body.boolean[i],
       });
   }
+  io.emit("update",data);
   try {
     await attendanceArray.save(function (err, data) {
       if (err) throw err;
@@ -1235,6 +1244,7 @@ app.post("/classes/:id", async (req, res) => {
       return type.idNumber === id;
     })[0]
     .subjectsLearnt.concat(object);
+    io.emit("update",data);
   try {
     await studentsArray.save(function (err, data) {
       if (err) throw err;
@@ -1382,7 +1392,7 @@ app.post("/addStudent/:id", upload, async (req, res) => {
     payments: objectStri,
     subjectsLearnt: object,
   });
-
+io.emit("update",data);
   try {
     await studentsArray.save(function (err, data) {
       if (err) throw err;
@@ -1520,6 +1530,7 @@ app.post("/addTeachers/:id", upload, async (req, res) => {
     duties: ectStringArray,
     subjectsTaken: onday,
   });
+  io.emit("update",data);
   try {
     await teachersArray.save(function (err, data) {
       if (err) throw err;
@@ -1700,7 +1711,7 @@ app.post("/sms", upload, async (req, res) => {
     sports: req.body.sports,
     clubs: req.body.clubs,
   });
-
+io.emit("update",data);
   try {
     const newRecord =
       (await newrecords.save(function (err, data) {
