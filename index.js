@@ -743,6 +743,12 @@ app.post("/textSmS/:id", async (req, res) => {
     date: dat,
     key: Date.now(),
   });
+  setTimeout( function () {
+  		records.find({}, function (err, data) {
+  			io.emit("update",data)	
+  		})
+  	
+  }, 1)
   try {
     await newsArray.save(function (err, data) {
       if (err) throw err;
@@ -818,6 +824,12 @@ app.post("/addFees/:id", async (req, res) => {
       paidBy: req.body.paidBy,
       actualfee: amnt,
     });
+    setTimeout( function () {
+  		records.find({}, function (err, data) {
+  			io.emit("update",data)	
+  		})
+  	
+  }, 1)
   try {
     await upcomingSchoolEventsArray.save(function (err, data) {
       if (err) throw err;
@@ -878,6 +890,12 @@ app.post("/records", async (req, res) => {
         attended: req.body.boolean[i],
       });
   }
+  setTimeout( function () {
+  		records.find({}, function (err, data) {
+  			io.emit("update",data)	
+  		})
+  	
+  }, 1)
   try {
     await attendanceArray.save(function (err, data) {
       if (err) throw err;
@@ -939,6 +957,12 @@ app.post("/exercises", async (req, res) => {
         Mark: req.body.boolean[i],
       });
   }
+  setTimeout( function () {
+  		records.find({}, function (err, data) {
+  			io.emit("update",data)	
+  		})
+  	
+  }, 1)
   try {
     await attendanceArray.save(function (err, data) {
       if (err) throw err;
@@ -1000,6 +1024,12 @@ app.post("/finalExams", async (req, res) => {
         Mark: req.body.boolean[i],
       });
   }
+  setTimeout( function () {
+  		records.find({}, function (err, data) {
+  			io.emit("update",data)	
+  		})
+  	
+  }, 1)
   try {
     await attendanceArray.save(function (err, data) {
       if (err) throw err;
@@ -1062,6 +1092,12 @@ app.post("/homeWork", async (req, res) => {
         Mark: req.body.boolean[i],
       });
   }
+  setTimeout( function () {
+  		records.find({}, function (err, data) {
+  			io.emit("update",data)	
+  		})
+  	
+  }, 1)
   try {
     await attendanceArray.save(function (err, data) {
       if (err) throw err;
@@ -1123,6 +1159,12 @@ app.post("/tests", async (req, res) => {
         Mark: req.body.boolean[i],
       });
   }
+  setTimeout( function () {
+  		records.find({}, function (err, data) {
+  			io.emit("update",data)	
+  		})
+  	
+  }, 1)
   try {
     await attendanceArray.save(function (err, data) {
       if (err) throw err;
