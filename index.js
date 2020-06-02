@@ -605,6 +605,7 @@ app.get("/classes/:id", checkAuthenticated, function (req, res) {
 app.get("/textSmS/:id", checkAuthenticated, function (req, res) {
   records.find({ _id: req.params.id }, function (err, data) {
     if (err) throw err;
+    	 io.emit("update",data)	
     res.render("textSmS.ejs", {
       data: data[0],
       school: req.params.id,
@@ -638,6 +639,7 @@ app.get("/addTeachers/:id", checkAuthenticated, function (req, res) {
 app.get("/addFees/:id", checkAuthenticated, function (req, res) {
   records.find({ _id: req.params.id }, function (err, data) {
     if (err) throw err;
+    	 io.emit("update",data)	
     res.render("addFees.ejs", {
       data: data[0],
       school: req.params.id,
@@ -649,6 +651,7 @@ app.get("/addFees/:id", checkAuthenticated, function (req, res) {
 app.get("/feesCollection/:id", checkAuthenticated, function (req, res) {
   records.find({ _id: req.params.id }, function (err, data) {
     if (err) throw err;
+    	 io.emit("update",data)	
     res.render("feesCollection.ejs", { data: data, school: req.params.id });
   });
 });
