@@ -491,7 +491,7 @@ app.post("/store", function (req, res) {
         let pollUrl = response.pollUrl;
         console.log(instructions);
         let status = paynow.pollTransaction(pollUrl);
-console.log(status.paid())
+console.log(status)
 
          } else {
       	
