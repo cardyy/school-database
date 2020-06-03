@@ -492,7 +492,7 @@ app.post("/store", function (req, res) {
         console.log(instructions);
         let status = paynow.pollTransaction(pollUrl);
 setTimeout(function(){
-if (status.paid()) {
+if (status.paid) {
  setTimeout(async function () {
         	let outletsArray;
         	for (var i in d){
@@ -528,7 +528,7 @@ if (status.paid()) {
   console.log("Why you no pay?");
 }
 
-}, 300000);
+}, 1);
          } else {
       	
         console.log(response.error);
