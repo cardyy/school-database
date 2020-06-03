@@ -491,42 +491,8 @@ app.post("/store", function (req, res) {
         let pollUrl = response.pollUrl;
         console.log(instructions);
         let status = paynow.pollTransaction(pollUrl);
+console.log(status.paid())
 
-if (status.paid()) {
- setTimeout(async function () {
-        	let outletsArray;
-        	for (var i in d){
-          outletsArray = await outlets.findById(d[i]);
-          var con= outletsArray.contact
-          var items = req.body.itemName
-          var usernameIsPresent = items.filter((a)=>{return a.cnt == con})
-            if (usernameIsPresent.length>0) {
-            	var products = usernameIsPresent
-          outletsArray.purchases = outletsArray.purchases.concat({
-            school: req.body.school,
-            name: req.body.name,
-            date: "02",
-            contact: req.body.contact,
-            address: req.body.address,
-            idNumber: req.body.idNumber,
-            className: req.body.className,
-            itemName: products,
-           delivered: "No",
-          })}
-           try {
-            await outletsArray.save(function (err, data) {
-              if (err) throw err;
-            });
-            console.log("done");
-          } catch {
-            if (outletsArray == null) {
-              console.log("not done");
-            }
-          }}
-        }, 1);
-} else {
-  console.log("Why you no pay?");
-}
          } else {
       	
         console.log(response.error);
