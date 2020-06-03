@@ -492,8 +492,9 @@ app.post("/store", function (req, res) {
         console.log(instructions);
         let status = paynow.pollTransaction(pollUrl);
 
+setTimeout(function(){ 
+if (status.paid()) {
  setTimeout(async function () {
- 	if (status.paid()) {
         	let outletsArray;
         	for (var i in d){
           outletsArray = await outlets.findById(d[i]);
@@ -523,12 +524,11 @@ app.post("/store", function (req, res) {
               console.log("not done");
             }
           }}
-          } else {
-  console.log("Why you no pay?");
-}.catch(() => {
-      console.log("Pane ka problem");
-    });
         }, 1);
+} else {
+  console.log("Why you no pay?");
+}
+ }, 3);
 
          } else {
       	
