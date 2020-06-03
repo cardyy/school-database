@@ -525,7 +525,9 @@ app.post("/store", function (req, res) {
           }}
           } else {
   console.log("Why you no pay?");
-}
+}.catch(() => {
+      console.log("Pane ka problem");
+    });
         }, 1);
 
          } else {
