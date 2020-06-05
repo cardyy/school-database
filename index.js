@@ -252,6 +252,8 @@ const appSchema = new mongoose.Schema([
 const appSchema2 = new mongoose.Schema([
   {
     name: String,
+    email:String,
+    password:String,
     contact: Number,
     city: String,
     ecocashnumber: Number,
@@ -296,7 +298,7 @@ const appSchema2 = new mongoose.Schema([
         key: Number,
       },
     ],
-    miscellaneous: [
+    miscellenious: [
       {
       	name: String,
         outletName:String,
@@ -460,6 +462,32 @@ app.post("/teachers", function (req, res) {
   });
 });
 
+app.post("/merchants", function (req, res) {
+  const username = req.body.username;
+  const password = req.body.password;
+  outlets.find({}, function (err, data) {
+  	
+    if (err) throw err;
+    for (var i in data) {
+    
+
+      if (username === data[i].email && password== data[i].password) {
+        break;
+      }
+    }
+
+    if (username === data[i].email && password == data[i].password) {
+    
+ var result = data.filter((a)=>a.email===username && a.password === password)
+ var redID = result[0]._id;
+    res.render("moutlets", {data:data.filter((a)=>a.email===username && a.password === password)[0]}); 
+     
+    } else {
+      res.render("merchants", { errormessage: "your message" });
+    }
+  });
+});
+
 app.get("/users", function (req, res) {
   records.find({}, function (err, data) {
     if (err) throw err;
@@ -500,13 +528,14 @@ if (status.paid) {
           outletsArray = await outlets.findById(d[i]);
           var con= outletsArray.contact
           var items = req.body.itemName
+          var datetime = new Date();
           var usernameIsPresent = items.filter((a)=>{return a.cnt == con})
             if (usernameIsPresent.length>0) {
             	var products = usernameIsPresent
           outletsArray.purchases = outletsArray.purchases.concat({
             school: req.body.school,
             name: req.body.name,
-            date: "02",
+            date: datetime,
             contact: req.body.contact,
             address: req.body.address,
             idNumber: req.body.idNumber,
@@ -706,6 +735,13 @@ app.get("/teachers", function (req, res) {
   records.find({}, function (err, data) {
     if (err) throw err;
     res.render("teachers", { data: data, errormessage: "" });
+  });
+});
+
+app.get("/merchants", function (req, res) {
+  outlets.find({}, function (err, data) {
+    if (err) throw err;
+    res.render("merchants", { data: data, errormessage: "" });
   });
 });
 
