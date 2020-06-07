@@ -254,6 +254,7 @@ const appSchema2 = new mongoose.Schema([
     name: String,
     email:String,
     password:String,
+    outletId:String,
     contact: Number,
     city: String,
     ecocashnumber: Number,
@@ -480,13 +481,45 @@ app.post("/merchants", function (req, res) {
     
  var result = data.filter((a)=>a.email===username && a.password === password)
  var redID = result[0]._id;
-    res.render("moutlets", {data:data.filter((a)=>a.email===username && a.password === password)[0]}); 
+    res.render("moutlets", {data:data.filter((a)=>a.email===username && a.password === password)[0], id:redID}); 
      
     } else {
       res.render("merchants", { errormessage: "your message" });
     }
   });
 });
+
+app.post("/moutlets", async (req, res) => {
+ let newsArray
+  newsArray = await outlets.findById(req.body.id);
+if(req.body.cat == 'stationery'){
+if(req.body.name !== '') {
+newsArray.stationery.filter((x)=>{x.name=== req.body.inpname})[0].name = newsArray.stationery.filter((x)=>{x.name=== req.body.inpname})[0].name= req.body.name}
+  if(req.body.quantity !== '') {
+newsArray.stationery.filter((x)=>{x.name=== req.body.inpname})[0].quantity= newsArray.stationery.filter((x)=>{x.name=== req.body.inpname})[0].quantity= req.body.quantity}
+ if(req.body.price !== '') {
+newsArray.stationery.filter((x)=>{x.name=== req.body.inpname})[0].price = newsArray.stationery.filter((x)=>{x.name=== req.body.inpname})[0].price= req.body.price}
+ if(req.body.description !== '') { 
+newsArray.stationery.filter((x)=>{x.name=== req.body.inpname})[0].dreails = newsArray.stationery.filter((x)=>{x.name=== req.body.inpname})[0].dreails= req.body.description}
+	}
+  setTimeout( function () {
+  	outlets.find({}, function (err, data) {
+  		io.emit("outlet",data)	
+  		})
+  	
+  }, 1)
+  try {
+    await newsArray.save(function (err, data) {
+      if (err) throw err;
+    });
+    res.render("merchants");
+  } catch {
+    if (newsArray == null) {
+      res.redirect("/index");
+    }
+  }
+});
+
 
 app.get("/users", function (req, res) {
   records.find({}, function (err, data) {
@@ -744,6 +777,7 @@ app.get("/merchants", function (req, res) {
     res.render("merchants", { data: data, errormessage: "" });
   });
 });
+
 
 app.post("/textSmS/:id", async (req, res) => {
   let newsArray;

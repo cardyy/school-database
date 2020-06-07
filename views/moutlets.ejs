@@ -39,8 +39,86 @@
   
 </head>
 <style>
-#products{
-display:flex; 
+#btn{
+margin-top: 50px;
+width:60%;
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.7);
+align-self: center;
+border-radius: 4px;	
+}
+input{
+margin-top: 20px;
+width:60%;
+padding-top:20px;
+
+border-radius: 4px;
+}
+textarea{
+border-radius: 4px;
+margin-top:	20px;
+width:60%;
+}
+   /* The Modal (background) */
+#modal {
+
+  display:none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 60%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+ margin-top: 5%;
+ margin-left: 30%;
+}
+
+
+/* Modal Content */
+.modal-content {
+ background:rgba(6, 6, 33, 1);
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  margin: auto;
+  padding: 20px;
+  width: 40%;
+  height: 70%
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+#sta{
+display:none; 
+flex-wrap:wrap;
+justify-content: space-around;
+padding-top:10px; 
+}
+#uni{
+display:none; 
+flex-wrap:wrap;
+justify-content: space-around;
+padding-top:10px; 
+}
+#bok{
+display:none; 
+flex-wrap:wrap;
+justify-content: space-around;
+padding-top:10px; 
+}
+#mis{
+display:none; 
 flex-wrap:wrap;
 justify-content: space-around;
 padding-top:10px; 
@@ -70,7 +148,7 @@ size:18;
 position: relative;
 width: 90px;
 height: 40px;
-background: #9a9a9a;
+background:rgba(6, 6, 33, 0.9);
 top:15px;
 left:5px;
 border-radius: 20px;
@@ -81,7 +159,7 @@ box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 position: relative;
 width: 90px;
 height: 40px;
-background: #9a9a9a;
+background:rgba(6, 6, 33, 0.9);
 top:15px;
 left:60px;
 border-radius: 20px;
@@ -127,16 +205,14 @@ box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
           <h5 class="centered"> <%-data.name%></h5>
           <li class="mt">
             <a href="/home">
-              <i class="fa fa-home"></i>
+              
               <span>Products</span>
               </a>
           </li>
          
-          
-         
-          <li class="sub-menu">
+         <li class="sub-menu">
             <a href="/">
-              <i class="fa fa-calendar"></i>
+             
               <span>Purchases</span>
               </a>
             
@@ -144,7 +220,7 @@ box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
           
           <li>
             <a href="/moutlets">
-              <i class="fa fa-envelope"></i>
+              
               <span>Finances </span>
         
               </a>
@@ -162,26 +238,97 @@ box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
         *********************************************************************************************************************************************************** -->
     <!--main content start-->
      <section id="main-content">
-    
+    <div  id="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close" >&times;</span>
+<form id="reg" class="cmxform form-horizontal style-form" name="moutlets" action = "/moutlets" method="POST"  >
+    <input type="text" style="display:none " name="id"/>
+     <input type="text" style="display:none "  id='inpname' name="inpname"/>
+     <input type="text" style="display:none "  id='inpname' name="cat" value="stationery"/>
+    <input type="text"  placeholder="Item Name" name="name"/>
+    <input type="text"  placeholder="Item Quantity" name="quantity"/>
+    <input type="text" placeholder="Item Price" name="price"/>
+    <textarea placeholder="Item Description" name="description"></textarea>
+   <button class="btn btn-theme" type="submit" id="btn" onclick="load()" >Save</button>
+   </form>
+  </div>
+<div id='status' class='invisible'>
+	
+</div>
+</div>
      <div id="products">
-     <select class='listbox'>
+     <select class='listbox' onchange="myFunction(this)">
+     <option>Choose Category</option>
      	<option>stationery</option>
      	<option>uniforms</option>
      	<option>books</option>
-     	<option>miscellaneous</option>
+     	<option>miscellenious</option>
      </select>
-     <% for (i=0;i<10;i++){%>
+     <div id="sta">
+      <% var stData = data.stationery %>
+ <% for (var i in stData){%>
     <div class="cards">
-  <img src="/img/background.png" alt="" width="240" height="140" style="padding-left:5px;padding-top:5px "/>
+ <img src="https://nebularimages.s3.eu-central-1.amazonaws.com/<%-stData[i].image %>" alt="" width="240" height="140" style="padding-left:5px;padding-top:5px "/>
     <div style="margin-top:10px;padding-left:5px; ">
-    <p>Name:</p>
-    <p>Price: $</p>
-    <p>Quantity</p>
+    <p>Name: <%-stData[i].name%> </p>
+    <p>Price: $<%-stData[i].price%></p>
+    <p>Quantity: <%-stData[i].quantity%></p>
     </div>
-  <button id="b1">Edit</button>
-  <button id="b2">Remove Listing</button>
+  <button id="b1"  onclick="modal('<%-stData[i].name%>')">Edit</button>
+  <button id="b2" >Remove Listing</button>
     	</div>
     	<%}%>
+    		
+    	</div>
+     <div id="uni">
+     	 <% var uniData = data.uniforms %>
+ <% for (var i in uniData){%>
+    <div class="cards">
+ <img src="https://nebularimages.s3.eu-central-1.amazonaws.com/<%-uniData[i].image %>" alt="" width="240" height="140" style="padding-left:5px;padding-top:5px "/>
+    <div style="margin-top:10px;padding-left:5px; ">
+    <p>Name: <%-uniData[i].name%> </p>
+    <p>Price: $<%-uniData[i].price%></p>
+    <p>Quantity: <%-uniData[i].quantity%></p>
+    </div>
+  <button id="b1"  onclick="modal('<%-uniData[i].name%>')">Edit</button>
+  <button id="b2" >Remove Listing</button>
+    	</div>
+    	<%}%>
+     	
+     </div>
+     <div id="bok">
+     	 <% var bokData = data.books %>
+ <% for (var i in bokData){%>
+    <div class="cards">
+ <img src="https://nebularimages.s3.eu-central-1.amazonaws.com/<%-bokData[i].image %>" alt="" width="240" height="140" style="padding-left:5px;padding-top:5px "/>
+    <div style="margin-top:10px;padding-left:5px; ">
+    <p>Name: <%-bokData[i].name%> </p>
+    <p>Price: $<%-bokData[i].price%></p>
+    <p>Quantity: <%-bokData[i].quantity%></p>
+    </div>
+  <button id="b1"  onclick="modal('<%-bokData[i].name%>')">Edit</button>
+  <button id="b2" >Remove Listing</button>
+    	</div>
+    	<%}%>
+     </div>
+     <div id="mis">
+     	   <% var misData = data.miscellenious %>
+ <% for (var i in misData){%>
+    <div class="cards">
+ <img src="https://nebularimages.s3.eu-central-1.amazonaws.com/<%-misData[i].image %>" alt="" width="240" height="140" style="padding-left:5px;padding-top:5px "/>
+    <div style="margin-top:10px;padding-left:5px; ">
+    <p>Name: <%-misData[i].name%> </p>
+    <p>Price: $<%-misData[i].price%></p>
+    <p>Quantity: <%-misData[i].quantity%></p>
+    </div>
+  <button id="b1"  onclick="modal('<%-misData[i].name%>')">Edit</button>
+  <button id="b2" >Remove Listing</button>
+    	</div>
+    	<%}%>
+     </div>
+    
     	</div>
 </section>
 
@@ -193,16 +340,50 @@ box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   <!-- js placed at the end of the document so the pages load faster -->
  
   <script>
+  function load(){
+  	document.getElementById('modal').style.display = 'block'
+  }
+  var span = document.getElementsByClassName("close")[0];
+ span.onclick = function() {
+  	document.getElementById('modal').style.display = 'none'
+  
+  }
+  function modal(x){
+  		document.getElementById('modal').style.display = 'block'
+  		document.getElementById('inpname').value = x
+  	
+  }
       	function openNav() {document.getElementById("sidebar").style.display= "block";}
-    var stData = [<%-data.stationery%>]
-    var uniData = [<%-data.uniforms%>]
-    var bokData = [<%-data.books%>]
-    var misData = [<%-data.miscellenious%>]
-    
-    
- console.log(misData)
-  
-  
+ function myFunction(selTag) {
+var x = selTag.options[selTag.selectedIndex].text
+document.getElementById('modal').style.display = 'none'
+if(x === 'stationery'){
+	document.getElementById('bok').style.display = 'none'
+ document.getElementById('uni').style.display = 'none'
+ document.getElementById('mis').style.display = 'none'
+ document.getElementById('sta').style.display = 'flex'
+	}
+  if(x === 'uniforms'){ 
+  	document.getElementById('bok').style.display = 'none'
+ document.getElementById('uni').style.display = 'flex'
+ document.getElementById('mis').style.display = 'none'
+ document.getElementById('sta').style.display = 'none'
+  	}
+  if(x === 'books'){ 
+  	document.getElementById('bok').style.display = 'flex'
+ document.getElementById('uni').style.display = 'none'
+ document.getElementById('mis').style.display = 'none'
+ document.getElementById('sta').style.display = 'none'
+  	}
+  		if(x === 'miscellenious'){
+  document.getElementById('bok').style.display = 'none'
+ document.getElementById('uni').style.display = 'none'
+ document.getElementById('mis').style.display = 'flex'
+ document.getElementById('sta').style.display = 'none'
+  			}
+  	
+  	
+ } 
       </script> 
 
 <script>/*! jQuery v1.12.4 | (c) jQuery Foundation | jquery.org/license */
