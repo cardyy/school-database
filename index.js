@@ -547,10 +547,100 @@ newsArray.books.filter((x)=>{return x.name=== req.body.inpname})[0].dreails = ne
     await newsArray.save(function (err, data) {
       if (err) throw err;
     });
-    res.render("merchants",{ errormessage: "your message" });
+    res.render("moutlets",{ data:newsArray,id:newsArray._id });
   } catch {
     if (newsArray == null) {
       res.redirect("/index");
+    }
+  }
+});
+
+app.post("/remove", async (req, res) => {
+ let newsArray
+  newsArray = await outlets.findById(req.body.id);
+  
+if(req.body.cat2 == 'stationery'){
+newsArray.stationery.filter((x)=>{return x.name=== req.body.inpname})[0].listing
+= newsArray.stationery.filter((x)=>{return x.name=== req.body.inpname})[0].listing
+= 'false'
+ }
+
+if(req.body.cat2 == 'uniforms'){
+newsArray.uniforms.filter((x)=>{return x.name=== req.body.inpname})[0].listing
+= newsArray.uniforms.filter((x)=>{return x.name=== req.body.inpname})[0].listing
+= 'false'
+
+}
+
+if(req.body.cat2 == 'miscellenious'){
+newsArray.miscellenious.filter((x)=>{return x.name=== req.body.inpname})[0].listing
+= newsArray.miscellenious.filter((x)=>{return x.name=== req.body.inpname})[0].listing
+= 'false'
+
+}
+if(req.body.cat2 == 'books'){
+
+newsArray.books.filter((x)=>{return x.name=== req.body.inpname})[0].listing= newsArray.books.filter((x)=>{return x.name=== req.body.inpname})[0].listing
+= 'false'
+}
+  setTimeout( function () {
+  	outlets.find({}, function (err, data) {
+  		io.emit("outlet",data)	
+  		})
+  	}, 1)
+  try {
+    await newsArray.save(function (err, data) {
+      if (err) throw err;
+    });
+    res.render("moutlets",{ data:newsArray,id:newsArray._id });
+  } catch {
+    if (newsArray == null) {
+      res.redirect("/");
+    }
+  }
+});
+
+app.post("/show", async (req, res) => {
+ let newsArray
+  newsArray = await outlets.findById(req.body.id);
+  
+if(req.body.cat3 == 'stationery'){
+newsArray.stationery.filter((x)=>{return x.name=== req.body.inpname})[0].listing
+= newsArray.stationery.filter((x)=>{return x.name=== req.body.inpname})[0].listing
+= 'true'
+ }
+
+if(req.body.cat3 == 'uniforms'){
+newsArray.uniforms.filter((x)=>{return x.name=== req.body.inpname})[0].listing
+= newsArray.uniforms.filter((x)=>{return x.name=== req.body.inpname})[0].listing
+= 'true'
+
+}
+
+if(req.body.cat3 == 'miscellenious'){
+newsArray.miscellenious.filter((x)=>{return x.name=== req.body.inpname})[0].listing
+= newsArray.miscellenious.filter((x)=>{return x.name=== req.body.inpname})[0].listing
+= 'true'
+
+}
+if(req.body.cat3 == 'books'){
+
+newsArray.books.filter((x)=>{return x.name=== req.body.inpname})[0].listing= newsArray.books.filter((x)=>{return x.name=== req.body.inpname})[0].listing
+= 'true'
+}
+  setTimeout( function () {
+  	outlets.find({}, function (err, data) {
+  		io.emit("outlet",data)	
+  		})
+  	}, 1)
+  try {
+    await newsArray.save(function (err, data) {
+      if (err) throw err;
+    });
+    res.render("moutlets",{ data:newsArray,id:newsArray._id });
+  } catch {
+    if (newsArray == null) {
+      res.redirect("/");
     }
   }
 });
