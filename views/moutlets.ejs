@@ -48,15 +48,16 @@ border-radius: 4px;
 }
 input{
 margin-top: 20px;
-width:60%;
+width:80%;
 padding-top:20px;
-
+margin-left: 25px;
 border-radius: 4px;
 }
 textarea{
+margin-left: 25px;	
 border-radius: 4px;
 margin-top:	20px;
-width:60%;
+width:80%;
 }
    /* The Modal (background) */
 #modal {
@@ -144,7 +145,7 @@ background: #fff;
 border-radius: 25px;
 size:18;
 }
-#b1{
+.b1{
 position: relative;
 width: 90px;
 height: 40px;
@@ -155,7 +156,7 @@ border-radius: 20px;
 color:#fff; 
 box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
-#b2{
+.b2{
 position: relative;
 width: 90px;
 height: 40px;
@@ -246,9 +247,8 @@ box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 <form id="reg" class="cmxform form-horizontal style-form" name="moutlets" action = "/moutlets" method="POST"  >
     <input type="text" style="display:none " name="id" value="<%-id%>"/>
      <input type="text" style="display:none "  id='inpname' name="inpname"/>
-     <input type="text" style="display:none "  name="cat" value="stationery"/>
-    <input type="text"  placeholder="Item Name" name="name"/>
-    <input type="text"  placeholder="Item Quantity" name="quantity"/>
+     <input type="text"   name="cat" id="cat" style="display:none " />
+ <input type="text"  placeholder="Item Quantity" name="quantity"/>
     <input type="text" placeholder="Item Price" name="price"/>
     <textarea placeholder="Item Description" name="description"></textarea>
    <button class="btn btn-theme" type="submit" id="btn" onclick="load()" >Save</button>
@@ -276,8 +276,8 @@ box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     <p>Price: $<%-stData[i].price%></p>
     <p>Quantity: <%-stData[i].quantity%></p>
     </div>
-  <button id="b1"  onclick="modal('<%-stData[i].name%>')">Edit</button>
-  <button id="b2" >Remove Listing</button>
+  <button id="stationery" class="b1" onclick="modal('<%-stData[i].name%>')">Edit</button>
+  <button id="stationery2"  class="b2">Remove Listing</button>
     	</div>
     	<%}%>
     		
@@ -292,8 +292,8 @@ box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     <p>Price: $<%-uniData[i].price%></p>
     <p>Quantity: <%-uniData[i].quantity%></p>
     </div>
-  <button id="b1"  onclick="modal('<%-uniData[i].name%>')">Edit</button>
-  <button id="b2" >Remove Listing</button>
+  <button id="uniforms" class="b1" onclick="modal('<%-uniData[i].name%>')">Edit</button>
+  <button id="uniforms2" class="b2">Remove Listing</button>
     	</div>
     	<%}%>
      	
@@ -308,8 +308,8 @@ box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     <p>Price: $<%-bokData[i].price%></p>
     <p>Quantity: <%-bokData[i].quantity%></p>
     </div>
-  <button id="b1"  onclick="modal('<%-bokData[i].name%>')">Edit</button>
-  <button id="b2" >Remove Listing</button>
+  <button id="books" class="b1" onclick="modal('<%-bokData[i].name%>')">Edit</button>
+  <button id="books2" class="b2">Remove Listing</button>
     	</div>
     	<%}%>
      </div>
@@ -323,8 +323,8 @@ box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     <p>Price: $<%-misData[i].price%></p>
     <p>Quantity: <%-misData[i].quantity%></p>
     </div>
-  <button id="b1"  onclick="modal('<%-misData[i].name%>')">Edit</button>
-  <button id="b2" >Remove Listing</button>
+  <button id="miscellenious" class="b1" onclick="modal('<%-misData[i].name%>')">Edit</button>
+  <button id="miscellenious2" class="b2">Remove Listing</button>
     	</div>
     	<%}%>
      </div>
@@ -351,6 +351,7 @@ box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   function modal(x){
   		document.getElementById('modal').style.display = 'block'
   		document.getElementById('inpname').value = x
+  		
   	
   }
       	function openNav() {document.getElementById("sidebar").style.display= "block";}
@@ -358,24 +359,28 @@ box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 var x = selTag.options[selTag.selectedIndex].text
 document.getElementById('modal').style.display = 'none'
 if(x === 'stationery'){
+	document.getElementById('cat').value=document.getElementById('stationery').id
 	document.getElementById('bok').style.display = 'none'
  document.getElementById('uni').style.display = 'none'
  document.getElementById('mis').style.display = 'none'
  document.getElementById('sta').style.display = 'flex'
 	}
   if(x === 'uniforms'){ 
+  	document.getElementById('cat').value=document.getElementById('uniforms').id
   	document.getElementById('bok').style.display = 'none'
  document.getElementById('uni').style.display = 'flex'
  document.getElementById('mis').style.display = 'none'
  document.getElementById('sta').style.display = 'none'
   	}
   if(x === 'books'){ 
+  	document.getElementById('cat').value=document.getElementById('books').id
   	document.getElementById('bok').style.display = 'flex'
  document.getElementById('uni').style.display = 'none'
  document.getElementById('mis').style.display = 'none'
  document.getElementById('sta').style.display = 'none'
   	}
   		if(x === 'miscellenious'){
+  	document.getElementById('cat').value=document.getElementById('miscellenious').id
   document.getElementById('bok').style.display = 'none'
  document.getElementById('uni').style.display = 'none'
  document.getElementById('mis').style.display = 'flex'

@@ -263,6 +263,7 @@ const appSchema2 = new mongoose.Schema([
     stationery: [
       {
         name: String,
+        listing:String,
         outletName:String,
         outletId:String,
         outletContact:Number,
@@ -276,6 +277,7 @@ const appSchema2 = new mongoose.Schema([
     uniforms: [
       {
         name: String,
+        listing:String,
         outletName:String,
         outletId:String,
         outletContact:Number,
@@ -290,6 +292,7 @@ const appSchema2 = new mongoose.Schema([
       {
         name: String,
         outletName:String,
+        listing:String,
         outletId:String,
         outletContact:Number,
         price: Number,
@@ -302,6 +305,7 @@ const appSchema2 = new mongoose.Schema([
     miscellenious: [
       {
       	name: String,
+      	listing:String,
         outletName:String,
         outletId:String,
         outletContact:Number,
@@ -492,15 +496,46 @@ app.post("/merchants", function (req, res) {
 app.post("/moutlets", async (req, res) => {
  let newsArray
   newsArray = await outlets.findById(req.body.id);
+
 if(req.body.cat == 'stationery'){
-if(req.body.name !== '') {
-newsArray.stationery.filter((x)=>{x.name=== req.body.inpname})[0].name = newsArray.stationery.filter((x)=>{x.name=== req.body.inpname})[0].name= req.body.name}
+	
+
   if(req.body.quantity !== '') {
-newsArray.stationery.filter((x)=>{x.name=== req.body.inpname})[0].quantity= newsArray.stationery.filter((x)=>{x.name=== req.body.inpname})[0].quantity= req.body.quantity}
+newsArray.stationery.filter((x)=>{return x.name=== req.body.inpname})[0].quantity= newsArray.stationery.filter((x)=>{return x.name=== req.body.inpname})[0].quantity= req.body.quantity }
  if(req.body.price !== '') {
-newsArray.stationery.filter((x)=>{x.name=== req.body.inpname})[0].price = newsArray.stationery.filter((x)=>{x.name=== req.body.inpname})[0].price= req.body.price}
+newsArray.stationery.filter((x)=>{return x.name=== req.body.inpname})[0].price = newsArray.stationery.filter((x)=>{return x.name=== req.body.inpname})[0].price= req.body.price}
  if(req.body.description !== '') { 
-newsArray.stationery.filter((x)=>{x.name=== req.body.inpname})[0].dreails = newsArray.stationery.filter((x)=>{x.name=== req.body.inpname})[0].dreails= req.body.description}
+newsArray.stationery.filter((x)=>{return x.name=== req.body.inpname})[0].dreails = newsArray.stationery.filter((x)=>{return x.name=== req.body.inpname})[0].dreails= req.body.description}
+	}
+	
+	if(req.body.cat == 'uniforms'){
+
+  if(req.body.quantity !== '') {
+newsArray.uniforms.filter((x)=>{return x.name=== req.body.inpname})[0].quantity= newsArray.uniforms.filter((x)=>{return x.name=== req.body.inpname})[0].quantity= req.body.quantity}
+ if(req.body.price !== '') {
+newsArray.uniforms.filter((x)=>{return x.name=== req.body.inpname})[0].price = newsArray.uniforms.filter((x)=>{return x.name=== req.body.inpname})[0].price= req.body.price}
+ if(req.body.description !== '') { 
+newsArray.uniforms.filter((x)=>{return x.name=== req.body.inpname})[0].dreails = newsArray.uniforms.filter((x)=>{return x.name=== req.body.inpname})[0].dreails= req.body.description}
+	}
+	
+		if(req.body.cat == 'miscellenious'){
+
+  if(req.body.quantity !== '') {
+newsArray.miscellenious.filter((x)=>{return x.name=== req.body.inpname})[0].quantity= newsArray.miscellenious.filter((x)=>{return x.name=== req.body.inpname})[0].quantity= req.body.quantity}
+ if(req.body.price !== '') {
+newsArray.miscellenious.filter((x)=>{return x.name=== req.body.inpname})[0].price = newsArray.miscellenious.filter((x)=>{return x.name=== req.body.inpname})[0].price= req.body.price}
+ if(req.body.description !== '') { 
+newsArray.miscellenious.filter((x)=>{return x.name=== req.body.inpname})[0].dreails = newsArray.miscellenious.filter((x)=>{return x.name=== req.body.inpname})[0].dreails= req.body.description}
+	}
+	
+		if(req.body.cat == 'books'){
+
+  if(req.body.quantity !== '') {
+newsArray.books.filter((x)=>{return x.name=== req.body.inpname})[0].quantity= newsArray.books.filter((x)=>{return x.name=== req.body.inpname})[0].quantity= req.body.quantity}
+ if(req.body.price !== '') {
+newsArray.books.filter((x)=>{return x.name=== req.body.inpname})[0].price = newsArray.books.filter((x)=>{return x.name=== req.body.inpname})[0].price= req.body.price}
+ if(req.body.description !== '') { 
+newsArray.books.filter((x)=>{return x.name=== req.body.inpname})[0].dreails = newsArray.books.filter((x)=>{return x.name=== req.body.inpname})[0].dreails= req.body.description}
 	}
   setTimeout( function () {
   	outlets.find({}, function (err, data) {
@@ -512,7 +547,7 @@ newsArray.stationery.filter((x)=>{x.name=== req.body.inpname})[0].dreails = news
     await newsArray.save(function (err, data) {
       if (err) throw err;
     });
-    res.render("merchants");
+    res.render("merchants",{ errormessage: "your message" });
   } catch {
     if (newsArray == null) {
       res.redirect("/index");
