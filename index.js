@@ -337,11 +337,12 @@ const records = mongoose.model("schools", appSchema);
 const outlets = mongoose.model("outlets", appSchema2);
 io.on("connection", socket => {
   socket.on("update", msg => {
-    console.log(msg);
-    
-    
-  });
+   });
+   socket.on("outlet", msg => {
+   });
 });
+
+
 app.post("/users", function (req, res) {
   const username = req.body.username;
   const password = req.body.password;
@@ -657,7 +658,8 @@ app.get("/users", function (req, res) {
 app.get("/outlets", function (req, res) {
   outlets.find({}, function (err, data) {
     if (err) throw err;
-    res.send(data);
+    	io.emit("outlet",data)	
+  	res.send(data);
   });
 });
 
