@@ -100,6 +100,50 @@ box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   text-decoration: none;
   cursor: pointer;
 }
+#modal2 {
+
+  display:none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 60%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+ margin-top: 5%;
+ margin-left: 30%;
+}
+
+
+/* modal2 Content */
+.modal2-content {
+ background:rgba(6, 6, 33, 1);
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  margin: auto;
+  padding: 20px;
+  width: 40%;
+  height: 70%
+}
+
+/* The close2 Button */
+.close2 {
+	position: relative;
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  top:-70%;
+  left: -33%;
+}
+
+.close2:hover,
+.close2:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
 #sta{
 display:none; 
 flex-wrap:wrap;
@@ -178,6 +222,27 @@ border-radius: 20px;
 color:#fff; 
 box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+  
+}
+tr:nth-child(odd) {
+ 
+
+  color: white;
+}
+tr:nth-child(even) {
+  background-color: #dddddd;
+ 
+}
 </style>
 <body>
    
@@ -215,28 +280,12 @@ box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
         <ul class="sidebar-menu" id="nav-accordion">
          
           <h5 class="centered"> <%-data.name%></h5>
-          <li class="mt">
-            <a href="/home">
-              
-              <span>Products</span>
-              </a>
-          </li>
-         
-         <li class="sub-menu">
-            <a href="/">
-             
-              <span>Purchases</span>
-              </a>
-            
-          </li>
           
-          <li>
-            <a href="/moutlets">
-              
-              <span>Finances </span>
-        
-              </a>
-          </li>
+       
+<input type="button" onclick="products()" value="Products" style="color:#fff;background-color:rgba(6, 6, 33, 0);font-size:14px;margin-left:-40px "/>
+         <input type="button" onclick="purchases()" value="Purchases" style="color:#fff;background-color:rgba(6, 6, 33, 0);font-size:14px;margin-left:-40px " />
+       <input type="button" onclick="finances()" value="Finances" style="color:#fff;background-color:rgba(6, 6, 33, 0);font-size:14px;margin-left:-40px " />    
+          
           
           
           
@@ -269,7 +318,12 @@ box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 	
 </div>
 </div>
-     <div id="products">
+<div  id="modal2">
+<div class="modal2-content" ><span id="showModal"></span></div>
+	
+    <span class="close2" >&times;</span>
+</div>
+     <div id="products" ">
      
    <form id="myForm" class="cmxform form-horizontal style-form" name="moutlets" action = "/remove" method="POST"  >
       <input type="text"   name="cat2" id="cat2" style="display:none " />
@@ -380,14 +434,47 @@ box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     
     	<%}%>
      </div>
-    
+   
     	</div>
     	
+  </div>
  
-     
-     </div>
-</section>
 
+</section>
+<div id="purchases" style="position:absolute;top:120px;display:none;left:20% ">
+      <table style="position:absolute; width:700px; left:15em">
+  <tr>
+    <td>Name of Child</td>
+     <td>Class</td>
+    <td>School</td>
+    <td>Items Purchased</td>
+    <td>Total Amount</td>
+    <td>Contact</td>
+    <td>Date</td>
+    <td>Address</td>
+     <td>Status</td>
+    
+  </tr>
+  
+    <% var newData = data.purchases %>
+ <% for (var i in newData){%>
+  <tr>
+ 
+    <th><%-newData[i].name%></th>
+    <th><%-newData[i].className%> </th>
+    <th><%-newData[i].school%></th>
+    <th><button onclick="itemO('<%-newData[i].idNumber%>','<%-newData[i].date%>')"  >Click To View Items</button></th>
+   <span><th>$<%-newData[i].amount%></th></span> 
+   <th><%-newData[i].contact%></th>
+    <th style="width:80px; "><%-newData[i].date%></th>
+   <th><%-newData[i].address%></th>
+     <th><%-newData[i].delivered%></th>
+  </tr>
+  
+  <%}%>
+</table>
+
+      </div>
       <!-- /wrapper -->
   
     <!-- /MAIN CONTENT -->
@@ -396,7 +483,42 @@ box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   <!-- js placed at the end of the document so the pages load faster -->
  
   <script>
+  function products(){
+  	document.getElementById('products').style.display = 'block';
+  	document.getElementById('purchases').style.display = 'none';
+  }
+  function purchases(){
+  	document.getElementById('purchases').style.display = 'block';
+  	document.getElementById('products').style.display = 'none';
+  }
+  function itemO(x,y){
+  	document.getElementById('modal2').style.display = 'block'
   
+  
+  	var see = [<%- data.purchases%>].filter((a)=>{return a.idNumber == x  && a.date == y})
+  	var array = []
+  	var array2 = []
+  	var array3 = []
+  	for (var i in see){
+  		var data = see[i].itemName.forEach((b=>{array.push(b.item)}))
+  		var data2 = see[i].itemName.forEach((b=>{array2.push(b.Quantiy)}))
+  		var data3 = see[i].itemName.forEach((b=>{array3.push(b.delivered)}))
+  		
+				
+  	}
+ 
+  var output = ''
+  for(var xx in array)	{
+  	output += `<li style="color:#fff;padding-top:10px;margin-left:20px;">${array[xx]}:|Quantity: ${array2[xx]}, Delivered: ${array3[xx]} |</li>`
+  }
+  	document.getElementById('showModal').innerHTML = output
+  	
+  }
+   var span2 = document.getElementsByClassName("close2")[0]
+ span2.onclick = function() {
+  	document.getElementById('modal2').style.display = 'none'
+  
+  }
   function remove(x){
   document.getElementById('inpname2').value = x
   document.getElementById("myForm").submit();
