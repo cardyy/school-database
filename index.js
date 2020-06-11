@@ -327,7 +327,20 @@ const appSchema2 = new mongoose.Schema([
         address: String,
         idNumber: String,
         className: String,
-        itemName: [],
+        itemName: [
+        {
+        studentId: String,
+outletId:String,
+cnt:Number,
+id:Number,
+item:String,
+date:String,
+delivered:String,
+price:Number,
+Quantiy:Number,
+key:String,
+quantity:Number
+						}],
         totalAmount:Number,
         delivered: String,
       },
@@ -342,7 +355,31 @@ io.on("connection", socket => {
    socket.on("outlet", msg => {
    });
 });
-
+app.post("/confirm", async function (req, res) {
+	var status = req.body.status
+	var id = req.body.id
+	var mainId = req.body.mainId
+	var idNumber = req.body.idNumber
+	var date = req.body.date
+    let array
+	array = await outlets.findById(mainId);
+	array.purchases.filter((a)=>{return a.idNumber == idNumber  && a.date == date})[0].itemName.filter((c)=>{return c.id==id })[0].delivered = array.purchases.filter((a)=>{return a.idNumber == idNumber  && a.date == date})[0].itemName.filter((c)=>{return c.id==id })[0].delivered = 'Yes' 
+		
+try {
+    await array.save(function (err, data) {
+      if (err) throw err;
+    });
+    console.log('done')
+  } catch {
+    if (array == null) {
+      console.log('not doane')
+    }
+  }
+});
+	
+	
+	
+	
 
 app.post("/users", function (req, res) {
   const username = req.body.username;

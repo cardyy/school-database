@@ -499,25 +499,56 @@ tr:nth-child(even) {
   	var array = []
   	var array2 = []
   	var array3 = []
+  	var array4 = []
+  	var array5 = []
+  	var array6 = []
   	for (var i in see){
   		var data = see[i].itemName.forEach((b=>{array.push(b.item)}))
   		var data2 = see[i].itemName.forEach((b=>{array2.push(b.Quantiy)}))
   		var data3 = see[i].itemName.forEach((b=>{array3.push(b.delivered)}))
+  		var data4 =see[i].itemName.forEach((b=>{array4.push(b.id)}))
+  		var data5 = see[i].itemName.forEach((b=>{array5.push(b.studentId)}))
+  		var data6 =see[i].itemName.forEach((b=>{array6.push(b.date)}))
+  		
   		
 				
   	}
- 
+  	var data5 = `<%- data._id%>`
+
   var output = ''
   for(var xx in array)	{
-  	output += `<li style="color:#fff;padding-top:10px;margin-left:20px;">${array[xx]}:|Quantity: ${array2[xx]}, Delivered: ${array3[xx]} |</li>`
+  	if (array3[xx] == 'No'){
+  	output += `<li style="color:#fff;padding-top:10px;margin-left:20px;">${array[xx]}:|Quantity: ${array2[xx]}, Delivered: ${array3[xx]} | <button style="color:red" id="confirm" onclick="confirm(${array4[xx]},'${data5}','${array5[xx]}','${array6[xx]}')">Confirm delivery </button></li>`}
+  	if (array3[xx] == 'Yes'){
+  		output += `<li style="color:#fff;padding-top:10px;margin-left:20px;">${array[xx]}:|Quantity: ${array2[xx]}, Delivered: ${array3[xx]} |</li>`	
+  	}
   }
   	document.getElementById('showModal').innerHTML = output
+  	
   	
   }
    var span2 = document.getElementsByClassName("close2")[0]
  span2.onclick = function() {
   	document.getElementById('modal2').style.display = 'none'
   
+  }
+  function confirm(x,y,z,z1){
+ 
+let data = {status:'Yes',id:x,mainId:y, idNumber:z,date:z1};
+
+fetch("/confirm", {
+  method: "POST", 
+  	headers:{
+    'Accept': 'application/json',
+    'Content-Type':'application/json'
+},
+  body: JSON.stringify(data)
+})
+
+.then(res => {
+  console.log("Request complete! response:", res);
+});
+	document.getElementById('modal2').style.display = 'none'
   }
   function remove(x){
   document.getElementById('inpname2').value = x
