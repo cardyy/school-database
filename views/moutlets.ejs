@@ -176,7 +176,7 @@ width: 250px;
 height: 280px;
 top: 150px;
 margin-top: 50px;
-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);	
+	
 	
 }	
 .listbox{
@@ -242,6 +242,20 @@ tr:nth-child(odd) {
 tr:nth-child(even) {
   background-color: #dddddd;
  
+}
+.selector{
+position:absolute;
+left:40em;
+top:70px;
+}
+input[type="date"]
+{
+    font-size:18px;
+   margin-top: -2px;
+  
+}
+select {
+   font-size: 18px;
 }
 </style>
 <body>
@@ -348,7 +362,7 @@ tr:nth-child(even) {
       <% var stData = data.stationery %>
  <% for (var i in stData){%>
     <div class="cards">
- <img src="https://nebularimages.s3.eu-central-1.amazonaws.com/<%-stData[i].image %>" alt="" width="240" height="140" style="padding-left:5px;padding-top:5px "/>
+ <img src="https://nebularimages.s3.eu-central-1.amazonaws.com/<%-stData[i].image %>" alt="" width="120" height="140" style="padding-left:5px;padding-top:5px;object-fit: contain; "/>
     <div style="margin-top:10px;padding-left:5px; ">
     <p>Name: <%-stData[i].name%> </p>
     <p>Price: $<%-stData[i].price%></p>
@@ -441,39 +455,18 @@ tr:nth-child(even) {
  
 
 </section>
-<div id="purchases" style="position:absolute;top:120px;display:none;left:20% ">
-      <table style="position:absolute; width:700px; left:15em">
-  <tr>
-    <td>Name of Child</td>
-     <td>Class</td>
-    <td>School</td>
-    <td>Items Purchased</td>
-    <td>Total Amount</td>
-    <td>Contact</td>
-    <td>Date</td>
-    <td>Address</td>
-     <td>Status</td>
-    
-  </tr>
+<div id="purchases" style="position:absolute;top:10px;display:none;left:20% ">
+<div class="selector">
+<p style="color:#fff;margin-left:58px;">Search By Date</p>
+ <input type="date" name="dateofbirth" id="dateofbirth" onchange="myFunctionD(this)" >
+</div>
+<div class="table">
+     
   
-    <% var newData = data.purchases %>
- <% for (var i in newData){%>
-  <tr>
- 
-    <th><%-newData[i].name%></th>
-    <th><%-newData[i].className%> </th>
-    <th><%-newData[i].school%></th>
-    <th><button onclick="itemO('<%-newData[i].idNumber%>','<%-newData[i].date%>')"  >Click To View Items</button></th>
-   <span><th>$<%-newData[i].amount%></th></span> 
-   <th><%-newData[i].contact%></th>
-    <th style="width:80px; "><%-newData[i].date%></th>
-   <th><%-newData[i].address%></th>
-     <th><%-newData[i].delivered%></th>
-  </tr>
-  
-  <%}%>
-</table>
+  <span id="tableTwo"></span>
 
+
+</div>
       </div>
       <!-- /wrapper -->
   
@@ -483,7 +476,42 @@ tr:nth-child(even) {
   <!-- js placed at the end of the document so the pages load faster -->
  
   <script>
-  function products(){
+ function myFunctionD(sel){
+ 	var x = sel.value
+ var tableData= [<%- data.purchases%>].filter((a)=>{return a.date == x})
+  let toutput = ` <table style="position:absolute; width:700px; left:13em;top:170px"><tr>
+    <td>Name of Child</td>
+     <td>Class</td>
+    <td>School</td>
+    <td>Items Purchased</td>
+    <td>Total Amount</td>
+    <td>Contact</td>
+    <td>Date</td>
+    <td>Address</td>
+   
+    
+  </tr>`
+  for (var i in tableData){
+  	toutput += `<tr>
+ 
+    <th>${tableData[i].name}</th>
+    <th>${tableData[i].className} </th>
+    <th>${tableData[i].school}</th>
+    <th><button onclick="itemO('${tableData[i].idNumber}','${tableData[i].date}')"  >Click To View Items</button></th>
+   <span><th>$${tableData[i].amount}</th></span> 
+   <th>${tableData[i].contact}</th>
+    <th style="width:80px; ">${tableData[i].date}</th>
+   <th>${tableData[i].address}</th>
+    
+  </tr>`
+  	}
+  	document.getElementById('tableTwo').innerHTML = `${toutput}</table>`
+ }
+
+
+  
+  	
+ function products(){
   	document.getElementById('products').style.display = 'block';
   	document.getElementById('purchases').style.display = 'none';
   }
@@ -493,9 +521,9 @@ tr:nth-child(even) {
   }
   function itemO(x,y){
   	document.getElementById('modal2').style.display = 'block'
+
   
-  
-  	var see = [<%- data.purchases%>].filter((a)=>{return a.idNumber == x  && a.date == y})
+  	var see = [<%- data.purchases%>].filter((a)=>{return a.idNumber === x  && a.date === y})
   	var array = []
   	var array2 = []
   	var array3 = []
