@@ -726,18 +726,17 @@ app.post("/store", function (req, res) {
           var con= outletsArray.contact
           var items = req.body.itemName
           var d = new Date();
-                       var year = d.getFullYear();
-                       var month = ("0" + (d.getMonth() + 1)).slice(-2);
-                       var day = ("0" + d.getDate()).slice(-2);
-                       var newdate = year + "-" + month + "-" + day;
-          var datetime = newdate;
+var year = d.getFullYear();
+var month = ("0" + (d.getMonth() + 1)).slice(-2);
+var day = ("0" + d.getDate()).slice(-2);
+newdate = year + "-" + month + "-" + day;
           var usernameIsPresent = items.filter((a)=>{return a.cnt == con})
             if (usernameIsPresent.length>0) {
             	var products = usernameIsPresent
           outletsArray.purchases = outletsArray.purchases.concat({
             school: req.body.school,
             name: req.body.name,
-            date: datetime,
+            date:newdate,
             amount:amount,
             contact: req.body.contact,
             address: req.body.address,
@@ -757,7 +756,8 @@ app.post("/store", function (req, res) {
             }
           }}
         }, 1);
-} else {
+
+         } else {
       	
         console.log(response.error);
       }
