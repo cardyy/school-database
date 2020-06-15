@@ -759,7 +759,7 @@ setTimeout(function(){
         }, 1);
 
 
-}, 180000);
+}, 1);
          } else {
       	
         console.log(response.error);
