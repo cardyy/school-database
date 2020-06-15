@@ -329,7 +329,8 @@ const appSchema2 = new mongoose.Schema([
         className: String,
         itemName: [
         {
-        studentId: String,
+_id: String,        	
+studentId: String,
 outletId:String,
 cnt:Number,
 id:Number,
@@ -718,7 +719,8 @@ app.post("/store", function (req, res) {
         console.log(instructions);
         let status = paynow.pollTransaction(pollUrl);
         console.log(status)
-
+setTimeout(function(){
+if (status.paid) {
  setTimeout(async function () {
         	let outletsArray;
         	for (var i in d){
@@ -756,7 +758,11 @@ var newdate = year + "-" + month + "-" + day;
             }
           }}
         }, 1);
+} else {
+  console.log("Why you no pay?");
+}
 
+}, 180000);
          } else {
       	
         console.log(response.error);
