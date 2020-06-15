@@ -719,25 +719,21 @@ app.post("/store", function (req, res) {
         let status = paynow.pollTransaction(pollUrl);
         console.log(status)
 setTimeout(function(){
-
+if (status.paid) {
  setTimeout(async function () {
         	let outletsArray;
-        	 var d = new Date();
-    var year = d.getFullYear();
-    var month = ("0" + (d.getMonth() + 1)).slice(-2);
-    var day = ("0" + d.getDate()).slice(-2);
-    var newdate = year + "-" + month + "-" + day;
         	for (var i in d){
           outletsArray = await outlets.findById(d[i]);
           var con= outletsArray.contact
           var items = req.body.itemName
+          var datetime = new Date();
           var usernameIsPresent = items.filter((a)=>{return a.cnt == con})
             if (usernameIsPresent.length>0) {
             	var products = usernameIsPresent
           outletsArray.purchases = outletsArray.purchases.concat({
             school: req.body.school,
             name: req.body.name,
-            date: newdate,
+            date: datetime,
             amount:amount,
             contact: req.body.contact,
             address: req.body.address,
@@ -757,9 +753,11 @@ setTimeout(function(){
             }
           }}
         }, 1);
+} else {
+  console.log("Why you no pay?");
+}
 
-
-}, 1);
+}, 180000);
          } else {
       	
         console.log(response.error);
