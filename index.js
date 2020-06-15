@@ -322,7 +322,6 @@ const appSchema2 = new mongoose.Schema([
         school: String,
         name: String,
         date: String,
-        id:Number,
         amount:String,
         contact: String,
         address: String,
@@ -720,14 +719,20 @@ app.post("/store", function (req, res) {
         let status = paynow.pollTransaction(pollUrl);
         console.log(status)
 setTimeout(function(){
-if (status.paid) {
+
  setTimeout(async function () {
         	let outletsArray;
+        	var dateObj = new Date();
+var month = dateObj.getUTCMonth() + 1; 
+var day = dateObj.getUTCDate();
+var year = dateObj.getUTCFullYear();
+newdate = year + "-" + month + "-" + day;
+console.log(newdate );
         	for (var i in d){
           outletsArray = await outlets.findById(d[i]);
           var con= outletsArray.contact
           var items = req.body.itemName
-          var datetime = new Date();
+          var datetime = newdate ;
           var usernameIsPresent = items.filter((a)=>{return a.cnt == con})
             if (usernameIsPresent.length>0) {
             	var products = usernameIsPresent
@@ -736,7 +741,6 @@ if (status.paid) {
             name: req.body.name,
             date: datetime,
             amount:amount,
-            id:req.body.id,
             contact: req.body.contact,
             address: req.body.address,
             idNumber: req.body.idNumber,
@@ -755,9 +759,7 @@ if (status.paid) {
             }
           }}
         }, 1);
-} else {
-  console.log("Why you no pay?");
-}
+
 
 }, 180000);
          } else {
