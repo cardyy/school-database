@@ -703,11 +703,6 @@ app.get("/outlets", function (req, res) {
 
 app.post("/store", function (req, res) {
   var d = req.body.outId;
-    var d = new Date();
-var year = d.getFullYear();
-var month = ("0" + (d.getMonth() + 1)).slice(-2);
-var day = ("0" + d.getDate()).slice(-2);
-var = newdate = year + "-" + month + "-" + day;
   let paynow = new Paynow("9130", "79e60b36-e2ee-48da-b2f4-a09ed08049d9");
   let payment = paynow.createPayment("Invoice 37", "cardyy@gmail.com");
   const item = req.body.item;
@@ -723,21 +718,25 @@ var = newdate = year + "-" + month + "-" + day;
         console.log(instructions);
         let status = paynow.pollTransaction(pollUrl);
         console.log(status)
-console.log(newdate)
+
  setTimeout(async function () {
         	let outletsArray;
         	for (var i in d){
           outletsArray = await outlets.findById(d[i]);
           var con= outletsArray.contact
           var items = req.body.itemName
-        
+          var datetime = new Date();
+            var year = datetime.getFullYear();
+var month = ("0" + (datetime.getMonth() + 1)).slice(-2);
+var day = ("0" + datetime.getDate()).slice(-2);
+var newdate = year + "-" + month + "-" + day;
           var usernameIsPresent = items.filter((a)=>{return a.cnt == con})
             if (usernameIsPresent.length>0) {
             	var products = usernameIsPresent
           outletsArray.purchases = outletsArray.purchases.concat({
             school: req.body.school,
             name: req.body.name,
-            date:'0',
+            date: newdate,
             amount:amount,
             contact: req.body.contact,
             address: req.body.address,
